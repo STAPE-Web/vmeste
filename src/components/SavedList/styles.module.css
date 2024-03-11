@@ -1,0 +1,72 @@
+.List {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    cursor: pointer;
+}
+
+.List div {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+    background-color: #fff;
+    padding: 20px 34px;
+    border-radius: 13px;
+}
+
+.List svg {
+    position: absolute;
+    cursor: pointer;
+    color: #FF8702;
+    top: 13px;
+    right: 13px;
+}
+
+.List img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+.List h3 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    color: #23232B;
+}
+
+.List p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #23232B;
+}
+
+.List h4 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 17px;
+    color: #23232B;
+}
+
+.List button {
+    height: 26px;
+    padding: 8px 23px;
+    border-radius: 100px;
+    background: #FF8702;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 22px;
+    cursor: pointer;
+}

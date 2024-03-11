@@ -1,0 +1,33 @@
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.Sidebar div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.5s;
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 400;
+    height: 44px;
+}
+
+.Sidebar div:hover {
+    opacity: 0.7;
+}
+
+.Sidebar div svg {
+    color: #E1DDD8;
+    width: 24px;
+    height: 24px;
+}
+
+.Sidebar div.Active svg {
+    color: #FF8702;
+}

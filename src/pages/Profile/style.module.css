@@ -1,0 +1,168 @@
+.Page {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    padding: 40px 0;
+    justify-content: center;
+    gap: 20px;
+}
+
+.Sidebar {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.Back {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #BCBCBF;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.Back svg {
+    width: 16px;
+    height: 16px;
+}
+
+.AccountInfo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.AccountInfo h3 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.RefferalBox {
+    width: 100%;
+    border-radius: 12px;
+    background: #FF8702;
+    padding: 20px 21px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.RefferalBox p {
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 18px;
+    color: #fff;
+}
+
+.RefferalBox p span {
+    font-weight: 400;
+}
+
+.RefferalBox button {
+    border: 1.5px solid #FFFFFF;
+    height: 30px;
+    padding: 8px 15px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.Navigation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Item.Active div svg {
+    color: #FF8702;
+}
+
+.Item div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.Item div svg {
+    width: 24px;
+    height: 24px;
+    color: #AFABA8;
+    transition: 0.5s;
+}
+
+.Item>svg {
+    width: 16px;
+    height: 16px;
+    color: #AFABA8;
+}
+
+.Content {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    padding: 40px 55px 75px 55px;
+    border-radius: 20px;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Content h2 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Content.Support {
+    padding: 40px 0 0 0;
+    overflow: hidden;
+}
+
+.Content.Support>h2 {
+    padding: 0 55px;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Row p {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #BCBCBF;
+    cursor: pointer;
+}

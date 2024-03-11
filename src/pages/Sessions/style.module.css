@@ -1,0 +1,110 @@
+.Page {
+    width: 100%;
+    height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.Content {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    border-radius: 20px;
+    background: #fff;
+    padding: 40px 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.Top svg {
+    width: 24px;
+    height: 24px;
+    color: #D9D9D9;
+    cursor: pointer;
+}
+
+.Top h2 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Top h2 span {
+    font-weight: 400;
+}
+
+.Box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+}
+
+.Box p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Box .Column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.Box .Column h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Box .Column h3 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Box .Row {
+    display: flex;
+    max-width: 260px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Box .Row button {
+    background: transparent;
+    border: none;
+    color: #595959;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.Box .Row button:first-child {
+    color: #FB5935;
+}

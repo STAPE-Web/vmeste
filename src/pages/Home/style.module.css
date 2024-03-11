@@ -1,0 +1,140 @@
+.Page {
+    width: 100%;
+    height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.Content {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    border-radius: 20px;
+    background: #fff;
+    padding: 40px 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Box h2 {
+    color: #23232B;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.Items {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.Items div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+    padding: 20px 0;
+    border-radius: 13px;
+    color: #23232B;
+    font-size: 14px;
+    font-weight: 400;
+    transition: 0.5s;
+}
+
+.Items div:hover {
+    box-shadow: 2px 4px 10px 0px #FF870250;
+}
+
+.Items img {
+    width: 60px;
+    height: 60px;
+}
+
+.Slider {
+    width: 100%;
+    display: flex;
+    height: 170px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.Slider div {
+    min-width: 275px;
+    height: 100%;
+    padding: 20px 60px 0 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 13px;
+}
+
+.Slider::-webkit-scrollbar {
+    display: none;
+}
+
+.ButtonRight,
+.ButtonLeft {
+    position: absolute;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: rgb(255, 135, 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.ButtonLeft {
+    left: 25px;
+}
+
+.ButtonRight svg,
+.ButtonLeft svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+}
+
+.ButtonRight:hover,
+.ButtonLeft:hover {
+    opacity: 0.7;
+}
+
+.SLiderBox {
+    width: 100%;
+    position: relative;
+    max-width: 870px;
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,42 @@
+.FillTrack {
+    height: 6px;
+    background: #FF8702;
+    border-radius: 100px;
+    position: absolute;
+    top: 5px;
+}
+
+.Range {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 15px 10px;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.RangeBox {
+    width: 100%;
+    position: relative;
+}
+
+.Steps {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Steps div {
+    width: 2px;
+    height: 8px;
+    border-radius: 10px;
+    background: #E1DDD8;
+}
+
+.Steps p {
+    font-size: 14px;
+    color: #BCBCBF;
+}

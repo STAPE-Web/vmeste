@@ -1,0 +1,22 @@
+.Banner {
+    width: 100%;
+    background: url("/Banner.png") no-repeat;
+    background-size: cover;
+    height: 235px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Banner h2 {
+    color: #fff;
+    font-size: 24px;
+}
+
+.Banner button {
+    background: #fff;
+    color: #FF8702;
+}

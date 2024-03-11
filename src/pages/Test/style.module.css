@@ -1,0 +1,158 @@
+.Page {
+    width: 100%;
+    min-height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    background: url("/Background.png") no-repeat;
+    background-size: cover;
+}
+
+.Container {
+    padding: 40px 0;
+    max-width: 875px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0 20px;
+}
+
+.Top p {
+    font-size: 18px;
+}
+
+.Top svg {
+    cursor: pointer;
+}
+
+.Box {
+    width: 100%;
+    border-radius: 20px;
+    padding: 75px 55px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.Box h2 {
+    color: #23232B;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.Box p {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.Box button {
+    max-width: 335px;
+    width: 100%;
+    align-self: center;
+}
+
+.Controlls {
+    width: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.Controlls .Group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Controlls svg {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.Controlls .Group div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.Controlls div:nth-child(2) {
+    height: 5px;
+    border-radius: 100px;
+}
+
+.Controlls div:nth-child(2)>div {
+    background: #fff;
+}
+
+.Controlls div:nth-child(2)>p {
+    display: none;
+}
+
+.Controlls h3 {
+    text-align: center;
+}
+
+.ButtonGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.CheckButton {
+    width: 100%;
+    height: 52px;
+    border-radius: 16px;
+    border: 2px solid #E8E8E8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    color: #4C4C69;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.CheckButton.Active {
+    border-color: #FF8702;
+}
+
+.CheckButton div {
+    border: 1.54px solid #FF8702;
+    background: #FF8702B2;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.CheckButton.Active div {
+    opacity: 1;
+}
+
+.CheckButton div svg {
+    width: 12px;
+    height: 12px;
+}

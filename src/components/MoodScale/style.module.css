@@ -1,0 +1,48 @@
+.MoodScale {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+    padding: 16px 10px;
+    border-radius: 13px;
+}
+
+.Range {
+    width: 100%;
+    height: 16px;
+    border-radius: 100px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Range div {
+    height: 100%;
+}
+
+.Values {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ValuesItems {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ValuesItems div {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}
+
+.ValuesItems p {
+    color: #AFABA8;
+    font-size: 14px;
+    font-weight: 400;
+}

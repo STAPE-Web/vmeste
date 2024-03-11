@@ -1,0 +1,28 @@
+.StepLine {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.StepLine .Range {
+    width: 100%;
+    border-radius: 100px;
+    height: 10px;
+    background: #E8E8E8;
+    overflow: hidden;
+}
+
+.StepLine .Range div {
+    height: 100%;
+    background: #FF8702;
+    border-radius: 100px;
+    transition: 0.5s;
+}
+
+.StepLine p {
+    color: #AFABA8;
+    font-size: 16px;
+    font-weight: 400;
+}

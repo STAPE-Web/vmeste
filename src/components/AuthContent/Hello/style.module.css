@@ -1,0 +1,35 @@
+.Section {
+    max-width: 875px;
+    border-radius: 20px;
+    padding: 40px 65px 43px 65px;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 40px;
+    align-items: center;
+}
+
+.Box {
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.Box h2 {
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 29px;
+    color: #23232B;
+}
+
+.Box p {
+    color: #AFABA8;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+}

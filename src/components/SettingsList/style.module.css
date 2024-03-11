@@ -1,0 +1,67 @@
+.Settings {
+    width: 100%;
+    flex-direction: column;
+    gap: 30px;
+    display: flex;
+}
+
+.Box {
+    display: flex;
+    align-items: flex-end;
+    gap: 100px;
+}
+
+.Settings h4 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+.Settings label {
+    color: #595959;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.Settings button {
+    color: #FF8702;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.ToggleBox {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.ToggleBox p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    color: #BCBCBF;
+    margin-top: 5px;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Row p {
+    color: #BCBCBF;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 22px;
+    cursor: pointer;
+}

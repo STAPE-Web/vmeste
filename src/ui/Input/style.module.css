@@ -1,0 +1,34 @@
+.Input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    border: 1px solid #BCBCBF;
+    border-radius: 100px;
+    height: 42px;
+    transition: 0.5s;
+}
+
+.Input div {
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.Input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 15px;
+    color: #23232B;
+    font-weight: 400;
+}
+
+.Input input::placeholder {
+    color: #BCBCBF;
+}
+
+.Input.Active {
+    border-color: #FF8702;
+}
