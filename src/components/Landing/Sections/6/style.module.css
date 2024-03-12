@@ -1,0 +1,136 @@
+.Section {
+    width: 100%;
+    padding-bottom: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.Container h2 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 55px;
+    color: #313131;
+}
+
+.Tabs {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-top: 20px;
+}
+
+.Tab {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #313131;
+    cursor: pointer;
+}
+
+.Tab div {
+    border: 4px solid #919EAB;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    transition: 0.5s;
+}
+
+.Tab.Active div {
+    background: #FF8702;
+    border-color: #FF8702;
+}
+
+.Items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 42px;
+}
+
+.Item {
+    border-radius: 20px;
+    padding: 40px 15px 65px 20px;
+    flex-direction: column;
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+.Item .Row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Item .Row p {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 17px;
+}
+
+.Item .Row h4 {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 17px;
+}
+
+.Item h5 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+    text-decoration: line-through;
+}
+
+.Item h3 {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 44px;
+}
+
+.Item p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.Item:nth-child(1),
+.Item:nth-child(2) {
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+}
+
+.Item:nth-child(1) h3,
+.Item:nth-child(1) .Row,
+.Item:nth-child(2) h5,
+.Item:nth-child(2) .Row {
+    color: #1A3C51;
+}
+
+.Item:nth-child(1) h5 {
+    color: #919EAB;
+}
+
+.Item:nth-child(2) h3,
+.Item:nth-child(2) .Row:last-child {
+    color: #FF8702;
+}
+
+.Item:nth-child(3) h5 {
+    text-decoration: none;
+}
+
+.Item:nth-child(3) {
+    background: #919EAB;
+    color: #fff;
+}

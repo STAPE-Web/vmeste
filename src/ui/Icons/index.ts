@@ -23,6 +23,20 @@ import Filter from "./Filter";
 import Verifed from "./Verifed";
 import Themes from "./Themes";
 import Search from "./Search";
+import Time from "./Time";
+import Camera from "./Camera";
+import Alert from "./Alert";
+import Zap from "./Zap";
+import Battarey from "./Buttery";
+import Cry from "./Cry";
+import HeardBroke from "./HeardBroke";
+import Pillow from "./Pillow";
+import YouTube from "./YouTube";
+import Telegram from "./Telegram";
+import Dzen from "./Dzen";
+import VK from "./VK";
+import Care from "./Care";
+import Mind from "./Mind";
 
 export {
     SignIn as SignInIcon,
@@ -50,4 +64,18 @@ export {
     Verifed as VerifedIcon,
     Themes as ThemesIcon,
     Search as SearchIcon,
+    Time as TimeIcon,
+    Camera as CameraIcon,
+    Alert as AlertIcon,
+    Zap as ZapIcon,
+    Battarey as BatteryIcon,
+    Cry as CryIcon,
+    HeardBroke as HeardBrokeIcon,
+    Pillow as PillowIcon,
+    YouTube as YouTubeIcon,
+    Telegram as TelegramIcon,
+    Dzen as DzenIcon,
+    VK as VKIcon,
+    Care as CareIcon,
+    Mind as MindIcon
 }

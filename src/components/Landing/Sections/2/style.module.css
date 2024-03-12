@@ -1,0 +1,41 @@
+.Section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container {
+    max-width: 1350px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 85px;
+}
+
+.Container div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Container h2 {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 88px;
+    background: linear-gradient(144.29deg, #E231FF -74.09%, #FF9110 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.Container p {
+    white-space: pre-wrap;
+    color: #313131;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 28px;
+}

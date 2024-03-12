@@ -53,7 +53,7 @@ const Register = () => {
 
                 <div className={styles.GroupItem}>
                     <h3>Сколько вам лет?</h3>
-                    <p>Для получения услуги на нашем сервисе вам должно быть больше 16 лет</p>
+                    <p>Для получения услуги на нашем сервисе вам должно быть больше 18 лет</p>
                     <div className={styles.InputBox}>
                         <Input onChange={e => setAge(e.target.value)} placeholder="Ваш возраст" type="number" value={age} />
                     </div>
@@ -116,7 +116,7 @@ const Register = () => {
     }
 
     useEffect(() => {
-        if (step === 1) setDisable(username === "" || age === "")
+        if (step === 1) setDisable(username === "" || age === "" || Number(age) < 18)
         if (step === 2) setDisable(experience === "" || forWho === "" || people === "")
     }, [username, age, step, experience, forWho, people])
 

@@ -1,0 +1,84 @@
+.Section {
+    width: 100%;
+    padding: 120px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.Illustration {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+}
+
+.Items {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Items div {
+    border: 1.7px solid #FF8702;
+    height: 30px;
+    padding: 5px 7px;
+    border-radius: 35px;
+    gap: 5px;
+    color: #FF8702;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 17px;
+}
+
+.Box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.Box h1 {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 66px;
+    color: #FF8702;
+}
+
+.Box h1 span {
+    font-weight: 700;
+    color: #313131;
+}
+
+.Box h3 {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 33px;
+    color: #313131;
+}
+
+.Price {
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 7px 13px;
+    box-shadow: 2px 2px 10px 0px #B6A1C069;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 41px;
+    color: #1A3C51;
+}
+
+.Box button {
+    margin-top: 100px;
+    width: fit-content;
+}

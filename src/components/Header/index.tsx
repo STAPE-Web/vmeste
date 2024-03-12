@@ -10,26 +10,29 @@ const Header = () => {
     const navigate = useNavigate()
     const [language, setLanguage] = useState<"RU" | "EN">("RU")
     const isAuth = JSON.parse(localStorage.getItem('isAuth') as string)
+    const path = window.location.pathname
 
     return (
-        <header className={styles.Header}>
-            <div className={styles.Container}>
-                <Logo onClick={() => navigate("/")} />
+        <>
+            {isAuth && path !== "/about" && <header className={styles.Header}>
+                <div className={styles.Container}>
+                    <Logo onClick={() => navigate("/")} />
 
-                <div className={styles.Box}>
-                    <ul>
-                        <li>Для психологов</li>
-                        <li>О нас</li>
-                        <li>Блог</li>
-                        {!isAuth && <li><SignInIcon /> Вход</li>}
-                    </ul>
+                    <div className={styles.Box}>
+                        <ul>
+                            <li>Для психологов</li>
+                            <li onClick={() => navigate("/about")}>О нас</li>
+                            <li>Блог</li>
+                            {!isAuth && <li><SignInIcon /> Вход</li>}
+                        </ul>
 
-                    <ButtonHeader disabled={false} onClick={() => ({})}>Выбрать психолога</ButtonHeader>
+                        <ButtonHeader disabled={false} onClick={() => navigate("/specialists")}>Выбрать психолога</ButtonHeader>
 
-                    <Language language={language} setLanguage={setLanguage} />
+                        <Language language={language} setLanguage={setLanguage} />
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>}
+        </>
     )
 }
 

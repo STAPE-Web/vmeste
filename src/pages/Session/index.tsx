@@ -44,17 +44,17 @@ const Sessions = () => {
                                 <div className={styles.ItemBox}>
                                     <div className={styles.RowBox}>
                                         <h3>{item.name}</h3>
-                                        <ArrowRightIcon />
+                                        {tab === "Планируемые" && <ArrowRightIcon />}
                                     </div>
 
                                     <p>{item.session} сессия</p>
 
                                     <h4>{item.date}</h4>
 
-                                    <div className={styles.Payed}>
+                                    {tab === "Планируемые" && <div className={styles.Payed}>
                                         <CheckIcon />
                                         Оплачено
-                                    </div>
+                                    </div>}
                                 </div>
                             </div>
                         ))}

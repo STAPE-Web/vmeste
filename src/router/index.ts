@@ -8,11 +8,15 @@ import Test from "@/pages/Test"
 import Specialists from "@/pages/Specialists"
 import Chats from "@/pages/Chats"
 import Chat from "@/pages/Chat"
+import Landing from "@/pages/Landing"
+import About from "@/pages/About"
 
 const notAuthRoutes = [
-    { id: 1, path: '*', element: Auth },
-    { id: 2, path: '/', element: Auth },
-    { id: 3, path: '/register', element: Register },
+    { id: 1, path: '*', element: Landing },
+    { id: 2, path: '/', element: Landing },
+    { id: 3, path: '/auth', element: Auth },
+    { id: 4, path: '/register', element: Register },
+    { id: 5, path: '/about', element: About },
 ]
 
 const authRoutes = [
@@ -25,6 +29,7 @@ const authRoutes = [
     { id: 7, path: '/specialists', element: Specialists },
     { id: 8, path: '/chats', element: Chats },
     { id: 9, path: '/chat/:id', element: Chat },
+    { id: 10, path: '/about', element: About },
     // Blog
 ]
 

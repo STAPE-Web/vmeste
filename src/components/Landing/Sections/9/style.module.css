@@ -1,0 +1,89 @@
+.Section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 175px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.Container h2 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 55px;
+    color: #313131;
+}
+
+.Items {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.Items div {
+    width: 100%;
+    background: url("/Background3.png") no-repeat;
+    background-size: cover;
+    background-position: center right;
+    border-radius: 20px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Items div h3,
+.Items2 div h3 {
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 28px;
+    color: #fff;
+}
+
+.Items div p,
+.Items2 div p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.Items2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.Items2 div:first-child {
+    max-width: 406px;
+}
+
+.Items2 div {
+    width: 100%;
+    background: url("/Background3.png") no-repeat;
+    background-size: cover;
+    background-position: center right;
+    border-radius: 20px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.List {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}

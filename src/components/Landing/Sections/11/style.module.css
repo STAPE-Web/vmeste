@@ -1,0 +1,30 @@
+.Section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 175px;
+}
+
+.Box {
+    max-width: 1300px;
+    width: 100%;
+    border-radius: 20px;
+    background: url("/Background2.png") no-repeat;
+    background-size: cover;
+    padding: 25px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Box h2 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 55px;
+    color: #FFFFFF;
+}
+
+.Box h2 span {
+    font-weight: 900;
+}

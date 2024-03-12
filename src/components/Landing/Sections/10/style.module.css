@@ -1,0 +1,55 @@
+.Section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 175px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Box {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.Box h2 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 55px;
+    color: #313131;
+}
+
+.BoxItem {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.BoxItem div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 550px;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #313131;
+}
+
+.BoxItem div svg {
+    min-width: 56px;
+}
+
+.Image {
+    position: absolute;
+    right: 0;
+}
