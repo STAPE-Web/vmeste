@@ -108,3 +108,66 @@
 .Box .Row button:first-child {
     color: #FB5935;
 }
+
+.Top h6 {
+    display: none;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+    color: #BCBCBF;
+}
+
+.Empty {
+    display: none;
+    height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .Top {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .Top h2 {
+        display: none;
+    }
+
+    .Top svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .Top span {
+        width: 30px;
+    }
+
+    .Content {
+        box-shadow: none;
+        padding: 20px;
+        height: 100vh;
+        justify-content: space-between;
+    }
+
+    .Page {
+        padding: 0;
+        height: 100vh;
+        min-height: 100vh;
+    }
+
+    .Container {
+        padding: 0;
+    }
+
+    .Grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .Top h6 {
+        display: flex;
+    }
+
+    .Empty {
+        display: flex;
+    }
+}

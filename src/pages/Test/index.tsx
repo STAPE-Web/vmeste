@@ -62,9 +62,11 @@ const Test = () => {
             <section className={styles.Container}>
                 {step !== 0 && step !== 19 && <div className={styles.Controlls}>
                     <div className={styles.Group}>
-                        <div onClick={() => setStep(step - 1)}><ArrowLeftIcon /> Назад</div>
+                        <div onClick={() => setStep(step - 1)} className={styles.Back}><ArrowLeftIcon /> Назад</div>
                         <p>{step}/18</p>
-                        <CloseIcon onClick={() => navigate("/")} />
+                        <div className={styles.Close}>
+                            <CloseIcon onClick={() => navigate("/")} />
+                        </div>
                     </div>
 
                     <StepLine max={18} value={step} />

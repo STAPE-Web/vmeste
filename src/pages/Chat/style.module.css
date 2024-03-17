@@ -3,7 +3,7 @@
     height: calc(100vh - 94px);
     display: flex;
     justify-content: center;
-    padding-bottom: 40px;
+    padding: 0 15px 40px 15px;
 }
 
 .Container {
@@ -155,4 +155,39 @@
 
 .Input button:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+        height: 100vh;
+        max-height: 100vh;
+    }
+
+    .Top {
+        padding: 20px;
+    }
+
+    .Container {
+        padding: 0;
+        height: 100vh;
+        max-height: 100vh;
+    }
+
+    .Content {
+        box-shadow: none;
+        padding: 0;
+        height: 100%;
+        gap: 10px;
+    }
+
+    .MessageBox {
+        padding: 0 20px;
+        overflow-y: scroll;
+        height: 100%;
+    }
+
+    .Container>div:first-child {
+        display: none;
+    }
 }

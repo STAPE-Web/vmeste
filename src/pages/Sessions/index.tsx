@@ -15,6 +15,8 @@ const Session = () => {
                     <div className={styles.Top}>
                         <ArrowLeftIcon onClick={() => navigate(-1)} />
                         <h2>Иван Иванов <span>5 сессия</span></h2>
+                        <h6>Мои сессии</h6>
+                        <span></span>
                     </div>
 
                     <div className={styles.Box}>
@@ -30,6 +32,8 @@ const Session = () => {
                             <button>Перенести</button>
                         </div>
                     </div>
+
+                    <div className={styles.Empty}></div>
                 </div>
             </section>
         </main>

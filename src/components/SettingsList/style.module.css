@@ -65,3 +65,9 @@
     line-height: 22px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .Box {
+        gap: 15px;
+    }
+}
