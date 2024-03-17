@@ -69,14 +69,14 @@ const Profile = () => {
         window.addEventListener("resize", () => {
             if (window.innerWidth <= 768) {
                 setMode("")
-            } else {
+            } else if (window.innerWidth >= 768) {
                 setMode("saved")
             }
         })
 
         if (window.innerWidth <= 768) {
             setMode("")
-        } else {
+        } else if (window.innerWidth >= 768) {
             setMode("saved")
         }
     }, [])
