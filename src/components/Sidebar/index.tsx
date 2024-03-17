@@ -19,7 +19,7 @@ const Sidebar = () => {
             {items.map((item, index) => (
                 <div key={index} className={path === item.link ? styles.Active : ""} onClick={() => navigate(item.link)}>
                     <item.icon />
-                    {item.name}
+                    <p>{item.name}</p>
                 </div>
             ))}
         </div>

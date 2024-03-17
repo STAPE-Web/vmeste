@@ -1,6 +1,6 @@
 .Header {
     width: 100%;
-    padding: 14px 0;
+    padding: 14px 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,4 +46,22 @@
 
 .Box ul li:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 1100px) {
+    .Box div {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .Box ul {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Header {
+        display: none;
+    }
 }

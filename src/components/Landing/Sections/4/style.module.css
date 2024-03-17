@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 15px;
     padding-bottom: 175px;
 }
 
@@ -69,4 +70,49 @@
     position: absolute;
     right: 0;
     z-index: -1;
+}
+
+@media screen and (max-width:1200px) {
+    .Image {
+        display: none;
+    }
+
+    .Section {
+        padding-bottom: 50px;
+    }
+}
+
+@media screen and (max-width:850px) {
+    .Container {
+        gap: 30px;
+    }
+
+    .Container h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+        text-align: center;
+    }
+
+    .Items {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .Item svg {
+        min-width: 45px !important;
+        max-width: 45px;
+        height: 45px !important;
+    }
+
+    .Item h3 {
+        font-size: 18px;
+        line-height: 17.6px;
+    }
+
+    .Item p {
+        font-size: 14px;
+        line-height: 13.2px;
+    }
 }

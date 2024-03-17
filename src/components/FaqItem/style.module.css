@@ -20,6 +20,8 @@
 
 .Select svg {
     transition: 0.5s;
+    min-width: 24px;
+    height: 24px;
 }
 
 .Item.Active .Select svg {
@@ -45,4 +47,21 @@
 .Item.Active .Select {
     background: #E8E8E8;
     color: #1A3C51;
+}
+
+@media screen and (max-width:750px) {
+    .Select {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .DropDown {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .Select svg {
+        min-width: 15px;
+        height: 15px;
+    }
 }

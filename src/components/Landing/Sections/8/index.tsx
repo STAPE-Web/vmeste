@@ -11,7 +11,14 @@ const Section8 = () => {
 
                 <div className={styles.Box}>
                     <div className={styles.Review}>
-                        <img src={Avatar} alt="" />
+                        <div className={styles.AvatarBox}>
+                            <img src={Avatar} alt="" />
+
+                            <div>
+                                <h3>Анастасия</h3>
+                                <h4>дизайнер</h4>
+                            </div>
+                        </div>
 
                         <div className={styles.ReviewBox}>
                             <p>Мне всегда казалось, что у меня что-то не так. А год назад я поняла, что больше так не могу. Что я хочу не просто существовать, а жить в гармонии с собой. Мой терапевт от ВМЕСТЕ — очень тактичная и внимательная девушка, с ней очень комфортно работать, чувствую себя в безопасности. Мне уже удалось разобраться с давно мучившими меня отношениями, избавиться от некоторых страхов.</p>
@@ -27,8 +34,6 @@ const Section8 = () => {
                             <ButtonRound onClick={() => ({})} big={true} disabled={false}><ArrowRightIcon /></ButtonRound>
                         </div>
                     </div>
-
-                    {/*  */}
                 </div>
             </div>
         </section>

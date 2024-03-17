@@ -17,9 +17,11 @@ const Section3 = () => {
                 <h2>Если у Вас:</h2>
                 <div className={styles.Grid}>
                     {items.map((item, index) => (
-                        <div key={index}>
-                            <item.icon />
-                            <h3>{item.title}</h3>
+                        <div key={index} className={styles.Item}>
+                            <div>
+                                <item.icon />
+                                <h3>{item.title}</h3>
+                            </div>
                             <p>{item.text}</p>
                         </div>
                     ))}

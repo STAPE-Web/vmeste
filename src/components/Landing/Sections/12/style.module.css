@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 175px;
+    padding: 0 15px 175px 15px;
 }
 
 .Container {
@@ -26,4 +26,34 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media screen and (max-width:950px) {
+    .Container {
+        gap: 20px;
+        align-items: center;
+    }
+
+    .Container h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+    }
+
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .Container div {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .Container div img {
+        max-width: 50%;
+        width: 100%;
+    }
 }

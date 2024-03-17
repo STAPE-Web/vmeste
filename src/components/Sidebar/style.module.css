@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 10px;
     max-width: 300px;
+    min-height: 300px;
     width: 100%;
 }
 
@@ -30,4 +31,31 @@
 
 .Sidebar div.Active svg {
     color: #FF8702;
+}
+
+@media screen and (max-width:1160px) {
+    .Sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        flex-direction: row;
+        background: #fff;
+        min-height: 50px;
+        align-items: flex-end;
+        max-width: 100%;
+        z-index: 100;
+        justify-content: space-between;
+        padding: 16px 0 10px 0;
+    }
+
+    .Sidebar div p {
+        display: none;
+    }
+
+    .Sidebar div {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
 }

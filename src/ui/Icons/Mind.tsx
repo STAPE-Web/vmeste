@@ -9,7 +9,7 @@ const Mind = (props: any) => {
             {...props}
         >
             <g
-                fill="#FF8702"
+                fill="currentColor"
                 fillRule="evenodd"
                 clipPath="url(#clip0_480_25973)"
                 clipRule="evenodd"

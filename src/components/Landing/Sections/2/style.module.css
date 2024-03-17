@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 15px;
 }
 
 .Container {
@@ -38,4 +39,41 @@
     font-size: 22px;
     font-weight: 600;
     line-height: 28px;
+}
+
+@media screen and (max-width:1200px) {
+    .Container {
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .Container {
+        flex-direction: column;
+        width: fit-content;
+    }
+
+    .Container div {
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .Container h2 {
+        font-size: 35px;
+        line-height: 38.5px;
+    }
+
+    .Container p {
+        font-size: 14px;
+        line-height: 15.4px;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .Container div {
+        flex-direction: column;
+    }
 }

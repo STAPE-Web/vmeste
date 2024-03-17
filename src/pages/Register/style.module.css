@@ -4,7 +4,7 @@
     justify-content: center;
     width: 100%;
     min-height: calc(100vh - 94px);
-    padding: 40px 0;
+    padding: 40px 20px;
 }
 
 .Box {
@@ -181,4 +181,23 @@
 
 .RowItem.ActiveItem div {
     opacity: 1;
+}
+
+.MobileBox {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .Box {
+        display: none;
+    }
+
+    .MobileBox {
+        display: flex;
+    }
+
+    .Page {
+        padding-top: 20px;
+        height: 100vh;
+    }
 }

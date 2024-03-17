@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 175px;
+    padding: 0 15px 175px 15px;
 }
 
 .Box {
@@ -27,4 +27,56 @@
 
 .Box h2 span {
     font-weight: 900;
+}
+
+.AppBox {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width:950px) {
+    .AppBox {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .Box {
+        padding: 16px;
+    }
+
+    .Box h2 {
+        font-size: 30px;
+        line-height: 32px;
+    }
+
+    .Box h2 br {
+        display: none;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .AppBox img {
+        max-width: 100px;
+        min-width: 100px;
+        width: 100%;
+    }
+
+    .Box {
+        gap: 15px;
+    }
+
+    .Box h2 {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .AppBox {
+        gap: 10px;
+    }
 }

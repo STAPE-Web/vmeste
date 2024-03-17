@@ -37,6 +37,33 @@ import Dzen from "./Dzen";
 import VK from "./VK";
 import Care from "./Care";
 import Mind from "./Mind";
+import Menu from "./Menu";
+import Mask from "./Mask";
+import Fire from "./Fire";
+import Alone from "./Alone";
+import Condition from "./Condition";
+import Magnes from "./Magnes";
+import Burger from "./Burger";
+import Warning from "./Warning";
+import Drags from "./Drags";
+import Alcogol from "./Alcogol";
+import People from "./People";
+import Parrents from "./Parrents";
+import Kids from "./Kids";
+import Strawberry from "./Strawberry";
+import Plus18 from "./Plus18";
+import Chart from "./Chart";
+import Match from "./Match";
+import Question from "./Question";
+import Goal from "./Goal";
+import Fired from "./Fired";
+import Moving from "./Moving";
+import Pregnancy from "./Pregnancy";
+import Finance from "./Finance";
+import Plant from "./Plant";
+import Hit from "./Hit";
+import User from "./User";
+import Bell from "./Bell";
 
 export {
     SignIn as SignInIcon,
@@ -77,5 +104,32 @@ export {
     Dzen as DzenIcon,
     VK as VKIcon,
     Care as CareIcon,
-    Mind as MindIcon
+    Mind as MindIcon,
+    Menu as MenuIcon,
+    Mask as MaskIcon,
+    Fire as FireIcon,
+    Alone as AloneIcon,
+    Condition as ConditionIcon,
+    Magnes as MagnesIcon,
+    Burger as BurgerIcon,
+    Warning as WarningIcon,
+    Drags as DragIcon,
+    Alcogol as AlcogolIcon,
+    People as PeopleIcon,
+    Parrents as ParrentsIcon,
+    Kids as KidsIcon,
+    Strawberry as StrawberryIcon,
+    Plus18 as Plus18Icon,
+    Chart as ChartIcon,
+    Match as MatchIcon,
+    Question as QuestionIcon,
+    Goal as GoalIcon,
+    Fired as FiredIcon,
+    Moving as MovingIcon,
+    Pregnancy as PregnancyIcon,
+    Finance as FinanceIcon,
+    Plant as PlantIcon,
+    Hit as HitIcon,
+    User as UserIcon,
+    Bell as BellIcon,
 }

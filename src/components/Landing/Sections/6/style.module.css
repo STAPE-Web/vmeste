@@ -1,9 +1,9 @@
 .Section {
     width: 100%;
-    padding-bottom: 175px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 15px 175px 15px;
 }
 
 .Container {
@@ -133,4 +133,74 @@
 .Item:nth-child(3) {
     background: #919EAB;
     color: #fff;
+}
+
+@media screen and (max-width: 1000px) {
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+
+    .Items {
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .Container {
+        gap: 20px;
+    }
+
+    .Items {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Container {
+        align-items: center;
+    }
+
+    .Container h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+    }
+
+    .Tabs {
+        margin-top: 0;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .Tab {
+        font-size: 16px;
+        line-height: 17.2px;
+    }
+
+    .Tab div {
+        width: 16px;
+        height: 16px;
+        border-width: 1px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Item {
+        padding: 16px 8px 16px 16px;
+        gap: 10px;
+    }
+
+    .Item h5 {
+        font-size: 14px;
+    }
+
+    .Item h3 {
+        font-size: 30px;
+    }
+
+    .Item p {
+        font-size: 14px;
+        line-height: 13.2px;
+    }
 }

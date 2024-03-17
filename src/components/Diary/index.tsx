@@ -36,8 +36,8 @@ const Diary = () => {
     const [selfRate, setSeltRate] = useState(50)
     const [note, setNote] = useState("Сегодня я чувствую себя хорошо")
 
-    const [tab2, setTab2] = useState("Дн")
-    const tabs2 = ["Дн", "Нед", "Мес", "Год"]
+    const [tab2, setTab2] = useState("ДН")
+    const tabs2 = ["ДН", "НЕД", "МЕС", "ГОД"]
 
     return (
         <div className={styles.Diary}>

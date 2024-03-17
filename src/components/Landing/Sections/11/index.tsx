@@ -7,8 +7,10 @@ const Section11 = () => {
         <section className={styles.Section}>
             <div className={styles.Box}>
                 <h2>Скачивайте мобильное <br /> приложение <span>«ВМЕСТЕ»</span></h2>
-                <img src={AppStore} alt="" />
-                <img src={GooglePlay} alt="" />
+                <div className={styles.AppBox}>
+                    <img src={AppStore} alt="" />
+                    <img src={GooglePlay} alt="" />
+                </div>
             </div>
         </section>
     )

@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 175px;
+    padding: 0 15px 175px 15px;
 }
 
 .Container {
@@ -52,4 +52,58 @@
 .Image {
     position: absolute;
     right: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .Image {
+        position: static;
+        width: 50%
+    }
+
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .Container {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Image {
+        display: none;
+    }
+
+    .Box {
+        align-items: center;
+        gap: 20px;
+    }
+
+    .Box h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+        text-align: center;
+    }
+
+    .Box h2 br {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .BoxItem div {
+        font-size: 14px;
+        gap: 5px;
+        line-height: 14px;
+    }
+
+    .BoxItem {
+        gap: 15px;
+    }
+
+    .BoxItem svg {
+        width: 40px;
+        height: 40px;
+    }
 }

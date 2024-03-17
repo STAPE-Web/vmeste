@@ -128,3 +128,51 @@
     line-height: 22px;
     color: #fff;
 }
+
+@media screen and (max-width: 1100px) {
+    .Container {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .Container ul {
+        align-items: flex-end;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .Download {
+        display: none;
+    }
+
+    .SocialBox {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .SocialBox h4,
+    .SocialBox .LinkBox {
+        display: none;
+    }
+
+    .Footer {
+        padding: 55px 15px !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .Container ul li {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .Box h4,
+    .Box h3 {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .Box>svg {
+        max-width: 150px;
+    }
+}

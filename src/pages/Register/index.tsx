@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@/ui/Icons"
 import Input from "@/ui/Input"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
+import MobileBox from "@/components/MobileBox"
 
 const Register = () => {
     const [step, setStep] = useState(1)
@@ -172,6 +173,8 @@ const Register = () => {
                     </>
                 }
             </div>
+
+            <MobileBox />
         </main>
     )
 }

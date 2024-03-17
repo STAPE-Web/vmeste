@@ -1,9 +1,9 @@
 .Section {
     width: 100%;
-    padding-bottom: 175px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 15px 175px 15px;
 }
 
 .Box {
@@ -27,4 +27,43 @@
 
 .Box svg {
     min-width: 210px;
+}
+
+@media screen and (max-width:1100px) {
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+
+    .Box h3 {
+        font-size: 35px;
+        line-height: 40px;
+    }
+}
+
+@media screen and (max-width:775px) {
+    .Box svg {
+        min-width: 100px;
+        height: auto;
+    }
+
+    .Box {
+        padding: 16px;
+        gap: 20px;
+    }
+
+    .Box h3 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .Box h3 {
+        font-size: 18px;
+        line-height: 20.6px;
+    }
+
+    .Box svg {
+        min-width: 60px;
+    }
 }

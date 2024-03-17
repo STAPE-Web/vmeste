@@ -23,7 +23,7 @@ const Header = () => {
                             <li>Для психологов</li>
                             <li onClick={() => navigate("/about")}>О нас</li>
                             <li>Блог</li>
-                            {!isAuth && <li><SignInIcon /> Вход</li>}
+                            {!isAuth && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
                         </ul>
 
                         <ButtonHeader disabled={false} onClick={() => navigate("/specialists")}>Выбрать психолога</ButtonHeader>

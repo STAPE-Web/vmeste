@@ -72,7 +72,7 @@ const Home = () => {
                                     </button>
                                     <div className={styles.Slider} ref={sliderRef}>
                                         {tests.map((item, index) => (
-                                            <div key={index} style={{ background: item.color }}>
+                                            <div key={index} style={{ background: item.color }} onClick={() => navigate("/test")}>
                                                 {item.title}
                                             </div>
                                         ))}

@@ -9,7 +9,7 @@ const Alert = (props: any) => {
             {...props}
         >
             <g
-                fill="#1A3C51"
+                fill="currentColor"
                 fillRule="evenodd"
                 clipPath="url(#clip0_258_183)"
                 clipRule="evenodd"

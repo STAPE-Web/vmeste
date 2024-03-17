@@ -1,6 +1,6 @@
 .Section1 {
     width: 100%;
-    padding: 120px 0;
+    padding: 120px 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,6 +88,7 @@
     line-height: 28px;
     text-align: center;
     color: #1A3C51;
+    background: #fff;
 }
 
 .Section1 .Box button {
@@ -102,7 +103,7 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
-    padding-bottom: 175px;
+    padding: 0 15px 175px 15px;
 }
 
 .Section2 p {
@@ -132,4 +133,106 @@
     min-width: 330px;
     background: #fff;
     color: #FF8702;
+}
+
+@media screen and (max-width: 1160px) {
+    .Section1 .Illustration {
+        position: static;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .Section1 {
+        padding: 50px 15px;
+    }
+
+    .Section1 .Container {
+        flex-direction: column-reverse;
+    }
+
+    .Section1 .Illustration {
+        width: 100%;
+        height: auto;
+    }
+
+    .Section1 .Box button {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Items {
+        position: absolute;
+        top: -30px;
+        width: 100%;
+        overflow: scroll;
+    }
+
+    .Items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .Box {
+        align-items: center;
+    }
+
+    .Section1 .Price {
+        position: absolute;
+        left: 0;
+        margin-top: -100px;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .Items div {
+        font-size: 15px;
+        line-height: 16.5px;
+    }
+
+    .Section1 .Box h1 {
+        font-size: 37px;
+        line-height: 37px;
+        text-align: center;
+    }
+
+    .Section1 .Box h3 {
+        font-size: 20px;
+        line-height: 22px;
+        text-align: center;
+    }
+
+    .Section1 .Box h3 br {
+        display: none;
+    }
+
+    .Section2 {
+        padding: 0 15px 50px 15px;
+        gap: 35px;
+    }
+
+    .Section2 p {
+        font-size: 20px;
+        line-height: 27px;
+    }
+
+    .Section2 .Box {
+        font-size: 16px;
+        line-height: 16px;
+        padding: 13px 20px;
+        background-position: center center;
+        gap: 15px;
+    }
+
+    .Image {
+        width: 100%;
+        height: auto;
+    }
+
+    .Section2 .Box button {
+        min-width: 130px;
+        font-size: 10px;
+        line-height: 13.5px;
+        white-space: nowrap;
+        height: 25px;
+    }
 }

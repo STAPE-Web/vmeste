@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    padding: 0 15px;
 }
 
 .Header .Header svg {
@@ -67,4 +68,100 @@
     opacity: 1;
     background: #fff;
     color: #1A3C51;
+}
+
+.Burger {
+    display: none;
+}
+
+.Burger svg:nth-child(2),
+.Burger.ActiveMenu svg:nth-child(1) {
+    display: none;
+}
+
+.Burger svg {
+    width: 33px;
+    height: 22px;
+    color: #fff;
+}
+
+.Burger.ActiveMenu svg:nth-child(2) {
+    display: flex;
+}
+
+.Navigation {
+    display: none;
+}
+
+.Navigation {
+    min-height: 0px;
+    overflow: hidden;
+    transition: 0.5s;
+    opacity: 0;
+    background: #E8E8E8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    color: #1A3C51;
+    font-size: 16px;
+    line-height: 21.82px;
+    font-weight: 700;
+}
+
+.Navigation.ActiveNav {
+    min-height: 170px;
+    opacity: 1;
+}
+
+.Navigation li {
+    min-height: 0px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.Navigation.ActiveNav li {
+    min-height: 22px;
+    max-height: 22px;
+}
+
+@media screen and (max-width: 1160px) {
+    .Header .Box>div {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .Header .Box ul {
+        display: none;
+    }
+
+    .Burger {
+        display: flex !important;
+    }
+
+    .Header .Box {
+        gap: 15px;
+    }
+
+    .Navigation {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .Header button {
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 15px;
+        height: 28px;
+        padding: 1px 20px;
+    }
+
+    .Logo {
+        max-width: 106px;
+    }
 }

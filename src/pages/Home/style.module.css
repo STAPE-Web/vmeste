@@ -1,15 +1,14 @@
 .Page {
     width: 100%;
-    height: calc(100vh - 94px);
+    min-height: calc(100vh - 94px);
     display: flex;
     justify-content: center;
-    padding-bottom: 40px;
 }
 
 .Container {
     max-width: 1300px;
     width: 100%;
-    padding: 40px 0;
+    padding: 40px 15px;
     display: flex;
     align-items: flex-start;
     gap: 20px;
@@ -92,6 +91,7 @@
     font-size: 20px;
     font-weight: 800;
     border-radius: 13px;
+    cursor: pointer;
 }
 
 .Slider::-webkit-scrollbar {
@@ -137,4 +137,38 @@
     max-width: 870px;
     display: flex;
     align-items: center;
+}
+
+@media screen and (max-width:768px) {
+    .Content {
+        box-shadow: none;
+        padding: 0;
+        padding-bottom: 100px;
+        gap: 25px;
+    }
+
+    .Container {
+        padding: 0;
+    }
+
+    .Box {
+        padding: 0 20px;
+    }
+
+    .Items {
+        overflow-x: scroll;
+        padding-bottom: 10px;
+    }
+
+    .Items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .Items div {
+        min-width: 100px;
+    }
+
+    .SLiderBox button {
+        display: none;
+    }
 }

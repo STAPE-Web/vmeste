@@ -3,12 +3,18 @@ import { Link } from "react-router-dom"
 import styles from "./style.module.css"
 import { FC, useState } from "react"
 import Input from "@/ui/Input"
+// import { AuthAPI } from "@/api"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
 }
 const Email: FC<Props> = ({ setState }) => {
     const [email, setEmail] = useState("")
+
+    async function authorize() {
+        // AuthAPI.sendCode(email)
+        setState("Code")
+    }
 
     return (
         <section className={styles.Section}>
@@ -17,7 +23,7 @@ const Email: FC<Props> = ({ setState }) => {
                 <p>Отправим код подтверждения</p>
                 <div className={styles.Form}>
                     <Input onChange={e => setEmail(e.target.value)} placeholder="Ваша почта" type="text" value={email} />
-                    <ButtonHeader disabled={email === ""} onClick={() => setState("Code")}>Получить код</ButtonHeader>
+                    <ButtonHeader disabled={email === ""} onClick={() => authorize()}>Получить код</ButtonHeader>
                 </div>
                 <p className={styles.Enter} onClick={() => setState("Phone")}>Вход по телефону</p>
             </div>

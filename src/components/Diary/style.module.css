@@ -134,3 +134,26 @@
     border: none;
     padding: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .Diary {
+        padding: 20px;
+    }
+
+    .Items {
+        overflow-x: scroll;
+        padding-bottom: 10px;
+    }
+
+    .Items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .Items div {
+        min-width: 100px;
+    }
+
+    .Tabs {
+        align-self: center;
+    }
+}

@@ -1,9 +1,9 @@
 .Section {
     width: 100%;
-    padding-bottom: 175px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 15px 175px 15px;
 }
 
 .Container {
@@ -54,14 +54,16 @@
     color: #313131;
 }
 
-.ReviewBox h3 {
+.ReviewBox h3,
+.AvatarBox h3 {
     font-size: 20px;
     font-weight: 800;
     line-height: 22px;
     color: #FF8702;
 }
 
-.ReviewBox h4 {
+.ReviewBox h4,
+.AvatarBox h4 {
     font-size: 15px;
     font-style: italic;
     font-weight: 400;
@@ -85,4 +87,74 @@
 
 .ButtonBox button:hover svg {
     color: #1A3C51;
+}
+
+.AvatarBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AvatarBox div {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width: 850px) {
+    .Container {
+        gap: 20px;
+        align-items: center;
+    }
+
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+
+    .Container h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+    }
+
+    .Box {
+        border-radius: 5px;
+        box-shadow: 3px 3px 16px 0px #B6A1C033;
+        padding: 14px;
+    }
+
+    .ButtonBox {
+        display: none;
+    }
+
+    .Review {
+        align-items: center;
+    }
+
+    .ReviewBox div {
+        display: none;
+    }
+
+    .ReviewBox p {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .AvatarBox div {
+        display: flex;
+    }
+
+    .AvatarBox h3 {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .AvatarBox h4 {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .Review img {
+        width: 70px;
+        height: 70px;
+    }
 }

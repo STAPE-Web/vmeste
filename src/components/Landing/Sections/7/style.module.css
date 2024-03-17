@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 175px;
+    padding: 0 15px 175px 15px;
 }
 
 .Box {
@@ -32,4 +33,37 @@
 
 .Box h3 span {
     font-weight: 900;
+}
+
+.Box button {
+    white-space: nowrap;
+}
+
+@media screen and (max-width:950px) {
+    .Box {
+        padding: 15px;
+    }
+
+    .Box h3 {
+        font-size: 30px;
+        line-height: 34px;
+    }
+
+    .Section {
+        padding: 0 15px 50px 15px;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .Box button {
+        font-size: 12px;
+        line-height: 13.64px;
+        height: 30px;
+        padding: 0 16px;
+    }
+
+    .Box h3 {
+        font-size: 16px;
+        line-height: 18px;
+    }
 }

@@ -11,6 +11,12 @@
     gap: 20px;
 }
 
+.Box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .Banner h2 {
     color: #fff;
     font-size: 24px;
@@ -19,4 +25,42 @@
 .Banner button {
     background: #fff;
     color: #FF8702;
+}
+
+.MobileHeader {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.MobileHeader .User {
+    width: 24px;
+    height: 24px;
+    background: #FFC381;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.Notifications {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+}
+
+@media screen and (max-width:768px) {
+    .Banner {
+        border-radius: 0 0 30px 30px;
+        justify-content: space-between;
+        padding-bottom: 25px;
+        padding-top: 16px;
+    }
+
+    .MobileHeader {
+        display: flex;
+    }
 }

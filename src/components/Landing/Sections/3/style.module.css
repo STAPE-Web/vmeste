@@ -1,5 +1,5 @@
 .Section {
-    padding: 175px 0;
+    padding: 175px 15px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@
     gap: 40px;
 }
 
-.Grid div {
+.Grid .Item {
     box-shadow: 3px 3px 16px 0px #B6A1C033;
     background: #fff;
     padding: 20px 20px 35px 20px;
@@ -37,7 +37,7 @@
     gap: 8px;
 }
 
-.Grid div h3 {
+.Grid .Item h3 {
     font-size: 25px;
     font-weight: 700;
     line-height: 28px;
@@ -45,9 +45,64 @@
     margin-top: 12px;
 }
 
-.Grid div p {
+.Grid .Item p {
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;
     color: #313131;
+}
+
+.Grid .Item svg {
+    color: #1A3C51;
+}
+
+@media screen and (max-width: 1000px) {
+    .Grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+    }
+
+    .Item div {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .Item div svg {
+        min-width: 24px;
+        height: 24px;
+    }
+
+    .Grid .Item h3 {
+        margin-top: 0;
+    }
+
+    .Container {
+        align-items: center;
+        gap: 30px;
+    }
+
+    .Section {
+        padding: 50px 15px;
+    }
+
+    .Container h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+    }
+
+    .Grid .Item p {
+        font-size: 14px;
+        line-height: 13.2px;
+    }
+
+    .Item {
+        padding: 20px;
+    }
 }
