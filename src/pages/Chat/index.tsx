@@ -1,11 +1,23 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, SearchIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, Calendar2Icon, SearchIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
 
 const Chat = () => {
     const navigate = useNavigate()
-    const messages = [
+    const ref = useRef<HTMLDivElement | null>(null)
+    const [value, setValue] = useState("")
+    const [search, setSearch] = useState(false)
+
+    function scrollDown() {
+        if (ref.current) {
+            const { scrollHeight, clientHeight } = ref.current;
+            ref.current.scrollTop = scrollHeight - clientHeight;
+        }
+    }
+
+    const [messages, setMessages] = useState([
         {
             me: true,
             content: "Как понять, что мне нужен психолог?",
@@ -24,7 +36,29 @@ const Chat = () => {
             type: "text",
             time: "13:15"
         },
-    ]
+    ])
+
+    function sendMessage() {
+        if (value !== "") {
+            setMessages(prev => [...prev, {
+                me: true,
+                content: value,
+                time: "13:15",
+                type: "text"
+            }])
+
+            setValue("")
+            setTimeout(() => {
+                scrollDown()
+            }, 1)
+        } else {
+            scrollDown()
+        }
+    }
+
+    useEffect(() => {
+        scrollDown()
+    }, [])
 
     return (
         <main className={styles.Page}>
@@ -33,12 +67,23 @@ const Chat = () => {
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>
-                        <ArrowLeftIcon onClick={() => navigate(-1)} />
-                        <h3>Отправить сообщение</h3>
-                        <SearchIcon />
+                        {search
+                            ? <>
+                                <div className={styles.Search}>
+                                    <SearchIcon />
+                                    <input type="text" placeholder="Поиск" />
+                                </div>
+                                <Calendar2Icon onClick={() => navigate("/calendar")} />
+                            </>
+                            : <>
+                                <ArrowLeftIcon onClick={() => navigate(-1)} />
+                                <h3>Отправить сообщение</h3>
+                                <SearchIcon onClick={() => setSearch(true)} />
+                            </>
+                        }
                     </div>
 
-                    <div className={styles.MessageBox}>
+                    <div className={styles.MessageBox} ref={ref}>
                         <h6>1 янв. 2024</h6>
                         {messages.map((msg, index) => (
                             <div key={index} className={`${styles.Message} ${msg.me ? styles.MyMessage : ""}`}>
@@ -52,8 +97,8 @@ const Chat = () => {
 
                     <div className={styles.Input}>
                         <AttachIcon />
-                        <input type="text" placeholder="Сообщение..." />
-                        <button>
+                        <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Сообщение..." />
+                        <button onClick={() => sendMessage()}>
                             <ArrowRightIcon />
                         </button>
                     </div>

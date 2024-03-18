@@ -24,7 +24,7 @@
     padding-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 10зч;
 }
 
 .Top {
@@ -33,6 +33,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 55px;
+    gap: 15px;
+    background: #fff;
+    padding-bottom: 20px;
 }
 
 .Top svg {
@@ -55,6 +58,9 @@
     flex-direction: column;
     gap: 10px;
     padding: 0 55px;
+    height: 450px;
+    overflow-y: scroll;
+    padding-bottom: 15px;
 }
 
 .MessageBox h6 {
@@ -134,7 +140,7 @@
 }
 
 .Input button {
-    width: 30px;
+    min-width: 30px;
     height: 30px;
     border-radius: 100%;
     background: #FF8702;
@@ -155,6 +161,32 @@
 
 .Input button:hover {
     opacity: 0.7;
+}
+
+.Search {
+    width: 100%;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    height: 44px;
+    border-radius: 100px;
+    padding: 0 12px;
+    gap: 12px;
+}
+
+.Search svg {
+    width: 12px;
+    height: 12px;
+}
+
+.Search input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
 }
 
 @media screen and (max-width: 768px) {

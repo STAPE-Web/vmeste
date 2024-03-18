@@ -50,7 +50,7 @@ const Calendar = () => {
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>
-                        <CloseIcon onClick={() => navigate("/sessions")} />
+                        <CloseIcon onClick={() => navigate(-1)} />
                         <p>Сегодня</p>
                     </div>
 
