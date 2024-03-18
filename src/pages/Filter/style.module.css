@@ -1,0 +1,262 @@
+.Page {
+    width: 100%;
+    min-height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    padding: 0 15px 40px 15px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.Content {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    border-radius: 20px;
+    background: #fff;
+    padding: 40px 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Top svg {
+    color: #BCBCBF;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.Top h2 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Tabs {
+    background: #F2F2F2;
+    height: 30px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.Tabs div {
+    padding: 0 17px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
+    color: #BCBCBF;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.Tabs div.ActiveTab {
+    background: #FF8702;
+    color: #fff;
+}
+
+.Box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Box h3 {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    border-radius: 7px;
+    border: none;
+    background: #F2F2F2;
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #98A1AA;
+}
+
+.Button:hover {
+    opacity: 0.7;
+}
+
+.Button svg {
+    width: 10px;
+    height: 10px;
+    color: #98A1AA;
+}
+
+.Modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0000003D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.GroupItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    background: #fff;
+    max-width: 875px;
+    padding: 40px 70px;
+    border-radius: 30px;
+}
+
+.GroupItem h3 {
+    color: #23232B;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.GroupItem p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #AFABA8;
+    max-width: 500px;
+    text-align: center;
+}
+
+.RowBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.CheckGroup {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 20px;
+}
+
+.CheckGroupItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.CheckGroupItem h2 {
+    color: #23232B;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.CheckArray {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.CheckArray div {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.CheckArray svg {
+    min-width: 15px;
+}
+
+.CheckArray p {
+    font-size: 14px;
+    color: #23232B;
+    text-align: start;
+    line-height: 15.4px;
+}
+
+.RowItems {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.RowItems div {
+    height: 30px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FF8702;
+    border-radius: 7px;
+    font-size: 14px;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+    }
+
+    .Container {
+        padding: 0;
+    }
+
+    .Content {
+        padding: 20px;
+        box-shadow: none;
+        gap: 30px;
+        padding-bottom: 100px;
+    }
+
+    .RowItems {
+        flex-wrap: wrap;
+    }
+
+    .Modal {
+        display: none;
+    }
+
+    .Page .Container>div:first-child {
+        display: none;
+    }
+}

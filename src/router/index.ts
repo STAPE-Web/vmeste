@@ -10,6 +10,8 @@ import Chats from "@/pages/Chats"
 import Chat from "@/pages/Chat"
 import Landing from "@/pages/Landing"
 import About from "@/pages/About"
+import Calendar from "@/pages/Calendar"
+import Filter from "@/pages/Filter"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Landing },
@@ -30,6 +32,8 @@ const authRoutes = [
     { id: 8, path: '/chats', element: Chats },
     { id: 9, path: '/chat/:id', element: Chat },
     { id: 10, path: '/about', element: About },
+    { id: 11, path: '/calendar', element: Calendar },
+    { id: 12, path: '/filter', element: Filter },
     // Blog
 ]
 

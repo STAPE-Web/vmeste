@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import styles from "./style.module.css"
 import { FC, useState } from "react"
 import Input from "@/ui/Input"
-import { AuthAPI } from "@/api"
+// import { AuthAPI } from "@/api"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
@@ -12,8 +12,8 @@ const Email: FC<Props> = ({ setState }) => {
     const [email, setEmail] = useState("")
 
     async function authorize() {
-        const result = await AuthAPI.sendCode(email)
-        console.log(result)
+        // const result = await AuthAPI.sendCode(email)
+        // console.log(result)
         setState("Code")
     }
 

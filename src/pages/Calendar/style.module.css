@@ -1,0 +1,205 @@
+.Page {
+    width: 100%;
+    height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+    padding: 0 15px 40px 15px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.Content {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    border-radius: 20px;
+    background: #fff;
+    padding: 40px 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Top svg {
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Top p {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #BCBCBF;
+}
+
+.Weeks {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.Weeks p {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+    color: #BCBCBF;
+}
+
+.Calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.Calendar h6 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #BCBCBF;
+}
+
+.Calendar h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Calendar .Days {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.Calendar span {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+}
+
+.Calendar span:hover {
+    background: #FF870220;
+}
+
+.Calendar span.ActiveDay {
+    border: 2px solid #FF8702;
+}
+
+.Calendar span.SelectedDay {
+    background: #FF870240;
+}
+
+.SelectedBox {
+    padding: 40px 50px;
+    background: #FFFFFF;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    position: absolute;
+    white-space: nowrap;
+    top: -180px;
+    border-radius: 20px;
+}
+
+.SelectedBox img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+.SelectedBox h3 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.SelectedBox p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #AFABA8;
+}
+
+.SelectedBox h4 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #23232B;
+}
+
+.SelectedBox div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.SelectedBox::before {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    content: "";
+    position: absolute;
+    left: 47.5%;
+    bottom: -10px;
+    transform: rotate(45deg);
+    box-shadow: 10px 10px 16px 0px #B6A1C033;
+    z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+    .Top h2 {
+        font-size: 20px;
+        color: #BCBCBF;
+    }
+
+    .Content {
+        box-shadow: none;
+        padding: 20px;
+        padding-bottom: 100px;
+    }
+
+    .Page {
+        padding: 0;
+        height: 100vh;
+        min-height: 100vh;
+    }
+
+    .Container {
+        padding: 0;
+    }
+
+    .Calendar span {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+    }
+}

@@ -1,9 +1,9 @@
 .Page {
     width: 100%;
-    height: calc(100vh - 94px);
+    min-height: calc(100vh - 94px);
     display: flex;
     justify-content: center;
-    padding-bottom: 40px;
+    padding: 0 15px 40px 15px;
 }
 
 .Container {
@@ -54,7 +54,7 @@
 }
 
 .SpecialistsBox svg {
-    width: 20px;
+    min-width: 20px;
     height: 20px;
     color: #CCCCD6;
     cursor: pointer;
@@ -62,8 +62,9 @@
 
 .InfoBox {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 40px;
+    position: relative;
 }
 
 .ImageBox {
@@ -122,6 +123,15 @@
     font-weight: 400;
     line-height: 22px;
     color: #23232B;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 7;
+    text-overflow: ellipsis;
+}
+
+.Info .About p.FullText {
+    display: flex;
 }
 
 .Info .About h5 {
@@ -173,8 +183,39 @@
     padding-top: 40px;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    width: 100%;
+    cursor: pointer;
+}
+
+.TextBox .TextBoxTop svg {
+    transition: 0.5s;
+}
+
+.TextBox.ActiveTextBox .TextBoxTop svg {
+    transform: rotate(180deg);
+}
+
+.TextBoxTop {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
+}
+
+.TextBoxBottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.TextBox.ActiveTextBox .TextBoxBottom {
+    max-height: 1000px;
+    padding-top: 30px;
 }
 
 .TextBox p {
@@ -182,4 +223,113 @@
     font-weight: 400;
     line-height: 22px;
     color: #23232B;
+}
+
+.InfoBox button:first-child {
+    position: absolute;
+    left: -20px;
+    z-index: 10;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+}
+
+.InfoBox button:last-child {
+    position: absolute;
+    right: -20px;
+    z-index: 10;
+}
+
+.TextBoxBottom p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.TextBoxBottom h5 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #AFABA8;
+}
+
+@media screen and (max-width: 1000px) {
+    .Avatars {
+        overflow-x: scroll;
+    }
+
+    .Avatars::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+    }
+
+    .Container {
+        padding: 0;
+    }
+
+    .Content {
+        padding: 0;
+        box-shadow: none;
+        gap: 0;
+        padding-bottom: 100px;
+    }
+
+    .Title {
+        display: none;
+    }
+
+    .SpecialistsBox {
+        gap: 30px;
+    }
+
+    .InfoBox button {
+        display: none;
+    }
+
+    .InfoBox {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .ImageBox {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .Info {
+        margin-top: -100px;
+        z-index: 10;
+        background: #fff;
+        width: 100%;
+        border-radius: 50px;
+        padding: 30px 20px;
+        align-items: center;
+    }
+
+    .Info h3,
+    .Info h4 {
+        text-align: center;
+    }
+
+    .Info h4 {
+        font-size: 14px;
+    }
+
+    .TextBox {
+        padding: 40px 20px;
+    }
+
+    .ButtonBox {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .ButtonBox button {
+        width: 100%;
+    }
 }

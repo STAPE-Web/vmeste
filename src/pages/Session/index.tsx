@@ -25,7 +25,7 @@ const Sessions = () => {
                 <div className={styles.Content}>
                     <div className={styles.Top}>
                         <h2>Мои сессии</h2>
-                        <Calendar2Icon />
+                        <Calendar2Icon onClick={() => navigate("/calendar")} />
                     </div>
 
                     <div className={styles.Tabs}>

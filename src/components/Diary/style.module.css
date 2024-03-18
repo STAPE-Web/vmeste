@@ -135,6 +135,71 @@
     padding: 10px;
 }
 
+.CloseIcon {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.Clanedar {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 80px;
+}
+
+.Diary h6 {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 10px;
+    text-align: center;
+    color: #23232B;
+}
+
+.ClanedarItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ClanedarItem div {
+    display: grid;
+    grid-template-columns: repeat(7, 40px);
+    gap: 0 8px;
+}
+
+.ClanedarItem h5 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #BCBCBF;
+}
+
+.ClanedarItem h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.ClanedarItem div span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    transition: 0.5s;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.ClanedarItem div span.ActiveDay {
+    background: #FF870240;
+
+}
+
 @media screen and (max-width: 768px) {
     .Diary {
         padding: 20px;
@@ -155,5 +220,19 @@
 
     .Tabs {
         align-self: center;
+    }
+
+    .Clanedar {
+        grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Diary h6 {
+        display: none;
+    }
+
+    .ClanedarItem div {
+        grid-template-columns: repeat(7, 1fr);
     }
 }

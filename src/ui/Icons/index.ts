@@ -64,6 +64,7 @@ import Plant from "./Plant";
 import Hit from "./Hit";
 import User from "./User";
 import Bell from "./Bell";
+import Add2 from "./Add2";
 
 export {
     SignIn as SignInIcon,
@@ -132,4 +133,5 @@ export {
     Hit as HitIcon,
     User as UserIcon,
     Bell as BellIcon,
+    Add2 as Add2Icon
 }
