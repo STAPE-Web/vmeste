@@ -16,7 +16,7 @@ const Test = () => {
             case 0: return <>
                 <div className={styles.Top}>
                     <p>3 минуты на прохождение</p>
-                    <CloseIcon onClick={() => navigate("/")} />
+                    <CloseIcon onClick={() => navigate(-1)} />
                 </div>
 
                 <div className={styles.Box}>

@@ -12,9 +12,10 @@ import Landing from "@/pages/Landing"
 import About from "@/pages/About"
 import Calendar from "@/pages/Calendar"
 import Filter from "@/pages/Filter"
+import Blog from "@/pages/Blog"
 
 const notAuthRoutes = [
-    { id: 1, path: '*', element: Landing },
+    { id: 1, path: '*', element: Auth },
     { id: 2, path: '/', element: Landing },
     { id: 3, path: '/auth', element: Auth },
     { id: 4, path: '/register', element: Register },
@@ -34,7 +35,7 @@ const authRoutes = [
     { id: 10, path: '/about', element: About },
     { id: 11, path: '/calendar', element: Calendar },
     { id: 12, path: '/filter', element: Filter },
-    // Blog
+    { id: 13, path: '/blog', element: Blog },
 ]
 
 export { notAuthRoutes, authRoutes }

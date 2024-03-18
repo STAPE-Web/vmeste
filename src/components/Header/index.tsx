@@ -22,7 +22,7 @@ const Header = () => {
                         <ul>
                             <li>Для психологов</li>
                             <li onClick={() => navigate("/about")}>О нас</li>
-                            <li>Блог</li>
+                            <li onClick={() => navigate("/blog")}>Блог</li>
                             {!isAuth && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
                         </ul>
 

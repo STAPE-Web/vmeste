@@ -5,6 +5,11 @@ import { useState } from "react"
 const SettingsList = () => {
     const [state, setState] = useState(false)
 
+    function signOut() {
+        localStorage.removeItem("isAuth")
+        window.location.replace("/")
+    }
+
     return (
         <div className={styles.Settings}>
             <div className={styles.Box}>
@@ -43,7 +48,7 @@ const SettingsList = () => {
             </div>
 
             <div className={styles.Row}>
-                <p>Выйти</p>
+                <p onClick={() => signOut()}>Выйти</p>
                 <p>Удалить аккаунт</p>
             </div>
         </div>

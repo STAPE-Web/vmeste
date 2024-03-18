@@ -1,0 +1,292 @@
+.Page {
+    width: 100%;
+    min-height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+    padding: 0 15px 40px 15px;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.Content {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    border-radius: 20px;
+    background: #fff;
+    padding: 40px 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Top h2 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Top svg {
+    color: #BCBCBF;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.Tabs {
+    background: #F2F2F2;
+    height: 30px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.Tabs div {
+    padding: 0 17px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
+    color: #BCBCBF;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.Tabs div.ActiveTab {
+    background: #FF8702;
+    color: #fff;
+}
+
+.Box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Box h3 {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.ScrollBox {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 870px;
+}
+
+.Scroll {
+    width: 100%;
+    overflow-x: scroll;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    height: 250px;
+}
+
+.Scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.PrevButton {
+    position: absolute;
+    left: 30px;
+    z-index: 10;
+}
+
+.NextButton {
+    right: 30px;
+    position: absolute;
+    z-index: 10;
+}
+
+.Item {
+    max-width: 250px;
+    min-width: 250px;
+    width: 100%;
+    background: #FF8702;
+    height: 100%;
+    border-radius: 13px;
+    padding: 16px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.LikeIcon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+}
+
+.Item div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Item h2 {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.Item p {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #fff;
+}
+
+.Grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    width: 100%;
+}
+
+.GridItem {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.GridItem img {
+    min-width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    background: #FF8702;
+}
+
+.GridItemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.GridItemInfo h6 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    color: #AFABA8;
+}
+
+.GridItemInfo h3 {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 18px;
+    color: #23232B;
+}
+
+.GridItemAdditional {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.GridItemAdditional svg {
+    width: 12px;
+    height: 12px;
+    color: #FF8702;
+}
+
+.GridItemAdditional div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.GridItemAdditional div p {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #AFABA8;
+}
+
+.GridItemAdditional img {
+    min-width: 14px;
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    background: #AFABA8;
+}
+
+@media screen and (max-width: 1160px) {
+    .ScrollBox {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+    }
+
+    .Container {
+        padding: 0;
+    }
+
+    .Content {
+        padding: 20px;
+        box-shadow: none;
+        align-items: center;
+        padding-bottom: 100px;
+    }
+
+    .Top {
+        display: none;
+    }
+
+    .ScrollBox button {
+        display: none;
+    }
+
+    .Grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .GridItem>img {
+        min-width: 85px;
+        height: 85px;
+    }
+
+    .GridItem {
+        gap: 10px;
+    }
+}
