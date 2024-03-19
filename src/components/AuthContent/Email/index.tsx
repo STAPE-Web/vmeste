@@ -7,14 +7,17 @@ import { AuthAPI } from "@/api"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
+    setAuthData: React.Dispatch<React.SetStateAction<string>>
 }
-const Email: FC<Props> = ({ setState }) => {
+const Email: FC<Props> = ({ setState, setAuthData }) => {
     const [email, setEmail] = useState("")
 
     async function authorize() {
+        setAuthData(email)
         const result = await AuthAPI.sendCode(email)
-        console.log(result)
-        setState("Code")
+        if (result.status === 200) {
+            setState("Code")
+        }
     }
 
     return (

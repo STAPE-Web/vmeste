@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 const LandingHeader = () => {
     const navigate = useNavigate()
     const [language, setLanguage] = useState<"RU" | "EN">("RU")
-    const isAuth = JSON.parse(localStorage.getItem('isAuth') as string)
+    const sid = JSON.parse(localStorage.getItem('sid') as string)
     const path = window.location.pathname
     const [menu, setMenu] = useState(false)
 
@@ -24,10 +24,10 @@ const LandingHeader = () => {
                             <li>Для психологов</li>
                             <li className={path === "/about" ? styles.Active : ""} onClick={() => navigate("/about")}>О нас</li>
                             <li onClick={() => navigate("/blog")}>Блог</li>
-                            {!isAuth && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
+                            {!sid && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
                         </ul>
 
-                        <ButtonHeader disabled={false} onClick={() => isAuth ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
+                        <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
 
                         <Language language={language} setLanguage={setLanguage} />
 
@@ -40,7 +40,7 @@ const LandingHeader = () => {
             </header>
 
             <ul className={`${styles.Navigation} ${menu ? styles.ActiveNav : ""}`}>
-                {!isAuth && <li onClick={() => navigate("/auth")}> Вход</li>}
+                {!sid && <li onClick={() => navigate("/auth")}> Вход</li>}
                 <li>Для психологов</li>
                 <li>О нас</li>
                 <li>Блог</li>

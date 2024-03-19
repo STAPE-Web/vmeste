@@ -6,7 +6,7 @@ const SettingsList = () => {
     const [state, setState] = useState(false)
 
     function signOut() {
-        localStorage.removeItem("isAuth")
+        localStorage.removeItem("sid")
         window.location.replace("/")
     }
 

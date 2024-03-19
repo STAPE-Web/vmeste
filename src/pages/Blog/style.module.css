@@ -184,6 +184,7 @@
     align-items: center;
     gap: 30px;
     width: 100%;
+    cursor: pointer;
 }
 
 .GridItem img {
@@ -247,6 +248,130 @@
     background: #AFABA8;
 }
 
+.Row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Row svg {
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Video {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.VideoBox {
+    width: 100%;
+    border-radius: 13px;
+    background: #FFC381;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 225px;
+}
+
+.VideoBox .Like {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.VideoBox div {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16.37px;
+    color: #595959;
+    border-radius: 2px;
+    background: #fff;
+    padding: 2px 6px;
+}
+
+.VideoText {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.VideoText h6 {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 14px;
+    color: #23232B;
+}
+
+.VideoText div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.VideoText h3 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #AFABA8;
+}
+
+.VideoText svg {
+    width: 16px;
+    height: 16px;
+    color: #AFABA8;
+}
+
+.Grid.GridList {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.Grid.GridList .VideoBox {
+    height: 85px;
+    border-radius: 6px;
+}
+
+.Grid.GridList .VideoBox div {
+    bottom: 7px;
+    right: 7px;
+    font-size: 8px;
+    line-height: 10px;
+}
+
+.Grid.GridList .VideoBox .Like {
+    width: 12px;
+    height: 12px;
+    top: 7px;
+    right: 7px;
+}
+
+.Grid.GridList .VideoBox .Play {
+    width: 30px;
+    height: 30px;
+}
+
+.Grid.GridList .VideoText {
+    align-items: flex-start;
+}
+
+.Grid.GridList .VideoText svg {
+    width: 12px;
+    height: 12px;
+}
+
 @media screen and (max-width: 1160px) {
     .ScrollBox {
         max-width: 100%;
@@ -288,5 +413,24 @@
 
     .GridItem {
         gap: 10px;
+    }
+
+    .Row {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        gap: 20px;
+    }
+
+    .Tabs {
+        width: 100%;
+    }
+
+    .Tabs div {
+        width: 100%;
+    }
+
+    .Grid.GridList {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

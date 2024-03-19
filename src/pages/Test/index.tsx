@@ -76,7 +76,7 @@ const Test = () => {
 
                 {fillContent()}
             </section>
-        </main >
+        </main>
     )
 }
 

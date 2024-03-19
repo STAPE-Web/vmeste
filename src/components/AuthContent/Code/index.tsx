@@ -1,12 +1,14 @@
+import { AuthAPI } from "@/api"
 import styles from "./style.module.css"
-import { FC, useEffect, useState } from "react"
+import { FC, useCallback, useEffect, useState } from "react"
 import ReactCodeInput from "react-code-input"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
+    authData: string
 }
 
-const Code: FC<Props> = ({ setState }) => {
+const Code: FC<Props> = ({ setState, authData }) => {
     const [code, setCode] = useState("")
     const [time, setTime] = useState(60)
 
@@ -20,9 +22,23 @@ const Code: FC<Props> = ({ setState }) => {
         }, 1000)
     }, [time])
 
+    const authCode = useCallback(async () => {
+        const result = await AuthAPI.verifyCode(authData, Number(code))
+        console.log(result)
+        if (result.status === 201) {
+            localStorage.setItem("sid", JSON.stringify(result.sid))
+            setState("Hello")
+        }
+
+        if (result.status === 200) {
+            localStorage.setItem("sid", JSON.stringify(result.sid))
+            window.location.replace("/")
+        }
+    }, [authData, code])
+
     useEffect(() => {
         if (code.length === 5) {
-            setState("Hello")
+            authCode()
         }
     }, [code])
 
@@ -30,7 +46,7 @@ const Code: FC<Props> = ({ setState }) => {
         <section className={styles.Section}>
             <div className={styles.Box}>
                 <h2>Введите код из письма</h2>
-                <p>Отправлен на <span>ivanivanov@gmail.com</span></p>
+                <p>Отправлен на <span>{authData}</span></p>
                 <div className={styles.Form}>
                     <ReactCodeInput name="code" inputMode="email" value={code} onChange={value => setCode(value)} type='text' fields={5} placeholder="·" />
                 </div>

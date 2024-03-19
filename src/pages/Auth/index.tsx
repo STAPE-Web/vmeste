@@ -8,13 +8,14 @@ import Hello from "@/components/AuthContent/Hello"
 
 const Auth = () => {
     const [state, setState] = useState<"Phone" | "Email" | "SMS" | "Code" | "Hello">("Email")
+    const [authData, setAuthData] = useState("")
 
     function fillContent() {
         switch (state) {
-            case "Phone": return <Phone setState={setState} />
-            case "Email": return <Email setState={setState} />
-            case "SMS": return <SMS setState={setState} />
-            case "Code": return <Code setState={setState} />
+            case "Phone": return <Phone setAuthData={setAuthData} setState={setState} />
+            case "Email": return <Email setAuthData={setAuthData} setState={setState} />
+            case "SMS": return <SMS authData={authData} setState={setState} />
+            case "Code": return <Code authData={authData} setState={setState} />
             case "Hello": return <Hello />
         }
     }

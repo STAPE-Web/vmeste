@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom"
 const Header = () => {
     const navigate = useNavigate()
     const [language, setLanguage] = useState<"RU" | "EN">("RU")
-    const isAuth = JSON.parse(localStorage.getItem('isAuth') as string)
+    const sid = JSON.parse(localStorage.getItem('sid') as string)
     const path = window.location.pathname
 
     return (
         <>
-            {isAuth && path !== "/about" && <header className={styles.Header}>
+            {sid && path !== "/about" && <header className={styles.Header}>
                 <div className={styles.Container}>
                     <Logo onClick={() => navigate("/")} />
 
@@ -23,7 +23,7 @@ const Header = () => {
                             <li>Для психологов</li>
                             <li onClick={() => navigate("/about")}>О нас</li>
                             <li onClick={() => navigate("/blog")}>Блог</li>
-                            {!isAuth && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
+                            {!sid && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
                         </ul>
 
                         <ButtonHeader disabled={false} onClick={() => navigate("/specialists")}>Выбрать психолога</ButtonHeader>

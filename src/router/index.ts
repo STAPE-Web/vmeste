@@ -13,6 +13,8 @@ import About from "@/pages/About"
 import Calendar from "@/pages/Calendar"
 import Filter from "@/pages/Filter"
 import Blog from "@/pages/Blog"
+import Article from "@/pages/Article"
+import Video from "@/pages/Video"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -36,6 +38,9 @@ const authRoutes = [
     { id: 11, path: '/calendar', element: Calendar },
     { id: 12, path: '/filter', element: Filter },
     { id: 13, path: '/blog', element: Blog },
+    { id: 14, path: '/article', element: Article },
+    { id: 15, path: '/video', element: Video },
+    { id: 16, path: '/register', element: Register },
 ]
 
 export { notAuthRoutes, authRoutes }

@@ -94,6 +94,18 @@
     cursor: pointer;
 }
 
+.Slider div:nth-child(1n) {
+    background: #92D35E;
+}
+
+.Slider div:nth-child(2n) {
+    background: #FF8702;
+}
+
+.Slider div:nth-child(3n) {
+    background: #FF5D02;
+}
+
 .Slider::-webkit-scrollbar {
     display: none;
 }
@@ -113,6 +125,13 @@
     justify-content: center;
     cursor: pointer;
     transition: 0.5s;
+}
+
+.ButtonRight:disabled,
+.ButtonLeft:disabled {
+    cursor: not-allowed;
+    background: #E8E8E8;
+    box-shadow: none;
 }
 
 .ButtonLeft {

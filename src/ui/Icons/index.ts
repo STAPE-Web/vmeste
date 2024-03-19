@@ -65,6 +65,15 @@ import Hit from "./Hit";
 import User from "./User";
 import Bell from "./Bell";
 import Add2 from "./Add2";
+import Grid from "./Grid";
+import List from "./List";
+import Play from "./Play";
+import Dots from "./Dots";
+import Share from "./Share";
+import RewindLeft from "./RewindLeft";
+import RewindRight from "./RewindRight";
+import FullScreen from "./FullScreen";
+import Pause from "./Pause";
 
 export {
     SignIn as SignInIcon,
@@ -133,5 +142,14 @@ export {
     Hit as HitIcon,
     User as UserIcon,
     Bell as BellIcon,
-    Add2 as Add2Icon
+    Add2 as Add2Icon,
+    Grid as GridIcon,
+    List as ListIcon,
+    Play as PlayIcon,
+    Dots as DotsIcon,
+    Share as ShareIcon,
+    RewindLeft as RewindLeftIcon,
+    RewindRight as RewindRightIcon,
+    FullScreen as FullScreenIcon,
+    Pause as PauseIcon,
 }

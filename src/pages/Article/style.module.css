@@ -1,0 +1,166 @@
+.Page {
+    width: 100%;
+    min-height: calc(100vh - 94px);
+    display: flex;
+    justify-content: center;
+    background: url("/Background4.png") no-repeat;
+    background-size: cover;
+}
+
+.Container {
+    padding: 40px 0;
+    max-width: 875px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Box {
+    width: 100%;
+    border-radius: 20px;
+    padding: 75px 55px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.Box h2 {
+    color: #23232B;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 36px;
+}
+
+.Box p {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.Back {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Back svg {
+    width: 16px;
+    height: 16px;
+}
+
+.Row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Category {
+    padding: 6px 24px;
+    height: 28px;
+    gap: 10px;
+    border-radius: 24px;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16.37px;
+    color: #23232B;
+}
+
+.Like {
+    width: 20px;
+    height: 20px;
+    color: #FF8702;
+    cursor: pointer;
+}
+
+.Autor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Autor img {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    background: #919EAB;
+}
+
+.Autor p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 37.71px;
+    color: #919EAB;
+}
+
+.Share {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ShareList {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ShareList div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    align-items: center;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 12.28px;
+    text-align: center;
+    color: #23232B;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 880px) {
+    .Container {
+        padding-bottom: 0;
+    }
+
+    .Box {
+        border-radius: 30px 30px 0 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Back {
+        margin-left: 20px;
+    }
+
+    .Box {
+        padding: 30px 20px;
+    }
+
+    .Box h2 {
+        font-size: 20px;
+        line-height: 27.28px;
+    }
+
+    .ShareList {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .ShareList::-webkit-scrollbar {
+        display: none;
+    }
+
+    .Box p {
+        font-size: 14px;
+        line-height: 19.1px;
+    }
+}

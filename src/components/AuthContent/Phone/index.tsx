@@ -1,17 +1,23 @@
 import ButtonHeader from "@/ui/Buttons/Header"
 import { Link } from "react-router-dom"
 import styles from "./style.module.css"
-import { FC, useState } from "react"
+import React, { FC, useState } from "react"
 import Select from "@/ui/Select"
 import Input from "@/ui/Input"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
+    setAuthData: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Phone: FC<Props> = ({ setState }) => {
+const Phone: FC<Props> = ({ setState, setAuthData }) => {
     const [country, setCountry] = useState("Россия")
     const [phone, setPhone] = useState("")
+
+    async function authorize() {
+        setAuthData(phone)
+        setState("SMS")
+    }
 
     return (
         <section className={styles.Section}>
@@ -21,7 +27,7 @@ const Phone: FC<Props> = ({ setState }) => {
                 <div className={styles.Form}>
                     <Select setValue={setCountry} value={country} />
                     <Input onChange={e => setPhone(e.target.value)} placeholder="ххх ххх-хх-хх" type="tel" value={phone} />
-                    <ButtonHeader disabled={phone === ""} onClick={() => setState("SMS")}>Получить код</ButtonHeader>
+                    <ButtonHeader disabled={phone === ""} onClick={() => authorize()}>Получить код</ButtonHeader>
                 </div>
                 <p className={styles.Enter} onClick={() => setState("Email")}>Вход по почте</p>
             </div>

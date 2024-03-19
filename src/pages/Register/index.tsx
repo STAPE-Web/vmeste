@@ -7,6 +7,7 @@ import Input from "@/ui/Input"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
 import MobileBox from "@/components/MobileBox"
+import { AuthAPI } from "@/api"
 
 const Register = () => {
     const [step, setStep] = useState(1)
@@ -19,7 +20,6 @@ const Register = () => {
     const [experience, setExperience] = useState("")
     const [forWho, setForWho] = useState("")
     const [people, setPeople] = useState("")
-    const [themes, setThemes] = useState("")
 
     const [myCondition, setMyCondition] = useState<string[]>([])
     const [relationship, setRelationship] = useState<string[]>([])
@@ -119,7 +119,8 @@ const Register = () => {
     useEffect(() => {
         if (step === 1) setDisable(username === "" || age === "" || Number(age) < 18)
         if (step === 2) setDisable(experience === "" || forWho === "" || people === "")
-    }, [username, age, step, experience, forWho, people])
+        if (step === 3) setDisable([...myCondition, ...relationship, ...work, ...events].length === 0)
+    }, [username, age, step, experience, forWho, people, myCondition, relationship, work, events])
 
     const themeList = [
         { title: "Моё состояние", image: "/Register_1.png" },
@@ -128,9 +129,24 @@ const Register = () => {
         { title: "События в жизни", image: "/Register_4.png" },
     ]
 
-    function Auth() {
-        localStorage.setItem("isAuth", JSON.stringify(true))
-        window.location.replace("/")
+    async function Auth() {
+        const data = {
+            sid: JSON.parse(localStorage.getItem("sid") as string),
+            name: username,
+            age: age,
+            therapyExperience: experience === "Есть опыт",
+            gender: people === "С женщиной" ? "W" : "M",
+            familyTherapy: forWho === "Для двоих",
+            themes: [...myCondition, ...relationship, ...work, ...events]
+        }
+
+        const result = await AuthAPI.register(data)
+        console.log(result)
+        if (result.status === 200) {
+            window.location.replace("/")
+        } else {
+            window.location.replace("/")
+        }
     }
 
     return (
@@ -146,7 +162,7 @@ const Register = () => {
 
                         <div className={styles.Row}>
                             {themeList.map((item, index) => (
-                                <div key={index} className={`${styles.RowItem} ${themes === item.title ? styles.ActiveItem : ""}`} onClick={() => setThemes(item.title)}>
+                                <div key={index} className={`${styles.RowItem}`} onClick={() => setEndRegister(false)}>
                                     <div>{items[index].state.length}</div>
                                     <img src={item.image} alt="" />
                                     <h4>{item.title}</h4>
@@ -154,7 +170,7 @@ const Register = () => {
                             ))}
                         </div>
 
-                        <ButtonDefault disabled={themes === ""} onClick={() => Auth()}>Завершить регистрацию</ButtonDefault>
+                        <ButtonDefault disabled={false} onClick={() => Auth()}>Завершить регистрацию</ButtonDefault>
                     </div>
                     : <>
                         {fillContent()}

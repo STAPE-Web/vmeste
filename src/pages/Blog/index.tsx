@@ -3,13 +3,14 @@ import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import ButtonRound from "@/ui/Buttons/Round"
-import { ArrowLeftIcon, ArrowRightIcon, Like2Icon, LikeIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, DotsIcon, GridIcon, Like2Icon, LikeIcon, ListIcon, PlayIcon } from "@/ui/Icons"
 import ScrollTest from "@/components/ScrollTest"
 
 const Blog = () => {
     const navigate = useNavigate()
     const [tab, setTab] = useState("Тесты")
     const tabs = ["Тесты", "Статьи", "Видео"]
+    const [grid, setGrid] = useState(true)
 
     const favorite = [
         { title: "«Почему мне так плохо?». Тест на депрессию", category: "Депрессия и стресс", time: "4 мин." },
@@ -35,6 +36,15 @@ const Blog = () => {
         { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
         { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
         { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
+    ]
+
+    const videoList = [
+        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
+        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
+        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
+        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
+        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
+        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
     ]
 
     function fillContent() {
@@ -73,7 +83,7 @@ const Blog = () => {
 
             case "Статьи": return <div className={styles.Grid}>
                 {articleList.map((item, index) => (
-                    <div key={index} className={styles.GridItem}>
+                    <div key={index} className={styles.GridItem} onClick={() => navigate("/article")}>
                         <img src="" alt="" />
 
                         <div className={styles.GridItemInfo}>
@@ -92,6 +102,27 @@ const Blog = () => {
                     </div>
                 ))}
             </div>
+
+            case "Видео": return <div className={`${styles.Grid} ${!grid ? styles.GridList : ""}`}>
+                {videoList.map((item, index) => (
+                    <div key={index} className={styles.Video} onClick={() => navigate("/video")}>
+                        <div className={styles.VideoBox}>
+                            <LikeIcon className={styles.Like} />
+                            <div>11:48</div>
+                            <PlayIcon className={styles.Play} />
+                        </div>
+
+                        <div className={styles.VideoText}>
+                            <div>
+                                <h6>{item.title}</h6>
+                                <h3>{item.date}</h3>
+                            </div>
+
+                            <DotsIcon />
+                        </div>
+                    </div>
+                ))}
+            </div>
         }
     }
 
@@ -105,13 +136,28 @@ const Blog = () => {
                         <h2>Полезные материалы</h2>
                     </div>
 
-                    <div className={styles.Tabs}>
-                        {tabs.map((t, index) => (
-                            <div key={index} className={t === tab ? styles.ActiveTab : ""} onClick={() => setTab(t)}>
-                                {t}
+                    {tab === "Видео"
+                        ? <div className={styles.Row}>
+                            <div className={styles.Tabs}>
+                                {tabs.map((t, index) => (
+                                    <div key={index} className={t === tab ? styles.ActiveTab : ""} onClick={() => setTab(t)}>
+                                        {t}
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+
+                            <div onClick={() => setGrid(!grid)}>
+                                {grid ? <GridIcon /> : <ListIcon />}
+                            </div>
+                        </div>
+                        : <div className={styles.Tabs}>
+                            {tabs.map((t, index) => (
+                                <div key={index} className={t === tab ? styles.ActiveTab : ""} onClick={() => setTab(t)}>
+                                    {t}
+                                </div>
+                            ))}
+                        </div>
+                    }
 
                     {fillContent()}
                 </div>

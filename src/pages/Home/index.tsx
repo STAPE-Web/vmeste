@@ -1,14 +1,17 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import Banner from "@/ui/Banner"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ArrowLeftIcon, ArrowRightIcon } from "@/ui/Icons"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import Diary from "@/components/Diary"
+import { TestsAPI } from "@/api"
+import { ITests } from "@/types"
 
 const Home = () => {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
+    const [tests, setTests] = useState<ITests[]>([])
 
     const items = [
         { name: "Радость", image: "/Emoji_1.png" },
@@ -17,15 +20,6 @@ const Home = () => {
         { name: "Грусть", image: "/Emoji_4.png" },
         { name: "Спокойствие", image: "/Emoji_5.png" },
         { name: "Сила", image: "/Emoji_6.png" },
-    ]
-
-    const tests = [
-        { title: "Кто вы в треугольнике Карпмана?", color: "#92D35E" },
-        { title: "Кто вы в треугольнике Карпмана?2", color: "#FF8702" },
-        { title: "Кто вы в треугольнике Карпмана?3", color: "#FF5D02" },
-        { title: "Кто вы в треугольнике Карпмана?4", color: "#92D35E" },
-        { title: "Кто вы в треугольнике Карпмана?5", color: "#FF8702" },
-        { title: "Кто вы в треугольнике Карпмана?6", color: "#FF5D02" },
     ]
 
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -39,6 +33,15 @@ const Home = () => {
         }
     };
 
+    async function getTests() {
+        const sid = JSON.parse(localStorage.getItem("sid") as string)
+        const result = await TestsAPI.getAll(sid)
+        setTests(result.res)
+    }
+
+    useEffect(() => {
+        getTests()
+    }, [])
 
     return (
         <main className={styles.Page}>
@@ -67,18 +70,18 @@ const Home = () => {
                                 <h2>Тесты</h2>
 
                                 <div className={styles.SLiderBox}>
-                                    <button className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
+                                    <button disabled={tests.length < 3} className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
                                         <ArrowLeftIcon />
                                     </button>
                                     <div className={styles.Slider} ref={sliderRef}>
                                         {tests.map((item, index) => (
-                                            <div key={index} style={{ background: item.color }} onClick={() => navigate("/test")}>
-                                                {item.title}
+                                            <div key={index} onClick={() => navigate("/test")}>
+                                                {item.name}
                                             </div>
                                         ))}
                                     </div>
 
-                                    <button className={styles.ButtonRight} onClick={() => handleScroll(500)}>
+                                    <button disabled={tests.length < 3} className={styles.ButtonRight} onClick={() => handleScroll(500)}>
                                         <ArrowRightIcon />
                                     </button>
                                 </div>

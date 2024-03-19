@@ -4,9 +4,10 @@ import ReactCodeInput from "react-code-input"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
+    authData: string
 }
 
-const SMS: FC<Props> = ({ setState }) => {
+const SMS: FC<Props> = ({ setState, authData }) => {
     const [code, setCode] = useState("")
     const [time, setTime] = useState(60)
 
@@ -30,7 +31,7 @@ const SMS: FC<Props> = ({ setState }) => {
         <section className={styles.Section}>
             <div className={styles.Box}>
                 <h2>Введите код из SMS</h2>
-                <p>Отправлен на номер <span>+7 987 654-32-10</span></p>
+                <p>Отправлен на номер <span>{authData}</span></p>
                 <div className={styles.Form}>
                     <ReactCodeInput name="code" inputMode="email" value={code} onChange={value => setCode(value)} type='text' fields={5} />
                 </div>
