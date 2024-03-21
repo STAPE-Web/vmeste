@@ -74,6 +74,7 @@ import RewindLeft from "./RewindLeft";
 import RewindRight from "./RewindRight";
 import FullScreen from "./FullScreen";
 import Pause from "./Pause";
+import Play2 from "./Play2";
 
 export {
     SignIn as SignInIcon,
@@ -152,4 +153,5 @@ export {
     RewindRight as RewindRightIcon,
     FullScreen as FullScreenIcon,
     Pause as PauseIcon,
+    Play2 as Play2Icon
 }

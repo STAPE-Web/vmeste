@@ -1,56 +1,44 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-import ButtonRound from "@/ui/Buttons/Round"
-import { ArrowLeftIcon, ArrowRightIcon, DotsIcon, GridIcon, Like2Icon, LikeIcon, ListIcon, PlayIcon } from "@/ui/Icons"
+import React, { useCallback, useEffect, useState } from "react"
+import { DotsIcon, GridIcon, LikeIcon, ListIcon, PlayIcon } from "@/ui/Icons"
 import ScrollTest from "@/components/ScrollTest"
+import { MaterialsAPI } from "@/api"
+import { IArticle, IBlog } from "@/types"
 
 const Blog = () => {
     const navigate = useNavigate()
     const [tab, setTab] = useState("Тесты")
     const tabs = ["Тесты", "Статьи", "Видео"]
     const [grid, setGrid] = useState(true)
+    const [data, setData] = useState<IBlog | null>(null)
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
 
-    const favorite = [
-        { title: "«Почему мне так плохо?». Тест на депрессию", category: "Депрессия и стресс", time: "4 мин." },
-        { title: "«Почему мне так плохо?». Тест на депрессию", category: "Депрессия и стресс", time: "4 мин." },
-        { title: "«Почему мне так плохо?». Тест на депрессию", category: "Депрессия и стресс", time: "4 мин." },
-        { title: "«Почему мне так плохо?». Тест на депрессию", category: "Депрессия и стресс", time: "4 мин." },
-        { title: "«Почему мне так плохо?». Тест на депрессию", category: "Депрессия и стресс", time: "4 мин." },
-    ]
+    const getMaterials = useCallback(async () => {
+        const result = await MaterialsAPI.getAll(sid)
+        setData(result.result)
+    }, [sid])
 
-    const testList = [
-        { title: "Кто вы в треугольнике Карпмана?", time: "3 минуты на прохождение" },
-        { title: "Проверьте свой тип привязанности в отношениях.", time: "7 минут на прохождение" },
-        { title: "«Не могу без тебя». Тест на созависимость", time: "3 минуты на прохождение" },
-        { title: "Узнайте ваш язык любви.", time: "4 минуты на прохождение" },
-        { title: "Узнайте ваш язык любви.", time: "4 минуты на прохождение" },
-    ]
+    useEffect(() => {
+        getMaterials()
+    }, [getMaterials])
 
-    const articleList = [
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-        { category: "Отношения", title: "Как выбраться из созависимых отношений", autor: "Анна Дегтярёва", date: "30 дек. 2023 " },
-    ]
+    function convertDate(value: number) {
+        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря",]
+        const date = new Date(value)
+        const day = date.getDate()
+        const month = date.getMonth()
+        const year = date.getFullYear()
+        return `${day} ${months[month]} ${year}`
+    }
 
-    const videoList = [
-        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
-        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
-        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
-        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
-        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
-        { title: "Название видео 1", date: "30 дек. 2023 ", time: "11:48" },
-    ]
+    console.log(data)
 
     function fillContent() {
         switch (tab) {
             case "Тесты": return <>
-                <div className={styles.Box}>
+                {/* <div className={styles.Box}>
                     <h3>Избранное</h3>
                     <div className={styles.ScrollBox}>
                         <div className={styles.PrevButton}>
@@ -74,48 +62,54 @@ const Blog = () => {
                             <ButtonRound big={true} disabled={true} onClick={() => ({})}><ArrowRightIcon /></ButtonRound>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
-                <ScrollTest array={testList} title="Отношения" />
-                <ScrollTest array={testList} title="Депрессия и стресс" />
-                <ScrollTest array={testList} title="Личность и характер" />
+                {data !== null && Object.keys(data?.tests).map((category) => (
+                    // @ts-ignore
+                    <ScrollTest key={category} array={data?.tests[category]} title={category} />
+                ))}
             </>
 
             case "Статьи": return <div className={styles.Grid}>
-                {articleList.map((item, index) => (
-                    <div key={index} className={styles.GridItem} onClick={() => navigate("/article")}>
-                        <img src="" alt="" />
+                {data !== null && Object.keys(data?.articles).map((category, index) => (
+                    <React.Fragment key={index}>
+                        {/* @ts-ignore */}
+                        {data.articles[category].map((item: IArticle, i) => (
+                            <div key={index} className={styles.GridItem} onClick={() => navigate(`/article/${item.id}`)}>
+                                <img src={item.preview} alt="" />
 
-                        <div className={styles.GridItemInfo}>
-                            <h6>{item.category}</h6>
-                            <h3>{item.title}</h3>
+                                <div className={styles.GridItemInfo}>
+                                    <h6>{category}</h6>
+                                    <h3>{item.title}</h3>
 
-                            <div className={styles.GridItemAdditional}>
-                                <div>
-                                    <img src="" alt="" />
-                                    <p>{item.autor} · {item.date}</p>
+                                    <div className={styles.GridItemAdditional}>
+                                        <div>
+                                            <img src="" alt="" />
+                                            <p>Анна Дегтярёва · {convertDate(item.createdAt)}</p>
+                                        </div>
+
+                                        <LikeIcon />
+                                    </div>
                                 </div>
-
-                                <LikeIcon />
                             </div>
-                        </div>
-                    </div>
+                        ))}
+                    </React.Fragment>
                 ))}
             </div>
 
             case "Видео": return <div className={`${styles.Grid} ${!grid ? styles.GridList : ""}`}>
-                {videoList.map((item, index) => (
-                    <div key={index} className={styles.Video} onClick={() => navigate("/video")}>
-                        <div className={styles.VideoBox}>
+                {data?.videos.videos.map((item, index) => (
+                    <div key={index} className={styles.Video} onClick={() => navigate(`/video/${item.id}`)}>
+                        <div className={styles.VideoBox} style={{ background: `url(${item.preview}) no-repeat` }}>
                             <LikeIcon className={styles.Like} />
-                            <div>11:48</div>
+                            {/* <div>11:48</div> */}
                             <PlayIcon className={styles.Play} />
                         </div>
 
                         <div className={styles.VideoText}>
                             <div>
                                 <h6>{item.title}</h6>
-                                <h3>{item.date}</h3>
+                                <h3>30 декабря 2023</h3>
                             </div>
 
                             <DotsIcon />

@@ -112,18 +112,24 @@
     gap: 15px;
 }
 
-.ShareList div {
+.ShareList button {
     display: flex;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
     align-items: center;
-    font-size: 9px;
+    font-size: 9px !important;
     font-weight: 400;
     line-height: 12.28px;
     text-align: center;
     color: #23232B;
     white-space: nowrap;
+    background: transparent;
+    border: none;
+}
+
+.Page textarea {
+    display: none;
 }
 
 @media screen and (max-width: 880px) {

@@ -1,5 +1,6 @@
+import { AuthAPI } from "@/api"
 import styles from "./style.module.css"
-import { FC, useEffect, useState } from "react"
+import { FC, useCallback, useEffect, useState } from "react"
 import ReactCodeInput from "react-code-input"
 
 interface Props {
@@ -21,22 +22,41 @@ const SMS: FC<Props> = ({ setState, authData }) => {
         }, 1000)
     }, [time])
 
-    useEffect(() => {
-        if (code.length === 5) {
+    const authCode = useCallback(async () => {
+        const result = await AuthAPI.verifyCode(`+7${authData}`, Number(code))
+        console.log(result)
+        if (result.status === 201) {
+            localStorage.setItem("sid", JSON.stringify(result.sid))
             setState("Hello")
         }
+
+        if (result.status === 200) {
+            localStorage.setItem("sid", JSON.stringify(result.sid))
+            window.location.replace("/")
+        }
+    }, [authData, code])
+
+    useEffect(() => {
+        if (code.length === 5) {
+            authCode()
+        }
     }, [code])
+
+    async function getNewCode() {
+        const result = await AuthAPI.sendCode(`+7${authData}`)
+        console.log(result)
+    }
 
     return (
         <section className={styles.Section}>
             <div className={styles.Box}>
                 <h2>Введите код из SMS</h2>
-                <p>Отправлен на номер <span>{authData}</span></p>
+                <p>Отправлен на номер <span>+7{authData}</span></p>
                 <div className={styles.Form}>
                     <ReactCodeInput name="code" inputMode="email" value={code} onChange={value => setCode(value)} type='text' fields={5} />
                 </div>
                 {time === 0
-                    ? <p className={styles.ResendCode}>Запросить код повторно</p>
+                    ? <p className={styles.ResendCode} onClick={() => getNewCode()}>Запросить код повторно</p>
                     : <p className={styles.Enter}>Повторно запросить код можно через {time}</p>
                 }
             </div>

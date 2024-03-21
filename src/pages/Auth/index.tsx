@@ -7,7 +7,7 @@ import Code from "@/components/AuthContent/Code"
 import Hello from "@/components/AuthContent/Hello"
 
 const Auth = () => {
-    const [state, setState] = useState<"Phone" | "Email" | "SMS" | "Code" | "Hello">("Email")
+    const [state, setState] = useState<"Phone" | "Email" | "SMS" | "Code" | "Hello">("Phone")
     const [authData, setAuthData] = useState("")
 
     function fillContent() {

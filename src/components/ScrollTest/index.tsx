@@ -3,43 +3,49 @@ import styles from "./style.module.css"
 import { FC } from "react"
 import { ArrowLeftIcon, ArrowRightIcon, LikeIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
-
-type IArray = {
-    title: string
-    time: string
-}
+import { ITests } from "@/types"
+import { MaterialsAPI } from "@/api"
 
 interface Props {
-    array: IArray[]
+    array: ITests[]
     title: string
 }
 
 const ScrollTest: FC<Props> = ({ array, title }) => {
     const navigate = useNavigate()
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+
+    async function addToFavorite(id: string) {
+        const result = await MaterialsAPI.like(sid, "add", "tests", id)
+        console.log(result)
+    }
 
     return (
         <div className={styles.Box}>
             <h3>{title}</h3>
             <div className={styles.ScrollBox}>
-                <div className={styles.PrevButton}>
+                {array.length >= 5 && <div className={styles.PrevButton}>
                     <ButtonRound big={true} disabled={true} onClick={() => ({})}><ArrowLeftIcon /></ButtonRound>
-                </div>
+                </div>}
 
                 <div className={styles.Scroll}>
                     {array.map((item, index) => (
-                        <div key={index} className={styles.Item} onClick={() => navigate("/test")}>
+                        <div key={index} className={styles.Item} onClick={() => navigate(`/test/${item.id}`)}>
                             <div>
-                                <LikeIcon className={styles.LikeIcon} />
+                                <LikeIcon className={styles.LikeIcon} onClick={(e: any) => {
+                                    e.stopPropagation();
+                                    addToFavorite(item.id)
+                                }} />
                             </div>
-                            <h2>{item.title}</h2>
-                            <p>{item.time}</p>
+                            <h2>{item.name}</h2>
+                            <p>{item.countTime} минут на прохождение</p>
                         </div>
                     ))}
                 </div>
 
-                <div className={styles.NextButton}>
+                {array.length >= 5 && <div className={styles.NextButton}>
                     <ButtonRound big={true} disabled={true} onClick={() => ({})}><ArrowRightIcon /></ButtonRound>
-                </div>
+                </div>}
             </div>
         </div>
     )

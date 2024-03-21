@@ -66,16 +66,16 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <div className={styles.Box}>
+                            {tests !== undefined && <div className={styles.Box}>
                                 <h2>Тесты</h2>
 
                                 <div className={styles.SLiderBox}>
-                                    <button disabled={tests.length < 3} className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
+                                    <button disabled={tests?.length < 3} className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
                                         <ArrowLeftIcon />
                                     </button>
                                     <div className={styles.Slider} ref={sliderRef}>
-                                        {tests.map((item, index) => (
-                                            <div key={index} onClick={() => navigate("/test")}>
+                                        {tests?.map((item, index) => (
+                                            <div key={index} onClick={() => navigate(`/test/${item.id}`)}>
                                                 {item.name}
                                             </div>
                                         ))}
@@ -85,7 +85,7 @@ const Home = () => {
                                         <ArrowRightIcon />
                                     </button>
                                 </div>
-                            </div>
+                            </div>}
                         </>
                     }
                 </div>

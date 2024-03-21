@@ -64,8 +64,11 @@
 }
 
 .Video,
-.Video img {
+.Video img,
+.Video video {
     width: 100%;
+    height: 450px;
+    object-fit: cover;
 }
 
 .Controlls {
@@ -139,6 +142,34 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.SpeedList {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 123px;
+    width: 100%;
+    z-index: 10;
+}
+
+.SpeedList .List {
+    position: absolute;
+    background: #262626;
+    max-width: 123px;
+    width: 100%;
+    margin-top: 35px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.SpeedList .List div {
+    padding: 6px 12px;
+    cursor: pointer;
+
 }
 
 @media screen and (max-width: 768px) {

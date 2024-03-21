@@ -42,6 +42,11 @@ const Code: FC<Props> = ({ setState, authData }) => {
         }
     }, [code])
 
+    async function getNewCode() {
+        const result = await AuthAPI.sendCode(authData)
+        console.log(result)
+    }
+
     return (
         <section className={styles.Section}>
             <div className={styles.Box}>
@@ -51,7 +56,7 @@ const Code: FC<Props> = ({ setState, authData }) => {
                     <ReactCodeInput name="code" inputMode="email" value={code} onChange={value => setCode(value)} type='text' fields={5} placeholder="·" />
                 </div>
                 {time === 0
-                    ? <p className={styles.ResendCode}>Запросить код повторно</p>
+                    ? <p className={styles.ResendCode} onClick={() => getNewCode()}>Запросить код повторно</p>
                     : <p className={styles.Enter}>Повторно запросить код можно через {time}</p>
                 }
             </div>

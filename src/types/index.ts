@@ -3,7 +3,9 @@ export interface ITests {
     name: string,
     extendedDescription: string,
     description: string,
-    questions: IQuestion[]
+    questions: IQuestion[],
+    isFavorite?: boolean,
+    countTime?: number,
 }
 
 export interface IOption {
@@ -14,4 +16,29 @@ export interface IOption {
 export interface IQuestion {
     question: string
     options: IOption[]
+}
+
+export interface IArticle {
+    id: string,
+    createdAt: number,
+    title: string,
+    tags: number[]
+    text: string,
+    preview: string,
+    isFavorite: boolean
+}
+
+export interface IVideo {
+    id: string;
+    link: string;
+    title: string;
+    descr: string;
+    preview: string;
+    isFavorite: boolean;
+}
+
+export interface IBlog {
+    tests: ITests[];
+    articles: IArticle[];
+    videos: { videos: IVideo[] };
 }

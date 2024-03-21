@@ -6,6 +6,12 @@ class Tests {
             sid
         }).then((res) => res.data)
     }
+
+    async getResult(sid: string, testId: string, answers: number[]) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/test/getResult`, {
+            sid, answers, testId
+        }).then((res) => res.data)
+    }
 }
 
 export default new Tests()

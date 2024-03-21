@@ -27,7 +27,7 @@ const notAuthRoutes = [
 const authRoutes = [
     { id: 1, path: '*', element: Home },
     { id: 2, path: '/', element: Home },
-    { id: 3, path: '/test', element: Test },
+    { id: 3, path: '/test/:id', element: Test },
     { id: 4, path: '/profile', element: Profile },
     { id: 5, path: '/sessions', element: Sessions },
     { id: 6, path: '/session/:id', element: Session },
@@ -38,8 +38,8 @@ const authRoutes = [
     { id: 11, path: '/calendar', element: Calendar },
     { id: 12, path: '/filter', element: Filter },
     { id: 13, path: '/blog', element: Blog },
-    { id: 14, path: '/article', element: Article },
-    { id: 15, path: '/video', element: Video },
+    { id: 14, path: '/article/:id', element: Article },
+    { id: 15, path: '/video/:id', element: Video },
     { id: 16, path: '/register', element: Register },
 ]
 
