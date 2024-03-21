@@ -254,6 +254,14 @@
     color: #AFABA8;
 }
 
+.ChooseSession {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
 @media screen and (max-width: 1000px) {
     .Avatars {
         overflow-x: scroll;

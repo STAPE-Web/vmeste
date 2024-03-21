@@ -15,6 +15,7 @@ import Filter from "@/pages/Filter"
 import Blog from "@/pages/Blog"
 import Article from "@/pages/Article"
 import Video from "@/pages/Video"
+import Specialist from "@/pages/Specialist"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -41,6 +42,7 @@ const authRoutes = [
     { id: 14, path: '/article/:id', element: Article },
     { id: 15, path: '/video/:id', element: Video },
     { id: 16, path: '/register', element: Register },
+    { id: 17, path: '/specialist/:id', element: Specialist },
 ]
 
 export { notAuthRoutes, authRoutes }

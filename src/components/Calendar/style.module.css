@@ -1,0 +1,79 @@
+.Weeks {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.Weeks p {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+    color: #BCBCBF;
+}
+
+.Calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.Calendar h6 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #BCBCBF;
+}
+
+.Calendar h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Calendar .Days {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.Calendar span {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+}
+
+.Calendar span:hover {
+    background: #FF870220;
+}
+
+.Calendar span.ActiveDay {
+    border: 2px solid #FF8702;
+}
+
+.Calendar span.SelectedDay {
+    background: #FF870240;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Row button {
+    color: #fff;
+}

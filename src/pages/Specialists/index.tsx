@@ -1,27 +1,49 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import Psyholog from "@/assets/Psyholog.png"
-import Avatar from "@/assets/Avatar.png"
-import Avatar2 from "@/assets/Avatar2.png"
-import Avatar3 from "@/assets/Avatar3.png"
-import Avatar4 from "@/assets/Avatar4.png"
-import Avatar5 from "@/assets/Avatar5.png"
-import Avatar6 from "@/assets/Avatar6.png"
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, FilterIcon, LikeIcon, ThemesIcon, VerifedIcon } from "@/ui/Icons"
 import ButtonDefault from "@/ui/Buttons/Default"
 import ButtonRound from "@/ui/Buttons/Round"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { PshycologistsAPI } from "@/api"
+import { ISpecialist } from "@/types"
 
 const Specialists = () => {
     const navigate = useNavigate()
+    const [data, setData] = useState<ISpecialist[]>([])
+    const [currentPeople, setCurrentPeople] = useState(0)
+
     const [fullText, setFullText] = useState(false)
     const [education, setEducation] = useState(false)
     const [methods, setMethods] = useState(false)
-    const list = [Avatar, Avatar2, Avatar3, Avatar4, Avatar5, Avatar6, Avatar, Avatar2, Avatar3, Avatar4, Avatar5, Avatar6, Avatar4, Avatar5, Avatar6]
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+
+    const getSpecialist = useCallback(async () => {
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500], themes: ["Стресс"] })
+        setData(result.psychologists)
+    }, [sid])
+
+    useEffect(() => {
+        getSpecialist()
+    }, [getSpecialist])
+
+    function formatDate(value: string) {
+        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря",]
+        const date = new Date(value)
+        const day = date.getDate()
+        const month = date.getMonth()
+        const hour = date.getHours()
+        const minutes = date.getMinutes()
+        return `${day} ${months[month]}, ${String().length !== 1 ? hour : `${hour}0`}:${String().length !== 1 ? `${minutes}0` : minutes}`
+    }
+
+    console.log(data[0])
+
+    if (data.length === 0) return
+
     const achive = [
-        { title: "Опыт", value: "5 лет", icon: VerifedIcon },
-        { title: "Темы", value: "4/4", icon: ThemesIcon },
+        { title: "Опыт", value: `${data[currentPeople].exp} лет`, icon: VerifedIcon },
+        { title: "Темы", value: `${data[currentPeople].sameThemesCount}/4`, icon: ThemesIcon },
     ]
 
     return (
@@ -34,8 +56,8 @@ const Specialists = () => {
 
                     <div className={styles.SpecialistsBox}>
                         <div className={styles.Avatars}>
-                            {list.map((item, index) => (
-                                <img src={item} key={index} alt="" />
+                            {data.map((item, index) => (
+                                <img src={item.urlAvatar} key={index} alt="" />
                             ))}
                         </div>
 
@@ -46,15 +68,15 @@ const Specialists = () => {
                         <ButtonRound big={true} disabled={true} onClick={() => ({})}><ArrowLeftIcon /></ButtonRound>
 
                         <div className={styles.ImageBox}>
-                            <img src={Psyholog} alt="" />
+                            <img src={data[currentPeople].urlAvatar} alt="" />
                             <LikeIcon />
                         </div>
 
                         <div className={styles.Info}>
-                            <h3>Констанин Никольский</h3>
+                            <h3>{data[currentPeople].name}</h3>
                             <div>
-                                <h4>Индивидуальная сессия 50 мин, 2 500 ₽</h4>
-                                <h4>Запись <span>с 25 декабря, 16:00</span></h4>
+                                <h4>Индивидуальная сессия {data[currentPeople].individualSession.countTime} мин, {data[currentPeople].individualSession.price} ₽</h4>
+                                <h4>Запись <span>с {formatDate(data[currentPeople].freeTime[0])}</span></h4>
                             </div>
 
                             <div className={styles.Achive}>
@@ -71,12 +93,12 @@ const Specialists = () => {
 
                             <div className={styles.About}>
                                 <h2>О себе</h2>
-                                <p className={fullText ? styles.FullText : ""}>Оказываю психологическую помощь и даю профессиональную поддержку людям, оказавшимся в сложной жизненной ситуации. Помогаю разрешить внутренниеОказываю психологическую помощь и даю профессиональную поддержку людям, оказавшимся в сложной жизненной ситуации. Помогаю разрешить внутренние Оказываю психологическую помощь и даю профессиональную поддержку людям, оказавшимся в сложной жизненной ситуации. Помогаю разрешить внутренниеОказываю психологическую помощь и даю профессиональную поддержку людям, оказавшимся в сложной жизненной ситуации. Помогаю разрешить внутренние</p>
-                                <h5 onClick={() => setFullText(!fullText)}>{fullText ? "Свернуть" : "Читать полностью"}</h5>
+                                <p className={fullText ? styles.FullText : ""}>{data[currentPeople].description}</p>
+                                {data[currentPeople].description.length > 322 && <h5 onClick={() => setFullText(!fullText)}>{fullText ? "Свернуть" : "Читать полностью"}</h5>}
                             </div>
                         </div>
 
-                        <ButtonRound big={true} disabled={false} onClick={() => ({})}><ArrowRightIcon /></ButtonRound>
+                        <ButtonRound big={true} disabled={data.length > 0} onClick={() => setCurrentPeople(currentPeople + 1)}><ArrowRightIcon /></ButtonRound>
                     </div>
 
                     <div className={`${styles.TextBox} ${education ? styles.ActiveTextBox : ""}`} onClick={() => setEducation(!education)}>
@@ -90,25 +112,12 @@ const Specialists = () => {
                         </div>
 
                         <div className={styles.TextBoxBottom}>
-                            <div>
-                                <h5>2022</h5>
-                                <p>Московский Гештальт Институт. Специализация "Зависимость и зависимые отношения. Гештальт-подход".</p>
-                            </div>
-
-                            <div>
-                                <h5>2021</h5>
-                                <p>Московский Гештальт Институт. Теория и практика гештальт-терапии.</p>
-                            </div>
-
-                            <div>
-                                <h5>2019</h5>
-                                <p>Московский Гештальт Институт. Специализация "Гештальт-подход в работе с травматическими переживаниями".</p>
-                            </div>
-
-                            <div>
-                                <h5>2016</h5>
-                                <p>Белорусский государственный педагогический университет имени М. Танка. Социальная педагогика с дополнительной специальностью "Практическая психология".</p>
-                            </div>
+                            {data[currentPeople].education.map((item, index) => (
+                                <div key={index}>
+                                    <h5>{item.year}</h5>
+                                    <p>{item.name}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -123,12 +132,17 @@ const Specialists = () => {
                         </div>
 
                         <div className={styles.TextBoxBottom}>
-                            <p>Ключевое понятие гештальт-терапии — целостность, полнота жизни. Достичь этой целостности мешают ситуации, которые человек проживает не до конца: проглатывает обиду, подавляет гнев, отвергает потребности и тд. Задача гештальт-терапевта — помочь человеку соединиться с эмоциями и осознать опыт во всей полноте. В ходе терапии клиент развивает самонаблюдение и начинает лучше осознавать сценарии поведения, устанавливает контакт с собой, с собственным телом и перестаёт испытывать напряжение от тревожащих его ситуаций.</p>
+                            {data[currentPeople].methods.map((item, index) => (
+                                <div key={index}>
+                                    <h5>{item.title}</h5>
+                                    <p>{item.description}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
                     <div className={styles.ButtonBox}>
-                        <ButtonDefault disabled={false} onClick={() => ({})}>Выбрать время сессии</ButtonDefault>
+                        <ButtonDefault disabled={false} onClick={() => navigate(`/specialist/${data[currentPeople].id}`)}>Выбрать время сессии</ButtonDefault>
                     </div>
                 </div>
             </section>

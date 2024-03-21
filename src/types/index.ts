@@ -42,3 +42,30 @@ export interface IBlog {
     articles: IArticle[];
     videos: { videos: IVideo[] };
 }
+
+export interface IMethod {
+    description: string,
+    title: string
+}
+
+export interface ISpecialist {
+    id: string,
+    name: string,
+    isFavourite: boolean,
+    individualSession: {
+        countTime: number,
+        price: number
+    },
+    urlAvatar: string,
+    exp: number,
+    education: [
+        {
+            name: string,
+            year: number
+        }
+    ],
+    sameThemesCount: number,
+    description: string,
+    methods: IMethod[],
+    freeTime: string[]
+}
