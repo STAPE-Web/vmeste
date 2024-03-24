@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, Calendar2Icon, CloseIcon, SearchIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, SearchIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 
