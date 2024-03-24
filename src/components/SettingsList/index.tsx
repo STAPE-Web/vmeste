@@ -20,7 +20,7 @@ const SettingsList: FC<Props> = ({ data }) => {
             {data.userInfo.type === "phone" && <div className={styles.Box}>
                 <div>
                     <label>Телефон</label>
-                    <h4>+7 999 999-99-99</h4>
+                    <h4>{data.userInfo.phone}</h4>
                 </div>
 
                 <button>Изменить</button>

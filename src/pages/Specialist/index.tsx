@@ -36,13 +36,19 @@ const Specialist = () => {
     }, [getSpecialist])
 
     function formatDate(value: string) {
-        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря",]
-        const date = new Date(value)
-        const day = date.getDate()
-        const month = date.getMonth()
-        const hour = date.getHours()
-        const minutes = date.getMinutes()
-        return `${day} ${months[month]}, ${String(hour).length === 1 ? `0${hour}` : hour}:${String(minutes).length === 1 ? `0${minutes}` : minutes}`
+        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+        const [datePart, timePart] = value.split(" ");
+        const [year, month, day] = datePart.split("-");
+        const [hour, minute] = timePart.split(":");
+
+        const formattedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hour), parseInt(minute));
+
+        const formattedDay = formattedDate.getDate();
+        const formattedMonth = formattedDate.getMonth();
+        const formattedHour = formattedDate.getHours();
+        const formattedMinutes = formattedDate.getMinutes();
+
+        return `${formattedDay} ${months[formattedMonth]}, ${String(formattedHour).padStart(2, '0')}:${String(formattedMinutes).padStart(2, '0')}`;
     }
 
     if (data === null) return
