@@ -373,6 +373,19 @@
     height: 12px;
 }
 
+.Title {
+    margin-bottom: -20px;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232B;
+}
+
+.Grid.Favorite {
+    border-bottom: 1px solid #E1DDD8;
+    padding-bottom: 40px;
+}
+
 @media screen and (max-width: 1160px) {
     .ScrollBox {
         max-width: 100%;

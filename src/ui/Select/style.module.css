@@ -11,9 +11,10 @@
     height: 44px;
     align-items: center;
     justify-content: space-between;
-    border-radius: 100px;
+    border-radius: 30px;
     padding: 12px 16px;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 .Touchable>svg {
@@ -36,4 +37,9 @@
 
 .Select.Active .Touchable>svg {
     transform: rotate(180deg);
+}
+
+.Select.Active .Touchable {
+    border-radius: 15px 15px 0 0;
+    border-bottom: 0;
 }

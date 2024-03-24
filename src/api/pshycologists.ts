@@ -7,8 +7,7 @@ class Pshycologists {
         }).then((res) => res.data)
     }
 
-    async like(sid: string, action: "add", type: "tests", id: string) {
-        console.log(sid, action, type, id)
+    async like(sid: string, action: "add" | "delete", type: "psychologists", id: string) {
         return await axios.post(`${import.meta.env.VITE_SERVER}/user/favorite`, {
             sid, action, type, id
         }).then((res) => res.data)

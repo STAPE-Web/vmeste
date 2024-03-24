@@ -23,6 +23,7 @@ const Diary = () => {
         { name: "Статистика", icon: StatsIcon },
     ]
 
+    const [howFeel, setHowFeel] = useState("")
     const items = [
         { name: "Радость", image: "/Emoji_1.png" },
         { name: "Страх", image: "/Emoji_2.png" },
@@ -126,7 +127,7 @@ const Diary = () => {
                                 <h2>Что чувствуешь?</h2>
                                 <div className={styles.Items}>
                                     {items.map((item, index) => (
-                                        <div key={index} onClick={() => ({})}>
+                                        <div className={item.name === howFeel ? styles.ActiveFeel : ""} key={index} onClick={() => setHowFeel(item.name)}>
                                             <img src={item.image} alt="" />
                                             {item.name}
                                         </div>
@@ -135,7 +136,7 @@ const Diary = () => {
 
                                 <div className={styles.AdditionalItems}>
                                     {addItems.map((item, index) => (
-                                        <div key={index}>{item}</div>
+                                        <div className={item === howFeel ? styles.ActiveFeel : ""} onClick={() => setHowFeel(item)} key={index}>{item}</div>
                                     ))}
                                 </div>
                             </div>

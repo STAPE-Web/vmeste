@@ -5,6 +5,7 @@ import styles from "./style.module.css"
 import Image1 from "@/assets/AppStore2.png"
 import Image2 from "@/assets/GooglePlay2.png"
 import Image3 from "@/assets/Qrcode.png"
+import { Link } from "react-router-dom"
 
 const Footer = () => {
     return (
@@ -14,12 +15,12 @@ const Footer = () => {
                     <Logo2 />
 
                     <div>
-                        <h3>+7 999 999 99 99</h3>
+                        <h3><a href="tel:+79999999999">+7 999 999 99 99</a></h3>
                         <p>По всем вопросам</p>
                     </div>
 
                     <div>
-                        <h3>info@vmeste.com</h3>
+                        <h3><a href="mailto:info@vmeste.com">info@vmeste.com</a></h3>
                         <p>Напишите нам</p>
                     </div>
 
@@ -27,11 +28,11 @@ const Footer = () => {
                 </div>
 
                 <ul>
-                    <li>Главная</li>
-                    <li>Личный кабинет</li>
-                    <li>Для психологов</li>
-                    <li>О нас</li>
-                    <li>Блог</li>
+                    <li><Link to="/">Главная</Link></li>
+                    <li><Link to="/profile">Личный кабинет</Link></li>
+                    <li><Link to="/">Для психологов</Link></li>
+                    <li><Link to="/about">О нас</Link></li>
+                    <li><Link to="/blog">Блог</Link></li>
                 </ul>
 
                 <div className={styles.Download}>

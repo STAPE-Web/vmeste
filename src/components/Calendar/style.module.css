@@ -77,3 +77,20 @@
 .Row button {
     color: #fff;
 }
+
+.Row div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+    .Calendar {
+        padding: 0 15px;
+    }
+
+    .Calendar span {
+        width: 40px;
+        height: 40px;
+    }
+}

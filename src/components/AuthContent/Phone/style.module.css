@@ -69,6 +69,41 @@
     color: #FF8702;
 }
 
+.SelectBox {
+    position: relative;
+    z-index: 10;
+}
+
+.SelectBox .DropDown {
+    max-height: 0px;
+    opacity: 0;
+    overflow-y: scroll;
+    transition: 0.5s;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border-radius: 0 0 15px 15px;
+    border: 1px solid #BCBCBF;
+    border-top: 0;
+}
+
+.SelectBoxActive .DropDown {
+    max-height: 150px;
+    opacity: 1;
+}
+
+.SelectBox .DropDown div {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 14px;
+    color: #AFABA8;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
     .Box h2 {
         font-size: 24px;

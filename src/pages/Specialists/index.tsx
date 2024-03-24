@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, FilterIcon, LikeIcon, ThemesIcon, VerifedIcon } from "@/ui/Icons"
+import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, FilterIcon, Like2Icon, LikeIcon, ThemesIcon, VerifedIcon } from "@/ui/Icons"
 import ButtonDefault from "@/ui/Buttons/Default"
 import ButtonRound from "@/ui/Buttons/Round"
 import { useCallback, useEffect, useState } from "react"
@@ -34,10 +34,8 @@ const Specialists = () => {
         const month = date.getMonth()
         const hour = date.getHours()
         const minutes = date.getMinutes()
-        return `${day} ${months[month]}, ${String().length !== 1 ? hour : `${hour}0`}:${String().length !== 1 ? `${minutes}0` : minutes}`
+        return `${day} ${months[month]}, ${String(hour).length === 1 ? `0${hour}` : hour}:${String(minutes).length === 1 ? `0${minutes}` : minutes}`
     }
-
-    console.log(data[0])
 
     if (data.length === 0) return
 
@@ -45,6 +43,11 @@ const Specialists = () => {
         { title: "Опыт", value: `${data[currentPeople].exp} лет`, icon: VerifedIcon },
         { title: "Темы", value: `${data[currentPeople].sameThemesCount}/4`, icon: ThemesIcon },
     ]
+
+    async function toggleLike(id: string, action: "add" | "delete", type: "psychologists") {
+        await PshycologistsAPI.like(sid, action, type, id)
+        await getSpecialist()
+    }
 
     return (
         <main className={styles.Page}>
@@ -69,14 +72,17 @@ const Specialists = () => {
 
                         <div className={styles.ImageBox}>
                             <img src={data[currentPeople].urlAvatar} alt="" />
-                            <LikeIcon />
+                            {data[currentPeople].isFavourite
+                                ? <Like2Icon onClick={() => toggleLike(data[currentPeople].id, "delete", "psychologists")} />
+                                : <LikeIcon onClick={() => toggleLike(data[currentPeople].id, "add", "psychologists")} />
+                            }
                         </div>
 
                         <div className={styles.Info}>
                             <h3>{data[currentPeople].name}</h3>
                             <div>
                                 <h4>Индивидуальная сессия {data[currentPeople].individualSession.countTime} мин, {data[currentPeople].individualSession.price} ₽</h4>
-                                <h4>Запись <span>с {formatDate(data[currentPeople].freeTime[0])}</span></h4>
+                                {data[currentPeople]?.freeTime.length !== 0 && <h4>Запись <span>с {formatDate(data[currentPeople]?.freeTime[0])}</span></h4>}
                             </div>
 
                             <div className={styles.Achive}>

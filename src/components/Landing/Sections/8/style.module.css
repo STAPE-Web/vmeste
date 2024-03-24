@@ -89,6 +89,10 @@
     color: #1A3C51;
 }
 
+.ButtonBox button:disabled:hover svg {
+    color: #fff;
+}
+
 .AvatarBox {
     display: flex;
     flex-direction: column;

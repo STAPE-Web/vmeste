@@ -153,6 +153,11 @@
     color: #92D35E;
 }
 
+.No {
+    width: 100%;
+    text-align: center;
+}
+
 @media screen and (max-width: 768px) {
     .Top {
         align-items: center;

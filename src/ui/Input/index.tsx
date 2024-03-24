@@ -6,12 +6,13 @@ interface Props {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     type: "tel" | "text" | "number"
     placeholder: string
+    code?: string
 }
 
-const Input: FC<Props> = ({ onChange, type, value, placeholder }) => {
+const Input: FC<Props> = ({ onChange, type, value, placeholder, code }) => {
     return (
         <div className={`${styles.Input} ${value.length > 0 ? styles.Active : ""}`}>
-            {type === "tel" && <div>+7</div>}
+            {type === "tel" && <div>{code}</div>}
             <input onChange={onChange} type={type} maxLength={type === "tel" ? 10 : 254} value={value} placeholder={placeholder} />
         </div>
     )

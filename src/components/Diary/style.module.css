@@ -82,7 +82,8 @@
     transition: 0.5s;
 }
 
-.Items div:hover {
+.Items div:hover,
+.Items div.ActiveFeel {
     box-shadow: 2px 4px 10px 0px #FF870250;
 }
 
@@ -119,7 +120,8 @@
     color: #23232B;
 }
 
-.AdditionalItems div:hover {
+.AdditionalItems div:hover,
+.AdditionalItems div.ActiveFeel {
     background: #FF870290;
     color: #fff;
 }

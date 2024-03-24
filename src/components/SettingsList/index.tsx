@@ -1,8 +1,13 @@
 import Toggle from "@/ui/Toggle"
 import styles from "./style.module.css"
-import { useState } from "react"
+import { FC, useState } from "react"
+import { IProfile } from "@/types"
 
-const SettingsList = () => {
+interface Props {
+    data: IProfile
+}
+
+const SettingsList: FC<Props> = ({ data }) => {
     const [state, setState] = useState(false)
 
     function signOut() {
@@ -12,29 +17,30 @@ const SettingsList = () => {
 
     return (
         <div className={styles.Settings}>
-            <div className={styles.Box}>
-                <div >
+            {data.userInfo.type === "phone" && <div className={styles.Box}>
+                <div>
                     <label>Телефон</label>
                     <h4>+7 999 999-99-99</h4>
                 </div>
 
                 <button>Изменить</button>
-            </div>
+            </div>}
 
             <div >
                 <label>Имя или псевдониим</label>
-                <h4>Иван</h4>
+                <h4>{data.userInfo.name}</h4>
             </div>
 
             <div >
                 <label>Возраст</label>
-                <h4>39 лет</h4>
+                <h4>{data.userInfo.age} лет</h4>
             </div>
 
-            <div >
+            {data.userInfo.type === "email" && <div>
                 <label>Электронная почта</label>
-                <h4>ivan.ivanov@mail.ru</h4>
+                <h4>{data.userInfo.email}</h4>
             </div>
+            }
 
             <h2>Настройки</h2>
 

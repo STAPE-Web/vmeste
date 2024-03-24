@@ -38,6 +38,7 @@ const Test = () => {
     async function getResult() {
         if (id !== undefined) {
             const result = await TestsAPI.getResult(sid, id, answersList)
+            console.log(result)
             setTestResult(result.result)
         }
     }
@@ -78,7 +79,7 @@ const Test = () => {
                         ))}
                     </div>
 
-                    <ButtonDefault disabled={answers === undefined} onClick={() => {
+                    <ButtonDefault disabled={answers === undefined || answers === 0} onClick={() => {
                         if (answers !== undefined) {
                             setStep(step < questions.length ? step + 1 : 666)
                             setAnswersList(prev => [...prev, answers])

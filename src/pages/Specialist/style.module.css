@@ -87,6 +87,8 @@
     right: 20px;
     color: #fff;
     cursor: pointer;
+    width: 24px;
+    height: 24px;
 }
 
 .Info {
@@ -262,6 +264,112 @@
     align-items: center;
 }
 
+.TimeList {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.TimeList div {
+    height: 35px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #FF8702;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24.55px;
+    color: #FF8702;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.TimeList div.ActiveTime {
+    background: #FF8702;
+    color: #fff;
+}
+
+.Time {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.Message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #AFABA8;
+}
+
+.Message.Error {
+    color: #FB5935;
+}
+
+.Message p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24.55px;
+}
+
+.Promo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    max-width: 690px;
+    margin: 0 auto;
+}
+
+.PromoRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.PromoRow button {
+    width: 100%;
+}
+
+.TotalBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.TotalBox p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24.55px;
+    color: #AFABA8;
+}
+
+.TotalBox h4 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 17px;
+    color: #23232B;
+    margin-bottom: 20px;
+}
+
+.TotalBox h6 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    color: #AFABA8;
+}
+
+.TotalBox h6 span {
+    color: #FF8702;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1000px) {
     .Avatars {
         overflow-x: scroll;
@@ -273,12 +381,24 @@
 }
 
 @media screen and (max-width: 768px) {
+    .Back {
+        position: absolute;
+        z-index: 10;
+        top: 20px;
+        left: 20px;
+        color: #fff !important;
+    }
+
     .Page {
         padding: 0;
     }
 
     .Container {
         padding: 0;
+    }
+
+    .Container>div:first-child {
+        display: none;
     }
 
     .Content {
@@ -341,5 +461,30 @@
 
     .ButtonBox button {
         width: 100%;
+    }
+
+    .Time {
+        padding: 0 15px;
+        margin: 40px 0;
+    }
+
+    .TimeList {
+        flex-wrap: wrap;
+    }
+
+    .Message svg {
+        min-width: 24px;
+    }
+
+    .Promo {
+        padding: 0 15px;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .PromoRow {
+        flex-direction: column;
+        gap: 10px;
     }
 }

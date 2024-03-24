@@ -12,7 +12,7 @@ const Video = () => {
     const [data, setData] = useState<IVideo | null>(null);
     const { id } = useParams();
     const sid = JSON.parse(localStorage.getItem("sid") as string);
-    const [play, setPlay] = useState(false)
+    const [play, setPlay] = useState(true)
 
     const [sppedList, setSppedList] = useState(false)
     const [currentSpeed, setCurrentSpeeed] = useState(1)
@@ -168,7 +168,7 @@ const Video = () => {
                     </div>
 
                     <div className={styles.Video}>
-                        <video ref={videoRef} src={data?.link}></video>
+                        <video autoPlay={true} ref={videoRef} src={data?.link}></video>
                     </div>
 
                     <div className={styles.Controlls}>

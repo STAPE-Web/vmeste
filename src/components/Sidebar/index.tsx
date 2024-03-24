@@ -1,4 +1,4 @@
-import { AddIcon, CalendarIcon, DocumentIcon, HomeIcon, MessageIcon } from "@/ui/Icons"
+import { AddIcon, CalendarIcon, DocumentIcon, HomeIcon, MessageIcon, UserIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 
@@ -12,6 +12,7 @@ const Sidebar = () => {
         { name: "Выбор специалиста", icon: AddIcon, link: "/specialists" },
         { name: "Полезные материалы", icon: DocumentIcon, link: "/blog" },
         { name: "Сообщения", icon: MessageIcon, link: "/chats" },
+        { name: "Личный кабинет", icon: UserIcon, link: "/profile" },
     ]
 
     return (

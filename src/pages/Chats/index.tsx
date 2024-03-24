@@ -1,11 +1,14 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import Avatar from "@/assets/Avatar.png"
+import Avatar2 from "@/assets/Avatar2.png"
 import { SearchIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Chats = () => {
     const navigate = useNavigate()
+    const [search, setSearch] = useState("")
     const items = [
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },
@@ -14,9 +17,9 @@ const Chats = () => {
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },
-        { avatar: Avatar, username: "Ольга Кузнецова", lastMessage: "Спасибо!", count: 0, time: "17:00" },
-        { avatar: Avatar, username: "Ольга Кузнецова", lastMessage: "Спасибо!", count: 0, time: "17:00" },
-        { avatar: Avatar, username: "Ольга Кузнецова", lastMessage: "Спасибо!", count: 0, time: "17:00" },
+        { avatar: Avatar2, username: "Ольга Кузнецова", lastMessage: "Спасибо!", count: 0, time: "17:00" },
+        { avatar: Avatar2, username: "Ольга Кузнецова", lastMessage: "Спасибо!", count: 0, time: "17:00" },
+        { avatar: Avatar2, username: "Ольга Кузнецова", lastMessage: "Спасибо!", count: 0, time: "17:00" },
     ]
 
     return (
@@ -27,11 +30,11 @@ const Chats = () => {
                 <div className={styles.Content}>
                     <div className={styles.Search}>
                         <SearchIcon />
-                        <input type="text" placeholder="Поиск" />
+                        <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Поиск" />
                     </div>
 
                     <div className={styles.List}>
-                        {items.map((item, index) => (
+                        {items.filter(i => i.username.toLowerCase().includes(search.toLowerCase())).map((item, index) => (
                             <div key={index} className={styles.Item} onClick={() => navigate(`/chat/${index}`)}>
                                 <div className={styles.ItemBox}>
                                     <img src={item.avatar} alt="" />

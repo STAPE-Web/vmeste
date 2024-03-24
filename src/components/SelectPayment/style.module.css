@@ -1,0 +1,86 @@
+.Select {
+    width: 100%;
+    display: flex;
+    border-radius: 30px;
+    border: 1px solid #BCBCBF;
+    flex-direction: column;
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+}
+
+.Select.Select.Active {
+    border-radius: 15px;
+}
+
+.DropDown {
+    max-height: 0;
+    opacity: 0;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    overflow-y: scroll;
+}
+
+.Select.Active .DropDown {
+    max-height: 150px;
+    opacity: 1;
+}
+
+.Touchable {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 40px;
+    color: #BCBCBF;
+}
+
+.Touchable svg {
+    transition: 0.5s;
+}
+
+.Select.Active .Touchable svg {
+    transform: rotate(180deg);
+}
+
+.Select.Active .DropDown .Item {
+    max-height: 24px;
+    opacity: 1;
+}
+
+.DropDown .Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 24px;
+    margin-bottom: 12px;
+    max-height: 0;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.DropDown .Item>svg {
+    min-width: 15px;
+    color: #BCBCBF;
+    height: 15px;
+}
+
+.DropDown .Item div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19.1px;
+    color: #595959;
+}
+
+.DropDown .Item div svg {
+    color: #BCBCBF;
+}

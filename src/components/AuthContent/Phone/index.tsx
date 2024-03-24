@@ -5,6 +5,7 @@ import React, { FC, useState } from "react"
 import Select from "@/ui/Select"
 import Input from "@/ui/Input"
 import { AuthAPI } from "@/api"
+import { countryCodes } from "./constants"
 
 interface Props {
     setState: React.Dispatch<React.SetStateAction<"Phone" | "Email" | "SMS" | "Code" | "Hello">>
@@ -12,8 +13,9 @@ interface Props {
 }
 
 const Phone: FC<Props> = ({ setState, setAuthData }) => {
-    const [country, setCountry] = useState("Россия")
+    const [country, setCountry] = useState({ name: "Россия", code: "+7" })
     const [phone, setPhone] = useState("")
+    const [active, setActive] = useState(false)
 
     async function authorize() {
         setAuthData(phone)
@@ -30,8 +32,21 @@ const Phone: FC<Props> = ({ setState, setAuthData }) => {
                 <h2>Создайте аккаунт или войдите</h2>
                 <p>Укажите номер телефона, который можно <br /> подтвердитьс помощью SMS</p>
                 <div className={styles.Form}>
-                    <Select setValue={setCountry} value={country} />
-                    <Input onChange={e => setPhone(e.target.value)} placeholder="ххх ххх-хх-хх" type="tel" value={phone} />
+                    <div className={`${styles.SelectBox} ${active ? styles.SelectBoxActive : ""}`}>
+                        <Select active={active} selectActive={setActive} value={country.name} />
+                        <div className={styles.DropDown}>
+                            {countryCodes.map((item, index) => (
+                                <div key={index} onClick={() => {
+                                    setActive(false)
+                                    setCountry(item)
+                                }}>
+                                    {item.name}
+                                    <span>{item.code}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <Input onChange={e => setPhone(e.target.value)} code={country.code} placeholder="ххх ххх-хх-хх" type="tel" value={phone} />
                     <ButtonHeader disabled={phone.length !== 10} onClick={() => authorize()}>Получить код</ButtonHeader>
                 </div>
                 <p className={styles.Enter} onClick={() => setState("Email")}>Вход по почте</p>

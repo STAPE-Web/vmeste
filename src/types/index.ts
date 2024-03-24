@@ -69,3 +69,38 @@ export interface ISpecialist {
     methods: IMethod[],
     freeTime: string[]
 }
+
+export type ICard = {
+    number: string
+    dateEnd: string
+    cvv: string
+}
+
+export interface ISession {
+    id: string,
+    userId: string,
+    userName: string,
+    psychId: string,
+    psychName: string,
+    psychPhoto: string
+    status: string,
+    dateSession: string
+    sessionNumber: number,
+    price: number
+}
+
+export interface IProfile {
+    savedPsychs: ISpecialist[]
+    status: number
+    themes: any,
+    userInfo: {
+        name: string,
+        age: number,
+        therapyExperience: boolean,
+        gender: string,
+        familyTherapy: boolean,
+        type: string,
+        email?: string
+        phone?: string
+    }
+}

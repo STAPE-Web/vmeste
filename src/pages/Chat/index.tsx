@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, Calendar2Icon, SearchIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, Calendar2Icon, CloseIcon, SearchIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 
@@ -73,7 +73,8 @@ const Chat = () => {
                                     <SearchIcon />
                                     <input type="text" placeholder="Поиск" />
                                 </div>
-                                <Calendar2Icon onClick={() => navigate("/calendar")} />
+                                {/* <Calendar2Icon onClick={() => navigate("/calendar")} /> */}
+                                <CloseIcon style={{ width: 15 }} onClick={() => setSearch(false)} />
                             </>
                             : <>
                                 <ArrowLeftIcon onClick={() => navigate(-1)} />
@@ -96,7 +97,8 @@ const Chat = () => {
                     </div>
 
                     <div className={styles.Input}>
-                        <AttachIcon />
+                        <input type="file" id="upload" />
+                        <label htmlFor="upload"><AttachIcon /></label>
                         <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Сообщение..." />
                         <button onClick={() => sendMessage()}>
                             <ArrowRightIcon />

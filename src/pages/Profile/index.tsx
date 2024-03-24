@@ -1,26 +1,42 @@
-import { ArrowLeftIcon, ArrowRightIcon, InfoIcon, LikeIcon, SettingsIcon, SupportIcon, WalletIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, InfoIcon, LikeIcon, SettingsIcon, SupportIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import Avatar from "@/assets/Avatar.svg"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import SavedList from "@/components/SavedList"
 import SettingsList from "@/components/SettingsList"
 import SupportService from "@/components/SupportService"
 import About from "@/assets/About.png"
 import { useNavigate } from "react-router-dom"
+import { AuthAPI } from "@/api"
+import { IProfile } from "@/types"
 
 const Profile = () => {
-    const [mode, setMode] = useState<"saved" | "settings" | "payment" | "support" | "about" | "">("saved")
+    const [mode, setMode] = useState<"saved" | "settings" | "support" | "about" | "">("saved")
     const navgate = useNavigate()
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+
+    const [data, setData] = useState<IProfile | null>(null)
+
+    const getProfile = useCallback(async () => {
+        const result = await AuthAPI.getProfile(sid)
+        setData(result)
+    }, [sid])
+
+    useEffect(() => {
+        getProfile()
+    }, [getProfile])
 
     const navigate = [
         { name: "Сохраненные психологи", mode: "saved", icon: LikeIcon },
         { name: "Настройка профиля", mode: `settings`, icon: SettingsIcon },
-        { name: "Способы оплаты", mode: "payment", icon: WalletIcon },
+        // { name: "Способы оплаты", mode: "payment", icon: WalletIcon },
         { name: "Служба поддержки", mode: "support", icon: SupportIcon },
         { name: "О сервисе", mode: "about", icon: InfoIcon },
     ]
 
     function fillContent() {
+        if (data === null) return;
+
         switch (mode) {
             case "saved": return <>
                 <div className={styles.Top}>
@@ -28,7 +44,10 @@ const Profile = () => {
                     <h2>Сохраненные психологи</h2>
                     <span></span>
                 </div>
-                <SavedList />
+                {data?.savedPsychs.length !== 0
+                    ? <SavedList getProfile={getProfile} />
+                    : <p>Нет сохраненных психологов</p>
+                }
             </>
 
             case "settings": return <>
@@ -37,7 +56,7 @@ const Profile = () => {
                     <h2>Настройки профиля</h2>
                     <span></span>
                 </div>
-                <SettingsList />
+                <SettingsList data={data} />
             </>
 
             case "support": return <>
@@ -87,7 +106,7 @@ const Profile = () => {
                 <div className={styles.Back} onClick={() => navgate("/")}><ArrowLeftIcon /> Назад</div>
 
                 <div className={styles.AccountInfo}>
-                    <h3>Имя или псевдоним</h3>
+                    <h3>{data?.userInfo.name}</h3>
                     <img src={Avatar} alt="" />
                 </div>
 

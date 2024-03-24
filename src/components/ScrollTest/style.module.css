@@ -73,6 +73,10 @@
     height: 14px;
 }
 
+.LikeIcon.ActiveIcon {
+    fill: #fff;
+}
+
 .Item div {
     display: flex;
     width: 100%;

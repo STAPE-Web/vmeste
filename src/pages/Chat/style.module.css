@@ -135,8 +135,15 @@
     padding: 0 15px;
 }
 
-.Input>svg {
+.Input label svg {
     color: #FF8702;
+    cursor: pointer;
+}
+
+.Input label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Input button {
@@ -161,6 +168,10 @@
 
 .Input button:hover {
     opacity: 0.7;
+}
+
+.Input input[type="file"] {
+    display: none;
 }
 
 .Search {

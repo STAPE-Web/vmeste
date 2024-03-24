@@ -1,5 +1,5 @@
 import { TelegramShareButton, WhatsappShareButton, EmailShareButton } from 'react-share';
-import { ArrowLeftIcon, LikeIcon } from '@/ui/Icons';
+import { ArrowLeftIcon, Like2Icon, LikeIcon } from '@/ui/Icons';
 import styles from './style.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -87,6 +87,13 @@ const Article = () => {
         document.body.removeChild(textArea);
     }
 
+    async function toggleLike(action: "add" | "delete", type: "tests" | "articles" | "videos") {
+        if (id) {
+            await MaterialsAPI.like(sid, action, type, id)
+            await getArticle()
+        }
+    }
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -97,7 +104,10 @@ const Article = () => {
                 <div className={styles.Box}>
                     <div className={styles.Row}>
                         <div className={styles.Category}>Стресс</div>
-                        <LikeIcon className={styles.Like} />
+                        {data?.isFavorite
+                            ? <Like2Icon onClick={() => toggleLike("delete", "articles")} className={styles.Like} />
+                            : <LikeIcon onClick={() => toggleLike("add", "articles")} className={styles.Like} />
+                        }
                     </div>
 
                     <h2>{data?.title}</h2>

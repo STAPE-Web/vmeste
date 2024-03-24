@@ -158,7 +158,94 @@
     align-items: center;
 }
 
+.Grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.Item {
+    width: 100%;
+    border-radius: 13px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 4px 10px 0px #B6A1C01C;
+    cursor: pointer;
+}
+
+.Item img {
+    width: 110px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.ItemBox {
+    padding: 0 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.RowBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.RowBox svg {
+    color: #BCBCBF;
+}
+
+.RowBox h3 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 22px;
+}
+
+.Item svg {
+    width: 16px;
+    height: 16px;
+}
+
+.ItemBox p {
+    color: #AFABA8;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 10px;
+}
+
+.ItemBox h4 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #23232B;
+}
+
+.Payed {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #92D35E;
+}
+
+.MobileBox {
+    display: none;
+}
+
 @media screen and (max-width:768px) {
+    .DesctopBox {
+        display: none;
+    }
+
+    .MobileBox {
+        display: block;
+    }
+
     .Content {
         box-shadow: none;
         padding: 0;

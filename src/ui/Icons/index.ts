@@ -75,6 +75,10 @@ import RewindRight from "./RewindRight";
 import FullScreen from "./FullScreen";
 import Pause from "./Pause";
 import Play2 from "./Play2";
+import WarningRound from "./WarningRound";
+import Card from "./Card";
+import SBP from "./SBP";
+import Scan from "./Scan";
 
 export {
     SignIn as SignInIcon,
@@ -153,5 +157,9 @@ export {
     RewindRight as RewindRightIcon,
     FullScreen as FullScreenIcon,
     Pause as PauseIcon,
-    Play2 as Play2Icon
+    Play2 as Play2Icon,
+    WarningRound as WarningRoundIcon,
+    Card as CardIcon,
+    SBP as SBPIcon,
+    Scan as ScanIcon,
 }

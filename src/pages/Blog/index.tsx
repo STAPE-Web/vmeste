@@ -2,10 +2,11 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 import React, { useCallback, useEffect, useState } from "react"
-import { DotsIcon, GridIcon, LikeIcon, ListIcon, PlayIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, DotsIcon, GridIcon, Like2Icon, LikeIcon, ListIcon, PlayIcon } from "@/ui/Icons"
 import ScrollTest from "@/components/ScrollTest"
 import { MaterialsAPI } from "@/api"
-import { IArticle, IBlog } from "@/types"
+import { IArticle, IBlog, ITests } from "@/types"
+import ButtonRound from "@/ui/Buttons/Round"
 
 const Blog = () => {
     const navigate = useNavigate()
@@ -33,12 +34,33 @@ const Blog = () => {
         return `${day} ${months[month]} ${year}`
     }
 
-    console.log(data)
+    async function removeLike(id: string, type: "tests" | "articles" | "videos") {
+        await MaterialsAPI.like(sid, "delete", type, id)
+        await getMaterials()
+    }
+
+    async function addLike(id: string, type: "tests" | "articles" | "videos") {
+        const result = await MaterialsAPI.like(sid, "add", type, id)
+        console.log(result)
+        await getMaterials()
+    }
+
+    if (data === null) return;
+
+    const favoriteTestsExist = Object.keys(data?.tests).some(category =>
+        // @ts-ignore
+        data?.tests[category].some((i: ITests) => i.isFavorite)
+    );
+
+    const favoriteArticlesExist = Object.keys(data?.articles).some(category =>
+        // @ts-ignore
+        data?.articles[category].some((i: ITests) => i.isFavorite)
+    );
 
     function fillContent() {
         switch (tab) {
             case "Тесты": return <>
-                {/* <div className={styles.Box}>
+                {favoriteTestsExist && <div className={styles.Box}>
                     <h3>Избранное</h3>
                     <div className={styles.ScrollBox}>
                         <div className={styles.PrevButton}>
@@ -46,15 +68,24 @@ const Blog = () => {
                         </div>
 
                         <div className={styles.Scroll}>
-                            {favorite.map((item, index) => (
-                                <div key={index} className={styles.Item} onClick={() => navigate("/test")}>
-                                    <Like2Icon className={styles.LikeIcon} />
-                                    <h2>{item.title}</h2>
-                                    <div>
-                                        <p>{item.category}</p>
-                                        <p>{item.time}</p>
-                                    </div>
-                                </div>
+                            {/* @ts-ignore */}
+                            {Object.keys(data?.tests).map((category, id) => (
+                                <React.Fragment key={id}>
+                                    {/* @ts-ignore */}
+                                    {data?.tests[category].filter((i: ITests) => i.isFavorite).map((item: ITests, index) => (
+                                        <div key={index} className={styles.Item} onClick={() => navigate(`/test/${item.id}`)}>
+                                            <Like2Icon onClick={(e: any) => {
+                                                e.stopPropagation()
+                                                removeLike(item.id, "tests")
+                                            }} className={styles.LikeIcon} />
+                                            <h2>{item.name}</h2>
+                                            <div>
+                                                <p>{category}</p>
+                                                <p>{item.countTime} мин.</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </React.Fragment>
                             ))}
                         </div>
 
@@ -62,61 +93,142 @@ const Blog = () => {
                             <ButtonRound big={true} disabled={true} onClick={() => ({})}><ArrowRightIcon /></ButtonRound>
                         </div>
                     </div>
-                </div> */}
+                </div>}
 
                 {data !== null && Object.keys(data?.tests).map((category) => (
                     // @ts-ignore
-                    <ScrollTest key={category} array={data?.tests[category]} title={category} />
+                    <ScrollTest getMaterials={getMaterials} key={category} array={data?.tests[category]} title={category} />
                 ))}
             </>
 
-            case "Статьи": return <div className={styles.Grid}>
-                {data !== null && Object.keys(data?.articles).map((category, index) => (
-                    <React.Fragment key={index}>
+            case "Статьи": return <>
+                {favoriteArticlesExist && <><h3 className={styles.Title}>Избранное</h3>
+                    <div className={`${styles.Grid} ${styles.Favorite}`}>
                         {/* @ts-ignore */}
-                        {data.articles[category].map((item: IArticle, i) => (
-                            <div key={index} className={styles.GridItem} onClick={() => navigate(`/article/${item.id}`)}>
-                                <img src={item.preview} alt="" />
+                        {Object.keys(data?.articles).map((category, id) => (
+                            <React.Fragment key={id}>
+                                {/* @ts-ignore */}
+                                {data?.articles[category].filter((i: IArticle) => i.isFavorite).map((item: IArticle, index) => (
+                                    <div key={index} className={styles.GridItem} onClick={() => navigate(`/article/${item.id}`)}>
+                                        <img src={item.preview} alt="" />
 
-                                <div className={styles.GridItemInfo}>
-                                    <h6>{category}</h6>
-                                    <h3>{item.title}</h3>
+                                        <div className={styles.GridItemInfo}>
+                                            <h6>{category}</h6>
+                                            <h3>{item.title}</h3>
 
-                                    <div className={styles.GridItemAdditional}>
-                                        <div>
-                                            <img src="" alt="" />
-                                            <p>Анна Дегтярёва · {convertDate(item.createdAt)}</p>
+                                            <div className={styles.GridItemAdditional}>
+                                                <div>
+                                                    <img src="" alt="" />
+                                                    <p>Анна Дегтярёва · {convertDate(item.createdAt)}</p>
+                                                </div>
+
+                                                <Like2Icon onClick={(e: any) => {
+                                                    e.stopPropagation()
+                                                    removeLike(item.id, "articles")
+                                                }} />
+                                            </div>
                                         </div>
-
-                                        <LikeIcon />
                                     </div>
+                                ))}
+                            </React.Fragment>
+                        ))}
+                    </div></>}
+
+                <div className={styles.Grid}>
+                    {data !== null && Object.keys(data?.articles).map((category, index) => (
+                        <React.Fragment key={index}>
+                            {/* @ts-ignore */}
+                            {data.articles[category].map((item: IArticle, i) => (
+                                <div key={index} className={styles.GridItem} onClick={() => navigate(`/article/${item.id}`)}>
+                                    <img src={item.preview} alt="" />
+
+                                    <div className={styles.GridItemInfo}>
+                                        <h6>{category}</h6>
+                                        <h3>{item.title}</h3>
+
+                                        <div className={styles.GridItemAdditional}>
+                                            <div>
+                                                <img src="" alt="" />
+                                                <p>Анна Дегтярёва · {convertDate(item.createdAt)}</p>
+                                            </div>
+
+                                            {item.isFavorite
+                                                ? <Like2Icon onClick={(e: any) => {
+                                                    e.stopPropagation()
+                                                    removeLike(item.id, "articles")
+                                                }} />
+                                                : <LikeIcon onClick={(e: any) => {
+                                                    e.stopPropagation()
+                                                    addLike(item.id, "articles")
+                                                }} />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </React.Fragment>
+                    ))}
+                </div>
+            </>
+
+            case "Видео": return <>
+                {data?.videos.videos.filter(i => i.isFavorite).length !== 0 && <>
+                    <h3 className={styles.Title}>Избранное</h3>
+                    <div className={`${styles.Grid} ${styles.Favorite} ${!grid ? styles.GridList : ""}`}>
+                        {data?.videos.videos.filter(i => i.isFavorite).map((item, index) => (
+                            <div key={index} className={styles.Video} onClick={() => navigate(`/video/${item.id}`)}>
+                                <div className={styles.VideoBox} style={{ background: `url(${item.preview}) no-repeat` }}>
+                                    <Like2Icon onClick={(e: any) => {
+                                        e.stopPropagation()
+                                        removeLike(item.id, "videos")
+                                    }} className={styles.Like} />
+
+                                    <PlayIcon className={styles.Play} />
+                                </div>
+
+                                <div className={styles.VideoText}>
+                                    <div>
+                                        <h6>{item.title}</h6>
+                                        <h3>30 декабря 2023</h3>
+                                    </div>
+
+                                    <DotsIcon />
                                 </div>
                             </div>
                         ))}
-                    </React.Fragment>
-                ))}
-            </div>
+                    </div>
+                </>}
 
-            case "Видео": return <div className={`${styles.Grid} ${!grid ? styles.GridList : ""}`}>
-                {data?.videos.videos.map((item, index) => (
-                    <div key={index} className={styles.Video} onClick={() => navigate(`/video/${item.id}`)}>
-                        <div className={styles.VideoBox} style={{ background: `url(${item.preview}) no-repeat` }}>
-                            <LikeIcon className={styles.Like} />
-                            {/* <div>11:48</div> */}
-                            <PlayIcon className={styles.Play} />
-                        </div>
-
-                        <div className={styles.VideoText}>
-                            <div>
-                                <h6>{item.title}</h6>
-                                <h3>30 декабря 2023</h3>
+                <div className={`${styles.Grid} ${!grid ? styles.GridList : ""}`}>
+                    {data?.videos.videos.map((item, index) => (
+                        <div key={index} className={styles.Video} onClick={() => navigate(`/video/${item.id}`)}>
+                            <div className={styles.VideoBox} style={{ background: `url(${item.preview}) no-repeat` }}>
+                                {item.isFavorite
+                                    ? <Like2Icon onClick={(e: any) => {
+                                        e.stopPropagation()
+                                        removeLike(item.id, "videos")
+                                    }} className={styles.Like} />
+                                    : <LikeIcon onClick={(e: any) => {
+                                        e.stopPropagation()
+                                        addLike(item.id, "videos")
+                                    }} className={styles.Like} />
+                                }
+                                {/* <div>11:48</div> */}
+                                <PlayIcon className={styles.Play} />
                             </div>
 
-                            <DotsIcon />
+                            <div className={styles.VideoText}>
+                                <div>
+                                    <h6>{item.title}</h6>
+                                    <h3>30 декабря 2023</h3>
+                                </div>
+
+                                <DotsIcon />
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </>
         }
     }
 
