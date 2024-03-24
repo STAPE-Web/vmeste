@@ -23,21 +23,22 @@ const Session = () => {
     }, [getSession])
 
     function formatDate(value: string) {
-        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря",]
-        const weeks = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
-        const date = new Date(value)
-        const day = date.getDate()
-        const month = date.getMonth()
-        const weekDay = date.getDay()
+        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+        const weeks = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+        const dateParts = value.split(" ")[0].split("-");
+        const date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+        const day = date.getDate();
+        const month = date.getMonth();
+        const weekDay = date.getDay();
 
-        return `${weeks[weekDay - 1]}, ${day} ${months[month]}`
+        return `${weeks[weekDay]}, ${day} ${months[month]}`;
     }
 
     function formatTime(value: string) {
-        const date = new Date(value)
-        const hour = date.getHours()
-        const minutes = date.getMinutes()
-        return `${String(hour).length === 1 ? `0${hour}` : hour}:${String(minutes).length === 1 ? `0${minutes}` : minutes}`
+        const timeParts = value.split(" ")[1].split(":");
+        const hour = parseInt(timeParts[0]);
+        const minutes = parseInt(timeParts[1]);
+        return `${String(hour).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     }
 
     async function cancelSession() {
