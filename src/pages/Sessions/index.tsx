@@ -46,6 +46,8 @@ const Session = () => {
         console.log(result)
         if (result.status === 200) {
             navigate("/sessions")
+        } else {
+            alert(result.msg)
         }
     }
 
