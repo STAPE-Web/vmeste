@@ -109,6 +109,7 @@
     .Items2 {
         gap: 16px;
         flex-direction: column;
+        height: 100%;
     }
 
     .Items2 div:first-child {
