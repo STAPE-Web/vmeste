@@ -84,3 +84,11 @@
 .DropDown .Item div svg {
     color: #BCBCBF;
 }
+
+.Checkbox div {
+    border-radius: 100%;
+}
+
+.Checkbox div svg {
+    color: #fff !important;
+}

@@ -34,6 +34,10 @@ const SMS: FC<Props> = ({ setState, authData }) => {
             localStorage.setItem("sid", JSON.stringify(result.sid))
             window.location.replace("/")
         }
+
+        if (result.status === 404) {
+            alert("Неверный код")
+        }
     }, [authData, code])
 
     useEffect(() => {
@@ -45,6 +49,7 @@ const SMS: FC<Props> = ({ setState, authData }) => {
     async function getNewCode() {
         const result = await AuthAPI.sendCode(`+7${authData}`)
         console.log(result)
+        setTime(60)
     }
 
     return (

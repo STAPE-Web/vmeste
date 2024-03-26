@@ -79,6 +79,7 @@ import WarningRound from "./WarningRound";
 import Card from "./Card";
 import SBP from "./SBP";
 import Scan from "./Scan";
+import YKassa from "./YKassa";
 
 export {
     SignIn as SignInIcon,
@@ -162,4 +163,5 @@ export {
     Card as CardIcon,
     SBP as SBPIcon,
     Scan as ScanIcon,
+    YKassa as YKassaIcon
 }
