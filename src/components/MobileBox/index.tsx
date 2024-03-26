@@ -7,6 +7,7 @@ import Input from "@/ui/Input"
 import ButtonRound from "@/ui/Buttons/Round"
 import MobileAuthModal from "../MobileAuthModal"
 import ButtonDefault from "@/ui/Buttons/Default"
+import { AuthAPI } from "@/api"
 
 const MobileBox = () => {
     const navigate = useNavigate()
@@ -129,9 +130,24 @@ const MobileBox = () => {
         }
     }
 
-    function Auth() {
-        localStorage.setItem("isAuth", JSON.stringify(true))
-        window.location.replace("/")
+    async function Auth() {
+        const data = {
+            sid: JSON.parse(localStorage.getItem("sid") as string),
+            name: username,
+            age: age,
+            therapyExperience: experience === "Есть опыт",
+            gender: people === "С женщиной" ? "W" : "M",
+            familyTherapy: forWho === "Для двоих",
+            themes: [...myCondition, ...relationship, ...work, ...events]
+        }
+
+        const result = await AuthAPI.register(data)
+        console.log(result)
+        if (result.status === 200) {
+            window.location.replace("/")
+        } else {
+            window.location.replace("/")
+        }
     }
 
     return (
