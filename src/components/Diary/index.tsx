@@ -18,7 +18,7 @@ const Diary = () => {
     const minutes = String(date.getMinutes()).length === 1 ? `0${date.getMinutes()}` : date.getMinutes()
     const [calendar, setCalendar] = useState(false)
     const sid = JSON.parse(localStorage.getItem("sid") as string)
-    const [moodscale, setMoodscale] = useState<{ name: string, value: number }[]>([])
+    const [moodscale] = useState<{ name: string, value: number }[]>([])
 
     const [tab, setTab] = useState("Дневник настроения")
     const tabs = [
