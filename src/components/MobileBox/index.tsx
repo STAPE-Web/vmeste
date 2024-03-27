@@ -62,7 +62,7 @@ const MobileBox = () => {
                 <p>Для получения услуги на нашем сервисе вам должно быть больше 16 лет</p>
                 <div className={styles.Row}>
                     <Input onChange={e => setAge(e.target.value)} placeholder="Ваш возраст" type="number" value={age} />
-                    <ButtonRound big={false} disabled={age === ""} onClick={() => setStep(3)}>
+                    <ButtonRound big={false} disabled={age === "" || Number(age) < 18} onClick={() => setStep(3)}>
                         <ArrowRightIcon />
                     </ButtonRound>
                 </div>
@@ -146,7 +146,7 @@ const MobileBox = () => {
         if (result.status === 200) {
             window.location.replace("/")
         } else {
-            window.location.replace("/")
+            alert(result.msg)
         }
     }
 

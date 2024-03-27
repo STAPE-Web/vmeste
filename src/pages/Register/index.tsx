@@ -145,7 +145,7 @@ const Register = () => {
         if (result.status === 200) {
             window.location.replace("/")
         } else {
-            window.location.replace("/")
+            alert(result.msg)
         }
     }
 

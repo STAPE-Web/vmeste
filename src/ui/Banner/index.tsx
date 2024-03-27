@@ -12,8 +12,6 @@ interface Props {
 const Banner: FC<Props> = ({ data }) => {
     const navigate = useNavigate()
 
-    console.log(data.filter(i => i.status !== "canceled"))
-
     return (
         <div className={styles.Banner}>
             <div className={styles.MobileHeader}>

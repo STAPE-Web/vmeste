@@ -1,11 +1,12 @@
 import { ArrowLeftIcon, Calendar2Icon, CloseIcon, DiaryIcon, StatsIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Range from "@/ui/Range"
 import { useNavigate } from "react-router-dom"
 import MoodScale from "../MoodScale"
 import Chart from "../Chart"
+import { DiaryAPI } from "@/api"
 
 const Diary = () => {
     const navigate = useNavigate()
@@ -16,6 +17,8 @@ const Diary = () => {
     const hour = String(date.getHours()).length === 1 ? `0${date.getHours()}` : date.getHours()
     const minutes = String(date.getMinutes()).length === 1 ? `0${date.getMinutes()}` : date.getMinutes()
     const [calendar, setCalendar] = useState(false)
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+    const [moodscale, setMoodscale] = useState<{ name: string, value: number }[]>([])
 
     const [tab, setTab] = useState("Дневник настроения")
     const tabs = [
@@ -23,7 +26,7 @@ const Diary = () => {
         { name: "Статистика", icon: StatsIcon },
     ]
 
-    const [howFeel, setHowFeel] = useState("")
+    const [howFeel, setHowFeel] = useState<string[]>([])
     const items = [
         { name: "Радость", image: "/Emoji_1.png" },
         { name: "Страх", image: "/Emoji_2.png" },
@@ -79,6 +82,29 @@ const Diary = () => {
         return daysArray;
     };
 
+    function selectFeel(item: string) {
+        if (howFeel.includes(item)) {
+            const newFeel = howFeel.filter(i => i !== item)
+            setHowFeel(newFeel)
+        } else {
+            setHowFeel(prev => [...prev, item])
+        }
+    }
+
+    async function saveFeeling() {
+        const result = await DiaryAPI.feel(sid, howFeel, stress, selfRate, note)
+        console.log(result)
+    }
+
+    const getFeeling = useCallback(async () => {
+        const result = await DiaryAPI.getDiary(sid)
+        console.log(result)
+    }, [sid])
+
+    useEffect(() => {
+        getFeeling()
+    }, [getFeeling])
+
     return (
         <div className={styles.Diary}>
             {calendar
@@ -127,7 +153,7 @@ const Diary = () => {
                                 <h2>Что чувствуешь?</h2>
                                 <div className={styles.Items}>
                                     {items.map((item, index) => (
-                                        <div className={item.name === howFeel ? styles.ActiveFeel : ""} key={index} onClick={() => setHowFeel(item.name)}>
+                                        <div className={howFeel.includes(item.name) ? styles.ActiveFeel : ""} key={index} onClick={() => selectFeel(item.name)}>
                                             <img src={item.image} alt="" />
                                             {item.name}
                                         </div>
@@ -136,7 +162,7 @@ const Diary = () => {
 
                                 <div className={styles.AdditionalItems}>
                                     {addItems.map((item, index) => (
-                                        <div className={item === howFeel ? styles.ActiveFeel : ""} onClick={() => setHowFeel(item)} key={index}>{item}</div>
+                                        <div className={howFeel.includes(item) ? styles.ActiveFeel : ""} onClick={() => selectFeel(item)} key={index}>{item}</div>
                                     ))}
                                 </div>
                             </div>
@@ -156,7 +182,7 @@ const Diary = () => {
                                 <textarea value={note} onChange={e => setNote(e.target.value)} className={styles.Textarea}></textarea>
                             </div>
 
-                            <ButtonDefault disabled={false} onClick={() => ({})}>Сохранить</ButtonDefault>
+                            <ButtonDefault disabled={false} onClick={() => saveFeeling()}>Сохранить</ButtonDefault>
                         </>
                         : <>
                             <div className={styles.Tabs}>
@@ -169,7 +195,7 @@ const Diary = () => {
 
                             <div className={styles.Block}>
                                 <h2>Шкала настроения</h2>
-                                <MoodScale />
+                                <MoodScale data={moodscale} />
                             </div>
 
                             <div className={styles.Block}>
