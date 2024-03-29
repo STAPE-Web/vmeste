@@ -18,7 +18,9 @@ const Diary = () => {
     const minutes = String(date.getMinutes()).length === 1 ? `0${date.getMinutes()}` : date.getMinutes()
     const [calendar, setCalendar] = useState(false)
     const sid = JSON.parse(localStorage.getItem("sid") as string)
-    const [moodscale] = useState<{ name: string, value: number }[]>([])
+    const [moodscale, setMoodscale] = useState<{ date: string, array: { time: string, feelings: string[], stress: number, assessment: number, notes: string }[] }[]>([])
+    const [stressData, setStressData] = useState<{ value: number, time: string }[]>([])
+    const [assessmentData, setassessmentData] = useState<{ value: number, time: string }[]>([])
 
     const [tab, setTab] = useState("Дневник настроения")
     const tabs = [
@@ -27,6 +29,7 @@ const Diary = () => {
     ]
 
     const [howFeel, setHowFeel] = useState<string[]>([])
+    const [emotion, setEmotion] = useState<"Радость" | "Страх" | "Бешенство" | "Грусть" | "Спокойствие" | "Сила">("Радость")
     const items = [
         { name: "Радость", image: "/Emoji_1.png" },
         { name: "Страх", image: "/Emoji_2.png" },
@@ -36,7 +39,15 @@ const Diary = () => {
         { name: "Сила", image: "/Emoji_6.png" },
     ]
 
-    const addItems = ["Возбуждение", "Восторг", "Игривость", "Наслаждение", "Очарование", "Осознанность", "Смелость", "Удовольствие", "Чувственность", "Энергичность", "Экстравагантность"]
+    const addItems = [
+        { name: "Радость", array: ["Благодарность", "Доверие", "Воодушевление", "Озарение", "Сопричастность", "Умиротворение", "Радушие", "Единство", "Торжественность", "Наслаждение", "Общность", "Восторг", "Благодать", "Поддержка", "Веселье", "Надежда", "Уверенность", "Легкость", "Любовь", "Удовлетворение", "Облегчение", "Обожание", "Преклонение", "Подъем духа", "Энтузиазм"] },
+        { name: "Страх", array: ["Волнение", "Испуг", "Паника", "Беспокойство", "Неуверенность", "Боязливость", "Подозрительность", "Трусость", "Нерешительность", "Настороженность", "Смятение", "Тревога", "Ужас", "Опасение", "Отвращение", "Робость", "Застенчивость", "Безнадежность", "Сдержанность", "Скрытность", "Жалость", "Скованность", "Замешательство", "Ошарашенность", "Озадаченность"] },
+        { name: "Бешенство", array: ["Холодность", "Злость", "Сарказм", "Раздражение", "Ярость", "Унижение", "Обида", "Ненависть", "Нетерпение", "Отвращение", "Надменность", "Злорадство", "Недовольство", "Ценизм", "Протест", "Неистовость", "Враждебность", "Равнодушие", "Безучастность", "Неприязнь", "Пренебрежение", "Зависть", "Мстительность", "Высокомерие"] },
+        { name: "Грусть", array: ["Огорчение", "Горе", "Боль", "Угнетенность", "Отвращение", "Одиночество", "Отчуждение", "Разочарование", "Поражение", "Жалость к себе", "Унижение", "Тоска", "Подавленность", "Предательство", "Скука", "Печаль", "Апатия", "Равнодушие", "Принижение", "Раздражение", "Обида", "Скорбь", "Отверженность", "Отчаяние"] },
+        { name: "Спокойствие", array: ["Покой", "Защищенность", "Безопасность", "Комфорт", "Стабильность", "Легкость", "Умиротворение", "Хладнокровие", "Блаженство", "Доверие", "Смирение"] },
+        { name: "Сила", array: ["Уверенность", "Решительность", "Бодрость", "Власть", "Гордость", "Гибкость", "Вдохновение", "Энергичность", "Готовность", "Воодушевление", "Мощь"] }
+    ];
+
     const [stress, setStress] = useState(50)
     const [selfRate, setSeltRate] = useState(50)
     const [note, setNote] = useState("Сегодня я чувствую себя хорошо")
@@ -97,13 +108,128 @@ const Diary = () => {
     }
 
     const getFeeling = useCallback(async () => {
-        const result = await DiaryAPI.getDiary(sid)
-        console.log(result)
-    }, [sid])
+        const result = await DiaryAPI.getDiary(sid);
+
+        const formattedDataArray = [];
+
+        for (const date in result.diary) {
+            if (Object.hasOwnProperty.call(result.diary, date)) {
+                formattedDataArray.push({ date, array: result.diary[date] });
+            }
+        }
+
+        let filteredData = [];
+        switch (tab2) {
+            case "ДН":
+                const today = new Date().toISOString().split('T')[0];
+                filteredData = formattedDataArray.filter(item => {
+                    const itemDateParts = item.date.split('-');
+                    const itemDateISO = `${itemDateParts[2]}-${itemDateParts[1]}-${itemDateParts[0]}`;
+                    return itemDateISO === today;
+                });
+                break;
+
+            case "НЕД":
+                const todayDate = new Date();
+                const startOfWeek = new Date(todayDate);
+                startOfWeek.setDate(todayDate.getDate() - todayDate.getDay());
+                const endOfWeek = new Date(todayDate);
+                endOfWeek.setDate(todayDate.getDate() + (6 - todayDate.getDay()));
+
+                filteredData = formattedDataArray.filter(item => {
+                    const itemDateParts = item.date.split('-');
+                    const itemDateISO = `${itemDateParts[2]}-${itemDateParts[1]}-${itemDateParts[0]}`;
+                    const itemDate = new Date(itemDateISO);
+                    return itemDate >= startOfWeek && itemDate <= endOfWeek;
+                });
+                break;
+            case "МЕС":
+                const currentMonth = new Date().getMonth() + 1;
+                filteredData = formattedDataArray.filter(item => {
+                    const itemMonth = parseInt(item.date.split('-')[1]);
+                    return itemMonth === currentMonth;
+                });
+                break;
+            case "ГОД":
+                const currentYear = new Date().getFullYear();
+                filteredData = formattedDataArray.filter(item => {
+                    const itemYear = parseInt(item.date.split('-')[2]);
+                    return itemYear === currentYear;
+                });
+                break;
+            default:
+                filteredData = formattedDataArray;
+                break;
+        }
+
+        setMoodscale(filteredData)
+    }, [sid, tab2])
 
     useEffect(() => {
         getFeeling()
     }, [getFeeling])
+
+
+    const getStressData = useCallback(() => {
+        const newData: { value: number, time: string }[] = [];
+        const tempData: { [key: string]: { sum: number, count: number } } = {};
+
+        moodscale.forEach(item => {
+            item.array.forEach(subItem => {
+                const time = subItem.time.split(' ')[1].slice(0, 5);
+                const stress = subItem.stress;
+
+                if (!tempData[time]) {
+                    tempData[time] = { sum: 0, count: 0 };
+                }
+
+                tempData[time].sum += stress;
+                tempData[time].count++;
+            });
+        });
+
+        for (const time in tempData) {
+            if (tempData.hasOwnProperty(time)) {
+                const averageStress = tempData[time].sum / tempData[time].count;
+                newData.push({ value: averageStress, time });
+            }
+        }
+
+        setStressData(newData);
+    }, [moodscale]);
+
+    const getAsessmentData = useCallback(() => {
+        const newData: { value: number, time: string }[] = [];
+        const tempData: { [key: string]: { sum: number, count: number } } = {};
+
+        moodscale.forEach(item => {
+            item.array.forEach(subItem => {
+                const time = subItem.time.split(' ')[1].slice(0, 5);
+                const stress = subItem.assessment;
+
+                if (!tempData[time]) {
+                    tempData[time] = { sum: 0, count: 0 };
+                }
+
+                tempData[time].sum += stress;
+                tempData[time].count++;
+            });
+        });
+
+        for (const time in tempData) {
+            if (tempData.hasOwnProperty(time)) {
+                const averageStress = tempData[time].sum / tempData[time].count;
+                newData.push({ value: averageStress, time });
+            }
+        }
+
+        setassessmentData(newData);
+    }, [moodscale]);
+
+    useEffect(() => {
+        getStressData()
+        getAsessmentData()
+    }, [getStressData, getAsessmentData])
 
     return (
         <div className={styles.Diary}>
@@ -135,7 +261,7 @@ const Diary = () => {
 
                         <p>{day} {months[month - 1]} {hour}:{minutes}</p>
 
-                        <Calendar2Icon onClick={() => setCalendar(true)} />
+                        <Calendar2Icon className={styles.Calendar2Icon} />
                     </div>
 
                     <div className={styles.Tabs}>
@@ -151,9 +277,9 @@ const Diary = () => {
                         ? <>
                             <div className={styles.Block}>
                                 <h2>Что чувствуешь?</h2>
-                                <div className={styles.Items}>
+                                <div className={`${styles.Items} ${styles.Emotions}`}>
                                     {items.map((item, index) => (
-                                        <div className={howFeel.includes(item.name) ? styles.ActiveFeel : ""} key={index} onClick={() => selectFeel(item.name)}>
+                                        <div className={emotion === item.name ? styles.ActiveFeel : ""} key={index} onClick={() => setEmotion(item.name as any)}>
                                             <img src={item.image} alt="" />
                                             {item.name}
                                         </div>
@@ -161,8 +287,15 @@ const Diary = () => {
                                 </div>
 
                                 <div className={styles.AdditionalItems}>
-                                    {addItems.map((item, index) => (
-                                        <div className={howFeel.includes(item) ? styles.ActiveFeel : ""} onClick={() => selectFeel(item)} key={index}>{item}</div>
+                                    {addItems[addItems.findIndex(i => i.name === emotion)].array.map((item, index) => (
+                                        <div className={`${howFeel.includes(item) ? styles.ActiveFeel : ""} ${emotion === "Радость" ? styles.Orange
+                                            : emotion === "Страх" ? styles.Yellow
+                                                : emotion === "Бешенство" ? styles.Green
+                                                    : emotion === "Грусть" ? styles.Turquoise
+                                                        : emotion === "Сила" ? styles.Blue
+                                                            : emotion === "Спокойствие" ? styles.Turquoise : ""
+                                            }`}
+                                            onClick={() => selectFeel(item)} key={index}>{item}</div>
                                     ))}
                                 </div>
                             </div>
@@ -200,12 +333,12 @@ const Diary = () => {
 
                             <div className={styles.Block}>
                                 <h2>Уровень стресса</h2>
-                                <Chart array={[1, 3, 4, 5, 2, 4, 3]} />
+                                <Chart array={stressData} />
                             </div>
 
                             <div className={styles.Block}>
                                 <h2>Самооценка</h2>
-                                <Chart array={[]} />
+                                <Chart array={assessmentData} />
                             </div>
                         </>
                     }

@@ -115,6 +115,15 @@
     background: #FF870240;
 }
 
+.AppointmentIndicator {
+    width: 10px;
+    height: 10px;
+    background: #FF8702;
+    position: absolute;
+    bottom: 15px;
+    border-radius: 100%;
+}
+
 .SelectedBox {
     padding: 40px 50px;
     background: #FFFFFF;
@@ -133,6 +142,7 @@
     width: 80px;
     height: 80px;
     border-radius: 100%;
+    object-fit: cover;
 }
 
 .SelectedBox h3 {

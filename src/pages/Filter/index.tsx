@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 import { Add2Icon, ArrowLeftIcon } from "@/ui/Icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
 import MobileAuthModal from "@/components/MobileAuthModal"
@@ -26,6 +26,13 @@ const Filter = () => {
     const [events, setEvents] = useState<string[]>([])
 
     const [modalMode, setModalMode] = useState(0)
+    const [price, setPrice] = useState<number[]>([2500])
+
+    const priceList = [
+        { price: 2500, text: "Опыт от 3 лет. Прошли личное собеседование, подтвердили образование, предоставили рекомендацию" },
+        { price: 3500, text: "Опыт от 5 лет. Работают в “Вместе” более года и за это время зарекомендовали себя наилучшим образом" },
+        { price: 4500, text: "Опыт от 7 лет. Самые востребованные психологи: супервизоры, члены ассоциаций, авторы научных статей" },
+    ]
 
     const itemsList = [
         { title: "Моё состояние", state: myCondition, func: setMyCondition, array: ["Стресс", "Упадок сил", "Нестабильная самооценка", "Приступы страха и тревоги", "Перепады настроения", "Раздражительность", "Ощущение одиночества", "Проблемы с концентрацией", "Эмоциональная зависимость", "Проблемы со сном", "Расстройство пищевого поведения", "Панические атаки", "Навязчивые мысли о здоровье", "Сложности с алкоголем/наркотиками"] },
@@ -40,6 +47,25 @@ const Filter = () => {
         } else {
             func(prev => [...prev, item])
         }
+    }
+
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
+
+    function SearchSpecialist() {
+        const searchData = {
+            familyTherapy: typeConsult === "Парная",
+            themes: [...myCondition, ...relationship, ...work, ...events],
+            gender: sexPeople === "Женщина" ? "W" : "M",
+            price: price.length === 0 ? [2500] : price
+        }
+        const params = `?familyTherapy=${searchData.familyTherapy}&themes=${searchData.themes.map(i => `${i}`).join("_")}&gender=${searchData.gender}&price=${searchData.price}`
+        navigate(`/specialists${params}`)
     }
 
     return (
@@ -149,8 +175,31 @@ const Filter = () => {
                         </div>
                     </div>
 
-                    <div style={{ width: "100%" }}>
-                        <ButtonDefault disabled={false} onClick={() => ({})}>Показать психологов</ButtonDefault>
+                    <div className={styles.Box}>
+                        <h3>Стоимость сессии</h3>
+                        <div className={styles.Grid}>
+                            {priceList.map((item, index) => (
+                                <div key={index} className={`${styles.GridItem} ${price.includes(item.price) ? styles.Active : ""}`} onClick={() => {
+                                    if (price.includes(item.price)) {
+                                        const newItem = price.filter(i => i !== item.price)
+                                        setPrice(newItem)
+                                    } else {
+                                        setPrice(prev => [...prev, item.price])
+                                    }
+                                }}>
+                                    <div>
+                                        <Checkbox state={price.includes(item.price)} />
+                                        <h4>{item.price} ₽</h4>
+                                    </div>
+
+                                    <p>{item.text}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className={styles.ButtonBox} style={{ width: "100%" }}>
+                        <ButtonDefault disabled={false} onClick={() => SearchSpecialist()}>Показать психологов</ButtonDefault>
                     </div>
                 </div>
             </section>

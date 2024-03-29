@@ -26,7 +26,7 @@ const Specialist = () => {
     const [modal, setModal] = useState(false)
 
     const getSpecialist = useCallback(async () => {
-        const result = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500], themes: ["Стресс"] })
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс"] })
         const userData = result.psychologists.find((i: ISpecialist) => i.id === id)
         setData(userData)
     }, [sid, id])
@@ -34,6 +34,14 @@ const Specialist = () => {
     useEffect(() => {
         getSpecialist()
     }, [getSpecialist])
+
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
 
     function formatDate(value: string) {
         const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
@@ -135,7 +143,7 @@ const Specialist = () => {
 
                     <div className={styles.ChooseSession}>
                         <h2>Выбрать время сессии</h2>
-                        <Calendar setSelectedDate={setSelectedDate} />
+                        <Calendar data={data.freeTime} setSelectedDate={setSelectedDate} />
                     </div>
 
                     <div className={styles.Time}>

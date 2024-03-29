@@ -51,7 +51,15 @@ const Session = () => {
         }
     }
 
-    if (data === null) return;
+    useEffect(() => {
+        document.documentElement.style.overflowY = 'hidden';
+
+        return () => {
+            document.documentElement.style.overflowY = '';
+        };
+    }, []);
+
+    // if (data === null) return;
 
     return (
         <main className={styles.Page}>
@@ -59,28 +67,30 @@ const Session = () => {
                 <Sidebar />
 
                 <div className={styles.Content}>
-                    <div className={styles.Top}>
-                        <ArrowLeftIcon onClick={() => navigate(-1)} />
-                        <h2>{data.psychName} <span>{data.sessionNumber} сессия</span></h2>
-                        <h6>Мои сессии</h6>
-                        <span></span>
-                    </div>
-
-                    <div className={styles.Box}>
-                        <p>Ближайшая сессия</p>
-
-                        <div className={styles.Column}>
-                            <h4>{formatDate(data.dateSession)}</h4>
-                            <h3>{formatTime(data.dateSession)}</h3>
+                    {data !== null && <>
+                        <div className={styles.Top}>
+                            <ArrowLeftIcon onClick={() => navigate(-1)} />
+                            <h2>{data.psychName} <span>{data.sessionNumber} сессия</span></h2>
+                            <h6>Мои сессии</h6>
+                            <span></span>
                         </div>
 
-                        <div className={styles.Row}>
-                            <button onClick={() => cancelSession()}>Отменить</button>
-                            <button>Перенести</button>
-                        </div>
-                    </div>
+                        <div className={styles.Box}>
+                            <p>Ближайшая сессия</p>
 
-                    <div className={styles.Empty}></div>
+                            <div className={styles.Column}>
+                                <h4>{formatDate(data.dateSession)}</h4>
+                                <h3>{formatTime(data.dateSession)}</h3>
+                            </div>
+
+                            <div className={styles.Row}>
+                                <button onClick={() => cancelSession()}>Отменить</button>
+                                <button>Перенести</button>
+                            </div>
+                        </div>
+
+                        <div className={styles.Empty}></div>
+                    </>}
                 </div>
             </section>
         </main>

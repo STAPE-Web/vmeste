@@ -16,6 +16,14 @@ const Blog = () => {
     const [data, setData] = useState<IBlog | null>(null)
     const sid = JSON.parse(localStorage.getItem("sid") as string)
 
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
+
     const getMaterials = useCallback(async () => {
         const result = await MaterialsAPI.getAll(sid)
         setData(result.result)
@@ -45,14 +53,14 @@ const Blog = () => {
         await getMaterials()
     }
 
-    if (data === null) return;
+    // if (data === null) return;
 
-    const favoriteTestsExist = Object.keys(data?.tests).some(category =>
+    const favoriteTestsExist = data !== null && Object.keys(data?.tests).some(category =>
         // @ts-ignore
         data?.tests[category].some((i: ITests) => i.isFavorite)
     );
 
-    const favoriteArticlesExist = Object.keys(data?.articles).some(category =>
+    const favoriteArticlesExist = data !== null && Object.keys(data?.articles).some(category =>
         // @ts-ignore
         data?.articles[category].some((i: ITests) => i.isFavorite)
     );

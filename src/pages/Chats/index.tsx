@@ -4,11 +4,20 @@ import Avatar from "@/assets/Avatar.png"
 import Avatar2 from "@/assets/Avatar2.png"
 import { SearchIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Chats = () => {
     const navigate = useNavigate()
     const [search, setSearch] = useState("")
+
+    useEffect(() => {
+        document.documentElement.style.overflowY = 'hidden';
+
+        return () => {
+            document.documentElement.style.overflowY = '';
+        };
+    }, []);
+
     const items = [
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },
         { avatar: Avatar, username: "Иван Иванов", lastMessage: "Как чувствуете себя сегодня?", count: 1, time: "17:00" },

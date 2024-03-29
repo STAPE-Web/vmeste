@@ -30,6 +30,14 @@ const Video = () => {
         getVideo();
     }, [getVideo]);
 
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
+
     const videoRef = useRef<HTMLVideoElement | null>(null)
 
     const changePlaybackSpeed = (speed: number) => {
@@ -168,7 +176,7 @@ const Video = () => {
                     </div>
 
                     <div className={styles.Video}>
-                        <video autoPlay={true} ref={videoRef} src={data?.link}></video>
+                        <video ref={videoRef} src={data?.link}></video>
                     </div>
 
                     <div className={styles.Controlls}>

@@ -26,6 +26,7 @@
     flex-direction: column;
     gap: 40px;
     align-items: center;
+    max-width: 980px;
 }
 
 .Top {

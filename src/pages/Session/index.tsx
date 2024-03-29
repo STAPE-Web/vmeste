@@ -25,6 +25,14 @@ const Sessions = () => {
         getSession()
     }, [getSession])
 
+    useEffect(() => {
+        document.documentElement.style.overflowY = 'hidden';
+
+        return () => {
+            document.documentElement.style.overflowY = '';
+        };
+    }, []);
+
     function formatDate(value: string) {
         const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
         const [datePart, timePart] = value.split(" ");

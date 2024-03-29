@@ -13,8 +13,17 @@ import Section6 from "@/components/Landing/Sections/6"
 import Section7 from "@/components/Landing/Sections/7"
 import Section8 from "@/components/Landing/Sections/8"
 import Section9 from "@/components/Landing/Sections/9"
+import { useEffect } from "react"
 
 const Landing = () => {
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
+
     return (
         <>
             <LandingHeader />

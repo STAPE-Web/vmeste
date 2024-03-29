@@ -26,6 +26,14 @@ const Profile = () => {
         getProfile()
     }, [getProfile])
 
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
+
     const navigate = [
         { name: "Сохраненные психологи", mode: "saved", icon: LikeIcon },
         { name: "Настройка профиля", mode: `settings`, icon: SettingsIcon },
@@ -35,7 +43,7 @@ const Profile = () => {
     ]
 
     function fillContent() {
-        if (data === null) return;
+        // if (data === null) return;
 
         switch (mode) {
             case "saved": return <>
@@ -56,7 +64,7 @@ const Profile = () => {
                     <h2>Настройки профиля</h2>
                     <span></span>
                 </div>
-                <SettingsList data={data} />
+                {data !== null && <SettingsList data={data} />}
             </>
 
             case "support": return <>
@@ -75,7 +83,7 @@ const Profile = () => {
                     <span></span>
                 </div>
                 <p>"Название" – это сервис видеоконсультаций с психотерапевтами, которым можно пользоваться из любого места и с любого устройства. Видеосвязь осуществляется через собственное, разработанное инхаус, решение, которое обеспечивает высокий уровень конфиденциальности и безопасности для клиента.</p>
-                <img src={About} alt="" />
+                <img className={styles.AboutImage} src={About} alt="" />
                 <div className={styles.Row}>
                     <p>Лицензии</p>
                     <p>Правила и соглашения</p>

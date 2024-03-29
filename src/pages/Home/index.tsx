@@ -14,6 +14,14 @@ const Home = () => {
     const [tests, setTests] = useState<ITests[]>([])
     const sid = JSON.parse(localStorage.getItem("sid") as string)
 
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+        };
+    }, []);
+
     const items = [
         { name: "Радость", image: "/Emoji_1.png" },
         { name: "Страх", image: "/Emoji_2.png" },

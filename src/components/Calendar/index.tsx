@@ -5,9 +5,10 @@ import ButtonRound from "@/ui/Buttons/Round";
 
 interface Props {
     setSelectedDate: React.Dispatch<React.SetStateAction<string>>
+    data: string[]
 }
 
-const Calendar: FC<Props> = ({ setSelectedDate }) => {
+const Calendar: FC<Props> = ({ setSelectedDate, data }) => {
     const week = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
     const monthNames: string[] = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     const [activeDay, setActiveDay] = useState(new Date().getDate())
@@ -17,6 +18,12 @@ const Calendar: FC<Props> = ({ setSelectedDate }) => {
         return new Date(year, month + 1, 0).getDate();
     };
 
+    const scheduledDays: { [date: string]: boolean } = data.reduce((acc: { [date: string]: boolean }, dateString: string) => {
+        const date = dateString.split(" ")[0];
+        acc[date] = true;
+        return acc;
+    }, {});
+
     const renderDays = (month: number, year: number): JSX.Element[] => {
         const totalDays = daysInMonth(month, year);
         const currentDate = new Date();
@@ -24,10 +31,14 @@ const Calendar: FC<Props> = ({ setSelectedDate }) => {
         for (let i = 1; i <= totalDays; i++) {
             const date = new Date(year, month, i);
             const isActiveDay = date.toDateString() === currentDate.toDateString();
+            const dayString = i < 10 ? `0${i}` : `${i}`;
+            const monthString = month + 1 < 10 ? `0${month + 1}` : `${month + 1}`;
+            const key = `${year}-${monthString}-${dayString}`;
+            const isScheduled = scheduledDays[key];
             daysArray.push(
                 <span
                     key={i}
-                    className={`${isActiveDay ? styles.ActiveDay : ''} ${activeDay === i ? styles.SelectedDay : ""}`}
+                    className={`${isActiveDay ? styles.ActiveDay : ''} ${activeDay === i ? styles.SelectedDay : ""} ${isScheduled ? styles.SheduledDay : ''}`}
                     onClick={() => selectDate(year, month, i)}
                 >{i}</span>
             );

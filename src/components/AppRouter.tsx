@@ -1,7 +1,7 @@
 import { AuthAPI } from "@/api"
 import { authRoutes, notAuthRoutes } from "@/router"
 import { useCallback, useEffect, useState } from "react"
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 const AppRouter = () => {
     const sid = JSON.parse(localStorage.getItem('sid') as string)
@@ -25,6 +25,7 @@ const AppRouter = () => {
 
     return (
         <>
+            <ScrollToTop />
             {sid
                 ? <Routes>
                     {authRoutes.map(route => (
@@ -42,3 +43,13 @@ const AppRouter = () => {
 }
 
 export default AppRouter
+
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+};

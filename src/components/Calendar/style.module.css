@@ -84,6 +84,17 @@
     flex-direction: column;
 }
 
+.SheduledDay::before {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    bottom: 15px;
+    background: #FF8702;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
 @media screen and (max-width: 768px) {
     .Calendar {
         padding: 0 15px;
@@ -92,5 +103,11 @@
     .Calendar span {
         width: 40px;
         height: 40px;
+    }
+
+    .SheduledDay::before {
+        width: 5px;
+        height: 5px;
+        bottom: 0;
     }
 }

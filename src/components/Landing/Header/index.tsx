@@ -42,8 +42,8 @@ const LandingHeader = () => {
             <ul className={`${styles.Navigation} ${menu ? styles.ActiveNav : ""}`}>
                 {!sid && <li onClick={() => navigate("/auth")}> Вход</li>}
                 <li>Для психологов</li>
-                <li>О нас</li>
-                <li>Блог</li>
+                <li onClick={() => navigate("/about")}>О нас</li>
+                <li onClick={() => navigate("/blog")}>Блог</li>
             </ul>
         </>
     )

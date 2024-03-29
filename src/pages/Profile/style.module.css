@@ -5,7 +5,7 @@
     min-height: 100vh;
     display: flex;
     align-items: flex-start;
-    padding: 40px 15px;
+    padding: 40px 0;
     justify-content: center;
     gap: 20px;
 }
@@ -148,7 +148,7 @@
     overflow: hidden;
 }
 
-.Content.Support>h2 {
+.Content.Support>.Top {
     padding: 0 55px;
 }
 
@@ -191,6 +191,10 @@
     width: 30px;
 }
 
+.AboutImage {
+    width: 100%;
+}
+
 @media screen and (max-width: 1160px) {
     .Sidebar {
         display: none;
@@ -224,5 +228,9 @@
 
     .Content.Support {
         padding-top: 0;
+    }
+
+    .Content.Support>.Top {
+        padding: 0;
     }
 }

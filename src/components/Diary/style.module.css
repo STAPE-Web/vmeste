@@ -82,10 +82,10 @@
     transition: 0.5s;
 }
 
-.Items div:hover,
+/* .Items div:hover,
 .Items div.ActiveFeel {
     box-shadow: 2px 4px 10px 0px #FF870250;
-}
+} */
 
 .Items img {
     width: 60px;
@@ -120,11 +120,11 @@
     color: #23232B;
 }
 
-.AdditionalItems div:hover,
+/* .AdditionalItems div:hover,
 .AdditionalItems div.ActiveFeel {
     background: #FF870290;
     color: #fff;
-}
+} */
 
 .Textarea {
     background: #fff;
@@ -197,9 +197,78 @@
     line-height: 20px;
 }
 
+.Calendar2Icon {
+    opacity: 0;
+    cursor: default !important;
+}
+
 .ClanedarItem div span.ActiveDay {
     background: #FF870240;
 
+}
+
+.Emotions div.ActiveFeel:nth-child(1),
+.Emotions div:hover:nth-child(1) {
+    box-shadow: 2px 4px 10px 0px #FF870250;
+}
+
+.Emotions div.ActiveFeel:nth-child(2),
+.Emotions div:hover:nth-child(2) {
+    box-shadow: 2px 4px 10px 0px #F8CB2F50;
+}
+
+.Emotions div.ActiveFeel:nth-child(3),
+.Emotions div:hover:nth-child(3) {
+    box-shadow: 2px 4px 10px 0px #FB593550;
+}
+
+.Emotions div.ActiveFeel:nth-child(4),
+.Emotions div:hover:nth-child(4) {
+    box-shadow: 2px 4px 10px 0px #92D35E50;
+}
+
+.Emotions div.ActiveFeel:nth-child(5),
+.Emotions div:hover:nth-child(5) {
+    box-shadow: 2px 4px 10px 0px #40BF7B50;
+}
+
+.Emotions div.ActiveFeel:nth-child(6),
+.Emotions div:hover:nth-child(6) {
+    box-shadow: 2px 4px 10px 0px #15A8B150;
+}
+
+.AdditionalItems div.ActiveFeel.Orange {
+    background: #FF8702;
+    color: #fff;
+}
+
+.AdditionalItems div.ActiveFeel.Yellow {
+    background: #F8CB2F;
+    color: #fff;
+}
+
+.AdditionalItems div.ActiveFeel.Red {
+    background: #FB5935;
+    color: #fff;
+}
+
+.AdditionalItems div.ActiveFeel.Green {
+    background: #92D35E;
+    color: #fff;
+}
+
+.AdditionalItems div.ActiveFeel.Turquoise {
+    background: #40BF7B;
+    color: #fff;
+}
+
+.AdditionalItems div.ActiveFeel.Blue {
+    background: #15A8B1;
+    color: #fff;
+}
+
+.AdditionalItems div:hover {
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 768px) {

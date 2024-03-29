@@ -1,19 +1,52 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { CloseIcon } from "@/ui/Icons"
-import { useState } from "react"
-import Avatar from "@/assets/Avatar2.png"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { SessionAPI } from "@/api"
+import { ISession } from "@/types"
 
 const Calendar = () => {
     const week = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
     const monthNames: string[] = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     const [selectedDay, setSelectedDay] = useState(0)
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
     const navigate = useNavigate()
+    const [data, setData] = useState<ISession[]>([])
 
     const daysInMonth = (month: number, year: number): number => {
         return new Date(year, month + 1, 0).getDate();
     };
+
+    useEffect(() => {
+        document.documentElement.style.overflowY = 'hidden';
+
+        return () => {
+            document.documentElement.style.overflowY = '';
+        };
+    }, []);
+
+    const getSession = useCallback(async () => {
+        const result = await SessionAPI.get(sid)
+        const allSessions: ISession[] = result.sessions.future
+        setData(allSessions.filter(i => i.status !== "canceled"))
+    }, [sid])
+
+    useEffect(() => {
+        getSession()
+    }, [getSession])
+
+    function formatDate(value: string) {
+        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+        const weeks = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+        const dateParts = value.split(" ")[0].split("-");
+        const date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+        const day = date.getDate();
+        const month = date.getMonth();
+        const weekDay = date.getDay();
+
+        return `${weeks[weekDay]}, ${day} ${months[month]}`;
+    }
 
     const renderDays = (month: number, year: number): JSX.Element[] => {
         const totalDays = daysInMonth(month, year);
@@ -22,26 +55,40 @@ const Calendar = () => {
         for (let i = 1; i <= totalDays; i++) {
             const date = new Date(year, month, i);
             const isActiveDay = date.toDateString() === currentDate.toDateString();
+
+            const appointment = data.find(appointment => {
+                const appointmentDate = new Date(appointment.dateSession);
+                return (
+                    appointmentDate.getFullYear() === year &&
+                    appointmentDate.getMonth() === month &&
+                    appointmentDate.getDate() === i
+                );
+            });
+
             daysArray.push(
                 <span
                     key={i}
                     className={`${isActiveDay ? styles.ActiveDay : ''} ${selectedDay === i ? styles.SelectedDay : ""}`}
-                    onClick={() => setSelectedDay(i)}
+                    onClick={() => setSelectedDay(selectedDay === i ? 0 : i)}
                 >
-                    {selectedDay === i && <div className={styles.SelectedBox}>
-                        <img src={Avatar} alt="" />
-                        <div>
-                            <h3>Ольга Кузнецова</h3>
-                            <p>1 сессия, 2 500 ₽</p>
-                            <h4>30 ноября 2023, 16:00</h4>
+                    {appointment && selectedDay === i && (
+                        <div className={styles.SelectedBox}>
+                            <img src={appointment.psychPhoto} alt="" />
+                            <div>
+                                <h3>{appointment.psychName}</h3>
+                                <p>{appointment.sessionNumber} сессия, {appointment.price} ₽</p>
+                                <h4>{formatDate(appointment.dateSession)}</h4>
+                            </div>
                         </div>
-                    </div>}
+                    )}
                     {i}
+                    {appointment && <div className={styles.AppointmentIndicator}></div>}
                 </span>
             );
         }
         return daysArray;
     };
+
 
     return (
         <main className={styles.Page}>

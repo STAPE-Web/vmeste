@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #F2F2F2;
 }
 
 .Range div {

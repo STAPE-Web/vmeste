@@ -17,6 +17,14 @@ const Chat = () => {
         }
     }
 
+    useEffect(() => {
+        document.documentElement.style.overflowY = 'hidden';
+
+        return () => {
+            document.documentElement.style.overflowY = '';
+        };
+    }, []);
+
     const [messages, setMessages] = useState([
         {
             me: true,

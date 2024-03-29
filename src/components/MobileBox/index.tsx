@@ -59,7 +59,7 @@ const MobileBox = () => {
             case 2: return <div className={styles.Box}>
                 <p>{step}/6</p>
                 <h2>Сколько вам лет?</h2>
-                <p>Для получения услуги на нашем сервисе вам должно быть больше 16 лет</p>
+                <p>Для получения услуги на нашем сервисе вам должно быть больше 18 лет</p>
                 <div className={styles.Row}>
                     <Input onChange={e => setAge(e.target.value)} placeholder="Ваш возраст" type="number" value={age} />
                     <ButtonRound big={false} disabled={age === "" || Number(age) < 18} onClick={() => setStep(3)}>
