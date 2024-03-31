@@ -63,7 +63,7 @@ const SMS: FC<Props> = ({ setState, authData }) => {
                 <h2>Введите код из SMS</h2>
                 <p>Отправлен на номер <span>+7{authData}</span></p>
                 <div className={styles.Form}>
-                    <ReactCodeInput name="code" inputMode="email" value={code} onChange={value => setCode(value)} type='text' fields={5} />
+                    <ReactCodeInput name="code" inputMode="numeric" value={code} onChange={value => setCode(value)} type='number' fields={5} />
                 </div>
                 {time === 0
                     ? <p className={styles.ResendCode} onClick={() => getNewCode()}>Запросить код повторно</p>
