@@ -52,6 +52,11 @@ const SMS: FC<Props> = ({ setState, authData }) => {
         setTime(60)
     }
 
+    useEffect(() => {
+        const inputs = document.querySelectorAll("input")
+        inputs.forEach(i => i.type = "number")
+    }, [])
+
     return (
         <section className={styles.Section}>
             <div className={styles.Box}>

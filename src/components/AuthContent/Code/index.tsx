@@ -52,13 +52,18 @@ const Code: FC<Props> = ({ setState, authData }) => {
         setTime(60)
     }
 
+    useEffect(() => {
+        const inputs = document.querySelectorAll("input")
+        inputs.forEach(i => i.type = "number")
+    }, [])
+
     return (
         <section className={styles.Section}>
             <div className={styles.Box}>
                 <h2>Введите код из письма</h2>
                 <p>Отправлен на <span>{authData}</span></p>
                 <div className={styles.Form}>
-                    <ReactCodeInput name="code" inputMode="email" value={code} onChange={value => setCode(value)} type='text' fields={5} placeholder="·" />
+                    <ReactCodeInput name="code" inputMode="tel" value={code} onChange={value => setCode(value)} type='number' fields={5} placeholder="·" />
                 </div>
                 {time === 0
                     ? <p className={styles.ResendCode} onClick={() => getNewCode()}>Запросить код повторно</p>

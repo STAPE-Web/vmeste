@@ -94,6 +94,12 @@
     cursor: pointer;
 }
 
+.Form input[type=number]::-webkit-inner-spin-button,
+.Form input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 @media screen and (max-width: 600px) {
     .Box h2 {
         font-size: 24px;
