@@ -69,10 +69,10 @@ const Specialists = () => {
 
     const handlers = useSwipeable({
         onSwipedLeft: () => {
-            console.log('Swiped left');
+            setCurrentPeople(currentPeople < data.length - 1 ? currentPeople + 1 : data.length - 1)
         },
         onSwipedRight: () => {
-            console.log('Swiped right');
+            setCurrentPeople(currentPeople === 0 ? 0 : currentPeople - 1)
         }
     });
 
