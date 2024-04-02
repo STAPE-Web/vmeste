@@ -17,11 +17,14 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 0 15px;
 }
 
 .Header .Header svg {
     cursor: pointer;
+}
+
+.Header .Logo {
+    height: 65px;
 }
 
 .Header .Box {
@@ -132,6 +135,10 @@
     .Header .Box>div {
         display: none;
     }
+
+    .Header .Container {
+        padding: 0 15px;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -163,5 +170,6 @@
 
     .Logo {
         max-width: 106px;
+        height: 20px !important;
     }
 }

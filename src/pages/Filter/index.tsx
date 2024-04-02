@@ -223,6 +223,8 @@ const Filter = () => {
                             </div>
                         ))}
                     </div>
+
+                    <ButtonDefault disabled={false} onClick={() => setModal(false)}>Готово</ButtonDefault>
                 </div>
             </div>}
 

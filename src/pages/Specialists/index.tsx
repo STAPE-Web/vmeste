@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { PshycologistsAPI } from "@/api"
 import { ISpecialist } from "@/types"
+import { useSwipeable } from 'react-swipeable';
 
 const Specialists = () => {
     const navigate = useNavigate()
@@ -66,6 +67,15 @@ const Specialists = () => {
         await getSpecialist()
     }
 
+    const handlers = useSwipeable({
+        onSwipedLeft: () => {
+            console.log('Swiped left');
+        },
+        onSwipedRight: () => {
+            console.log('Swiped right');
+        }
+    });
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -87,7 +97,7 @@ const Specialists = () => {
                         <div className={styles.InfoBox}>
                             <ButtonRound big={true} disabled={currentPeople === 0} onClick={() => setCurrentPeople(currentPeople - 1)}><ArrowLeftIcon /></ButtonRound>
 
-                            <div className={styles.ImageBox}>
+                            <div className={styles.ImageBox} {...handlers}>
                                 <img src={data[currentPeople].urlAvatar} alt="" />
                                 {data[currentPeople].isFavourite
                                     ? <Like2Icon onClick={() => toggleLike(data[currentPeople].id, "delete", "psychologists")} />

@@ -19,7 +19,7 @@ const Range: FC<Props> = ({ value, setValue, array }) => {
             </div>
 
             <div className={styles.RangeBox}>
-                <Slider range value={value} step={10} onChange={value => setValue(value)} />
+                <Slider range value={value} step={10} onChange={value => setValue(Number(value))} />
                 <div className={styles.FillTrack} style={{ width: Number(value) + '%' }}></div>
             </div>
 

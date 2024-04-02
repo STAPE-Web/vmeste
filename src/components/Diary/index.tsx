@@ -28,6 +28,8 @@ const Diary = () => {
         { name: "Статистика", icon: StatsIcon },
     ]
 
+    console.log(moodscale)
+
     const [howFeel, setHowFeel] = useState<string[]>([])
     const [emotion, setEmotion] = useState<"Радость" | "Страх" | "Бешенство" | "Грусть" | "Спокойствие" | "Сила">("Радость")
     const items = [
@@ -50,7 +52,7 @@ const Diary = () => {
 
     const [stress, setStress] = useState(50)
     const [selfRate, setSeltRate] = useState(50)
-    const [note, setNote] = useState("Сегодня я чувствую себя хорошо")
+    const [note, setNote] = useState("")
 
     const [tab2, setTab2] = useState("ДН")
     const tabs2 = ["ДН", "НЕД", "МЕС", "ГОД"]
@@ -259,7 +261,7 @@ const Diary = () => {
                     <div className={styles.Top}>
                         <ArrowLeftIcon onClick={() => navigate("/")} />
 
-                        <p>{day} {months[month - 1]} {hour}:{minutes}</p>
+                        <p>{day} {months[month]} {hour}:{minutes}</p>
 
                         <Calendar2Icon className={styles.Calendar2Icon} />
                     </div>
@@ -312,7 +314,7 @@ const Diary = () => {
 
                             <div className={styles.Block}>
                                 <h2>Заметки</h2>
-                                <textarea value={note} onChange={e => setNote(e.target.value)} className={styles.Textarea}></textarea>
+                                <textarea placeholder="Заметка о вашем состоянии" value={note} onChange={e => setNote(e.target.value)} className={styles.Textarea}></textarea>
                             </div>
 
                             <ButtonDefault disabled={false} onClick={() => saveFeeling()}>Сохранить</ButtonDefault>
