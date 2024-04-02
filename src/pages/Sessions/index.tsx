@@ -85,7 +85,7 @@ const Session = () => {
 
                             <div className={styles.Row}>
                                 <button onClick={() => cancelSession()}>Отменить</button>
-                                <button>Перенести</button>
+                                <button onClick={() => navigate(`/calendar?id=${id}&pid=${data.psychId}`)}>Перенести</button>
                             </div>
                         </div>
 

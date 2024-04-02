@@ -28,8 +28,6 @@ const Diary = () => {
         { name: "Статистика", icon: StatsIcon },
     ]
 
-    console.log(moodscale)
-
     const [howFeel, setHowFeel] = useState<string[]>([])
     const [emotion, setEmotion] = useState<"Радость" | "Страх" | "Бешенство" | "Грусть" | "Спокойствие" | "Сила">("Радость")
     const items = [

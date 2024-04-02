@@ -9,7 +9,7 @@ import { IQuestion, ITests } from '@/types'
 
 type ITestResult = {
     text: string
-    recomendations: string
+    recommendations: string
 }
 
 const Test = () => {
@@ -18,7 +18,7 @@ const Test = () => {
     const { id } = useParams()
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [step, setStep] = useState(0)
-    const [answers, setAnswers] = useState<number>(0)
+    const [answers, setAnswers] = useState<number>(10)
     const [answersList, setAnswersList] = useState<number[]>([])
     const [questions, setQuestions] = useState<IQuestion[]>([])
     const [testResult, setTestResult] = useState<ITestResult | null>(null)
@@ -78,8 +78,8 @@ const Test = () => {
                 <div className={styles.Box}>
                     <div className={styles.ButtonGrid}>
                         {questions[step - 1].options.map((item, index) => (
-                            <div className={`${styles.CheckButton} ${item.point === answers ? styles.Active : ""}`} key={index} onClick={() => {
-                                setAnswers(item.point)
+                            <div className={`${styles.CheckButton} ${item.point - 1 === answers ? styles.Active : ""}`} key={index} onClick={() => {
+                                setAnswers(item.point - 1)
                             }}>
                                 {item.option}
                                 <div><CheckIcon /></div>
@@ -87,11 +87,11 @@ const Test = () => {
                         ))}
                     </div>
 
-                    <ButtonDefault disabled={answers === undefined || answers === 0} onClick={() => {
+                    <ButtonDefault disabled={answers === undefined || answers === 10} onClick={() => {
                         if (answers !== undefined) {
                             setStep(step < questions.length ? step + 1 : 666)
                             setAnswersList(prev => [...prev, answers])
-                            setAnswers(0)
+                            setAnswers(10)
                         }
                     }}>Далее</ButtonDefault>
                 </div>
@@ -105,7 +105,7 @@ const Test = () => {
 
                 <div className={styles.Box}>
                     <h2>{testResult?.text}</h2>
-                    <p>{testResult?.recomendations}</p>
+                    <p>{testResult?.recommendations === " " ? "Рекомендаций нет" : testResult?.recommendations}</p>
                 </div>
             </>
         }

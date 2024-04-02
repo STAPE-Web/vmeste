@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 interface Props {
@@ -12,6 +12,8 @@ interface FeelingItem {
 
 const MoodScale: FC<Props> = ({ data }) => {
     const [moodscaleData, setMoodscaleData] = useState<FeelingItem[]>([]);
+
+    console.log(data)
 
     function feelColor(name: string) {
         switch (name) {
@@ -34,7 +36,7 @@ const MoodScale: FC<Props> = ({ data }) => {
         { name: "Сила", array: ["Уверенность", "Решительность", "Бодрость", "Власть", "Гордость", "Гибкость", "Вдохновение", "Энергичность", "Готовность", "Воодушевление", "Мощь"] }
     ];
 
-    function getData() {
+    const getData = useCallback(() => {
         const result: FeelingItem[] = [];
 
         const feelingsCount: { [key: string]: number } = data.reduce((accumulator, currentValue) => {
@@ -58,11 +60,11 @@ const MoodScale: FC<Props> = ({ data }) => {
         });
 
         setMoodscaleData(result);
-    }
+    }, [data])
 
     useEffect(() => {
         getData()
-    }, [])
+    }, [getData])
 
     return (
         <div className={styles.MoodScale}>

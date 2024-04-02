@@ -138,6 +138,58 @@
     border-radius: 20px;
 }
 
+.NewDateBox {
+    padding: 30px;
+    background: #FFFFFF;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    position: absolute;
+    white-space: nowrap;
+    top: -100px;
+    margin-left: -15px;
+    border-radius: 20px;
+}
+
+.NewDateBox::before {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    content: "";
+    position: absolute;
+    left: 47.5%;
+    bottom: -10px;
+    transform: rotate(45deg);
+    box-shadow: 10px 10px 16px 0px #B6A1C033;
+    z-index: -1;
+}
+
+.NewDateBox .NewTime {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.NewDateBox .NewTime div {
+    height: 35px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #FF8702;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24.55px;
+    color: #FF8702;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.NewDateBox .NewTime div.ActiveNewTime {
+    background: #FF8702;
+    color: #fff;
+}
+
 .SelectedBox img {
     width: 80px;
     height: 80px;
@@ -183,6 +235,17 @@
     transform: rotate(45deg);
     box-shadow: 10px 10px 16px 0px #B6A1C033;
     z-index: -1;
+}
+
+.SheduledDay::before {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    bottom: 15px;
+    background: #FF8702;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
 }
 
 @media screen and (max-width: 768px) {

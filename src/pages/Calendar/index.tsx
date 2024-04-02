@@ -2,9 +2,10 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { CloseIcon } from "@/ui/Icons"
 import { useCallback, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { SessionAPI } from "@/api"
-import { ISession } from "@/types"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { PshycologistsAPI, SessionAPI } from "@/api"
+import { ISession, ISpecialist } from "@/types"
+import ButtonDefault from "@/ui/Buttons/Default"
 
 const Calendar = () => {
     const week = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
@@ -13,6 +14,12 @@ const Calendar = () => {
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const navigate = useNavigate()
     const [data, setData] = useState<ISession[]>([])
+    const [psyhData, setPsyhData] = useState<ISpecialist | null>(null)
+    const [searchParams] = useSearchParams()
+    const id = searchParams.get("id")
+    const pid = searchParams.get("pid")
+    const [newDate, setNewDate] = useState("")
+    const [newResultDate, setNewResultDate] = useState("")
 
     const daysInMonth = (month: number, year: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -36,6 +43,16 @@ const Calendar = () => {
         getSession()
     }, [getSession])
 
+    const getSpecialist = useCallback(async () => {
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс"] })
+        const userData = result.psychologists.find((i: ISpecialist) => i.id === pid)
+        setPsyhData(userData)
+    }, [sid, id])
+
+    useEffect(() => {
+        getSpecialist()
+    }, [getSpecialist])
+
     function formatDate(value: string) {
         const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
         const weeks = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
@@ -47,6 +64,12 @@ const Calendar = () => {
 
         return `${weeks[weekDay]}, ${day} ${months[month]}`;
     }
+
+    const scheduledDays: { [date: string]: boolean } = psyhData ? psyhData?.freeTime?.reduce((acc: { [date: string]: boolean }, dateString: string) => {
+        const date = dateString.split(" ")[0];
+        acc[date] = true;
+        return acc;
+    }, {}) : {};
 
     const renderDays = (month: number, year: number): JSX.Element[] => {
         const totalDays = daysInMonth(month, year);
@@ -64,13 +87,34 @@ const Calendar = () => {
                     appointmentDate.getDate() === i
                 );
             });
+            const dayString = i < 10 ? `0${i}` : `${i}`;
+            const monthString = month + 1 < 10 ? `0${month + 1}` : `${month + 1}`;
+            const key = `${year}-${monthString}-${dayString}`;
+            const isScheduled = scheduledDays[key];
 
             daysArray.push(
                 <span
                     key={i}
-                    className={`${isActiveDay ? styles.ActiveDay : ''} ${selectedDay === i ? styles.SelectedDay : ""}`}
-                    onClick={() => setSelectedDay(selectedDay === i ? 0 : i)}
+                    className={`${isActiveDay ? styles.ActiveDay : ''} ${selectedDay === i ? styles.SelectedDay : ""} ${isScheduled ? styles.SheduledDay : ''}`}
+                    onClick={() => {
+                        if (id) {
+                            if (isScheduled) selectDate(year, month, i)
+                        } else {
+                            setSelectedDay(selectedDay === i ? 0 : i)
+                        }
+                    }}
                 >
+                    {newDate !== "" && Number(newDate.split("-")[2]) === Number(String(i).length !== 1 ? i : `0${i}`) && (<div className={styles.NewDateBox}>
+                        <div className={styles.NewTime}>
+                            {psyhData?.freeTime.filter(pitem => pitem.split(" ")[0] === newDate).map((pitem, piid) => (
+                                <div
+                                    onClick={() => setNewResultDate(pitem)}
+                                    key={piid}
+                                    className={newResultDate === pitem ? styles.ActiveNewTime : ""}
+                                >{pitem.split(" ")[1].split(":")[0]}:{pitem.split(" ")[1].split(":")[1]}</div>
+                            ))}
+                        </div>
+                    </div>)}
                     {appointment && selectedDay === i && (
                         <div className={styles.SelectedBox}>
                             <img src={appointment.psychPhoto} alt="" />
@@ -82,13 +126,32 @@ const Calendar = () => {
                         </div>
                     )}
                     {i}
-                    {appointment && <div className={styles.AppointmentIndicator}></div>}
+                    {!id && appointment && <div className={styles.AppointmentIndicator}></div>}
                 </span>
             );
         }
         return daysArray;
     };
 
+    function selectDate(year: number, month: number, i: number) {
+        const formatedDate = `${year}-${String(month).length !== 1 ? month + 1 : `0${month + 1}`}-${String(i).length !== 1 ? i : `0${i}`}`
+        setNewDate(formatedDate)
+    }
+
+    async function carrySession() {
+        const apiData = {
+            sid: sid,
+            sesId: id,
+            newTime: newResultDate
+        }
+        const result = await SessionAPI.move(apiData)
+        console.log(result)
+        setNewDate("")
+        setNewResultDate("")
+        getSession()
+        getSpecialist()
+        alert("Сессия успешно перенесена")
+    }
 
     return (
         <main className={styles.Page}>
@@ -112,6 +175,8 @@ const Calendar = () => {
                             {renderDays(new Date().getMonth(), new Date().getFullYear())}
                         </div>
                     </div>
+
+                    {id && <ButtonDefault disabled={newResultDate === ""} onClick={() => carrySession()}>Перенести сессию</ButtonDefault>}
                 </div>
             </section>
         </main>

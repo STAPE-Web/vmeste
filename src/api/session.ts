@@ -25,6 +25,12 @@ class Session {
             ...data
         }).then((res) => res.data)
     }
+
+    async move(data: any) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/user/moveSession`, {
+            ...data
+        }).then((res) => res.data)
+    }
 }
 
 export default new Session()

@@ -55,8 +55,6 @@ const Chart: FC<Props> = ({ array }) => {
         }
     };
 
-    console.log(chartData)
-
     const data = {
         labels,
         datasets: [
