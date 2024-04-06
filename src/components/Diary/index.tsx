@@ -105,6 +105,15 @@ const Diary = () => {
     async function saveFeeling() {
         const result = await DiaryAPI.feel(sid, howFeel, stress, selfRate, note)
         console.log(result)
+        if(result.status = 200){
+            alert("Успешно сохранено")
+            setHowFeel([])
+            setStress(50)
+            setSeltRate(50)
+            getFeeling()
+        }else{
+            alert(result.message)
+        }
     }
 
     const getFeeling = useCallback(async () => {
