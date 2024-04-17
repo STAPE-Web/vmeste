@@ -9,12 +9,12 @@ const AppRouter = () => {
 
   const getProfile = useCallback(async () => {
     const result = await AuthAPI.getProfile(sid);
-    console.log(result);
     if (result.status === 404) {
       localStorage.removeItem("sid");
       window.location.reload();
     } else {
       setProfileFetched(true);
+      localStorage.setItem("userData", JSON.stringify(result.userInfo))
     }
   }, [sid]);
 

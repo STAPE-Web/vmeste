@@ -1,21 +1,19 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, SearchIcon } from "@/ui/Icons"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
+import { generateToken, zim } from "@/utils"
+import { ZIMMessage } from "zego-zim-web"
 
 const Chat = () => {
     const navigate = useNavigate()
     const ref = useRef<HTMLDivElement | null>(null)
     const [value, setValue] = useState("")
     const [search, setSearch] = useState(false)
-
-    function scrollDown() {
-        if (ref.current) {
-            const { scrollHeight, clientHeight } = ref.current;
-            ref.current.scrollTop = scrollHeight - clientHeight;
-        }
-    }
+    const [messages, setMessages] = useState<ZIMMessage[]>([])
+    const userData = JSON.parse(localStorage.getItem("userData") as string)
+    const { id } = useParams()
 
     useEffect(() => {
         document.documentElement.style.overflowY = 'hidden';
@@ -25,47 +23,72 @@ const Chat = () => {
         };
     }, []);
 
-    const [messages, setMessages] = useState([
-        {
-            me: true,
-            content: "Как понять, что мне нужен психолог?",
-            type: "text",
-            time: "13:15"
-        },
-        {
-            me: false,
-            content: `Психолог нужен, если хочется привести в порядок свои мысли и чувства.\n\nК примеру, у вас не складываются отношения с партнёром. Или никак не получается "найти себя" и раздражает работа. Или кажется, что в будущем ждёт только плохое — и от этого тревожно. На сеансах с терапевтом можно поговорить об этом, изучить прошлый опыт, обнаружить негативные модели мышления и научиться реагировать на ситуации иначе.\n\nИногда бывает, что у клиента вроде бы нет готовой темы для разговора с терапевтом, но этот разговор почему-то нужен. А порой люди, переживающие тяжёлый развод или смерть близких, не испытывают потребности в терапии — и это тоже нормально.`,
-            type: "text",
-            time: "13:15"
-        },
-        {
-            me: false,
-            content: `Психолог нужен, если хочется привести в порядок свои мысли и чувства.\n\nК примеру, у вас не складываются отношения с партнёром. Или никак не получается "найти себя" и раздражает работа. Или кажется, что в будущем ждёт только плохое — и от этого тревожно. На сеансах с терапевтом можно поговорить об этом, изучить прошлый опыт, обнаружить негативные модели мышления и научиться реагировать на ситуации иначе.\n\nИногда бывает, что у клиента вроде бы нет готовой темы для разговора с терапевтом, но этот разговор почему-то нужен. А порой люди, переживающие тяжёлый развод или смерть близких, не испытывают потребности в терапии — и это тоже нормально.`,
-            type: "text",
-            time: "13:15"
-        },
-    ])
-
-    function sendMessage() {
-        if (value !== "") {
-            setMessages(prev => [...prev, {
-                me: true,
-                content: value,
-                time: "13:15",
-                type: "text"
-            }])
-
-            setValue("")
-            setTimeout(() => {
-                scrollDown()
-            }, 1)
-        } else {
-            scrollDown()
+    function scrollDown() {
+        if (ref.current) {
+            const { scrollHeight, clientHeight } = ref.current;
+            ref.current.scrollTop = scrollHeight - clientHeight;
         }
     }
 
-    useEffect(() => {
+    const userInfo = { userID: userData.email, userName: userData.name };
+    const token = generateToken(userInfo.userID, 0)
+    zim.login(userInfo.userID, { userName: userInfo.userName, token: token, isOfflineLogin: false }).then(() => {
+        zim.queryHistoryMessage(toConversationID, 0, { count: 30, reverse: true })
+            .then((res) => {
+                setMessages(res.messageList)
+            })
+            .catch((err) => console.error(err));
+    })
+
+    zim.on('tokenWillExpire', function () {
+        const token = generateToken(userInfo.userID, 0)
+        zim.renewToken(token)
+            .then(function ({ token }) {
+                console.log(token)
+            })
+            .catch(function (err) {
+                console.log(err)
+            });
+    })
+
+    var userIDs = [userData.email, "0"];
+
+    zim.queryUsersInfo(userIDs, { isQueryFromServer: false })
+        .then(function (res) {
+            console.log(res)
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+
+    const toConversationID = id || "";
+    const conversationType = 0;
+    const config = {
+        priority: 1,
+    };
+
+    const messageTextObj = { type: 1, message: value, extendedData: 'Extension info of the message (optional)' };
+
+    function sendMessage() {
+        zim.sendMessage(messageTextObj, toConversationID, conversationType, config)
+            .then(function () {
+                setValue("")
+                scrollDown()
+            })
+            .catch(function (err) {
+                console.log(err)
+            });
+
         scrollDown()
+    }
+
+    function formatDate(date: number) {
+        const newDate = new Date(date);
+        return `${newDate.getHours()}:${newDate.getMinutes()}`
+    }
+
+    useEffect(() => {
+        setTimeout(() => scrollDown(), 1300)
     }, [])
 
     return (
@@ -95,10 +118,10 @@ const Chat = () => {
                     <div className={styles.MessageBox} ref={ref}>
                         <h6>1 янв. 2024</h6>
                         {messages.map((msg, index) => (
-                            <div key={index} className={`${styles.Message} ${msg.me ? styles.MyMessage : ""}`}>
+                            <div key={index} className={`${styles.Message} ${msg.senderUserID === userData.email ? styles.MyMessage : ""}`}>
                                 <div>
-                                    {msg.content}
-                                    <p>{msg.time}</p>
+                                    {msg.message}
+                                    <p>{formatDate(msg.timestamp)}</p>
                                 </div>
                             </div>
                         ))}
