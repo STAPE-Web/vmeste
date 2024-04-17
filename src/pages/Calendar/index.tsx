@@ -1,11 +1,12 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { CloseIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from "@/ui/Icons"
 import { useCallback, useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { PshycologistsAPI, SessionAPI } from "@/api"
 import { ISession, ISpecialist } from "@/types"
 import ButtonDefault from "@/ui/Buttons/Default"
+import ButtonRound from "@/ui/Buttons/Round"
 
 const Calendar = () => {
     const week = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
@@ -20,6 +21,26 @@ const Calendar = () => {
     const pid = searchParams.get("pid")
     const [newDate, setNewDate] = useState("")
     const [newResultDate, setNewResultDate] = useState("")
+    const [activeMonth, setActiveMonth] = useState(new Date().getMonth())
+    const [activeYear, setActiveYear] = useState(new Date().getFullYear())
+
+    const goToPreviousMonth = () => {
+        if (activeMonth === 0) {
+            setActiveMonth(11);
+            setActiveYear(activeYear - 1);
+        } else {
+            setActiveMonth(activeMonth - 1);
+        }
+    };
+
+    const goToNextMonth = () => {
+        if (activeMonth === 11) {
+            setActiveMonth(0);
+            setActiveYear(activeYear + 1);
+        } else {
+            setActiveMonth(activeMonth + 1);
+        }
+    };
 
     const daysInMonth = (month: number, year: number): number => {
         return new Date(year, month + 1, 0).getDate();
@@ -169,10 +190,19 @@ const Calendar = () => {
                     </div>
 
                     <div className={styles.Calendar}>
-                        <h6>{new Date().getFullYear()}</h6>
-                        <h3>{monthNames[new Date().getMonth()]}</h3>
+                        <div className={styles.Data}>
+                            <div>
+                                <h6>{activeYear}</h6>
+                                <h3>{monthNames[activeMonth]}</h3>
+                            </div>
+
+                            <div className={styles.Arrows}>
+                                <ButtonRound big={false} disabled={false} onClick={() => goToPreviousMonth()}><ArrowLeftIcon /></ButtonRound>
+                                <ButtonRound big={false} disabled={false} onClick={() => goToNextMonth()}><ArrowRightIcon /></ButtonRound>
+                            </div>
+                        </div>
                         <div className={styles.Days}>
-                            {renderDays(new Date().getMonth(), new Date().getFullYear())}
+                            {renderDays(activeMonth, activeYear)}
                         </div>
                     </div>
 

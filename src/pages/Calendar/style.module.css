@@ -1,278 +1,291 @@
 .Page {
-    width: 100%;
-    height: calc(100vh - 94px);
-    display: flex;
-    justify-content: center;
-    padding-bottom: 40px;
-    padding: 0 15px 40px 15px;
+  width: 100%;
+  height: calc(100vh - 94px);
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+  padding: 0 15px 40px 15px;
 }
 
 .Container {
-    max-width: 1300px;
-    width: 100%;
-    padding: 40px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+  max-width: 1300px;
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .Content {
-    width: 100%;
-    box-shadow: 3px 3px 16px 0px #B6A1C033;
-    border-radius: 20px;
-    background: #fff;
-    padding: 40px 55px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center;
+  width: 100%;
+  box-shadow: 3px 3px 16px 0px #b6a1c033;
+  border-radius: 20px;
+  background: #fff;
+  padding: 40px 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
 }
 
 .Top {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .Top svg {
-    color: #BCBCBF;
-    cursor: pointer;
+  color: #bcbcbf;
+  cursor: pointer;
 }
 
 .Top p {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 22px;
-    color: #BCBCBF;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  color: #bcbcbf;
 }
 
 .Weeks {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
 }
 
 .Weeks p {
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 12px;
-    color: #BCBCBF;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  color: #bcbcbf;
 }
 
 .Calendar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 .Calendar h6 {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 22px;
-    color: #BCBCBF;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #bcbcbf;
 }
 
 .Calendar h3 {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 22px;
-    color: #23232B;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #23232b;
 }
 
 .Calendar .Days {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .Calendar span {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    cursor: pointer;
-    transition: 0.5s;
-    position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.5s;
+  position: relative;
 }
 
 .Calendar span:hover {
-    background: #FF870220;
+  background: #ff870220;
 }
 
 .Calendar span.ActiveDay {
-    border: 2px solid #FF8702;
+  border: 2px solid #ff8702;
 }
 
 .Calendar span.SelectedDay {
-    background: #FF870240;
+  background: #ff870240;
 }
 
 .AppointmentIndicator {
-    width: 10px;
-    height: 10px;
-    background: #FF8702;
-    position: absolute;
-    bottom: 15px;
-    border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  background: #ff8702;
+  position: absolute;
+  bottom: 15px;
+  border-radius: 100%;
 }
 
 .SelectedBox {
-    padding: 40px 50px;
-    background: #FFFFFF;
-    box-shadow: 3px 3px 16px 0px #B6A1C033;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    z-index: 10;
-    position: absolute;
-    white-space: nowrap;
-    top: -180px;
-    border-radius: 20px;
+  padding: 40px 50px;
+  background: #ffffff;
+  box-shadow: 3px 3px 16px 0px #b6a1c033;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+  position: absolute;
+  white-space: nowrap;
+  top: -180px;
+  border-radius: 20px;
 }
 
 .NewDateBox {
-    padding: 30px;
-    background: #FFFFFF;
-    box-shadow: 3px 3px 16px 0px #B6A1C033;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    z-index: 10;
-    position: absolute;
-    white-space: nowrap;
-    top: -100px;
-    margin-left: -15px;
-    border-radius: 20px;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: 3px 3px 16px 0px #b6a1c033;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+  position: absolute;
+  white-space: nowrap;
+  top: -100px;
+  margin-left: -15px;
+  border-radius: 20px;
 }
 
 .NewDateBox::before {
-    width: 25px;
-    height: 25px;
-    background: #fff;
-    content: "";
-    position: absolute;
-    left: 47.5%;
-    bottom: -10px;
-    transform: rotate(45deg);
-    box-shadow: 10px 10px 16px 0px #B6A1C033;
-    z-index: -1;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  content: "";
+  position: absolute;
+  left: 47.5%;
+  bottom: -10px;
+  transform: rotate(45deg);
+  box-shadow: 10px 10px 16px 0px #b6a1c033;
+  z-index: -1;
 }
 
 .NewDateBox .NewTime {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .NewDateBox .NewTime div {
-    height: 35px;
-    padding: 5px;
-    border-radius: 8px;
-    border: 1px solid #FF8702;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 24.55px;
-    color: #FF8702;
-    cursor: pointer;
-    transition: 0.5s;
+  height: 35px;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #ff8702;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24.55px;
+  color: #ff8702;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .NewDateBox .NewTime div.ActiveNewTime {
-    background: #FF8702;
-    color: #fff;
+  background: #ff8702;
+  color: #fff;
 }
 
 .SelectedBox img {
-    width: 80px;
-    height: 80px;
-    border-radius: 100%;
-    object-fit: cover;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  object-fit: cover;
 }
 
 .SelectedBox h3 {
-    font-size: 23px;
-    font-weight: 800;
-    line-height: 22px;
-    color: #23232B;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 22px;
+  color: #23232b;
 }
 
 .SelectedBox p {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 10px;
-    color: #AFABA8;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 10px;
+  color: #afaba8;
 }
 
 .SelectedBox h4 {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 10px;
-    color: #23232B;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 10px;
+  color: #23232b;
 }
 
 .SelectedBox div {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .SelectedBox::before {
-    width: 25px;
-    height: 25px;
-    background: #fff;
-    content: "";
-    position: absolute;
-    left: 47.5%;
-    bottom: -10px;
-    transform: rotate(45deg);
-    box-shadow: 10px 10px 16px 0px #B6A1C033;
-    z-index: -1;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  content: "";
+  position: absolute;
+  left: 47.5%;
+  bottom: -10px;
+  transform: rotate(45deg);
+  box-shadow: 10px 10px 16px 0px #b6a1c033;
+  z-index: -1;
 }
 
 .SheduledDay::before {
-    content: "";
-    position: absolute;
-    z-index: 10;
-    bottom: 15px;
-    background: #FF8702;
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
+  content: "";
+  position: absolute;
+  z-index: 10;
+  bottom: 15px;
+  background: #ff8702;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+
+.Data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Arrows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 @media screen and (max-width: 768px) {
-    .Top h2 {
-        font-size: 20px;
-        color: #BCBCBF;
-    }
+  .Top h2 {
+    font-size: 20px;
+    color: #bcbcbf;
+  }
 
-    .Content {
-        box-shadow: none;
-        padding: 20px;
-        padding-bottom: 100px;
-    }
+  .Content {
+    box-shadow: none;
+    padding: 20px;
+    padding-bottom: 100px;
+  }
 
-    .Page {
-        padding: 0;
-        height: 100vh;
-        min-height: 100vh;
-    }
+  .Page {
+    padding: 0;
+    height: 100vh;
+    min-height: 100vh;
+  }
 
-    .Container {
-        padding: 0;
-    }
+  .Container {
+    padding: 0;
+  }
 
-    .Calendar span {
-        width: 40px;
-        height: 40px;
-        text-align: center;
-    }
+  .Calendar span {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+  }
 }
