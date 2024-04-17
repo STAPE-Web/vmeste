@@ -30,7 +30,7 @@ const Chat = () => {
         }
     }
 
-    const userInfo = { userID: userData.email, userName: userData.name };
+    const userInfo = { userID: userData.type === "email" ? userData.email : userData.phone, userName: userData.name };
     const token = generateToken(userInfo.userID, 0)
     zim.login(userInfo.userID, { userName: userInfo.userName, token: token, isOfflineLogin: false }).then(() => {
         zim.queryHistoryMessage(toConversationID, 0, { count: 30, reverse: true })
