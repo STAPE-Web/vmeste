@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { generateToken, zim } from "@/utils"
 import { ZIMConversation } from "zego-zim-web"
+import Avatar from "@/assets/Avatar.svg"
 
 const Chats = () => {
     const navigate = useNavigate()
@@ -68,6 +69,10 @@ const Chats = () => {
         }
     };
 
+    zim.on("receivePeerMessage", () => {
+        getChats()
+    })
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -83,7 +88,7 @@ const Chats = () => {
                         {items.map((item, index) => (
                             <div key={index} className={styles.Item} onClick={() => navigate(`/chat/${item.conversationID}`)}>
                                 <div className={styles.ItemBox}>
-                                    <img src={item.conversationAvatarUrl} alt="" />
+                                    <img src={Avatar} alt="" />
                                     <div>
                                         <h3>{item.conversationName}</h3>
                                         <p>{item.lastMessage?.message}</p>
@@ -92,7 +97,7 @@ const Chats = () => {
 
                                 <div className={styles.TimeBox}>
                                     <h6>{formatDate(item.lastMessage?.timestamp)}</h6>
-                                    {/* {item.count !== 0 && <div>{item.count}</div>} */}
+                                    {item.unreadMessageCount !== 0 && <div>{item.unreadMessageCount}</div>}
                                 </div>
                             </div>
                         ))}

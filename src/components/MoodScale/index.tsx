@@ -22,6 +22,8 @@ interface FeelingItem {
 const MoodScale: FC<Props> = ({ data }) => {
   const [moodscaleData, setMoodscaleData] = useState<FeelingItem[]>([]);
 
+  console.log(data)
+
   function feelColor(name: string) {
     switch (name) {
       case "Радость":
@@ -200,10 +202,14 @@ const MoodScale: FC<Props> = ({ data }) => {
     const feelingsCount: { [key: string]: number } = data.reduce(
       (accumulator, currentValue) => {
         currentValue.array.forEach((entry) => {
-          entry.feelings.forEach((feeling) => {
+          console.log(entry.feelings);
+          for (const feeling in entry.feelings) {
             // @ts-ignore
-            accumulator[feeling] = (accumulator[feeling] || 0) + 1;
-          });
+            entry.feelings[feeling].forEach((subFeeling) => {
+              // @ts-ignore
+              accumulator[subFeeling] = (accumulator[subFeeling] || 0) + 1;
+            });
+          }
         });
         return accumulator;
       },

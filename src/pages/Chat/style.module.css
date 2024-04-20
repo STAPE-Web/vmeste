@@ -1,236 +1,242 @@
 .Page {
-    width: 100%;
-    height: calc(100vh - 94px);
-    display: flex;
-    justify-content: center;
-    padding: 0 15px 40px 15px;
+  width: 100%;
+  height: calc(100vh - 94px);
+  display: flex;
+  justify-content: center;
+  padding: 0 15px 40px 15px;
 }
 
 .Container {
-    max-width: 1300px;
-    width: 100%;
-    padding: 40px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+  max-width: 1300px;
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .Content {
-    width: 100%;
-    box-shadow: 3px 3px 16px 0px #B6A1C033;
-    border-radius: 20px;
-    background: #fff;
-    overflow: hidden;
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 10зч;
+  width: 100%;
+  box-shadow: 3px 3px 16px 0px #b6a1c033;
+  border-radius: 20px;
+  background: #fff;
+  overflow: hidden;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10зч;
 }
 
 .Top {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 55px;
-    gap: 15px;
-    background: #fff;
-    padding-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 55px;
+  gap: 15px;
+  background: #fff;
+  padding-bottom: 20px;
 }
 
 .Top svg {
-    width: 24px;
-    height: 24px;
-    color: #BCBCBF;
-    cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: #bcbcbf;
+  cursor: pointer;
 }
 
 .Top h3 {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 22px;
-    color: #BCBCBF;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #bcbcbf;
 }
 
 .MessageBox {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 0 55px;
-    height: 450px;
-    overflow-y: scroll;
-    padding-bottom: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 55px;
+  height: 450px;
+  overflow-y: scroll;
+  padding-bottom: 15px;
 }
 
 .MessageBox h6 {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 19px;
-    color: #AFABA8;
-    margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  color: #afaba8;
+  margin-bottom: 15px;
 }
 
 .Message {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Message img {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .Message div {
-    max-width: 500px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    box-shadow: 2px 4px 10px 0px #B6A1C01C;
-    border-radius: 13px 13px 13px 0;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 25px;
+  max-width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  box-shadow: 2px 4px 10px 0px #b6a1c01c;
+  border-radius: 13px 13px 13px 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
 }
 
 .Message.MyMessage {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .Message p {
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 11px;
-    color: #BCBCBF;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 11px;
+  color: #bcbcbf;
 }
 
 .Message.MyMessage div {
-    background: #FF8702;
-    color: #fff;
-    border-radius: 13px 13px 0 13px;
+  background: #ff8702;
+  color: #fff;
+  border-radius: 13px 13px 0 13px;
 }
 
 .Message.MyMessage p {
-    color: #fff;
+  color: #fff;
 }
 
 .Input {
-    background: #FF87021A;
-    width: 100%;
-    padding: 17px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+  background: #ff87021a;
+  width: 100%;
+  padding: 17px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
 .Input input {
-    width: 100%;
-    height: 33px;
-    border-radius: 100px;
-    border: none;
-    background: #fff;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 10px;
-    padding: 0 15px;
+  width: 100%;
+  height: 33px;
+  border-radius: 100px;
+  border: none;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 10px;
+  padding: 0 15px;
 }
 
 .Input label svg {
-    color: #FF8702;
-    cursor: pointer;
+  color: #ff8702;
+  cursor: pointer;
 }
 
 .Input label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Input button {
-    min-width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    background: #FF8702;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background: #ff8702;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .Input button svg {
-    transform: rotate(-90deg);
-    color: #fff !important;
-    width: 16px;
-    height: 16px;
+  transform: rotate(-90deg);
+  color: #fff !important;
+  width: 16px;
+  height: 16px;
 }
 
 .Input button:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .Input input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .Search {
-    width: 100%;
-    background: #F2F2F2;
-    display: flex;
-    align-items: center;
-    height: 44px;
-    border-radius: 100px;
-    padding: 0 12px;
-    gap: 12px;
+  width: 100%;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-radius: 100px;
+  padding: 0 12px;
+  gap: 12px;
 }
 
 .Search svg {
-    width: 12px;
-    height: 12px;
+  width: 12px;
+  height: 12px;
 }
 
 .Search input {
-    height: 100%;
-    width: 100%;
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 22px;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
 }
 
 @media screen and (max-width: 768px) {
-    .Page {
-        padding: 0;
-        height: 100vh;
-        max-height: 100vh;
-    }
+  .Page {
+    padding: 0;
+    height: 100vh;
+    max-height: 100vh;
+  }
 
-    .Top {
-        padding: 20px;
-    }
+  .Top {
+    padding: 20px;
+  }
 
-    .Container {
-        padding: 0;
-        height: 100vh;
-        max-height: 100vh;
-    }
+  .Container {
+    padding: 0;
+    height: 100vh;
+    max-height: 100vh;
+  }
 
-    .Content {
-        box-shadow: none;
-        padding: 0;
-        height: 100%;
-        gap: 10px;
-    }
+  .Content {
+    box-shadow: none;
+    padding: 0;
+    height: 100%;
+    gap: 10px;
+  }
 
-    .MessageBox {
-        padding: 0 20px;
-        overflow-y: scroll;
-        height: 100%;
-    }
+  .MessageBox {
+    padding: 0 20px;
+    overflow-y: scroll;
+    height: 100%;
+  }
 
-    .Container>div:first-child {
-        display: none;
-    }
+  .Container > div:first-child {
+    display: none;
+  }
 }

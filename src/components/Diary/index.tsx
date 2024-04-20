@@ -503,23 +503,21 @@ const Diary = () => {
                     addItems.findIndex((i) => i.name === emotion)
                   ].array.map((item, index) => (
                     <div
-                      className={`${
-                        howFeel.includes(item) ? styles.ActiveFeel : ""
-                      } ${
-                        emotion === "Радость"
+                      className={`${howFeel.includes(item) ? styles.ActiveFeel : ""
+                        } ${emotion === "Радость"
                           ? styles.Orange
                           : emotion === "Страх"
-                          ? styles.Yellow
-                          : emotion === "Бешенство"
-                          ? styles.Green
-                          : emotion === "Грусть"
-                          ? styles.Turquoise
-                          : emotion === "Сила"
-                          ? styles.Blue
-                          : emotion === "Спокойствие"
-                          ? styles.Turquoise
-                          : ""
-                      }`}
+                            ? styles.Yellow
+                            : emotion === "Бешенство"
+                              ? styles.Green
+                              : emotion === "Грусть"
+                                ? styles.Turquoise
+                                : emotion === "Сила"
+                                  ? styles.Blue
+                                  : emotion === "Спокойствие"
+                                    ? styles.Turquoise
+                                    : ""
+                        }`}
                       onClick={() => selectFeel(item)}
                       key={index}
                     >

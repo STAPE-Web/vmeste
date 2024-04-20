@@ -2,18 +2,21 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, SearchIcon } from "@/ui/Icons"
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { generateToken, zim } from "@/utils"
-import { ZIMMessage } from "zego-zim-web"
+import { ZIMMediaMessageBase } from "zego-zim-web"
 
 const Chat = () => {
     const navigate = useNavigate()
     const ref = useRef<HTMLDivElement | null>(null)
     const [value, setValue] = useState("")
     const [search, setSearch] = useState(false)
-    const [messages, setMessages] = useState<ZIMMessage[]>([])
+    const [messages, setMessages] = useState<any[]>([])
     const userData = JSON.parse(localStorage.getItem("userData") as string)
     const { id } = useParams()
+    const [image, setImage] = useState<any>(null)
+
+    console.log("messages", messages)
 
     useEffect(() => {
         document.documentElement.style.overflowY = 'hidden';
@@ -38,6 +41,8 @@ const Chat = () => {
                 setMessages(res.messageList)
             })
             .catch((err) => console.error(err));
+
+        zim.clearConversationUnreadMessageCount(toConversationID, conversationType)
     })
 
     zim.on('tokenWillExpire', function () {
@@ -91,6 +96,26 @@ const Chat = () => {
         setTimeout(() => scrollDown(), 1300)
     }, [])
 
+    const sendMediaMessage = useCallback(() => {
+        if (image !== null) {
+            const mes: ZIMMediaMessageBase = { fileLocalPath: image, type: 11 }
+            zim.sendMediaMessage(mes, toConversationID, conversationType, config).then(function () {
+                setValue("")
+                scrollDown()
+            }).catch(function (err) {
+                console.log(err)
+            });
+        }
+
+        scrollDown()
+    }, [image])
+
+    useEffect(() => {
+        sendMediaMessage()
+    }, [sendMediaMessage])
+
+    console.log("messages", messages)
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -121,6 +146,7 @@ const Chat = () => {
                             <div key={index} className={`${styles.Message} ${msg.senderUserID === userData.email ? styles.MyMessage : ""}`}>
                                 <div>
                                     {msg.message}
+                                    {msg.type === 11 && <img src={msg.fileDownloadUrl} alt="" />}
                                     <p>{formatDate(msg.timestamp)}</p>
                                 </div>
                             </div>
@@ -128,7 +154,7 @@ const Chat = () => {
                     </div>
 
                     <div className={styles.Input}>
-                        <input type="file" id="upload" />
+                        <input type="file" id="upload" onChange={e => setImage(e.target.files ? e.target.files[0] : null)} />
                         <label htmlFor="upload"><AttachIcon /></label>
                         <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Сообщение..." />
                         <button onClick={() => sendMessage()}>
