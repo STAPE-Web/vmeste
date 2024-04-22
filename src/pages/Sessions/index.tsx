@@ -64,7 +64,7 @@ const Session = () => {
     }, []);
 
 
-    // console.log(data?.dateSession)
+    console.log(data?.dateSession)
     const endDate: any = data && new Date("2024-04-23 01:10:0.00");
     const difference = endDate - Date.now();
 
