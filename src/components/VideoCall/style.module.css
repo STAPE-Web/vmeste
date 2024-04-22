@@ -1,0 +1,16 @@
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    border-radius: 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    max-width: 980px;
+    overflow: hidden;
+}
+
+.Section>div {
+    width: 100%;
+}

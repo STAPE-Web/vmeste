@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, FileIcon, SearchI
 import { useNavigate, useParams } from "react-router-dom"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { generateToken, zim } from "@/utils"
-import { ZIMMediaMessageBase } from "zego-zim-web"
+import { ZIMMediaMessageBase, ZIMUserFullInfo } from "zego-zim-web"
 
 const Chat = () => {
     const navigate = useNavigate()
@@ -15,8 +15,7 @@ const Chat = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
     const { id } = useParams()
     const [image, setImage] = useState<any>(null)
-
-    console.log("messages", messages)
+    const [user, setUser] = useState<ZIMUserFullInfo | null>(null)
 
     useEffect(() => {
         document.documentElement.style.overflowY = 'hidden';
@@ -57,7 +56,7 @@ const Chat = () => {
 
     zim.queryUsersInfo(userIDs, { isQueryFromServer: false })
         .then(function (res) {
-            console.log(res)
+            setUser(res.userList[1])
         })
         .catch(function (err) {
             console.log(err)
@@ -138,7 +137,7 @@ const Chat = () => {
                         ) : (
                             <>
                                 <ArrowLeftIcon onClick={() => navigate(-1)} />
-                                <h3>Отправить сообщение</h3>
+                                <h3>{user?.baseInfo.userName}</h3>
                                 <SearchIcon onClick={() => setSearch(true)} />
                             </>
                         )}

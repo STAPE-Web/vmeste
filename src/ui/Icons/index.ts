@@ -81,6 +81,8 @@ import SBP from "./SBP";
 import Scan from "./Scan";
 import YKassa from "./YKassa";
 import File from "./File";
+import Video from "./Video";
+import Micro from "./Micro";
 
 export {
     SignIn as SignInIcon,
@@ -165,5 +167,7 @@ export {
     SBP as SBPIcon,
     Scan as ScanIcon,
     YKassa as YKassaIcon,
-    File as FileIcon
+    File as FileIcon,
+    Video as VideoIcon,
+    Micro as MicroIcon
 }

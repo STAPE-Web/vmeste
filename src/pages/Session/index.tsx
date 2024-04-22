@@ -70,7 +70,10 @@ const Sessions = () => {
 
                     {tab === "Планируемые"
                         ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled").map((item, index) => (
-                            <div key={index} className={styles.Item} onClick={() => navigate(`/session/${item.id}`)}>
+                            <div key={index} className={styles.Item} onClick={() => {
+                                navigate(`/session/${item.id}`)
+                                window.location.reload()
+                            }}>
                                 <img src={item.psychPhoto} alt="" />
 
                                 <div className={styles.ItemBox}>
@@ -92,7 +95,10 @@ const Sessions = () => {
                         ))}</div>
                             : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
                         : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
-                            <div key={index} className={styles.Item} onClick={() => navigate(`/session/${item.id}`)}>
+                            <div key={index} className={styles.Item} onClick={() => {
+                                navigate(`/session/${item.id}`)
+                                window.location.reload()
+                            }}>
                                 <img src={item.psychPhoto} alt="" />
 
                                 <div className={styles.ItemBox}>

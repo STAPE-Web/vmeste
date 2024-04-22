@@ -73,6 +73,8 @@ const Chats = () => {
         getChats()
     })
 
+    console.log(items)
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -91,7 +93,9 @@ const Chats = () => {
                                     <img src={Avatar} alt="" />
                                     <div>
                                         <h3>{item.conversationName}</h3>
-                                        <p>{item.lastMessage?.message}</p>
+                                        {item.lastMessage?.type === 1 && <p>{item.lastMessage.message}</p>}
+                                        {item.lastMessage?.type === 11 && <p>Фото</p>}
+                                        {item.lastMessage?.type === 12 && <p>Файл</p>}
                                     </div>
                                 </div>
 
