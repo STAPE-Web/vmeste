@@ -63,6 +63,10 @@
   padding-bottom: 15px;
 }
 
+.MessageBox::-webkit-scrollbar-track{
+  background: #fff!important;
+}
+
 .MessageBox h6 {
   width: 100%;
   text-align: center;
@@ -83,6 +87,7 @@
   width: 100%;
   margin-bottom: 10px;
   border-radius: 10px;
+  height: 300px;
 }
 
 .Message div {
@@ -117,6 +122,17 @@
 
 .Message.MyMessage p {
   color: #fff;
+}
+
+.Message a{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.Message a svg{
+  min-width: 24px;
+  height: 24px;
 }
 
 .Input {

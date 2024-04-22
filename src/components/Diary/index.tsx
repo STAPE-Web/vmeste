@@ -81,6 +81,8 @@ const Diary = () => {
     { name: "Сила", image: "/Emoji_6.png" },
   ];
 
+  const [activeNameFeeling, setActiveNameFeeling] = useState<string[]>([])
+
   const addItems = [
     {
       name: "Радость",
@@ -488,7 +490,9 @@ const Diary = () => {
                 <div className={`${styles.Items} ${styles.Emotions}`}>
                   {items.map((item, index) => (
                     <div
-                      className={emotion === item.name ? styles.ActiveFeel : ""}
+                      className={
+                        emotion === item.name || activeNameFeeling.includes(item.name) ? styles.ActiveFeel : ""
+                      }
                       key={index}
                       onClick={() => setEmotion(item.name as any)}
                     >
@@ -518,7 +522,10 @@ const Diary = () => {
                                     ? styles.Turquoise
                                     : ""
                         }`}
-                      onClick={() => selectFeel(item)}
+                      onClick={() => {
+                        selectFeel(item)
+                        setActiveNameFeeling(prev => activeNameFeeling.includes(addItems[addItems.findIndex((i) => i.name === emotion)].name) ? [...prev] : [...prev, addItems[addItems.findIndex((i) => i.name === emotion)].name])
+                      }}
                       key={index}
                     >
                       {item}
@@ -580,12 +587,12 @@ const Diary = () => {
 
               <div className={styles.Block}>
                 <h2>Уровень стресса</h2>
-                <Chart array={stressData} />
+                <Chart array={stressData} tab2={tab2} />
               </div>
 
               <div className={styles.Block}>
                 <h2>Самооценка</h2>
-                <Chart array={assessmentData} />
+                <Chart array={assessmentData} tab2={tab2} />
               </div>
             </>
           )}

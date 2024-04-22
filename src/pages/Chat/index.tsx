@@ -1,8 +1,8 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, SearchIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, FileIcon, SearchIcon } from "@/ui/Icons"
 import { useNavigate, useParams } from "react-router-dom"
-import { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { generateToken, zim } from "@/utils"
 import { ZIMMediaMessageBase } from "zego-zim-web"
 
@@ -48,15 +48,12 @@ const Chat = () => {
     zim.on('tokenWillExpire', function () {
         const token = generateToken(userInfo.userID, 0)
         zim.renewToken(token)
-            .then(function ({ token }) {
-                console.log(token)
-            })
             .catch(function (err) {
                 console.log(err)
             });
     })
 
-    var userIDs = [userData.email, "0"];
+    var userIDs = [userData.email, id];
 
     zim.queryUsersInfo(userIDs, { isQueryFromServer: false })
         .then(function (res) {
@@ -98,7 +95,7 @@ const Chat = () => {
 
     const sendMediaMessage = useCallback(() => {
         if (image !== null) {
-            const mes: ZIMMediaMessageBase = { fileLocalPath: image, type: 11 }
+            const mes: ZIMMediaMessageBase = { fileLocalPath: image, type: image.type === "image/png" || image.type === "image/jpeg" ? 11 : 12 }
             zim.sendMediaMessage(mes, toConversationID, conversationType, config).then(function () {
                 setValue("")
                 scrollDown()
@@ -114,7 +111,14 @@ const Chat = () => {
         sendMediaMessage()
     }, [sendMediaMessage])
 
-    console.log("messages", messages)
+    function formatDateList(date: number) {
+        const newDate = new Date(date);
+        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
+        const formattedDate = `${newDate.getDate()} ${months[newDate.getMonth()]}, ${newDate.getFullYear()}`
+        return formattedDate
+    }
+
+    let prevDate: string | null = null;
 
     return (
         <main className={styles.Page}>
@@ -123,34 +127,50 @@ const Chat = () => {
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>
-                        {search
-                            ? <>
+                        {search ? (
+                            <>
                                 <div className={styles.Search}>
                                     <SearchIcon />
                                     <input type="text" placeholder="Поиск" />
                                 </div>
-                                {/* <Calendar2Icon onClick={() => navigate("/calendar")} /> */}
                                 <CloseIcon style={{ width: 15 }} onClick={() => setSearch(false)} />
                             </>
-                            : <>
+                        ) : (
+                            <>
                                 <ArrowLeftIcon onClick={() => navigate(-1)} />
                                 <h3>Отправить сообщение</h3>
                                 <SearchIcon onClick={() => setSearch(true)} />
                             </>
-                        }
+                        )}
                     </div>
 
                     <div className={styles.MessageBox} ref={ref}>
-                        <h6>1 янв. 2024</h6>
-                        {messages.map((msg, index) => (
-                            <div key={index} className={`${styles.Message} ${msg.senderUserID === userData.email ? styles.MyMessage : ""}`}>
-                                <div>
-                                    {msg.message}
-                                    {msg.type === 11 && <img src={msg.fileDownloadUrl} alt="" />}
-                                    <p>{formatDate(msg.timestamp)}</p>
-                                </div>
-                            </div>
-                        ))}
+                        {messages.map((msg, index) => {
+                            const currentDate = formatDateList(msg.timestamp);
+                            let displayDate = false;
+
+                            if (prevDate !== currentDate) {
+                                displayDate = true;
+                                prevDate = currentDate;
+                            }
+
+                            return (
+                                <React.Fragment key={index}>
+                                    {displayDate && <h6>{currentDate}</h6>}
+                                    <div className={`${styles.Message} ${msg.senderUserID === userData.email ? styles.MyMessage : ""}`}>
+                                        <div>
+                                            {msg.message}
+                                            {msg.type === 11 && <img src={msg.fileDownloadUrl} alt="" />}
+                                            {msg.type === 12 && <a href={msg.fileDownloadUrl}>
+                                                <FileIcon />
+                                                {msg.fileName}
+                                            </a>}
+                                            <p>{formatDate(msg.timestamp)}</p>
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            );
+                        })}
                     </div>
 
                     <div className={styles.Input}>
@@ -164,7 +184,7 @@ const Chat = () => {
                 </div>
             </section>
         </main>
-    )
+    );
 }
 
 export default Chat

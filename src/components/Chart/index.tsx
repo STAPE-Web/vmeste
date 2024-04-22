@@ -12,9 +12,10 @@ import { FC } from "react";
 
 interface Props {
   array: { value: number; time: number }[];
+  tab2: string
 }
 
-const Chart: FC<Props> = ({ array }) => {
+const Chart: FC<Props> = ({ array, tab2 }) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -23,17 +24,14 @@ const Chart: FC<Props> = ({ array }) => {
     Filler
   );
 
-  const labels = [
-    "00:00",
-    "04:00",
-    "08:00",
-    "12:00",
-    "16:00",
-    "20:00",
-    "00:00",
-  ];
+  const month = `${String(new Date(Date.now()).getMonth()).length < 2 ? 0 : ""}${new Date(Date.now()).getMonth() + 1}`
 
-  console.log(array);
+  const labels = tab2 === "ДН" ? ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00"]
+    : tab2 === "НЕД" ? ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
+      : tab2 === "МЕС" ? [`01.${month}`, `08.${month}`, `01.${month}`, `16.${month}`, `24.${month}`, `30.${month}`]
+        : tab2 === "ГОД" ? ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
+          : ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00"]
+
 
   const chartData: number[] = Array(labels.length).fill(0);
 

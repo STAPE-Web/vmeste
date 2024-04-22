@@ -80,6 +80,7 @@ import Card from "./Card";
 import SBP from "./SBP";
 import Scan from "./Scan";
 import YKassa from "./YKassa";
+import File from "./File";
 
 export {
     SignIn as SignInIcon,
@@ -163,5 +164,6 @@ export {
     Card as CardIcon,
     SBP as SBPIcon,
     Scan as ScanIcon,
-    YKassa as YKassaIcon
+    YKassa as YKassaIcon,
+    File as FileIcon
 }

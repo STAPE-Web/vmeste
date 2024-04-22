@@ -129,7 +129,7 @@ const Home = () => {
                                 <h2>Тесты</h2>
 
                                 <div className={styles.SLiderBox}>
-                                    <button disabled={tests?.length < 3} className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
+                                    <button disabled={tests?.length < 4} className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
                                         <ArrowLeftIcon />
                                     </button>
                                     <div className={styles.Slider} ref={sliderRef}>
@@ -140,7 +140,7 @@ const Home = () => {
                                         ))}
                                     </div>
 
-                                    <button disabled={tests.length < 3} className={styles.ButtonRight} onClick={() => handleScroll(500)}>
+                                    <button disabled={tests.length < 4} className={styles.ButtonRight} onClick={() => handleScroll(500)}>
                                         <ArrowRightIcon />
                                     </button>
                                 </div>
