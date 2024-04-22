@@ -39,7 +39,6 @@ const Chat = () => {
             .then((res) => {
                 setMessages(res.messageList)
             })
-            .catch((err) => console.error(err));
 
         zim.clearConversationUnreadMessageCount(toConversationID, conversationType)
     })
@@ -47,20 +46,18 @@ const Chat = () => {
     zim.on('tokenWillExpire', function () {
         const token = generateToken(userInfo.userID, 0)
         zim.renewToken(token)
-            .catch(function (err) {
-                console.log(err)
-            });
     })
 
-    var userIDs = [userData.email, id];
+    const getUserInfo = useCallback(() => {
+        zim.queryUsersInfo([id || ""], { isQueryFromServer: false })
+            .then(function (res) {
+                setUser(res.userList[0])
+            })
+    }, [id])
 
-    zim.queryUsersInfo(userIDs, { isQueryFromServer: false })
-        .then(function (res) {
-            setUser(res.userList[1])
-        })
-        .catch(function (err) {
-            console.log(err)
-        });
+    useEffect(() => {
+        getUserInfo()
+    }, [getUserInfo])
 
     const toConversationID = id || "";
     const conversationType = 0;
