@@ -12,7 +12,6 @@ interface Props {
       notes: string;
     }[];
   }[];
-  tab2: string
 }
 
 interface FeelingItem {
@@ -20,7 +19,7 @@ interface FeelingItem {
   value: number;
 }
 
-const MoodScale: FC<Props> = ({ data, tab2 }) => {
+const MoodScale: FC<Props> = ({ data }) => {
   const [moodscaleData, setMoodscaleData] = useState<FeelingItem[]>([]);
   console.log(moodscaleData)
 
