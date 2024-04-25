@@ -129,9 +129,9 @@ const Home = () => {
                                 <h2>Тесты</h2>
 
                                 <div className={styles.SLiderBox}>
-                                    <button disabled={tests?.length < 4} className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
+                                    {tests?.length >= 4 && <button className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
                                         <ArrowLeftIcon />
-                                    </button>
+                                    </button>}
                                     <div className={styles.Slider} ref={sliderRef}>
                                         {tests?.map((item, index) => (
                                             <div key={index} onClick={() => navigate(`/test/${item.id}`)}>
@@ -140,9 +140,9 @@ const Home = () => {
                                         ))}
                                     </div>
 
-                                    <button disabled={tests.length < 4} className={styles.ButtonRight} onClick={() => handleScroll(500)}>
+                                    {tests?.length >= 4 && <button className={styles.ButtonRight} onClick={() => handleScroll(-500)}>
                                         <ArrowRightIcon />
-                                    </button>
+                                    </button>}
                                 </div>
                             </div>}
                         </>

@@ -21,8 +21,7 @@ interface FeelingItem {
 
 const MoodScale: FC<Props> = ({ data }) => {
   const [moodscaleData, setMoodscaleData] = useState<FeelingItem[]>([]);
-
-  console.log(data)
+  console.log(moodscaleData)
 
   function feelColor(name: string) {
     switch (name) {
@@ -202,14 +201,13 @@ const MoodScale: FC<Props> = ({ data }) => {
     const feelingsCount: { [key: string]: number } = data.reduce(
       (accumulator, currentValue) => {
         currentValue.array.forEach((entry) => {
-          console.log(entry.feelings);
-          for (const feeling in entry.feelings) {
-            // @ts-ignore
-            entry.feelings[feeling].forEach((subFeeling) => {
+          // @ts-ignore
+          Object.values(entry.feelings).forEach((feelingArray: string[]) => {
+            feelingArray.forEach((feeling) => {
               // @ts-ignore
-              accumulator[subFeeling] = (accumulator[subFeeling] || 0) + 1;
+              accumulator[feeling] = (accumulator[feeling] || 0) + 1;
             });
-          }
+          });
         });
         return accumulator;
       },
@@ -229,6 +227,15 @@ const MoodScale: FC<Props> = ({ data }) => {
         totalFeelings > 0 ? Math.round((count / totalFeelings) * 100) : 0;
       result.push({ name: addItem.name, value: percentage });
     });
+
+    const sum = result.reduce((acc, curr) => acc + curr.value, 0);
+    if (sum > 100) {
+      const diff = sum - 100;
+      const firstNonZeroIndex = result.findIndex((item) => item.value !== 0);
+      if (firstNonZeroIndex !== -1) {
+        result[firstNonZeroIndex].value -= diff;
+      }
+    }
 
     setMoodscaleData(result);
   }, [data]);

@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 import { FC } from "react";
 
 interface Props {
-  array: { value: number; time: number }[];
+  array: { value: number; time: string }[];
   tab2: string
 }
 
@@ -26,38 +26,45 @@ const Chart: FC<Props> = ({ array, tab2 }) => {
 
   const month = `${String(new Date(Date.now()).getMonth()).length < 2 ? 0 : ""}${new Date(Date.now()).getMonth() + 1}`
 
-  const labels = tab2 === "ДН" ? ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00"]
-    : tab2 === "НЕД" ? ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
-      : tab2 === "МЕС" ? [`01.${month}`, `08.${month}`, `01.${month}`, `16.${month}`, `24.${month}`, `30.${month}`]
-        : tab2 === "ГОД" ? ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
-          : ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00"]
+  const daysOfMonth = [];
+  for (let day = 1; day <= 31; day++) {
+    const formattedDay = day < 10 ? `0${day}` : `${day}`;
+    daysOfMonth.push(`${formattedDay}.${month}`);
+  }
 
+  const labels = tab2 === "ДН" ? ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
+    : tab2 === "НЕД" ? ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
+      : tab2 === "МЕС" ? daysOfMonth
+        : tab2 === "ГОД" ? ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
+          : ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
 
   const chartData: number[] = Array(labels.length).fill(0);
 
-  function findTimeInterval(time: number): [number, number] {
-    for (let i = 0; i < labels.length - 1; i++) {
-      const startTime = labels[i].split(":")[0];
-      const endTime = labels[i + 1].split(":")[0];
-      if (time >= Number(startTime) && time <= Number(endTime)) {
-        return [i, i + 1];
-      }
+  array.forEach((item) => {
+    if (tab2 === "ДН") {
+      const hour = item.time.split(" ")[1].split(":")[0];
+      const labelHour = labels.findIndex((i) => i.split(":")[0] === hour);
+      chartData[labelHour] = chartData[labelHour] ? (chartData[labelHour] + item.value) / 2 : item.value;
     }
-    return [labels.length - 1, 0];
-  }
 
-  array.forEach((item: { value: number; time: number }) => {
-    const [startIndex, endIndex] = findTimeInterval(item.time);
-    const interpolatedValue: number = item.value / 2;
-    if (startIndex === endIndex) {
-      chartData[startIndex] = interpolatedValue;
-    } else {
-      chartData[startIndex] += interpolatedValue;
-      chartData[endIndex] += interpolatedValue;
+    if (tab2 === "НЕД") {
+      const day = item.time.split(" ")[0].split("-")
+      const weekDay = new Date(`${day[1]}/${day[0]}/${day[2]}`).getDay() - 1
+      chartData[weekDay] = chartData[weekDay] ? (chartData[weekDay] + item.value) / 2 : item.value;
+    }
+
+    if (tab2 === "ГОД") {
+      const month = item.time.split(" ")[0].split("-")[1]
+      const formatedMonth = month[0] === "0" ? Number(month[1]) - 1 : Number(month) - 1
+      chartData[formatedMonth] = chartData[formatedMonth] ? (chartData[formatedMonth] + item.value) / 2 : item.value;
+    }
+
+    if (tab2 === "МЕС") {
+      const day = item.time.split(" ")[0].split("-")[0]
+      const dayIndex = Number(day) - 1
+      chartData[dayIndex] = chartData[dayIndex] ? (chartData[dayIndex] + item.value) / 2 : item.value;
     }
   });
-
-  console.log(chartData);
 
   const options = {
     responsive: true,
@@ -81,8 +88,17 @@ const Chart: FC<Props> = ({ array, tab2 }) => {
     },
   };
 
+  function fillLabels() {
+    switch (tab2) {
+      case "ДН": return ["00:00", "", "", "", "04:00", "", "", "", "08:00", "", "", "", "12:00", "", "", "", "16:00", "", "", "", "20:00", "", "", "", "00:00"];
+      case "НЕД": return ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+      case "ГОД": return ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
+      case "МЕС": return [`01.${month}`, "", "", "", "", "", "", `08.${month}`, "", "", "", "", "", "", "", `16.${month}`, "", "", "", "", "", "", "", `24.${month}`, "", "", "", "", "", `30.${month}`,]
+    }
+  }
+
   const data = {
-    labels,
+    labels: fillLabels(),
     datasets: [
       {
         fill: true,

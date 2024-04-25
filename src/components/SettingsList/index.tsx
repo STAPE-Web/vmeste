@@ -22,8 +22,6 @@ const SettingsList: FC<Props> = ({ data }) => {
                     <label>Телефон</label>
                     <h4>{data.userInfo.phone}</h4>
                 </div>
-
-                <button>Изменить</button>
             </div>}
 
             <div >

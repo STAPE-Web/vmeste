@@ -20,9 +20,9 @@ const VideoCall: FC<Props> = ({ id }) => {
                 mode: ZegoUIKitPrebuilt.OneONoneCall
             },
             showScreenSharingButton: false,
-            showTextChat: false,
+            showTextChat: true,
             showRoomDetailsButton: false,
-            showUserList: false
+            showUserList: false,
         })
     }
 

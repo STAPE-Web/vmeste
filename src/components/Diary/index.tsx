@@ -56,10 +56,10 @@ const Diary = () => {
     }[]
   >([]);
   const [stressData, setStressData] = useState<
-    { value: number; time: number }[]
+    { value: number; time: string }[]
   >([]);
   const [assessmentData, setassessmentData] = useState<
-    { value: number; time: number }[]
+    { value: number; time: string }[]
   >([]);
 
   const [tab, setTab] = useState("Дневник настроения");
@@ -371,57 +371,25 @@ const Diary = () => {
   }, [getFeeling]);
 
   const getStressData = useCallback(() => {
-    const newData: { value: number; time: number }[] = [];
-    const tempData: { [key: string]: { sum: number; count: number } } = {};
+    const newData: { value: number; time: string }[] = [];
 
     moodscale.forEach((item) => {
       item.array.forEach((subItem) => {
-        const time = subItem.time.split(" ")[1].slice(0, 5).split(":")[0];
-        const stress = subItem.stress;
-
-        if (!tempData[time]) {
-          tempData[time] = { sum: 0, count: 0 };
-        }
-
-        tempData[time].sum += stress;
-        tempData[time].count++;
+        newData.push({ time: subItem.time, value: subItem.assessment })
       });
-    });
-
-    for (const time in tempData) {
-      if (tempData.hasOwnProperty(time)) {
-        const averageStress = tempData[time].sum / tempData[time].count;
-        newData.push({ value: averageStress, time: Number(time) });
-      }
-    }
+    })
 
     setStressData(newData);
   }, [moodscale]);
 
   const getAsessmentData = useCallback(() => {
-    const newData: { value: number; time: number }[] = [];
-    const tempData: { [key: string]: { sum: number; count: number } } = {};
+    const newData: { value: number; time: string }[] = [];
 
     moodscale.forEach((item) => {
       item.array.forEach((subItem) => {
-        const time = subItem.time.split(" ")[1].slice(0, 5).split(":")[0];
-        const stress = subItem.assessment;
-
-        if (!tempData[time]) {
-          tempData[time] = { sum: 0, count: 0 };
-        }
-
-        tempData[time].sum += stress;
-        tempData[time].count++;
+        newData.push({ time: subItem.time, value: subItem.assessment })
       });
-    });
-
-    for (const time in tempData) {
-      if (tempData.hasOwnProperty(time)) {
-        const averageStress = tempData[time].sum / tempData[time].count;
-        newData.push({ value: averageStress, time: Number(time) });
-      }
-    }
+    })
 
     setassessmentData(newData);
   }, [moodscale]);

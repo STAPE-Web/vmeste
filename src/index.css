@@ -91,6 +91,7 @@ html {
 .TYiiRFB3EhYJGVPE4k4q {
   border: 1px solid #BCBCBF !important;
   border-radius: 100px !important;
+  display: none !important;
 }
 
 .sCsSbKP9yxvw4LQAeaTz {
@@ -141,4 +142,20 @@ html {
   border: 1px solid #BCBCBF !important;
   border-radius: 100px !important;
   color: #BCBCBF !important;
+}
+
+._M8cCug8H18ALQ05cNMt {
+  margin: 0 !important;
+}
+
+.M4HRY2n7rpNAd1UjDNZe {
+  position: absolute;
+  width: 100% !important;
+  height: 100%;
+  margin: 0 !important;
+  z-index: 1001;
+}
+
+.xM8CBkrn0wtFOdOP84Bb input {
+  width: 100% !important;
 }
