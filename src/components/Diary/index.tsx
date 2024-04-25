@@ -550,7 +550,7 @@ const Diary = () => {
 
               <div className={styles.Block}>
                 <h2>Шкала настроения</h2>
-                <MoodScale data={moodscale} />
+                <MoodScale data={moodscale} tab2={tab2} />
               </div>
 
               <div className={styles.Block}>
