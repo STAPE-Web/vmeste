@@ -239,7 +239,7 @@ const MoodScale: FC<Props> = ({ data, tab2 }) => {
     }
 
     setMoodscaleData(result);
-  }, [data, tab2, setMoodscaleData]);
+  }, [data]);
 
   useEffect(() => {
     getData();
