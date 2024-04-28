@@ -83,6 +83,7 @@ import YKassa from "./YKassa";
 import File from "./File";
 import Video from "./Video";
 import Micro from "./Micro";
+import Phone from "./Phone";
 
 export {
     SignIn as SignInIcon,
@@ -169,5 +170,6 @@ export {
     YKassa as YKassaIcon,
     File as FileIcon,
     Video as VideoIcon,
-    Micro as MicroIcon
+    Micro as MicroIcon,
+    Phone as PhoneIcon
 }

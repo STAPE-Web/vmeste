@@ -82,7 +82,10 @@ const Specialists = () => {
                 <Sidebar />
 
                 <div className={styles.Content}>
-                    <h2 className={styles.Title}>Выбор специалиста</h2>
+                    <div className={styles.Row}>
+                        <h2 className={styles.Title}>Выбор специалиста</h2>
+                        {data.length === 0 && <FilterIcon onClick={() => navigate("/filter")} />}
+                    </div>
                     {data.length !== 0 ? <>
                         <div className={styles.SpecialistsBox}>
                             <div className={styles.Avatars}>

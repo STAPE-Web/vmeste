@@ -7,7 +7,7 @@ import { SessionAPI } from "@/api"
 import { ISession } from "@/types"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Avatar from "@/assets/Avatar.svg"
-import VideoCall from "@/components/VideoCall"
+import useGlobalStore from "@/store"
 
 const Session = () => {
     const navigate = useNavigate()
@@ -15,6 +15,8 @@ const Session = () => {
     const [data, setData] = useState<ISession | null>(null)
     const { id } = useParams()
     const [enterCall, setEnterCall] = useState(false)
+    const changeCallID = useGlobalStore(state => state.changeCallId)
+    const changePsychId = useGlobalStore(state => state.changePsychId)
 
     const getSession = useCallback(async () => {
         const result = await SessionAPI.get(sid)
@@ -25,6 +27,18 @@ const Session = () => {
     useEffect(() => {
         getSession()
     }, [getSession])
+
+    useEffect(() => {
+        if (data) {
+            changePsychId(data?.psychId)
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (id) {
+            changeCallID(id)
+        }
+    }, [id])
 
     function formatDate(value: string) {
         const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
@@ -64,7 +78,6 @@ const Session = () => {
     }, []);
 
 
-    console.log(data?.dateSession)
     const endDate: any = data && new Date("2024-04-23 01:10:0.00");
     const difference = endDate - Date.now();
 
@@ -113,7 +126,7 @@ const Session = () => {
                 <Sidebar />
 
                 {enterCall
-                    ? id !== undefined && <VideoCall id={id} />
+                    ? <div id="call"></div>
                     : <div className={styles.Content}>
                         {data !== null && <>
                             <div className={styles.Top}>

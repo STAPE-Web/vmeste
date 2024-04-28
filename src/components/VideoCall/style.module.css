@@ -9,8 +9,36 @@
     align-items: center;
     max-width: 980px;
     overflow: hidden;
+    position: absolute;
+    top: 134px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    margin-left: 150px;
 }
 
 .Section>div {
     width: 100%;
+}
+
+.Hidden {
+    display: none !important;
+}
+
+.MessageButton {
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    z-index: 1001;
+    right: 10px;
+    bottom: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #313443;
+    border: none;
+    color: #fff;
+}
+
+.MessageButton svg {
+    width: 20px;
 }

@@ -276,6 +276,18 @@
     padding: 10px 0;
 }
 
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Row svg {
+    color: #CCCCD6;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1000px) {
     .Avatars {
         overflow-x: scroll;

@@ -1,10 +1,11 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, FileIcon, SearchIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon, AttachIcon, CloseIcon, FileIcon, PhoneIcon, SearchIcon } from "@/ui/Icons"
 import { useNavigate, useParams } from "react-router-dom"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { generateToken, zim } from "@/utils"
 import { ZIMMediaMessageBase, ZIMUserFullInfo } from "zego-zim-web"
+import useGlobalStore from "@/store"
 
 const Chat = () => {
     const navigate = useNavigate()
@@ -16,6 +17,8 @@ const Chat = () => {
     const { id } = useParams()
     const [image, setImage] = useState<any>(null)
     const [user, setUser] = useState<ZIMUserFullInfo | null>(null)
+    const callJoined = useGlobalStore(state => state.callJoined)
+    const callId = useGlobalStore(state => state.callId)
 
     useEffect(() => {
         document.documentElement.style.overflowY = 'hidden';
@@ -139,6 +142,15 @@ const Chat = () => {
                             </>
                         )}
                     </div>
+
+                    {callJoined && <div className={styles.CallInfo} onClick={() => navigate(`/session/${callId}`)}>
+                        <div>
+                            <div className={styles.Dot}></div>
+                            <p>Иван Иванов</p>
+                        </div>
+
+                        <button><PhoneIcon /></button>
+                    </div>}
 
                     <div className={styles.MessageBox} ref={ref}>
                         {messages.map((msg, index) => {

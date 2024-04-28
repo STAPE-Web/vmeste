@@ -72,7 +72,6 @@ const Sessions = () => {
                         ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled").map((item, index) => (
                             <div key={index} className={styles.Item} onClick={() => {
                                 navigate(`/session/${item.id}`)
-                                window.location.reload()
                             }}>
                                 <img src={item.psychPhoto} alt="" />
 
@@ -97,7 +96,6 @@ const Sessions = () => {
                         : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
                             <div key={index} className={styles.Item} onClick={() => {
                                 navigate(`/session/${item.id}`)
-                                window.location.reload()
                             }}>
                                 <img src={item.psychPhoto} alt="" />
 

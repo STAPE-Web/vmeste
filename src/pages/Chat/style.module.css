@@ -24,7 +24,7 @@
   padding-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 10зч;
+  position: relative;
 }
 
 .Top {
@@ -63,8 +63,8 @@
   padding-bottom: 15px;
 }
 
-.MessageBox::-webkit-scrollbar-track{
-  background: #fff!important;
+.MessageBox::-webkit-scrollbar-track {
+  background: #fff !important;
 }
 
 .MessageBox h6 {
@@ -125,13 +125,13 @@
   color: #fff;
 }
 
-.Message a{
+.Message a {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.Message a svg{
+.Message a svg {
   min-width: 24px;
   height: 24px;
 }
@@ -223,6 +223,53 @@
   line-height: 22px;
 }
 
+.CallInfo {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: translateX(-50%);
+  max-width: 335px;
+  box-shadow: 2px 4px 10px 0px #b6a1c02c;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  padding: 10px 12px 10px 12px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.CallInfo .Dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background: #FB5935;
+}
+
+.CallInfo>div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.CallInfo p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #AFABA8;
+}
+
+.CallInfo button {
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  background: #FB5935;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .Page {
     padding: 0;
@@ -253,7 +300,7 @@
     height: 100%;
   }
 
-  .Container > div:first-child {
+  .Container>div:first-child {
     display: none;
   }
 }
