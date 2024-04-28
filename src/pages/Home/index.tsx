@@ -13,6 +13,8 @@ const Home = () => {
     const [searchParams] = useSearchParams()
     const [tests, setTests] = useState<ITests[]>([])
     const sid = JSON.parse(localStorage.getItem("sid") as string)
+    const [showLeftButton, setShowLeftButton] = useState(false);
+    const [showRightButton, setShowRightButton] = useState(true);
 
     useEffect(() => {
         document.body.style.overflowY = 'hidden';
@@ -35,12 +37,36 @@ const Home = () => {
 
     const handleScroll = (scrollAmount: number) => {
         if (sliderRef.current) {
-            sliderRef.current.scrollBy({
+            const slider = sliderRef.current;
+            slider.scrollBy({
                 left: scrollAmount,
                 behavior: 'smooth',
             });
         }
     };
+
+    const checkCScroll = () => {
+        if (sliderRef.current) {
+            const slider = sliderRef.current;
+            const scrollLeft = slider.scrollLeft;
+            const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+            setShowLeftButton(scrollLeft > 0);
+            setShowRightButton(scrollLeft < maxScrollLeft - 1);
+        }
+    };
+
+    useEffect(() => {
+        checkCScroll();
+        if (sliderRef.current) {
+            sliderRef.current.addEventListener('scroll', checkCScroll);
+        }
+
+        return () => {
+            if (sliderRef.current) {
+                sliderRef.current.removeEventListener('scroll', checkCScroll);
+            }
+        };
+    }, [tests]);
 
     async function getTests() {
         const sid = JSON.parse(localStorage.getItem("sid") as string)
@@ -72,6 +98,7 @@ const Home = () => {
         const minutes = date.getMinutes()
         return `${day} ${months[month]}, ${String(hour).length === 1 ? `0${hour}` : hour}:${String(minutes).length === 1 ? `0${minutes}` : minutes}`
     }
+
 
     return (
         <main className={styles.Page}>
@@ -129,9 +156,11 @@ const Home = () => {
                                 <h2>Тесты</h2>
 
                                 <div className={styles.SLiderBox}>
-                                    {tests?.length >= 4 && <button className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
-                                        <ArrowLeftIcon />
-                                    </button>}
+                                    {showLeftButton && (
+                                        <button className={styles.ButtonLeft} onClick={() => handleScroll(-500)}>
+                                            <ArrowLeftIcon />
+                                        </button>
+                                    )}
                                     <div className={styles.Slider} ref={sliderRef}>
                                         {tests?.map((item, index) => (
                                             <div key={index} onClick={() => navigate(`/test/${item.id}`)}>
@@ -140,9 +169,11 @@ const Home = () => {
                                         ))}
                                     </div>
 
-                                    {tests?.length >= 4 && <button className={styles.ButtonRight} onClick={() => handleScroll(-500)}>
-                                        <ArrowRightIcon />
-                                    </button>}
+                                    {showRightButton && (
+                                        <button className={styles.ButtonRight} onClick={() => handleScroll(500)}>
+                                            <ArrowRightIcon />
+                                        </button>
+                                    )}
                                 </div>
                             </div>}
                         </>
