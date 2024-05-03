@@ -1,6 +1,7 @@
-import { ArrowDownIcon, ArrowRightIcon, CardIcon, YKassaIcon } from "@/ui/Icons"
+import { ArrowDownIcon, CardIcon, YKassaIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import { FC, useState } from "react"
+import Checkbox from "@/ui/Checkbox"
 
 interface Props {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -8,11 +9,11 @@ interface Props {
 
 const SelectPayment: FC<Props> = ({ setModal }) => {
     const [active, setActive] = useState(false)
-    // const [activeCard, setActiveCard] = useState(0)
+    const [activeCard, setActiveCard] = useState(false)
     // const cardList = useGlobalStore(state => state.cardList)
     const list = [
         { icon: CardIcon, name: "Привязать карту", action: () => setModal(true) },
-        { icon: YKassaIcon, name: "ЮKassa", action: () => ({}) },
+        { icon: YKassaIcon, name: "ЮKassa", action: () => setActiveCard(!activeCard) },
     ]
 
     return (
@@ -55,7 +56,8 @@ const SelectPayment: FC<Props> = ({ setModal }) => {
                             {i.name}
                         </div>
 
-                        <ArrowRightIcon />
+                        {/* <ArrowRightIcon /> */}
+                        <Checkbox state={activeCard} />
                     </div>
                 ))}
             </div>

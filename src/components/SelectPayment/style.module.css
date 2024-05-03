@@ -65,9 +65,9 @@
     transition: 0.5s;
 }
 
-.DropDown .Item>svg {
+.DropDown svg {
     min-width: 15px;
-    color: #BCBCBF;
+    color: #fff !important;
     height: 15px;
 }
 

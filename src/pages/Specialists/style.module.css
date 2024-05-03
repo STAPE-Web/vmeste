@@ -288,6 +288,31 @@
     cursor: pointer;
 }
 
+.NonePsyh {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.NonePsyh p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 21.82px;
+    text-align: center;
+    color: #4C4C69;
+    margin-bottom: -15px;
+}
+
+.NonePsyh h3 {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 24.55px;
+    text-align: center;
+    color: #FF8702;
+}
+
 @media screen and (max-width: 1000px) {
     .Avatars {
         overflow-x: scroll;
@@ -363,5 +388,9 @@
     .ButtonBox {
         bottom: 70px;
         z-index: 100;
+    }
+
+    .NonePsyh {
+        padding: 20px 0;
     }
 }

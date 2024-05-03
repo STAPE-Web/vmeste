@@ -118,7 +118,7 @@ const Specialist = () => {
                             <h3>{data?.name}</h3>
                             <div>
                                 <h4>Индивидуальная сессия {data?.individualSession.countTime} мин, {data?.individualSession.price} ₽</h4>
-                                {data?.freeTime.length !== 0 && <h4>Запись <span>с {formatDate(data?.freeTime[0])}</span></h4>}
+                                {data?.freeTime.length !== 0 && <h4>Запись <span>с {formatDate(data?.freeTime.sort()[0])}</span></h4>}
                             </div>
 
                             <div className={styles.Achive}>

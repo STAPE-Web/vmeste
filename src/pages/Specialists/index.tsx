@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import { PshycologistsAPI } from "@/api"
 import { ISpecialist } from "@/types"
 import { useSwipeable } from 'react-swipeable';
+import ArrowTop from "@/assets/ArrowTop"
 
 const Specialists = () => {
     const navigate = useNavigate()
@@ -23,10 +24,18 @@ const Specialists = () => {
     const themesParam = searchParams.get("themes")?.split("_") || ["Стресс", ""]
     const genderParam = searchParams.get("gender") || "M"
     const priceParam = searchParams.get("price")?.split(",").map(Number) || [2500, 3500, 4500];
+    const [nonePsyh, setNonePsyh] = useState(false)
 
     const getSpecialist = useCallback(async () => {
         const result = await PshycologistsAPI.get(sid, { familyTherapy: familyTherapyParam, gender: genderParam, prices: priceParam, themes: themesParam })
-        setData(result.psychologists)
+        if (result.psychologists.length === 0) {
+            setNonePsyh(true)
+            const newResult = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс", ""] })
+            setData(newResult.psychologists)
+        } else {
+            setNonePsyh(false)
+            setData(result.psychologists)
+        }
     }, [sid, familyTherapyParam, themesParam, genderParam, priceParam])
 
     useEffect(() => {
@@ -86,7 +95,8 @@ const Specialists = () => {
                         <h2 className={styles.Title}>Выбор специалиста</h2>
                         {data.length === 0 && <FilterIcon onClick={() => navigate("/filter")} />}
                     </div>
-                    {data.length !== 0 ? <>
+
+                    {data.length !== 0 && <>
                         <div className={styles.SpecialistsBox}>
                             <div className={styles.Avatars}>
                                 {data.map((item, index) => (
@@ -96,6 +106,12 @@ const Specialists = () => {
 
                             <FilterIcon onClick={() => navigate("/filter")} />
                         </div>
+
+                        {nonePsyh && <div className={styles.NonePsyh}>
+                            <p>Не найдено психологов <br /> по вашему запросу</p>
+                            <h3>Посмотрите максимально <br /> подходящих специалистов</h3>
+                            <ArrowTop />
+                        </div>}
 
                         <div className={styles.InfoBox}>
                             <ButtonRound big={true} disabled={currentPeople === 0} onClick={() => setCurrentPeople(currentPeople - 1)}><ArrowLeftIcon /></ButtonRound>
@@ -176,12 +192,7 @@ const Specialists = () => {
                                 ))}
                             </div>
                         </div>
-
-                        {/* <div className={styles.ButtonBox}>
-                            <ButtonDefault disabled={false} onClick={() => navigate(`/specialist/${data[currentPeople].id}`)}>Выбрать время сессии</ButtonDefault>
-                        </div> */}
                     </>
-                        : <p>Ничего не найдено</p>
                     }
                 </div>
             </section>

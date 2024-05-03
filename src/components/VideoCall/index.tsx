@@ -6,9 +6,10 @@ import useGlobalStore from "@/store"
 import { useLocation, useNavigate } from "react-router-dom"
 import { MessageIcon } from "@/ui/Icons"
 
-
 const VideoCall = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
+
+    if (userData === null) return;
     const userInfo = { userID: userData.type === "email" ? userData.email : userData.phone, userName: userData.name };
     const [showVideo, setShowVideo] = useState(false)
     const callId = useGlobalStore(state => state.callId)
@@ -37,8 +38,14 @@ const VideoCall = () => {
                     changeCallJoined(false)
                 },
             })
+
+            // const zcc = new ZegoExpressEngine(appConfig.appID, appConfig.serverSecret)
+            // const localStream = await zcc.createStream({ camera: { video: true, audio: false, videoInput:  }, })
+            // console.log(localStream)
+            // zcc.setBackgroundBlurOptions(localStream, { blurDegree: 50 })
         }
     }
+
 
     const location = useLocation();
     useEffect(() => {
