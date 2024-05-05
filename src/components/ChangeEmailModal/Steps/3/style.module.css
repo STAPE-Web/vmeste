@@ -1,0 +1,35 @@
+.Box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 24px;
+}
+
+.Box>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.Box h2 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 26px;
+    text-align: center;
+    color: #4C4C69;
+}
+
+.Box p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19.1px;
+    text-align: center;
+    color: #4C4C69;
+}
+
+.Box button {
+    width: 100%;
+}

@@ -2,6 +2,8 @@ import Toggle from "@/ui/Toggle"
 import styles from "./style.module.css"
 import { FC, useState } from "react"
 import { IProfile } from "@/types"
+import useGlobalStore from "@/store"
+import ChangeEmailModal from "../ChangeEmailModal"
 
 interface Props {
     data: IProfile
@@ -9,6 +11,7 @@ interface Props {
 
 const SettingsList: FC<Props> = ({ data }) => {
     const [state, setState] = useState(false)
+    const actionChangeEmailModal = useGlobalStore(state => state.actionChangeEmailModal)
 
     function signOut() {
         localStorage.removeItem("sid")
@@ -24,7 +27,7 @@ const SettingsList: FC<Props> = ({ data }) => {
                 </div>
             </div>}
 
-            <div >
+            <div>
                 <label>Имя или псевдониим</label>
                 <h4>{data.userInfo.name}</h4>
             </div>
@@ -34,11 +37,14 @@ const SettingsList: FC<Props> = ({ data }) => {
                 <h4>{data.userInfo.age} лет</h4>
             </div>
 
-            {data.userInfo.type === "email" && <div>
-                <label>Электронная почта</label>
-                <h4>{data.userInfo.email}</h4>
-            </div>
-            }
+            {data.userInfo.type === "email" && <div className={styles.Box}>
+                <div>
+                    <label>Электронная почта</label>
+                    <h4>{data.userInfo.email}</h4>
+                </div>
+
+                <button className={styles.Button} onClick={() => actionChangeEmailModal(true)}>Изменить</button>
+            </div>}
 
             <h2>Настройки</h2>
 
@@ -55,6 +61,8 @@ const SettingsList: FC<Props> = ({ data }) => {
                 <p onClick={() => signOut()}>Выйти</p>
                 <p>Удалить аккаунт</p>
             </div>
+
+            <ChangeEmailModal />
         </div>
     )
 }

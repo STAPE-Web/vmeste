@@ -4,6 +4,7 @@ import materials from "./materials";
 import pshycologists from "./pshycologists";
 import session from "./session";
 import diary from "./diary";
+import profile from "./profile";
 
 export {
     auth as AuthAPI,
@@ -11,5 +12,6 @@ export {
     materials as MaterialsAPI,
     pshycologists as PshycologistsAPI,
     session as SessionAPI,
-    diary as DiaryAPI
+    diary as DiaryAPI,
+    profile as ProfileAPI
 }
