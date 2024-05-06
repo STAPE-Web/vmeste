@@ -80,6 +80,7 @@
     border-radius: 3px;
     transition: 0.5s;
     height: 30px;
+    cursor: pointer;
 }
 
 .List div svg {
