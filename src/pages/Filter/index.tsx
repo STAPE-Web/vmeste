@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
 import MobileAuthModal from "@/components/MobileAuthModal"
+import CouplesModal from "@/components/CoupleModal"
 
 const Filter = () => {
     const navigate = useNavigate()
@@ -17,13 +18,18 @@ const Filter = () => {
 
     const sessionTimeList = ["Любое", "Ближайшее", "Конкретное"]
     const [sessionTime, setSessionTime] = useState("Любое")
+    const currentTimeList = ["до 10:00", "10:00-18:00", "после 18:00"]
+    const [MonFriTime, setMonFriTime] = useState("до 10:00")
+    const [SatSunTime, setSatSunTime] = useState("до 10:00")
 
     const [modal, setModal] = useState(false)
+    const [couplesModal, setCouplesModal] = useState(false)
 
     const [myCondition, setMyCondition] = useState<string[]>([])
     const [relationship, setRelationship] = useState<string[]>([])
     const [work, setWork] = useState<string[]>([])
     const [events, setEvents] = useState<string[]>([])
+    const [coupleTerapy, setCoupleTerapy] = useState<string[]>([])
 
     const [modalMode, setModalMode] = useState(0)
     const [price, setPrice] = useState<number[]>([2500])
@@ -60,11 +66,14 @@ const Filter = () => {
     function SearchSpecialist() {
         const searchData = {
             familyTherapy: typeConsult === "Парная",
-            themes: [...myCondition, ...relationship, ...work, ...events],
+            themes: typeConsult === "Парная" ? coupleTerapy : [...myCondition, ...relationship, ...work, ...events],
             gender: sexPeople === "Женщина" ? "W" : "M",
-            price: price.length === 0 ? [2500] : price
+            price: price.length === 0 ? [2500, 3500, 4500] : price,
+            time: sessionTime,
+            MFTime: MonFriTime,
+            SSTime: SatSunTime
         }
-        const params = `?familyTherapy=${searchData.familyTherapy}&themes=${searchData.themes.map(i => `${i}`).join("_")}&gender=${searchData.gender}&price=${searchData.price}`
+        const params = `?familyTherapy=${searchData.familyTherapy}&themes=${searchData.themes.map(i => `${i}`).join("_")}&gender=${searchData.gender}&price=${searchData.price}&time=${searchData.time}${searchData.time === "Конкретное" ? `&MFTime=${searchData.MFTime}&SSTime=${searchData.SSTime}` : ""}`
         navigate(`/specialists${params}`)
     }
 
@@ -92,65 +101,81 @@ const Filter = () => {
 
                     <div className={styles.Box}>
                         <h3>Темы для обсуждения</h3>
-                        <div>
-                            <h5>Мое состояние</h5>
-                            <div className={styles.RowItems}>
-                                {myCondition.map((item, index) => <div key={index}>{item}</div>)}
+                        {typeConsult === "Парная"
+                            ? <div>
+                                <div className={styles.RowItems}>
+                                    {coupleTerapy.map((item, index) => <div key={index}>{item}</div>)}
 
-                                <button className={styles.Button} onClick={() => {
-                                    setModal(true)
-                                    setModalMode(0)
-                                }}>
-                                    <Add2Icon />
-                                    {myCondition.length === 0 && "Выбрать"}
-                                </button>
+                                    <button className={styles.Button} onClick={() => {
+                                        setCouplesModal(true)
+                                    }}>
+                                        <Add2Icon />
+                                        {coupleTerapy.length === 0 && "Выбрать"}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                            : <>
+                                <div>
+                                    <h5>Мое состояние</h5>
+                                    <div className={styles.RowItems}>
+                                        {myCondition.map((item, index) => <div key={index}>{item}</div>)}
 
-                        <div>
-                            <h5>Отношения</h5>
-                            <div className={styles.RowItems}>
-                                {relationship.map((item, index) => <div key={index}>{item}</div>)}
+                                        <button className={styles.Button} onClick={() => {
+                                            setModal(true)
+                                            setModalMode(0)
+                                        }}>
+                                            <Add2Icon />
+                                            {myCondition.length === 0 && "Выбрать"}
+                                        </button>
+                                    </div>
+                                </div>
 
-                                <button className={styles.Button} onClick={() => {
-                                    setModal(true)
-                                    setModalMode(1)
-                                }}>
-                                    <Add2Icon />
-                                    {relationship.length === 0 && "Выбрать"}
-                                </button>
-                            </div>
-                        </div>
+                                <div>
+                                    <h5>Отношения</h5>
+                                    <div className={styles.RowItems}>
+                                        {relationship.map((item, index) => <div key={index}>{item}</div>)}
 
-                        <div>
-                            <h5>Работа, учеба</h5>
-                            <div className={styles.RowItems}>
-                                {work.map((item, index) => <div key={index}>{item}</div>)}
+                                        <button className={styles.Button} onClick={() => {
+                                            setModal(true)
+                                            setModalMode(1)
+                                        }}>
+                                            <Add2Icon />
+                                            {relationship.length === 0 && "Выбрать"}
+                                        </button>
+                                    </div>
+                                </div>
 
-                                <button className={styles.Button} onClick={() => {
-                                    setModal(true)
-                                    setModalMode(2)
-                                }}>
-                                    <Add2Icon />
-                                    {work.length === 0 && "Выбрать"}
-                                </button>
-                            </div>
-                        </div>
+                                <div>
+                                    <h5>Работа, учеба</h5>
+                                    <div className={styles.RowItems}>
+                                        {work.map((item, index) => <div key={index}>{item}</div>)}
 
-                        <div>
-                            <h5>События в жизни</h5>
-                            <div className={styles.RowItems}>
-                                {events.map((item, index) => <div key={index}>{item}</div>)}
+                                        <button className={styles.Button} onClick={() => {
+                                            setModal(true)
+                                            setModalMode(2)
+                                        }}>
+                                            <Add2Icon />
+                                            {work.length === 0 && "Выбрать"}
+                                        </button>
+                                    </div>
+                                </div>
 
-                                <button className={styles.Button} onClick={() => {
-                                    setModal(true)
-                                    setModalMode(4)
-                                }}>
-                                    <Add2Icon />
-                                    {events.length === 0 && "Выбрать"}
-                                </button>
-                            </div>
-                        </div>
+                                <div>
+                                    <h5>События в жизни</h5>
+                                    <div className={styles.RowItems}>
+                                        {events.map((item, index) => <div key={index}>{item}</div>)}
+
+                                        <button className={styles.Button} onClick={() => {
+                                            setModal(true)
+                                            setModalMode(4)
+                                        }}>
+                                            <Add2Icon />
+                                            {events.length === 0 && "Выбрать"}
+                                        </button>
+                                    </div>
+                                </div>
+                            </>
+                        }
                     </div>
 
                     <div className={styles.Box}>
@@ -173,9 +198,30 @@ const Filter = () => {
                                 </div>
                             ))}
                         </div>
+                        {sessionTime === "Ближайшее" && <p className={styles.MiniDescription}>Сначала будут показаны терапевты, к которым можно записаться в ближайшее время.</p>}
+                        {sessionTime === "Конкретное" && <p className={styles.MiniDescription}>Сначала будут показаны терапевты, к которым можно записаться в указанное время. Больше интервалов — больше подходящих специалистов.</p>}
+
+                        {sessionTime === "Конкретное" && <>
+                            <h4>Понедельник-пятница</h4>
+                            <div className={styles.Tabs}>
+                                {currentTimeList.map((t, index) => (
+                                    <div key={index} className={t === MonFriTime ? styles.ActiveTab : ""} onClick={() => setMonFriTime(t)}>
+                                        {t}
+                                    </div>
+                                ))}
+                            </div>
+                            <h4>Суббота-воскресенье</h4>
+                            <div className={styles.Tabs}>
+                                {currentTimeList.map((t, index) => (
+                                    <div key={index} className={t === SatSunTime ? styles.ActiveTab : ""} onClick={() => setSatSunTime(t)}>
+                                        {t}
+                                    </div>
+                                ))}
+                            </div>
+                        </>}
                     </div>
 
-                    <div className={styles.Box}>
+                    {typeConsult === "Индивидуальная" && <div className={styles.Box}>
                         <h3>Стоимость сессии</h3>
                         <div className={styles.Grid}>
                             {priceList.map((item, index) => (
@@ -196,7 +242,7 @@ const Filter = () => {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div>}
 
                     <div className={styles.ButtonBox} style={{ width: "100%" }}>
                         <ButtonDefault disabled={false} onClick={() => SearchSpecialist()}>Показать психологов</ButtonDefault>
@@ -227,6 +273,12 @@ const Filter = () => {
                     <ButtonDefault disabled={false} onClick={() => setModal(false)}>Готово</ButtonDefault>
                 </div>
             </div>}
+
+            {couplesModal && <CouplesModal
+                setModal={setCouplesModal}
+                setCoupleTerapy={setCoupleTerapy}
+                coupleTerapy={coupleTerapy}
+            />}
 
             {modal && <MobileAuthModal
                 modalMode={modalMode}

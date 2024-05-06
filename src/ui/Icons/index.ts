@@ -84,6 +84,8 @@ import File from "./File";
 import Video from "./Video";
 import Micro from "./Micro";
 import Phone from "./Phone";
+import Divorce from "./Divorce";
+import KidParrent from "./KidParrent";
 
 export {
     SignIn as SignInIcon,
@@ -171,5 +173,7 @@ export {
     File as FileIcon,
     Video as VideoIcon,
     Micro as MicroIcon,
-    Phone as PhoneIcon
+    Phone as PhoneIcon,
+    Divorce as DivorceIcon,
+    KidParrent as KidParrentIcon,
 }

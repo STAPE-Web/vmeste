@@ -24,17 +24,40 @@ const Specialists = () => {
     const themesParam = searchParams.get("themes")?.split("_") || ["Стресс", ""]
     const genderParam = searchParams.get("gender") || "M"
     const priceParam = searchParams.get("price")?.split(",").map(Number) || [2500, 3500, 4500];
+    const timeParam = searchParams.get("time")
+    const MFTime = searchParams.get("MFTime")
     const [nonePsyh, setNonePsyh] = useState(false)
 
     const getSpecialist = useCallback(async () => {
         const result = await PshycologistsAPI.get(sid, { familyTherapy: familyTherapyParam, gender: genderParam, prices: priceParam, themes: themesParam })
-        if (result.psychologists.length === 0) {
+        const psyhData: ISpecialist[] = result.psychologists
+        if (timeParam === "Ближайшее") psyhData.sort((a, b) => new Date(a.freeTime.sort()[0]).getTime() - new Date(b.freeTime.sort()[0]).getTime());
+        if (timeParam === "Конкретное") {
+            psyhData.sort((a, b) => {
+                const timeA = new Date(a.freeTime.sort()[0]);
+                const timeB = new Date(b.freeTime.sort()[0]);
+                const hoursA = timeA.getHours();
+                const hoursB = timeB.getHours();
+
+                if (MFTime === "до 10:00") {
+                    return (hoursA < 10 ? 0 : 1) - (hoursB < 10 ? 0 : 1) || hoursA - hoursB;
+                } else if (MFTime === "10:00-18:00") {
+                    return ((hoursA >= 10 && hoursA < 18) ? 0 : 1) - ((hoursB >= 10 && hoursB < 18) ? 0 : 1) || hoursA - hoursB;
+                } else if (MFTime === "после 18:00") {
+                    return (hoursA >= 18 ? 0 : 1) - (hoursB >= 18 ? 0 : 1) || hoursA - hoursB;
+                } else {
+                    return 0;
+                }
+            });
+        }
+
+        if (psyhData.length === 0) {
             setNonePsyh(true)
             const newResult = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс", ""] })
             setData(newResult.psychologists)
         } else {
             setNonePsyh(false)
-            setData(result.psychologists)
+            setData(psyhData)
         }
     }, [sid, familyTherapyParam, themesParam, genderParam, priceParam])
 
