@@ -32,7 +32,8 @@ const Code: FC<Props> = ({ setState, authData }) => {
     if (result.status === 201) {
       localStorage.setItem("sid", JSON.stringify(result.sid));
       if (result.type === "psych") {
-        window.location.href = "/psychologist/create"
+        window.location.replace("/psychologist/create")
+        localStorage.setItem("userType", "psych")
       } else {
         setState("Hello");
       }
@@ -41,6 +42,7 @@ const Code: FC<Props> = ({ setState, authData }) => {
     if (result.status === 200) {
       localStorage.setItem("sid", JSON.stringify(result.sid));
       window.location.replace("/");
+      if (result.type === "psych") localStorage.setItem("userType", "psych")
     }
 
     if (result.status === 404) {
