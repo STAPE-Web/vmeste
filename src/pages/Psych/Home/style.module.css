@@ -1,0 +1,82 @@
+.Page {
+    max-width: 1300px;
+    padding: 40px 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Session {
+    width: 100%;
+    height: 235px;
+    border-radius: 13px;
+    background: url("/Psych/Home1.png") no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Session h3 {
+    font-size: 24px;
+}
+
+.Payments,
+.Stats,
+.Clients,
+.Schedule {
+    width: 100%;
+    height: 150px;
+    border-radius: 13px;
+    background: url("/Psych/Home2.png") no-repeat;
+    background-size: cover;
+    padding: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.Stats {
+    background: url("/Psych/Home3.png") no-repeat;
+}
+
+.Clients {
+    background: url("/Psych/Home4.png") no-repeat;
+}
+
+.Schedule {
+    background: url("/Psych/Home5.png") no-repeat;
+}
+
+.Memo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #4C4C69;
+    font-weight: 400;
+    margin-top: 15px;
+    cursor: pointer;
+}

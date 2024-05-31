@@ -104,6 +104,18 @@
     cursor: pointer;
 }
 
+.Row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 335px;
+    width: 100%;
+}
+
+.Row p {
+    width: 100%;
+}
+
 @media screen and (max-width: 600px) {
     .Box h2 {
         font-size: 24px;

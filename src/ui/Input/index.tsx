@@ -4,7 +4,7 @@ import styles from "./style.module.css"
 interface Props {
     value: string
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    type: "tel" | "text" | "number"
+    type: "tel" | "text" | "number" | "date"
     placeholder: string
     code?: string
 }

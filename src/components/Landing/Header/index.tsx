@@ -21,10 +21,10 @@ const LandingHeader = () => {
 
                     <div className={styles.Box}>
                         <ul>
-                            <li>Для психологов</li>
+                            <li className={path === "/psychologist" ? styles.Active : ""} onClick={() => navigate("/psychologist")}>Для психологов</li>
                             <li className={path === "/about" ? styles.Active : ""} onClick={() => navigate("/about")}>О нас</li>
                             <li onClick={() => navigate("/blog")}>Блог</li>
-                            {!sid && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
+                            {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}><SignInIcon /> Вход</li>}
                         </ul>
 
                         <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
@@ -40,8 +40,8 @@ const LandingHeader = () => {
             </header>
 
             <ul className={`${styles.Navigation} ${menu ? styles.ActiveNav : ""}`}>
-                {!sid && <li onClick={() => navigate("/auth")}> Вход</li>}
-                <li>Для психологов</li>
+                {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}> Вход</li>}
+                <li onClick={() => navigate("/psychologist")}>Для психологов</li>
                 <li onClick={() => navigate("/about")}>О нас</li>
                 <li onClick={() => navigate("/blog")}>Блог</li>
             </ul>

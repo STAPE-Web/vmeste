@@ -16,6 +16,11 @@ import Blog from "@/pages/Blog"
 import Article from "@/pages/Article"
 import Video from "@/pages/Video"
 import Specialist from "@/pages/Specialist"
+import Landing2 from "@/pages/Landing2"
+import Create from "@/pages/Create"
+import PsychHome from "@/pages/Psych/Home"
+import PsychProfile from "@/pages/Psych/Profile"
+import Methods from "@/pages/Psych/Methods"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -23,7 +28,10 @@ const notAuthRoutes = [
     { id: 3, path: '/auth', element: Auth },
     { id: 4, path: '/register', element: Register },
     { id: 5, path: '/about', element: About },
-]
+    { id: 6, path: '/psychologist', element: Landing2 },
+    { id: 7, path: '/auth/psychologist', element: Auth },
+    { id: 8, path: '/psychologist/create', element: Create },
+];
 
 const authRoutes = [
     { id: 1, path: '*', element: Home },
@@ -43,6 +51,21 @@ const authRoutes = [
     { id: 15, path: '/video/:id', element: Video },
     { id: 16, path: '/register', element: Register },
     { id: 17, path: '/specialist/:id', element: Specialist },
-]
+];
 
-export { notAuthRoutes, authRoutes }
+const psychRoutes = [
+    { id: 1, path: '/psychologist/create', element: Create },
+    { id: 2, path: '/', element: PsychHome },
+    { id: 3, path: '/profile', element: PsychProfile },
+    { id: 4, path: '/methods', element: Methods },
+    { id: 5, path: '/chats', element: PsychHome },
+    { id: 6, path: '/sessions', element: PsychHome },
+    { id: 7, path: '/blog', element: PsychHome },
+    { id: 8, path: '/wallet', element: PsychHome },
+    { id: 9, path: '/faq', element: PsychHome },
+    { id: 10, path: '/memo', element: PsychHome },
+    { id: 11, path: '/support', element: PsychHome },
+    { id: 12, path: '/about', element: About },
+];
+
+export { notAuthRoutes, authRoutes, psychRoutes };

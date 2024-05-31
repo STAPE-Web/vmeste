@@ -104,3 +104,35 @@ export interface IProfile {
         phone?: string
     }
 }
+
+export interface ICreatePsyh {
+    sid: string,
+    fio: string,
+    "gender": string,
+    "bday": string,
+    "phone": string,
+    "email": string,
+    "contact": string,
+    "citizenship": string,
+    "socailMedia": string,
+    "bio": string,
+    "educ": string[],
+    "promComm": boolean,
+    "mainMethod": string,
+    "extraMethod": string,
+    "consultStart": string,
+    "onlineExp": boolean,
+    "onlineExpInfo": string,
+    "clients": number,
+    "longestSession": string,
+    "personalTreopia": boolean,
+    "supervisions": boolean,
+    "anotherJob": string,
+    "vmesteClients": string,
+    "psychProcess": string,
+    "onlineTherapy": string,
+    "familyTherapy": boolean,
+    "foundUs": string,
+    "docs": string,
+    "photos": string
+}

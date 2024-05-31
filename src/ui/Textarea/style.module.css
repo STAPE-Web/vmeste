@@ -1,0 +1,15 @@
+.Textarea {
+    width: 100%;
+    border: 1px solid #BCBCBF;
+    border-radius: 13px;
+    padding: 15px;
+    font-size: 15px;
+    color: #23232B;
+    font-weight: 400;
+    resize: vertical;
+    height: 140px;
+}
+
+.Textarea::placeholder {
+    color: #BCBCBF;
+}

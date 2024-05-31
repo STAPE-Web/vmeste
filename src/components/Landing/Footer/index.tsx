@@ -30,7 +30,7 @@ const Footer = () => {
                 <ul>
                     <li><Link to="/">Главная</Link></li>
                     <li><Link to="/profile">Личный кабинет</Link></li>
-                    <li><Link to="/">Для психологов</Link></li>
+                    <li><Link to="/psychologist">Для психологов</Link></li>
                     <li><Link to="/about">О нас</Link></li>
                     <li><Link to="/blog">Блог</Link></li>
                 </ul>

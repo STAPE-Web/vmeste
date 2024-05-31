@@ -1,0 +1,111 @@
+.Section {
+    padding: 0 15px;
+    padding-bottom: 175px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.Container h2 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 55px;
+    color: #313131;
+}
+
+.Grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.Grid .Item {
+    box-shadow: 3px 3px 16px 0px #B6A1C033;
+    background: #fff;
+    padding: 20px 20px 35px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Grid .Item h3 {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #1A3C51;
+    margin-top: 12px;
+}
+
+.Grid .Item p {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #313131;
+}
+
+.Grid .Item svg {
+    color: #1A3C51;
+    width: 35px;
+    height: 35px;
+}
+
+@media screen and (max-width: 1000px) {
+    .Grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+    }
+
+    .Item div {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .Item div svg {
+        min-width: 24px;
+        height: 24px;
+    }
+
+    .Grid .Item h3 {
+        margin-top: 0;
+    }
+
+    .Container {
+        align-items: center;
+        gap: 30px;
+    }
+
+    .Section {
+        padding: 50px 15px;
+    }
+
+    .Container h2 {
+        font-size: 32px;
+        line-height: 35.2px;
+    }
+
+    .Grid .Item p {
+        font-size: 14px;
+        line-height: 13.2px;
+    }
+
+    .Item {
+        padding: 20px;
+    }
+}

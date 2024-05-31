@@ -84,3 +84,12 @@ const getZIM = () => ZIM;
 getZIM().create(appConfig);
 export const zim = getZIM().getInstance() as ZIM;
 export const SDKVersion = getZIM().getVersion();
+
+export const generateYearsArray = (startYear: number): string[] => {
+    const currentYear = new Date().getFullYear();
+    const years: string[] = [];
+    for (let year = startYear; year <= currentYear; year++) {
+        years.push(String(year));
+    }
+    return years;
+};

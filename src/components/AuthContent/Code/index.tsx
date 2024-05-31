@@ -2,6 +2,7 @@ import { AuthAPI } from "@/api";
 import styles from "./style.module.css";
 import { FC, useCallback, useEffect, useState } from "react";
 import ReactCodeInput from "react-code-input";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   setState: React.Dispatch<
@@ -13,6 +14,7 @@ interface Props {
 const Code: FC<Props> = ({ setState, authData }) => {
   const [code, setCode] = useState("");
   const [time, setTime] = useState(60);
+  const path = useLocation().pathname.split("/")[2]
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,7 +31,11 @@ const Code: FC<Props> = ({ setState, authData }) => {
     console.log(result);
     if (result.status === 201) {
       localStorage.setItem("sid", JSON.stringify(result.sid));
-      setState("Hello");
+      if (result.type === "psych") {
+        window.location.href = "/psychologist/create"
+      } else {
+        setState("Hello");
+      }
     }
 
     if (result.status === 200) {
@@ -49,7 +55,7 @@ const Code: FC<Props> = ({ setState, authData }) => {
   }, [code]);
 
   async function getNewCode() {
-    const result = await AuthAPI.sendCode(authData);
+    const result = await AuthAPI.sendCode(authData, path !== undefined);
     console.log(result);
     setTime(60);
   }

@@ -1,0 +1,23 @@
+.InputItem {
+    padding: 0 12px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FF8702;
+    color: #fff;
+    border-radius: 5px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.InputItem div {
+    height: 15px;
+    width: 1px;
+    background: #fff;
+}
+
+.InputItem svg {
+    width: 8px;
+    height: 8px;
+}

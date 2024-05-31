@@ -1,10 +1,11 @@
 import { AuthAPI } from "@/api";
-import { authRoutes, notAuthRoutes } from "@/router";
+import { authRoutes, notAuthRoutes, psychRoutes } from "@/router";
 import { useCallback, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 const AppRouter = () => {
   const sid = JSON.parse(localStorage.getItem("sid") as string);
+  const userType = localStorage.getItem("userType");
   const [profileFetched, setProfileFetched] = useState(false);
 
   const getProfile = useCallback(async () => {
@@ -20,22 +21,32 @@ const AppRouter = () => {
 
   useEffect(() => {
     if (!profileFetched && sid) {
-      getProfile();
+      if (userType !== "psych") getProfile();
     }
-  }, [profileFetched, sid, getProfile]);
+  }, [profileFetched, sid, getProfile, userType]);
 
   return (
     <>
       <ScrollToTop />
       {sid ? (
         <Routes>
-          {authRoutes.map((route) => (
-            <Route
-              path={route.path}
-              element={<route.element />}
-              key={route.id}
-            />
-          ))}
+          {userType === "psych" ? (
+            psychRoutes.map((route) => (
+              <Route
+                path={route.path}
+                element={<route.element />}
+                key={route.id}
+              />
+            ))
+          ) : (
+            authRoutes.map((route) => (
+              <Route
+                path={route.path}
+                element={<route.element />}
+                key={route.id}
+              />
+            ))
+          )}
         </Routes>
       ) : (
         <Routes>

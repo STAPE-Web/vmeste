@@ -86,6 +86,8 @@ import Micro from "./Micro";
 import Phone from "./Phone";
 import Divorce from "./Divorce";
 import KidParrent from "./KidParrent";
+import Memo from "./Memo";
+import Delete from "./Delete";
 
 export {
     SignIn as SignInIcon,
@@ -176,4 +178,6 @@ export {
     Phone as PhoneIcon,
     Divorce as DivorceIcon,
     KidParrent as KidParrentIcon,
+    Memo as MemoIcon,
+    Delete as DeleteIcon,
 }

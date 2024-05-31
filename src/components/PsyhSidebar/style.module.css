@@ -1,0 +1,80 @@
+.Sidebar {
+    max-width: 300px;
+    min-width: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.User {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.User img {
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+}
+
+.User h3 {
+    color: #4C4C69;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.User h6 {
+    color: #98A1AA;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.List {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #F2F2F2;
+}
+
+.List .Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.List .Item svg {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    color: #E1DDD8;
+}
+
+.List .Item>svg {
+    color: #98A1AA;
+    width: 16px;
+    height: 16px;
+}
+
+.List .Item div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #23232B;
+}
+
+.Logout {
+    width: fit-content;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #BCBCBF;
+    font-size: 16px;
+    font-weight: 700;
+}
