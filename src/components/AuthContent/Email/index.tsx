@@ -32,10 +32,7 @@ const Email: FC<Props> = ({ setState, setAuthData }) => {
                     <Input onChange={e => setEmail(e.target.value)} placeholder="Ваша почта" type="text" value={email} />
                     <ButtonHeader disabled={email === ""} onClick={() => authorize()}>Получить код</ButtonHeader>
                 </div>
-                <div className={styles.Row}>
-                    <p className={styles.Enter} onClick={() => setState("Phone")}>Вход по телефону</p>
-                    {path !== undefined && <p className={styles.Enter} onClick={() => navigate("/psychologist/create")}>Создать аккаунт</p>}
-                </div>
+                <p className={styles.Enter} onClick={() => setState("Phone")}>Вход по телефону</p>
             </div>
 
             {path !== undefined

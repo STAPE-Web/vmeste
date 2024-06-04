@@ -1,0 +1,213 @@
+.Page {
+    max-width: 1300px;
+    padding: 40px 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Tabs {
+    background: #F2F2F2;
+    height: 30px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.Tabs div {
+    padding: 0 17px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
+    color: #BCBCBF;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.Tabs div.ActiveTab {
+    background: #FF8702;
+    color: #fff;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Top svg {
+    width: 24px;
+    height: 24px;
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Top .NoteIcon {
+    width: 20px;
+    height: 20px;
+    color: #FF8702;
+}
+
+.Top h2 {
+    color: #23232B;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.UserInfo {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0 24px 0;
+    flex-direction: column;
+    gap: 3px;
+    border-radius: 13px;
+    background: rgba(146, 211, 94, 0.15);
+    margin-top: 20px;
+}
+
+.UserInfo div {
+    position: absolute;
+    top: -40px;
+}
+
+.UserInfo h3 {
+    color: #23232B;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.UserInfo h3 span {
+    color: #595959;
+    font-weight: 500;
+}
+
+.UserInfo p {
+    color: #595959;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.Themes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ThemesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ThemesList div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ThemesList div ul {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+.Themes h3 {
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.ThemesList div h3 {
+    color: #23232B;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ThemesList ul li {
+    height: 32px;
+    border-radius: 7px;
+    background: #FF8702;
+    color: #fff;
+    padding: 0 10px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.Notes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.NoteButton {
+    width: 100%;
+    padding: 30px 45px;
+    border-radius: 13px;
+    background: #F2F2F2;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #AFABA8;
+    cursor: pointer;
+}
+
+.NoteItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    padding: 24px 30px;
+    border-radius: 13px;
+}
+
+.NoteItem h3 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.NoteItem p {
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.NoteItem h6 {
+    color: #AFABA8;
+    font-size: 14px;
+    font-weight: 400;
+}

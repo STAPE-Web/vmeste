@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react"
 import { generateToken, zim } from "@/utils"
 import { ZIMConversation } from "zego-zim-web"
 import Avatar from "@/assets/Avatar.svg"
+import PsychSidebar from "@/components/PsyhSidebar"
 
 const Chats = () => {
     const navigate = useNavigate()
@@ -13,6 +14,7 @@ const Chats = () => {
     const [items, setItems] = useState<ZIMConversation[]>([])
     const [isLogged, setIsLogged] = useState(false)
     const userData = JSON.parse(localStorage.getItem("userData") as string)
+    const userType = localStorage.getItem("userType")
 
     useEffect(() => {
         document.documentElement.style.overflowY = 'hidden';
@@ -22,7 +24,7 @@ const Chats = () => {
         };
     }, []);
 
-    const userInfo = { userID: userData.type === "email" ? userData.email : userData.phone, userName: userData.name };
+    const userInfo = { userID: userData.email || userData.phone, userName: userData.username };
     const token = generateToken(userInfo.userID, 0)
 
     const loginUser = useCallback(() => {
@@ -78,7 +80,7 @@ const Chats = () => {
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
-                <Sidebar />
+                {userType ? <PsychSidebar /> : <Sidebar />}
 
                 <div className={styles.Content}>
                     <div className={styles.Search}>

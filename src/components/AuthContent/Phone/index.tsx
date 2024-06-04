@@ -52,10 +52,7 @@ const Phone: FC<Props> = ({ setState, setAuthData }) => {
                     <ButtonHeader disabled={phone.length !== 10} onClick={() => authorize()}>Получить код</ButtonHeader>
                 </div>
 
-                <div className={styles.Row}>
-                    <p className={styles.Enter} onClick={() => setState("Email")}>Вход по почте</p>
-                    {path !== undefined && <p className={styles.Enter} onClick={() => navigate("/psychologist/create")}>Создать аккаунт</p>}
-                </div>
+                <p className={styles.Enter} onClick={() => setState("Email")}>Вход по почте</p>
             </div>
 
             {path !== undefined

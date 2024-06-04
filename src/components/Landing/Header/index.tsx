@@ -27,7 +27,11 @@ const LandingHeader = () => {
                             {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}><SignInIcon /> Вход</li>}
                         </ul>
 
-                        <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
+                        {path === "/psychologist"
+                            ? <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth/psychologist")}>Зарегестрироваться</ButtonHeader>
+                            : <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
+
+                        }
 
                         <Language language={language} setLanguage={setLanguage} />
 

@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { SessionAPI } from "@/api"
 import { ISession } from "@/types"
+import PsychSidebar from "@/components/PsyhSidebar"
 
 const Sessions = () => {
     const navigate = useNavigate()
     const [tab, setTab] = useState("Планируемые")
     const tabs = ["Планируемые", "Прошедшие"]
     const sid = JSON.parse(localStorage.getItem("sid") as string)
+    const userType = localStorage.getItem("userType")
 
     const [futureSessions, setFutureSessions] = useState<ISession[]>([])
     const [lastSessions, setLastSessions] = useState<ISession[]>([])
@@ -52,7 +54,7 @@ const Sessions = () => {
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
-                <Sidebar />
+                {userType ? <PsychSidebar /> : <Sidebar />}
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>

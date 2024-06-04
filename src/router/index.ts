@@ -21,6 +21,11 @@ import Create from "@/pages/Create"
 import PsychHome from "@/pages/Psych/Home"
 import PsychProfile from "@/pages/Psych/Profile"
 import Methods from "@/pages/Psych/Methods"
+import Statistics from "@/pages/Statistics"
+import Clients from "@/pages/Clients"
+import Client from "@/pages/Client"
+import Schedule from "@/pages/Schedule"
+import Wallet from "@/pages/Psych/Wallet"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -51,6 +56,7 @@ const authRoutes = [
     { id: 15, path: '/video/:id', element: Video },
     { id: 16, path: '/register', element: Register },
     { id: 17, path: '/specialist/:id', element: Specialist },
+    { id: 18, path: '/psychologist', element: Landing2 },
 ];
 
 const psychRoutes = [
@@ -58,14 +64,25 @@ const psychRoutes = [
     { id: 2, path: '/', element: PsychHome },
     { id: 3, path: '/profile', element: PsychProfile },
     { id: 4, path: '/methods', element: Methods },
-    { id: 5, path: '/chats', element: PsychHome },
-    { id: 6, path: '/sessions', element: PsychHome },
+    { id: 5, path: '/chats', element: Chats },
+    { id: 6, path: '/sessions', element: Sessions },
+    // { id: 7, path: '/blog', element: Blog },
     { id: 7, path: '/blog', element: PsychHome },
-    { id: 8, path: '/wallet', element: PsychHome },
+    { id: 8, path: '/wallet', element: Wallet },
     { id: 9, path: '/faq', element: PsychHome },
     { id: 10, path: '/memo', element: PsychHome },
     { id: 11, path: '/support', element: PsychHome },
     { id: 12, path: '/about', element: About },
+    { id: 13, path: '/statistic', element: Statistics },
+    { id: 14, path: '/clients', element: Clients },
+    { id: 15, path: '/clients/:id', element: Client },
+    { id: 16, path: '/schedule', element: Schedule },
+    { id: 17, path: '/session/:id', element: Session },
+    { id: 18, path: '/chat/:id', element: Chat },
+    { id: 20, path: '/article/:id', element: Article },
+    { id: 21, path: '/video/:id', element: Video },
+    { id: 22, path: '/test/:id', element: Test },
+    { id: 23, path: '/psychologist', element: Landing2 },
 ];
 
 export { notAuthRoutes, authRoutes, psychRoutes };

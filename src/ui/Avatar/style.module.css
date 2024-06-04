@@ -1,0 +1,22 @@
+.Avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background: #92D35E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 5px solid #FFFDFC;
+}
+
+.Avatar p {
+    font-size: 35px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.Avatar img {
+    width: 100%;
+    height: 100%;
+}

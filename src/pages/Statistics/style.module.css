@@ -1,0 +1,179 @@
+.Page {
+    max-width: 1300px;
+    padding: 40px 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.List {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    flex-direction: column;
+    padding: 24px 12px;
+    gap: 30px;
+    height: 100%;
+}
+
+.Top,
+.Bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.Bottom {
+    gap: 5px;
+    min-height: 52px;
+}
+
+.Top svg {
+    width: 24px;
+    height: 24px;
+    color: #FF8702;
+}
+
+.Top h4 {
+    color: #23232B;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    min-height: 36px;
+}
+
+.Bottom p {
+    color: #595959;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+}
+
+.Bottom h3 {
+    color: #23232B;
+    font-weight: 800;
+    font-size: 23px;
+    text-align: center;
+    line-height: 22px;
+}
+
+.WithUs {
+    width: 100%;
+    padding: 35px 30px;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    border-radius: 13px;
+}
+
+.WithUs .Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.WithUs p {
+    color: #23232B;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.WithUs h3 {
+    color: #23232B;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.Sessions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Sessions .Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Sessions h3 {
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.Sessions h4 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.Sessions p {
+    color: #23232B;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.VideoCall {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.VideoList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.VideoCall h2 {
+    color: #23232B;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.VideoItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 12px;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+}
+
+.VideoItem h3 {
+    color: #23232B;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.VideoItem p {
+    color: #595959;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+}

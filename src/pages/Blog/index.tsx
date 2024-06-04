@@ -7,6 +7,7 @@ import ScrollTest from "@/components/ScrollTest"
 import { MaterialsAPI } from "@/api"
 import { IArticle, IBlog, ITests } from "@/types"
 import ButtonRound from "@/ui/Buttons/Round"
+import PsychSidebar from "@/components/PsyhSidebar"
 
 const Blog = () => {
     const navigate = useNavigate()
@@ -15,6 +16,7 @@ const Blog = () => {
     const [grid, setGrid] = useState(true)
     const [data, setData] = useState<IBlog | null>(null)
     const sid = JSON.parse(localStorage.getItem("sid") as string)
+    const userType = localStorage.getItem("userType")
 
     useEffect(() => {
         document.body.style.overflowY = 'hidden';
@@ -55,12 +57,12 @@ const Blog = () => {
 
     // if (data === null) return;
 
-    const favoriteTestsExist = data !== null && Object.keys(data?.tests).some(category =>
+    const favoriteTestsExist = data !== null && data !== undefined && Object.keys(data?.tests).some(category =>
         // @ts-ignore
         data?.tests[category].some((i: ITests) => i.isFavorite)
     );
 
-    const favoriteArticlesExist = data !== null && Object.keys(data?.articles).some(category =>
+    const favoriteArticlesExist = data !== null && data !== undefined && Object.keys(data?.articles).some(category =>
         // @ts-ignore
         data?.articles[category].some((i: ITests) => i.isFavorite)
     );
@@ -243,7 +245,7 @@ const Blog = () => {
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
-                <Sidebar />
+                {userType ? <PsychSidebar /> : <Sidebar />}
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>

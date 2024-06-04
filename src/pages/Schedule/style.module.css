@@ -1,0 +1,125 @@
+.Page {
+    max-width: 1300px;
+    padding: 40px 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Top h2 {
+    color: #23232B;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.Top svg {
+    width: 24px;
+    height: 24px;
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.Calendar .Info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Calendar .Info div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Calendar .Info p {
+    color: #BCBCBF;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.Calendar .Info svg {
+    width: 24px;
+    height: 24px;
+    color: #FF8702;
+    cursor: pointer;
+}
+
+.Dates {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.Dates svg {
+    width: 15px;
+    height: 15px;
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Dates div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-direction: column;
+    color: #4C4C69;
+    cursor: pointer;
+}
+
+.Dates div span {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.Dates div p {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.Dates div:nth-child(2) {
+    color: #FF8702;
+}
+
+.Memo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 13px;
+    background: rgba(255, 135, 2, 0.1);
+    color: #FF8702;
+    max-width: 335px;
+}
+
+.Memo svg {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+}

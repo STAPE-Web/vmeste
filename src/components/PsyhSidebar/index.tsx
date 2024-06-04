@@ -1,10 +1,11 @@
 import { ArrowRightIcon, CalendarIcon, DiaryIcon, DocumentIcon, HomeIcon, InfoIcon, MessageIcon, QuestionIcon, SupportIcon, UserIcon, WalletIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import Avatar from "@/assets/Avatar.png"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const PsychSidebar = () => {
     const navigate = useNavigate()
+    const path = useLocation()
 
     const items = [
         { name: "Главная", icon: HomeIcon, link: "/" },
@@ -26,6 +27,12 @@ const PsychSidebar = () => {
         { name: "О сервисе", icon: InfoIcon, link: "/about" },
     ]
 
+    function signOut() {
+        localStorage.removeItem("sid")
+        localStorage.removeItem("userType")
+        window.location.replace("/")
+    }
+
     return (
         <div className={styles.Sidebar}>
             <div className={styles.User}>
@@ -39,7 +46,7 @@ const PsychSidebar = () => {
 
             <div className={styles.List}>
                 {items.map((item, index) => (
-                    <div key={index} className={styles.Item} onClick={() => navigate(item.link)}>
+                    <div key={index} className={`${styles.Item} ${path.pathname === item.link ? styles.Active : ""}`} onClick={() => navigate(item.link)}>
                         <div>
                             <item.icon />
                             {item.name}
@@ -50,7 +57,7 @@ const PsychSidebar = () => {
 
             <div className={styles.List}>
                 {items2.map((item, index) => (
-                    <div key={index} className={styles.Item} onClick={() => navigate(item.link)}>
+                    <div key={index} className={`${styles.Item} ${path.pathname === item.link ? styles.Active : ""}`} onClick={() => navigate(item.link)}>
                         <div>
                             <item.icon />
                             {item.name}
@@ -62,7 +69,7 @@ const PsychSidebar = () => {
 
             <div className={styles.List}>
                 {items3.map((item, index) => (
-                    <div key={index} className={styles.Item} onClick={() => navigate(item.link)}>
+                    <div key={index} className={`${styles.Item} ${path.pathname === item.link ? styles.Active : ""}`} onClick={() => navigate(item.link)}>
                         <div>
                             <item.icon />
                             {item.name}
@@ -72,7 +79,7 @@ const PsychSidebar = () => {
                 ))}
             </div>
 
-            <button className={styles.Logout}>Выйти из профиля</button>
+            <button className={styles.Logout} onClick={() => signOut()}>Выйти из профиля</button>
         </div>
     )
 }

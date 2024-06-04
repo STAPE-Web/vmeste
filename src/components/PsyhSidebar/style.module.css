@@ -69,6 +69,10 @@
     color: #23232B;
 }
 
+.List .Item.Active div svg {
+    color: #FF8702;
+}
+
 .Logout {
     width: fit-content;
     background: transparent;

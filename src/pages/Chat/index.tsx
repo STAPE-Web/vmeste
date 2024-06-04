@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { generateToken, zim } from "@/utils"
 import { ZIMMediaMessageBase, ZIMUserFullInfo } from "zego-zim-web"
 import useGlobalStore from "@/store"
+import PsychSidebar from "@/components/PsyhSidebar"
 
 const Chat = () => {
     const navigate = useNavigate()
@@ -19,6 +20,7 @@ const Chat = () => {
     const [user, setUser] = useState<ZIMUserFullInfo | null>(null)
     const callJoined = useGlobalStore(state => state.callJoined)
     const callId = useGlobalStore(state => state.callId)
+    const userType = localStorage.getItem("userType")
 
     useEffect(() => {
         document.documentElement.style.overflowY = 'hidden';
@@ -35,7 +37,7 @@ const Chat = () => {
         }
     }
 
-    const userInfo = { userID: userData.type === "email" ? userData.email : userData.phone, userName: userData.name };
+    const userInfo = { userID: userData.email || userData.phone, userName: userData.username };
     const token = generateToken(userInfo.userID, 0)
     zim.login(userInfo.userID, { userName: userInfo.userName, token: token, isOfflineLogin: false }).then(() => {
         zim.queryHistoryMessage(toConversationID, 0, { count: 30, reverse: true })
@@ -122,7 +124,7 @@ const Chat = () => {
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
-                <Sidebar />
+                {userType ? <PsychSidebar /> : <Sidebar />}
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>

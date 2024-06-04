@@ -93,3 +93,10 @@ export const generateYearsArray = (startYear: number): string[] => {
     }
     return years;
 };
+
+export function fillPaymentColor(type: string) {
+    switch (type) {
+        case "Запланировано": return "#F8CB2F"
+        case "Выплачено": return "#92D35E"
+    }
+}

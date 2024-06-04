@@ -1,0 +1,74 @@
+.Page {
+    max-width: 1300px;
+    padding: 40px 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.Section h2 {
+    color: #4C4C69;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.Section h2 span {
+    font-size: 35px;
+}
+
+.List {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.Item {
+    width: 100%;
+    background: #fff;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    border-radius: 13px;
+    padding: 24px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    cursor: pointer;
+}
+
+.Item h3 {
+    color: #4C4C69;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.Item h3 span {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.Item div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Item div p {
+    font-size: 18px;
+    color: #AFABA8;
+    font-weight: 400;
+}
+
+.Item div p:last-child {
+    color: #4C4C69;
+}

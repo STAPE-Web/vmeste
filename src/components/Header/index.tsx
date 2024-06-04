@@ -10,6 +10,7 @@ const Header = () => {
     const navigate = useNavigate()
     const [language, setLanguage] = useState<"RU" | "EN">("RU")
     const sid = JSON.parse(localStorage.getItem('sid') as string)
+    const userType = localStorage.getItem('userType')
     const path = window.location.pathname
 
     return (
@@ -20,13 +21,19 @@ const Header = () => {
 
                     <div className={styles.Box}>
                         <ul>
-                            <li>Для психологов</li>
+                            {userType === "psych"
+                                ? <li onClick={() => navigate("/")}>Главная</li>
+                                : <li onClick={() => navigate("/psychologist")}>Для психологов</li>
+                            }
                             <li onClick={() => navigate("/about")}>О нас</li>
                             <li onClick={() => navigate("/blog")}>Блог</li>
                             {!sid && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
                         </ul>
 
-                        <ButtonHeader disabled={false} onClick={() => navigate("/specialists")}>Выбрать психолога</ButtonHeader>
+                        {userType === "psych"
+                            ? <ButtonHeader disabled={false} onClick={() => navigate("/schedule")}>Расписание</ButtonHeader>
+                            : <ButtonHeader disabled={false} onClick={() => navigate("/specialists")}>Выбрать психолога</ButtonHeader>
+                        }
 
                         <Language language={language} setLanguage={setLanguage} />
                     </div>

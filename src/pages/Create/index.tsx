@@ -122,7 +122,7 @@ const Create = () => {
                     </div>
 
                     <div className={styles.InputBox}>
-                        <Input onChange={e => setPhone(e.target.value)} placeholder="+ Х ХХХ ХХХ ХХ ХХ" type="text" value={phone} />
+                        <Input code="+7" onChange={e => setPhone(e.target.value)} placeholder="ХХХ ХХХ ХХ ХХ" type="tel" value={phone} />
                     </div>
                 </div>
 

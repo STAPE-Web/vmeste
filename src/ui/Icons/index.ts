@@ -88,6 +88,10 @@ import Divorce from "./Divorce";
 import KidParrent from "./KidParrent";
 import Memo from "./Memo";
 import Delete from "./Delete";
+import Stable from "./Stable";
+import Time2 from "./Time2";
+import Note from "./Note";
+import Note2 from "./Note2";
 
 export {
     SignIn as SignInIcon,
@@ -180,4 +184,8 @@ export {
     KidParrent as KidParrentIcon,
     Memo as MemoIcon,
     Delete as DeleteIcon,
+    Stable as StableIcon,
+    Time2 as Time2Icon,
+    Note as NoteIcon,
+    Note2 as Note2Icon,
 }
