@@ -27,7 +27,7 @@ class Auth {
     }
 
     async createPsyh(data: ICreatePsyh) {
-        return await axios.post(`${import.meta.env.VITE_SERVER}/account/saveForm`, {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/saveForm`, {
             ...data
         }).then((res) => res.data)
     }

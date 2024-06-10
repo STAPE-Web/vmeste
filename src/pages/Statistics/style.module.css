@@ -1,6 +1,6 @@
 .Page {
-    max-width: 1300px;
-    padding: 40px 0;
+    max-width: 1330px;
+    padding: 40px 15px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -176,4 +176,67 @@
     text-align: center;
     font-size: 14px;
     font-weight: 400;
+}
+
+.MobileHeader {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.MobileHeader svg {
+    width: 28px;
+    height: 28px;
+    color: #BCBCBF;
+}
+
+.MobileHeader h3 {
+    width: 100%;
+    color: #BCBCBF;
+    text-align: center;
+}
+
+.MobileHeader div {
+    width: 28px;
+    height: 28px;
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+        padding-bottom: 100px;
+    }
+
+    .Section {
+        padding: 0;
+        box-shadow: none;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .MobileHeader {
+        display: flex;
+    }
+
+    .Title {
+        display: none;
+    }
+
+    .List {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .VideoList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .VideoList {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

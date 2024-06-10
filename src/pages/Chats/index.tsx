@@ -24,7 +24,7 @@ const Chats = () => {
         };
     }, []);
 
-    const userInfo = { userID: userData.email || userData.phone, userName: userData.username };
+    const userInfo = { userID: userData.email || userData.phone || userData.id, userName: userData.username || userData.name };
     const token = generateToken(userInfo.userID, 0)
 
     const loginUser = useCallback(() => {

@@ -1,11 +1,13 @@
 import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
-import { StableIcon, Time2Icon, UserIcon, VerifedIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, StableIcon, Time2Icon, UserIcon, VerifedIcon } from "@/ui/Icons"
 import Favicon from "@/assets/Favicon"
 import BarChart from "@/components/BarChart"
 import PieChart from "@/ui/PieChart"
+import { useNavigate } from "react-router-dom"
 
 const Statistics = () => {
+    const navigate = useNavigate()
     const videoData = [
         { month: "Ноябрь", value: 100, amount: 12, max: 12 },
         { month: "Декабрь", value: 84, amount: 5, max: 6 },
@@ -16,7 +18,12 @@ const Statistics = () => {
             <PsychSidebar />
 
             <section className={styles.Section}>
-                <h2>Статистика</h2>
+                <div className={styles.MobileHeader}>
+                    <ArrowLeftIcon onClick={() => navigate(-1)} />
+                    <h3>Статистика</h3>
+                    <div />
+                </div>
+                <h2 className={styles.Title}>Статистика</h2>
 
                 <div className={styles.List}>
                     <div className={styles.Item}>

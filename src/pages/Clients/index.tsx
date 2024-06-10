@@ -1,6 +1,7 @@
 import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
+import { ArrowLeftIcon } from "@/ui/Icons"
 
 const Clients = () => {
     const navigate = useNavigate()
@@ -19,7 +20,13 @@ const Clients = () => {
             <PsychSidebar />
 
             <section className={styles.Section}>
-                <h2>Клиенты</h2>
+                <div className={styles.MobileHeader}>
+                    <ArrowLeftIcon onClick={() => navigate(-1)} />
+                    <h3>Клиенты</h3>
+                    <div />
+                </div>
+
+                <h2 className={styles.Title}>Клиенты</h2>
                 <h2><span>{items.length}</span> человек</h2>
 
                 <div className={styles.List}>

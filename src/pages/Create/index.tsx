@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.css"
 import StepLine from "@/ui/StepLine"
 import ButtonRound from "@/ui/Buttons/Round"
-import { Add2Icon, ArrowLeftIcon, ArrowRightIcon } from "@/ui/Icons"
+import { Add2Icon, ArrowLeftIcon, ArrowRightIcon, DeleteIcon } from "@/ui/Icons"
 import Input from "@/ui/Input"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Textarea from "@/ui/Textarea"
 import { generateYearsArray } from "@/utils"
 import Select from "@/ui/Select2"
-import { ICreatePsyh } from "@/types"
-import { AuthAPI } from "@/api"
+import { ICreatePsyh, IEduc } from "@/types"
+import { AuthAPI, UploadAPI } from "@/api"
+import Upload from "@/components/Upload"
+import { useNavigate } from "react-router-dom"
 
 const Create = () => {
+    const navigate = useNavigate()
     const [step, setStep] = useState(1)
     const [disable, setDisable] = useState(false)
     const [endRegister, setEndRegister] = useState(false)
+    // const [modal, setModal] = useState(false)
+    // const [modalType, setModalType] = useState<"Внутренние конфликты" | "Отношения" | "Работа, учеба" | "События в жизни" | "">("")
 
     const [username, setUsername] = useState("")
     const [gender, setGender] = useState("")
@@ -28,7 +33,7 @@ const Create = () => {
     const [citizenship, setcitizenship] = useState("")
     const [socailMedia, setSocialMedia] = useState("")
     const [bio, setBio] = useState("")
-    const [educ, setEduc] = useState<string[]>([])
+    const [educ, setEduc] = useState<IEduc[]>([])
     const [university, setUniversity] = useState("")
     const [endYear, setEndYear] = useState("")
     const yearList = generateYearsArray(2000);
@@ -38,7 +43,6 @@ const Create = () => {
     const extraEduList = ["Зависимости, аддикции", "Расстройство пищевого поведения", "Сексология", "Экстремальные ситуации, ПТСР", "Другое"]
     const [extraEdu, setExtraEdu] = useState<string[]>([])
     const [promComm, setpromComm] = useState("")
-    const edu = `${endYear} - ${university} - ${specialName} - ${degree}`
 
     const [mainMethod, setmainMethod] = useState("")
     const mainMethodList = ["Психоанализ", "Юнгианский анализ", "Гештальтпсихология", "Когнитивно-поведенческая психология", "Нейро-лингвистическое программирование", "Психодрама", "Транзактный анализ", "Экзистенциальная психология", "Клиент-центрированная терапия", "Арт-терапия", "Телесно-ориентированная терапия"]
@@ -49,10 +53,10 @@ const Create = () => {
     const [longestSession, setlongestSession] = useState("")
     const [personalTreopia, setpersonalTreopia] = useState("")
 
-    const [myCondition, setMyCondition] = useState<string[]>([])
-    const [relationship, setRelationship] = useState<string[]>([])
-    const [work, setWork] = useState<string[]>([])
-    const [events, setEvents] = useState<string[]>([])
+    // const [myCondition, setMyCondition] = useState<string[]>([])
+    // const [relationship, setRelationship] = useState<string[]>([])
+    // const [work, setWork] = useState<string[]>([])
+    // const [events, setEvents] = useState<string[]>([])
 
     const [supervisions, setsupervisions] = useState("")
     const [anotherJob, setanotherJob] = useState("")
@@ -63,20 +67,17 @@ const Create = () => {
     const [foundUs, setfoundUs] = useState("")
     const foundUsList = ["Рассказали коллеги / друзья", "Из рекламы", "Гештальтпсихология", "Нашла на сайте “Вместе” информацию о наборе", "Через поиск работы в интернете", "Другое"]
 
-    const items = [
-        { title: "Моё состояние", state: myCondition, func: setMyCondition, array: ["Стресс", "Упадок сил", "Нестабильная самооценка", "Приступы страха и тревоги", "Перепады настроения", "Раздражительность", "Ощущение одиночества", "Проблемы с концентрацией", "Эмоциональная зависимость", "Проблемы со сном", "Расстройство пищевого поведения", "Панические атаки", "Навязчивые мысли о здоровье", "Сложности с алкоголем/наркотиками"] },
-        { title: "Отношения", state: relationship, func: setRelationship, array: ["С партнером", "С окружающими", "С родителями", "С детьми", "Сексуальные", "Сложности с ориентацией, ее поиск"] },
-        { title: "Работа, учеба", state: work, func: setWork, array: ["Недостаток мотивации", "Выгорание", "«Не знаю, чем хочу заниматься»", "Прокрастинация", "Отсутствие цели", "Смена, потеря работы"] },
-        { title: "События в жизни", state: events, func: setEvents, array: ["Переезд, эмиграция", "Беременность, рождение ребёнка", "Разрыв отношений, развод", "Финансовые изменения", "Утрата близкого человека", "Болезнь, своя и близких", "Насилие"] }
-    ]
+    const [photos, setPhotos] = useState<FileList | null>(null)
+    const [docs, setDocs] = useState<FileList | null>(null)
+    const [docsList, setDocsList] = useState<string[]>([])
+    const [photosList, setPhotosList] = useState<string[]>([])
 
-    // function checkItem(item: string, func: React.Dispatch<React.SetStateAction<string[]>>, state: string[]) {
-    //     if (state.includes(item)) {
-    //         func(state.filter(i => i !== item))
-    //     } else {
-    //         func(prev => [...prev, item])
-    //     }
-    // }
+    // const items = [
+    //     { title: "Моё состояние", state: myCondition, func: setMyCondition, array: ["Стресс", "Упадок сил", "Нестабильная самооценка", "Приступы страха и тревоги", "Перепады настроения", "Раздражительность", "Ощущение одиночества", "Проблемы с концентрацией", "Эмоциональная зависимость", "Проблемы со сном", "Расстройство пищевого поведения", "Панические атаки", "Навязчивые мысли о здоровье", "Сложности с алкоголем/наркотиками"] },
+    //     { title: "Отношения", state: relationship, func: setRelationship, array: ["С партнером", "С окружающими", "С родителями", "С детьми", "Сексуальные", "Сложности с ориентацией, ее поиск"] },
+    //     { title: "Работа, учеба", state: work, func: setWork, array: ["Недостаток мотивации", "Выгорание", "«Не знаю, чем хочу заниматься»", "Прокрастинация", "Отсутствие цели", "Смена, потеря работы"] },
+    //     { title: "События в жизни", state: events, func: setEvents, array: ["Переезд, эмиграция", "Беременность, рождение ребёнка", "Разрыв отношений, развод", "Финансовые изменения", "Утрата близкого человека", "Болезнь, своя и близких", "Насилие"] }
+    // ]
 
     function fillContent() {
         switch (step) {
@@ -162,6 +163,16 @@ const Create = () => {
                             <h3>Расскажите нам о себе в свободной форме. Что считаете нам нужно узнать о вас, чтобы понять, какой вы специалист?*</h3>
                             <Textarea onChange={e => setBio(e.target.value)} placeholder="Введите ответ" value={bio} />
                         </div>
+
+                        <div className={styles.ColumnBox}>
+                            <h3>Подтверждающие документы*</h3>
+                            <p>Прикрепите фотографии развернутых дипломов и сертификатов, подтверждающих обучение.<br />
+                                Обязательные документы: <br />
+                                1. диплом о базовом психологическом (смежном) обучении / переподготовке;<br />
+                                2. документы об обучении методу.<br />
+                                Если обучение не окончено, пожалуйста, прикрепите справку из обучающего учреждения.</p>
+                            <Upload file={docs} id="docs" setFile={setDocs} />
+                        </div>
                     </div>
 
                     <div className={styles.Column}>
@@ -191,6 +202,15 @@ const Create = () => {
                             <Select array={degreeList} setValue={setDegree} value={degree === "" ? "Выберите вариант" : degree} />
                             {university !== "" && endYear !== "" && specialName !== "" && degree !== "" && <button className={styles.AddButton} onClick={() => addNewEduc()}><Add2Icon /> Добавить</button>}
                         </div>
+
+                        <ul>
+                            {educ.map((item, index) => (
+                                <li key={index}>{item.year} - {item.name} - {item.faculty} - {degreeList[item.degree]} <DeleteIcon onClick={() => {
+                                    const newArray = educ.filter((_, i) => i !== index)
+                                    setEduc(newArray)
+                                }} /></li>
+                            ))}
+                        </ul>
 
                         <div className={styles.ColumnBox}>
                             <h3>Дополнительное образование</h3>
@@ -222,7 +242,7 @@ const Create = () => {
                             <Select array={mainMethodList} setValue={setmainMethod} value={mainMethod === "" ? "Выберите вариант" : mainMethod} />
                         </div>
 
-                        <div className={styles.ColumnBox}>
+                        {/* <div className={styles.ColumnBox}>
                             <h3>Ваш дополнительный метод?*</h3>
                             <div className={styles.Grid}>
                                 {themeList.map((item, index) => (
@@ -233,7 +253,7 @@ const Create = () => {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className={styles.ColumnBox}>
                             <h3>Когда вы начали консультировать?</h3>
@@ -318,10 +338,21 @@ const Create = () => {
                             <Select array={foundUsList} setValue={setfoundUs} value={foundUs === "" ? "Выберите вариант" : foundUs} />
                             {foundUs === "Другое" && <Textarea onChange={e => setonlineTherapy(e.target.value)} placeholder="Введите ответ" value={onlineTherapy} />}
                         </div>
+
+                        <div className={styles.ColumnBox}>
+                            <h3>Прикрепите ваши фотографии*</h3>
+                            <p>Требования к фото: <br />
+                                Цветные;<br />
+                                Лицо по центру и хорошо освещено.<br />
+                                Размер не менее 1МБ<br />
+                                В формате .jpg<br />
+                                В количестве не более трех штук</p>
+                            <Upload file={photos} id="photos" setFile={setPhotos} />
+                        </div>
                     </div>
                 </div>
 
-                <ButtonDefault disabled={disable} onClick={() => Auth()}>Отправить</ButtonDefault>
+                <ButtonDefault disabled={false} onClick={() => Auth()}>Отправить</ButtonDefault>
                 <h6>Нажимая кнопку «Отправить» я подтверждаю, что прочитал(а) и даю <a href="">согласие</a> на обработку своих персональных данных. Подробнее об обработке данных читайте в <a href="">политике</a>.</h6>
             </div>
         }
@@ -330,14 +361,18 @@ const Create = () => {
 
     useEffect(() => {
         if (step === 1) setDisable(username === "" || gender === "" || bday === "" || phone === "" || email === "")
-        if (step === 2) setDisable(contact === "" || citizenship === "" || socailMedia === "" || bio === "" || university === "" && educ.length === 0 || promComm === "")
-        // if (step === 3) setDisable([...myCondition, ...relationship, ...work, ...events].length === 0)
+        if (step === 2) setDisable(contact === "" || citizenship === "" || socailMedia === "" || bio === "" || promComm === "")
         if (step === 3) setDisable(mainMethod === "" || consultStart === "" || onlineExp === "" || clients === "" || longestSession === "" || personalTreopia === "")
         if (step === 4) setDisable(supervisions === "" || anotherJob === "" || vmesteClients === "" || psychProcess === "" || onlineTherapy === "" || familyTherapy === "" || foundUs === "")
-    }, [username, gender, bday, phone, email, edu, university, contact, citizenship, socailMedia, bio, educ, step, myCondition, relationship, work, events, promComm, mainMethod, consultStart, onlineExp, clients, longestSession, personalTreopia, supervisions, anotherJob, vmesteClients, psychProcess, onlineTherapy, familyTherapy, foundUs])
+    }, [username, gender, bday, phone, email, university, contact, citizenship, socailMedia, bio, step, promComm, mainMethod, consultStart, onlineExp, clients, longestSession, personalTreopia, supervisions, anotherJob, vmesteClients, psychProcess, onlineTherapy, familyTherapy, foundUs])
 
     function addNewEduc() {
-        setEduc(prev => [...prev, edu])
+        setEduc(prev => [...prev, {
+            degree: degreeList.indexOf(degree) + 1,
+            faculty: specialName,
+            name: university,
+            year: Number(endYear)
+        }])
         clearEduValues()
     }
 
@@ -357,37 +392,57 @@ const Create = () => {
         }
     }
 
-    const themeList = [
-        { title: "Моё состояние", image: "/Register_1.png" },
-        { title: "Отношения", image: "/Register_2.png" },
-        { title: "Работа, учеба", image: "/Register_3.png" },
-        { title: "События в жизни", image: "/Register_4.png" },
-    ]
+    // const themeList = [
+    //     { title: "Моё состояние", image: "/Register_1.png" },
+    //     { title: "Отношения", image: "/Register_2.png" },
+    //     { title: "Работа, учеба", image: "/Register_3.png" },
+    //     { title: "События в жизни", image: "/Register_4.png" },
+    // ]
 
     async function Auth() {
         const data: ICreatePsyh = {
-            sid: JSON.parse(localStorage.getItem("sid") as string),
-            fio: username,
-            promComm: promComm === "Состою",
-            extraMethod: "",
-            onlineExp: onlineExp === "Да",
-            personalTreopia: personalTreopia === "Да",
-            supervisions: supervisions === "Да",
-            clients: Number(clients),
-            docs: "", photos: "",
-            familyTherapy: familyTherapy === "Парные",
-            gender: gender === "Женский" ? "W" : "M", bday, phone, email, contact, citizenship, socailMedia, bio, educ, mainMethod, consultStart, onlineExpInfo, longestSession,
-            anotherJob, vmesteClients, psychProcess, onlineTherapy, foundUs
+            "sid": JSON.parse(localStorage.getItem("sid") as string),
+            "fio": username,
+            "gender": gender === "Женский" ? "W" : "M",
+            "bday": bday,
+            "phone": `+7${phone}`,
+            "email": email,
+            "contact": contact,
+            "citizenship": citizenship,
+            "socailMedia": socailMedia,
+            "bio": bio,
+            "educ": educ,
+            "profComm": promComm === "Состою",
+            "mainMethod": [mainMethod],
+            "extraMethod": [
+                1,
+                2
+            ],
+            "consultStart": consultStart,
+            "onlineExp": onlineExp === "Да",
+            "onlineExpInfo": onlineExpInfo,
+            "clients": Number(clients),
+            "longestSession": longestSession,
+            "personalTreopia": personalTreopia === "Да",
+            "supervisions": supervisions === "Да",
+            "anotherJob": anotherJob,
+            "vmesteClients": vmesteClients,
+            "psychProcess": psychProcess,
+            "onlineTherapy": onlineTherapy,
+            "familyTherapy": familyTherapy,
+            "foundUs": foundUsList.findIndex(i => i === foundUs) + 1,
+            "docs": docsList,
+            "photos": photosList
         }
 
-        const result = await AuthAPI.register(data)
+        console.log(data)
+
+        const result = await AuthAPI.createPsyh(data)
         console.log(result)
         if (result.status === 200) {
-            window.location.replace("/")
+            navigate("/")
         } else {
-            // alert(result.msg)
-            window.location.replace("/")
-            localStorage.setItem("userType", "psych")
+            alert(result.msg)
         }
     }
 
@@ -398,6 +453,46 @@ const Create = () => {
             document.body.style.overflowY = '';
         };
     }, []);
+
+    const uploadDocs = useCallback(async () => {
+        if (docs !== null) {
+            for (let i = 0; i < docs.length; i++) {
+                const result = await UploadAPI.document(docs[i])
+                console.log(result)
+                if (result.status === 200) {
+                    setDocsList(prev => [...prev, result.fileId])
+                }
+
+                setDocs(null);
+            }
+        }
+    }, [docs, setDocsList])
+
+    const uploadPhotos = useCallback(async () => {
+        if (photos !== null) {
+            for (let i = 0; i < photos.length; i++) {
+                const result = await UploadAPI.image(photos[i])
+                console.log(result)
+                if (result.status === 200) {
+                    setPhotosList(prev => [...prev, result.imageId])
+                }
+            }
+
+            setPhotos(null);
+        }
+    }, [photos, setPhotosList])
+
+    useEffect(() => {
+        if (docs !== null) {
+            uploadDocs();
+        }
+    }, [docs, uploadDocs]);
+
+    useEffect(() => {
+        if (photos !== null) {
+            uploadPhotos();
+        }
+    }, [photos, uploadPhotos]);
 
     return (
         <main className={styles.Page}>
@@ -422,8 +517,6 @@ const Create = () => {
                     </>
                 }
             </div>
-
-            {/* <MobileBox /> */}
         </main>
     )
 }

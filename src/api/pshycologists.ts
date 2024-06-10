@@ -12,6 +12,12 @@ class Pshycologists {
             sid, action, type, id
         }).then((res) => res.data)
     }
+
+    async getProfile(sid: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/account/getProfile`, {
+            sid
+        }).then((res) => res.data)
+    }
 }
 
 export default new Pshycologists()

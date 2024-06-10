@@ -49,7 +49,7 @@ const PsychSidebar = () => {
                     <div key={index} className={`${styles.Item} ${path.pathname === item.link ? styles.Active : ""}`} onClick={() => navigate(item.link)}>
                         <div>
                             <item.icon />
-                            {item.name}
+                            <p>{item.name}</p>
                         </div>
                     </div>
                 ))}
@@ -60,7 +60,7 @@ const PsychSidebar = () => {
                     <div key={index} className={`${styles.Item} ${path.pathname === item.link ? styles.Active : ""}`} onClick={() => navigate(item.link)}>
                         <div>
                             <item.icon />
-                            {item.name}
+                            <p>{item.name}</p>
                         </div>
                         <ArrowRightIcon />
                     </div>
@@ -72,7 +72,7 @@ const PsychSidebar = () => {
                     <div key={index} className={`${styles.Item} ${path.pathname === item.link ? styles.Active : ""}`} onClick={() => navigate(item.link)}>
                         <div>
                             <item.icon />
-                            {item.name}
+                            <p>{item.name}</p>
                         </div>
                         <ArrowRightIcon />
                     </div>

@@ -92,6 +92,7 @@ import Stable from "./Stable";
 import Time2 from "./Time2";
 import Note from "./Note";
 import Note2 from "./Note2";
+import AddFile from "./AddFile";
 
 export {
     SignIn as SignInIcon,
@@ -188,4 +189,5 @@ export {
     Time2 as Time2Icon,
     Note as NoteIcon,
     Note2 as Note2Icon,
+    AddFile as AddFileIcon,
 }

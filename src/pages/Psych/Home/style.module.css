@@ -1,6 +1,6 @@
 .Page {
-    max-width: 1300px;
-    padding: 40px 0;
+    max-width: 1330px;
+    padding: 40px 15px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -79,4 +79,64 @@
     font-weight: 400;
     margin-top: 15px;
     cursor: pointer;
+}
+
+.MobileHeader {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+    position: absolute;
+    top: 15px;
+}
+
+.MobileHeader .User {
+    width: 24px;
+    height: 24px;
+    background: #FFC381;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.Notifications {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+        padding-bottom: 100px;
+    }
+
+    .Section {
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .MobileHeader {
+        display: flex;
+    }
+
+    .Session {
+        height: 210px;
+        border-radius: 0 0 30px 30px;
+        justify-content: flex-end !important;
+        position: relative;
+        padding-bottom: 32px;
+    }
+
+    .Row,
+    .Memo {
+        padding: 0 15px;
+    }
+
+    .Row div {
+        background-position: top right;
+    }
 }

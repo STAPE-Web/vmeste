@@ -1,10 +1,12 @@
 import PsychSidebar from '@/components/PsyhSidebar'
 import styles from "./style.module.css"
-import { CloseIcon, DotsIcon } from '@/ui/Icons'
+import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons'
 import { fillPaymentColor } from '@/utils'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Wallet = () => {
+    const navigate = useNavigate()
     const [modal, setModal] = useState(false)
     const items = [
         { type: "Запланировано", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
@@ -22,6 +24,7 @@ const Wallet = () => {
 
             <section className={styles.Section}>
                 <div className={styles.Top}>
+                    <ArrowLeftIcon onClick={() => navigate(-1)} className={styles.Back} />
                     <h2>Выплаты</h2>
                     <DotsIcon />
                 </div>

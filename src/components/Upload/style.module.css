@@ -1,0 +1,74 @@
+.Input {
+    display: none;
+}
+
+.Label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #FF8702;
+    gap: 8px;
+    justify-content: center;
+    height: 40px;
+    border-radius: 7px;
+    color: #FF8702;
+    transition: 0.5s;
+}
+
+.Label svg {
+    width: 16px;
+    height: 16px;
+}
+
+.List {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 7px;
+    background: rgba(242, 242, 242, 1);
+    padding: 8px;
+    gap: 20px;
+}
+
+.Item svg {
+    width: 10px;
+    min-width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.Item p {
+    font-size: 12px;
+    width: 100%;
+    max-width: 80px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Row div {
+    padding: 4px;
+    font-size: 10px;
+    background: rgba(251, 89, 53, 1);
+    color: #fff;
+    border-radius: 5px;
+}

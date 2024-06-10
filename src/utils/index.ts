@@ -100,3 +100,22 @@ export function fillPaymentColor(type: string) {
         case "Выплачено": return "#92D35E"
     }
 }
+
+export function calculateSize(bytes: number): string {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+export function formatType(type: string) {
+    switch (type) {
+        case "application/vnd.openxmlformats-officedocument.wordprocessingml.document": return "DOCX"
+        case "application/pdf": return "PDF"
+        case "application/msword": return "DOC"
+        case "image/png": return "PNG"
+        case "image/jpeg": return "JPEG"
+
+    }
+}

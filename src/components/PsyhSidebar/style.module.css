@@ -82,3 +82,40 @@
     font-size: 16px;
     font-weight: 700;
 }
+
+@media screen and (max-width:1160px) {
+    .Sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        flex-direction: row;
+        background: #fff;
+        min-height: 50px;
+        align-items: flex-end;
+        max-width: 100%;
+        z-index: 100;
+        justify-content: space-between;
+        padding: 16px 0 10px 0;
+    }
+
+    .Sidebar .List p,
+    .User,
+    .List,
+    .Logout {
+        display: none;
+    }
+
+    .List:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        border: none;
+    }
+
+    .Item {
+        width: 100%;
+        align-items: center;
+        justify-content: center !important;
+    }
+}

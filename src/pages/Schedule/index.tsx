@@ -1,8 +1,10 @@
 import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
 import { ArrowLeftIcon, ArrowRightIcon, BellIcon, Calendar2Icon } from "@/ui/Icons"
+import { useNavigate } from "react-router-dom"
 
 const Schedule = () => {
+    const navigate = useNavigate()
     const dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пн", "Сб", "Вс"]
 
@@ -11,6 +13,12 @@ const Schedule = () => {
             <PsychSidebar />
 
             <section className={styles.Section}>
+                <div className={styles.MobileHeader}>
+                    <ArrowLeftIcon onClick={() => navigate(-1)} />
+                    <h3>Расписание</h3>
+                    <BellIcon />
+                </div>
+
                 <div className={styles.Top}>
                     <h2>Расписание</h2>
                     <BellIcon />

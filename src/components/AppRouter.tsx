@@ -15,13 +15,17 @@ const AppRouter = () => {
       window.location.reload();
     } else {
       setProfileFetched(true);
-      localStorage.setItem("userData", JSON.stringify(result.userInfo))
+      {
+        userType !== "psych"
+        ? localStorage.setItem("userData", JSON.stringify(result.userInfo))
+        : localStorage.setItem("userData", JSON.stringify(result))
+      }
     }
   }, [sid]);
 
   useEffect(() => {
     if (!profileFetched && sid) {
-      if (userType !== "psych") getProfile();
+      getProfile();
     }
   }, [profileFetched, sid, getProfile, userType]);
 

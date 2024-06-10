@@ -56,8 +56,6 @@ const Code: FC<Props> = ({ setState, authData }) => {
     }
   }, [code]);
 
-  console.log(path)
-
   async function getNewCode() {
     const result = await AuthAPI.sendCode(authData, path !== undefined);
     console.log(result);

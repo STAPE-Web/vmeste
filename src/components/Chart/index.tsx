@@ -86,6 +86,11 @@ const Chart: FC<Props> = ({ array, tab2 }) => {
         },
       },
     },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
   };
 
   function fillLabels() {

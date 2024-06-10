@@ -105,9 +105,16 @@ export interface IProfile {
     }
 }
 
+export interface IEduc {
+    "name": string,
+    "year": number,
+    "faculty": string,
+    "degree": number
+}
+
 export interface ICreatePsyh {
-    sid: string,
-    fio: string,
+    "sid": string,
+    "fio": string,
     "gender": string,
     "bday": string,
     "phone": string,
@@ -116,10 +123,10 @@ export interface ICreatePsyh {
     "citizenship": string,
     "socailMedia": string,
     "bio": string,
-    "educ": string[],
-    "promComm": boolean,
-    "mainMethod": string,
-    "extraMethod": string,
+    "educ": IEduc[],
+    "profComm": boolean,
+    "mainMethod": string[],
+    "extraMethod": number[],
     "consultStart": string,
     "onlineExp": boolean,
     "onlineExpInfo": string,
@@ -131,8 +138,24 @@ export interface ICreatePsyh {
     "vmesteClients": string,
     "psychProcess": string,
     "onlineTherapy": string,
-    "familyTherapy": boolean,
-    "foundUs": string,
-    "docs": string,
-    "photos": string
+    "familyTherapy": string,
+    "foundUs": number,
+    "docs": string[],
+    "photos": string[]
+}
+
+export interface IPsyhProfile {
+    "status": number,
+    "id": string,
+    "level": number,
+    "isApproved": boolean,
+    "name": string,
+    "photoUrl": string,
+    "gender": string,
+    "bday": string,
+    "bio": string,
+    "methods": string[],
+    "therapy": string,
+    "educ": IEduc[],
+    "language": string[]
 }
