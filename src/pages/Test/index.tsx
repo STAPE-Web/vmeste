@@ -35,14 +35,6 @@ const Test = () => {
         getTest()
     }, [getTest])
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     async function getResult() {
         if (id !== undefined) {
             const result = await TestsAPI.getResult(sid, id, answersList)

@@ -149,14 +149,6 @@ const Register = () => {
         }
     }
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     return (
         <main className={styles.Page}>
             <div className={styles.Box}>

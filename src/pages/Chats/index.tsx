@@ -16,14 +16,6 @@ const Chats = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
     const userType = localStorage.getItem("userType")
 
-    useEffect(() => {
-        document.documentElement.style.overflowY = 'hidden';
-
-        return () => {
-            document.documentElement.style.overflowY = '';
-        };
-    }, []);
-
     const userInfo = { userID: userData.email || userData.phone || userData.id, userName: userData.username || userData.name };
     const token = generateToken(userInfo.userID, 0)
 

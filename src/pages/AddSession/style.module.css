@@ -1,0 +1,339 @@
+.Page {
+    max-width: 1330px;
+    padding: 40px 15px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Top h2 {
+    color: #23232B;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.Top svg {
+    width: 24px;
+    height: 24px;
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Weeks {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.Weeks p {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+    color: #bcbcbf;
+}
+
+.Calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.Calendar h6 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #bcbcbf;
+}
+
+.Calendar h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #23232b;
+}
+
+.Calendar .Days {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.Calendar span {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+}
+
+.Calendar span:hover {
+    background: #ff870220;
+}
+
+.Calendar span.ActiveDay {
+    border: 2px solid #ff8702;
+}
+
+.Calendar span.SelectedDay {
+    background: #ff870240;
+}
+
+.AppointmentIndicator {
+    width: 10px;
+    height: 10px;
+    background: #ff8702;
+    position: absolute;
+    bottom: 15px;
+    border-radius: 100%;
+}
+
+.SelectedBox {
+    padding: 40px 50px;
+    background: #ffffff;
+    box-shadow: 3px 3px 16px 0px #b6a1c033;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    position: absolute;
+    white-space: nowrap;
+    top: -180px;
+    border-radius: 20px;
+}
+
+.NewDateBox {
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 3px 3px 16px 0px #b6a1c033;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    position: absolute;
+    white-space: nowrap;
+    top: -100px;
+    margin-left: -15px;
+    border-radius: 20px;
+}
+
+.NewDateBox::before {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    content: "";
+    position: absolute;
+    left: 47.5%;
+    bottom: -10px;
+    transform: rotate(45deg);
+    box-shadow: 10px 10px 16px 0px #b6a1c033;
+    z-index: -1;
+}
+
+.NewDateBox .NewTime {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.NewDateBox .NewTime div {
+    height: 35px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #ff8702;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24.55px;
+    color: #ff8702;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.NewDateBox .NewTime div.ActiveNewTime {
+    background: #ff8702;
+    color: #fff;
+}
+
+.SelectedBox img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.SelectedBox h3 {
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 22px;
+    color: #23232b;
+}
+
+.SelectedBox p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #afaba8;
+}
+
+.SelectedBox h4 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #23232b;
+}
+
+.SelectedBox div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.SelectedBox::before {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    content: "";
+    position: absolute;
+    left: 47.5%;
+    bottom: -10px;
+    transform: rotate(45deg);
+    box-shadow: 10px 10px 16px 0px #b6a1c033;
+    z-index: -1;
+}
+
+.SheduledDay::before {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    bottom: 15px;
+    background: #ff8702;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.Data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Arrows {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.FreeTime {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.FreeTime h3 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.FreeTime p {
+    color: #595959;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.FreeItem {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.Row div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #FF8702;
+    color: #FF8702;
+    font-size: 18px;
+    height: 35px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.5s;
+    background: #fff;
+}
+
+.Row div.Active {
+    background: #FF8702;
+    color: #fff;
+}
+
+.Row div.Disabled {
+    background: #fff;
+    color: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.FreeTime button {
+    width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+        padding-bottom: 100px;
+    }
+
+    .Section {
+        padding: 0;
+        box-shadow: none;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .MobileHeader {
+        display: flex;
+    }
+
+    .Top {
+        display: none;
+    }
+}

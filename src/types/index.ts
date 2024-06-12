@@ -159,3 +159,12 @@ export interface IPsyhProfile {
     "educ": IEduc[],
     "language": string[]
 }
+
+export interface IEditProfile {
+    "sid": string,
+    "languages": string[],
+    "photo": string,
+    "bio": string,
+    "methods": string[],
+    "therapy": string
+}

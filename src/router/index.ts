@@ -26,6 +26,7 @@ import Clients from "@/pages/Clients"
 import Client from "@/pages/Client"
 import Schedule from "@/pages/Schedule"
 import Wallet from "@/pages/Psych/Wallet"
+import AddSession from "@/pages/AddSession"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -83,6 +84,7 @@ const psychRoutes = [
     { id: 21, path: '/video/:id', element: Video },
     { id: 22, path: '/test/:id', element: Test },
     { id: 23, path: '/psychologist', element: Landing2 },
+    { id: 24, path: '/schedule/new', element: AddSession },
 ];
 
 export { notAuthRoutes, authRoutes, psychRoutes };

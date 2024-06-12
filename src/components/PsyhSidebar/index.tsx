@@ -1,11 +1,12 @@
 import { ArrowRightIcon, CalendarIcon, DiaryIcon, DocumentIcon, HomeIcon, InfoIcon, MessageIcon, QuestionIcon, SupportIcon, UserIcon, WalletIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
-import Avatar from "@/assets/Avatar.png"
 import { useLocation, useNavigate } from "react-router-dom"
+import { IPsyhProfile } from "@/types"
 
 const PsychSidebar = () => {
     const navigate = useNavigate()
     const path = useLocation()
+    const userData: IPsyhProfile = JSON.parse(localStorage.getItem("userData") as string)
 
     const items = [
         { name: "Главная", icon: HomeIcon, link: "/" },
@@ -37,11 +38,11 @@ const PsychSidebar = () => {
         <div className={styles.Sidebar}>
             <div className={styles.User}>
                 <div>
-                    <h3>Иван Иванов</h3>
-                    <h6>Ранг</h6>
+                    <h3>{userData !== null ? userData.name : ""}</h3>
+                    <h6>Ранг: {userData !== null ? userData.level : ""}</h6>
                 </div>
 
-                <img src={Avatar} alt="" />
+                <img src={userData !== null ? userData.photoUrl : ""} alt="" />
             </div>
 
             <div className={styles.List}>

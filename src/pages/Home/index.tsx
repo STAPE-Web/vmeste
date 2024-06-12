@@ -16,14 +16,6 @@ const Home = () => {
     const [showLeftButton, setShowLeftButton] = useState(false);
     const [showRightButton, setShowRightButton] = useState(true);
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     const items = [
         { name: "Радость", image: "/Emoji_1.png" },
         { name: "Страх", image: "/Emoji_2.png" },
@@ -98,7 +90,6 @@ const Home = () => {
         const minutes = date.getMinutes()
         return `${day} ${months[month]}, ${String(hour).length === 1 ? `0${hour}` : hour}:${String(minutes).length === 1 ? `0${minutes}` : minutes}`
     }
-
 
     return (
         <main className={styles.Page}>

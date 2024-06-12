@@ -4,12 +4,13 @@ import styles from "./style.module.css"
 
 interface Props {
     text: string,
+    onClick: () => void
 }
 
-const InputItem: FC<Props> = ({ text }) => {
+const InputItem: FC<Props> = ({ text, onClick }) => {
     return (
         <div className={styles.InputItem}>
-            <CloseIcon />
+            <CloseIcon onClick={onClick} />
             <div />
             {text}
         </div>

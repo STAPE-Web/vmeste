@@ -65,14 +65,6 @@ const Specialists = () => {
         getSpecialist()
     }, [])
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     function formatDate(value: string) {
         const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
         const [datePart, timePart] = value.split(" ");

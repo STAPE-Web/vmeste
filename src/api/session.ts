@@ -31,6 +31,12 @@ class Session {
             ...data
         }).then((res) => res.data)
     }
+
+    async add(sid: string, time: string[]) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/addSessions`, {
+            sid, time
+        }).then((res) => res.data)
+    }
 }
 
 export default new Session()

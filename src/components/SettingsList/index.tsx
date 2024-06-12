@@ -4,6 +4,7 @@ import { FC, useState } from "react"
 import { IProfile } from "@/types"
 import useGlobalStore from "@/store"
 import ChangeEmailModal from "../ChangeEmailModal"
+import { ProfileAPI } from "@/api"
 
 interface Props {
     data: IProfile
@@ -12,10 +13,20 @@ interface Props {
 const SettingsList: FC<Props> = ({ data }) => {
     const [state, setState] = useState(false)
     const actionChangeEmailModal = useGlobalStore(state => state.actionChangeEmailModal)
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
 
     function signOut() {
         localStorage.removeItem("sid")
         window.location.replace("/")
+    }
+
+    async function deleteAccount() {
+        const result = await ProfileAPI.delete(sid)
+        console.log(result)
+        if (result.status === 200) {
+            window.location.href = "/"
+            localStorage.clear()
+        }
     }
 
     return (
@@ -59,7 +70,7 @@ const SettingsList: FC<Props> = ({ data }) => {
 
             <div className={styles.Row}>
                 <p onClick={() => signOut()}>Выйти</p>
-                <p>Удалить аккаунт</p>
+                <p onClick={() => deleteAccount()}>Удалить аккаунт</p>
             </div>
 
             <ChangeEmailModal />

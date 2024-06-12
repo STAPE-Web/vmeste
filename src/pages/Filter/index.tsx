@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 import { Add2Icon, ArrowLeftIcon } from "@/ui/Icons"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
 import MobileAuthModal from "@/components/MobileAuthModal"
@@ -54,14 +54,6 @@ const Filter = () => {
             func(prev => [...prev, item])
         }
     }
-
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
 
     function SearchSpecialist() {
         const searchData = {

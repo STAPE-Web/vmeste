@@ -46,14 +46,6 @@ const Calendar = () => {
         return new Date(year, month + 1, 0).getDate();
     };
 
-    useEffect(() => {
-        document.documentElement.style.overflowY = 'hidden';
-
-        return () => {
-            document.documentElement.style.overflowY = '';
-        };
-    }, []);
-
     const getSession = useCallback(async () => {
         const result = await SessionAPI.get(sid)
         const allSessions: ISession[] = result.sessions.future

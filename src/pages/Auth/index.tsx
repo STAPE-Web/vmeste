@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./style.module.css";
 import Phone from "@/components/AuthContent/Phone";
 import Email from "@/components/AuthContent/Email";
@@ -11,14 +11,6 @@ const Auth = () => {
     "Phone" | "Email" | "SMS" | "Code" | "Hello"
   >("Phone");
   const [authData, setAuthData] = useState("");
-
-  useEffect(() => {
-    document.documentElement.style.overflowY = "hidden";
-
-    return () => {
-      document.documentElement.style.overflowY = "";
-    };
-  }, []);
 
   function fillContent() {
     switch (state) {

@@ -119,3 +119,29 @@ export function formatType(type: string) {
 
     }
 }
+
+export function formatMethods(name: string) {
+    switch (name) {
+        case "Психоаналитическая терапия": return "Психоанализ"
+        case "Гештальт-терапия": return "Гештальтпсихология"
+        case "КПТ": return "Когнитивно-поведенческая психология"
+        case "Экзистенциальная психотерапия": return "Экзистенциальная психология"
+        case "Понимающая психотерапия / клиент-центрированный подход": return "Клиент-центрированная терапия"
+        default: return name
+    }
+}
+
+export function formatTherapy(name: string) {
+    switch (name) {
+        case "Индивидуальные": return "Индивидуальная"
+        case "Парные": return "Парная"
+        default: return name
+    }
+}
+
+export function formatFreeTime(activeMonth: number, selectedDay: number, time: string, activeYear: number) {
+    const month = String(activeMonth).length === 1 ? `0${activeMonth}` : activeMonth
+    const day = String(selectedDay).length === 1 ? `0${selectedDay}` : selectedDay
+    const formatTime = time.split(" - ")[0]
+    return `${activeYear}-${month}-${day} ${formatTime}:0.00`
+}

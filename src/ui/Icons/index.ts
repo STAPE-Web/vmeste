@@ -93,6 +93,8 @@ import Time2 from "./Time2";
 import Note from "./Note";
 import Note2 from "./Note2";
 import AddFile from "./AddFile";
+import Camera2 from "./Camera2";
+import Image from "./Image";
 
 export {
     SignIn as SignInIcon,
@@ -190,4 +192,6 @@ export {
     Note as NoteIcon,
     Note2 as Note2Icon,
     AddFile as AddFileIcon,
+    Camera2 as Camera2Icon,
+    Image as ImageIcon,
 }

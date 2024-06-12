@@ -94,14 +94,6 @@ const Article = () => {
         }
     }
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>

@@ -12,10 +12,8 @@ import Select from "@/ui/Select2"
 import { ICreatePsyh, IEduc } from "@/types"
 import { AuthAPI, UploadAPI } from "@/api"
 import Upload from "@/components/Upload"
-import { useNavigate } from "react-router-dom"
 
 const Create = () => {
-    const navigate = useNavigate()
     const [step, setStep] = useState(1)
     const [disable, setDisable] = useState(false)
     const [endRegister, setEndRegister] = useState(false)
@@ -440,19 +438,11 @@ const Create = () => {
         const result = await AuthAPI.createPsyh(data)
         console.log(result)
         if (result.status === 200) {
-            navigate("/")
+            window.location.href = "/"
         } else {
             alert(result.msg)
         }
     }
-
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
 
     const uploadDocs = useCallback(async () => {
         if (docs !== null) {

@@ -1,3 +1,4 @@
+import { IEditProfile } from "@/types";
 import axios from "axios";
 
 class Profile {
@@ -22,6 +23,18 @@ class Profile {
     async step4(sid: string, otp: number) {
         return await axios.post(`${import.meta.env.VITE_SERVER}/account/changeLogin/step/4`, {
             sid, otp
+        }).then((res) => res.data)
+    }
+
+    async editProfile(data: IEditProfile) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/account/editProfile`, {
+            ...data
+        }).then((res) => res.data)
+    }
+
+    async delete(sid: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/account/deleteProfile`, {
+            sid
         }).then((res) => res.data)
     }
 }

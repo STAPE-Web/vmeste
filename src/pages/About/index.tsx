@@ -6,7 +6,6 @@ import { CareIcon, LikeIcon, MindIcon } from "@/ui/Icons"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Illustration2 from "@/assets/Illustration2"
 import Illustration3 from "@/assets/Illustration3"
-import { useEffect } from "react"
 
 const About = () => {
     const navigate = useNavigate()
@@ -16,14 +15,6 @@ const About = () => {
         { name: "забота", icon: CareIcon },
         { name: "понимание", icon: MindIcon },
     ]
-
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
 
     return (
         <>

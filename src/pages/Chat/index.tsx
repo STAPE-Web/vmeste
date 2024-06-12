@@ -22,14 +22,6 @@ const Chat = () => {
     const callId = useGlobalStore(state => state.callId)
     const userType = localStorage.getItem("userType")
 
-    useEffect(() => {
-        document.documentElement.style.overflowY = 'hidden';
-
-        return () => {
-            document.documentElement.style.overflowY = '';
-        };
-    }, []);
-
     function scrollDown() {
         if (ref.current) {
             const { scrollHeight, clientHeight } = ref.current;

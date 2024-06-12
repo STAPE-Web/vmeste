@@ -26,14 +26,6 @@ const Profile = () => {
         getProfile()
     }, [getProfile])
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     const navigate = [
         { name: "Сохраненные психологи", mode: "saved", icon: LikeIcon },
         { name: "Настройка профиля", mode: `settings`, icon: SettingsIcon },

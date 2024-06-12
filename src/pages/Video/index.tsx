@@ -30,14 +30,6 @@ const Video = () => {
         getVideo();
     }, [getVideo]);
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     const videoRef = useRef<HTMLVideoElement | null>(null)
 
     const changePlaybackSpeed = (speed: number) => {

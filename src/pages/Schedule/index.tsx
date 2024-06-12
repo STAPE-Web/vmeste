@@ -30,7 +30,7 @@ const Schedule = () => {
 
                         <div>
                             <h2>Сегодня</h2>
-                            <Calendar2Icon />
+                            <Calendar2Icon onClick={() => navigate("/schedule/new")} />
                         </div>
                     </div>
 

@@ -69,15 +69,6 @@ const Session = () => {
         }
     }
 
-    useEffect(() => {
-        document.documentElement.style.overflowY = 'hidden';
-
-        return () => {
-            document.documentElement.style.overflowY = '';
-        };
-    }, []);
-
-
     const endDate: any = data && new Date("2024-04-23 01:10:0.00");
     const difference = endDate - Date.now();
 

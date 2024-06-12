@@ -18,14 +18,6 @@ const Blog = () => {
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const userType = localStorage.getItem("userType")
 
-    useEffect(() => {
-        document.body.style.overflowY = 'hidden';
-
-        return () => {
-            document.body.style.overflowY = '';
-        };
-    }, []);
-
     const getMaterials = useCallback(async () => {
         const result = await MaterialsAPI.getAll(sid)
         setData(result.result)

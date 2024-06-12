@@ -17,6 +17,7 @@
 .User img {
     width: 52px;
     height: 52px;
+    min-width: 52px;
     border-radius: 100%;
 }
 
