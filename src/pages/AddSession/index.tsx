@@ -84,7 +84,7 @@ const AddSession = () => {
         const result = await SessionAPI.add(sid, activeTime)
         console.log(result)
         if (result.status === 200) {
-
+            alert("Записи успешно созданы")
         } else {
             alert(result.msg)
         }
