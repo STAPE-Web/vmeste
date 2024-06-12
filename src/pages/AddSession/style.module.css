@@ -315,6 +315,18 @@
     width: fit-content;
 }
 
+@media screen and (max-width: 900px) {
+    .Row {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .Row div {
+        padding: 0 15px;
+        width: fit-content;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .Page {
         padding: 0;
@@ -329,11 +341,25 @@
         padding: 0 15px;
     }
 
-    .MobileHeader {
-        display: flex;
+    .Top {
+        padding: 20px 0;
     }
 
-    .Top {
-        display: none;
+    .Calendar span {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .Row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .Row div,
+    .FreeTime button {
+        width: 100%;
     }
 }
