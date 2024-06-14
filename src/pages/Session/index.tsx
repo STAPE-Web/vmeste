@@ -121,7 +121,7 @@ const Sessions = () => {
                             {tab === "Планируемые"
                                 ? <>{psychSession.length !== 0 ? <div className={styles.Grid}>{psychSession.filter(i => i.status !== "canceled").map((item, index) => (
                                     <div key={index} className={styles.PsychItem} onClick={() => {
-                                        navigate(`/session/${item.id}`)
+                                        navigate(`/session/${item.sesId}`)
                                     }}>
                                         <div className={styles.Border} />
 

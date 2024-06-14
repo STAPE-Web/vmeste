@@ -24,8 +24,7 @@ const Session = () => {
     const getSession = useCallback(async () => {
         if (userType === "psych") {
             const result: IPsychSessions = await PshycologistsAPI.getMy(sid)
-            console.log(result)
-            setPsychData(result.sessions.filter(i => i.id === id)[0])
+            setPsychData(result.sessions.filter(i => i.sesId === id)[0])
         } else {
             const result = await SessionAPI.get(sid)
             const allSessions: ISession[] = result.sessions.future
