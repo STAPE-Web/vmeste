@@ -3,8 +3,8 @@ import styles from "./style.module.css"
 import { ArrowRightIcon, Calendar2Icon, CheckIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
-import { SessionAPI } from "@/api"
-import { ISession } from "@/types"
+import { PshycologistsAPI, SessionAPI } from "@/api"
+import { IPsychSession, IPsychSessions, ISession } from "@/types"
 import PsychSidebar from "@/components/PsyhSidebar"
 
 const Sessions = () => {
@@ -16,11 +16,18 @@ const Sessions = () => {
 
     const [futureSessions, setFutureSessions] = useState<ISession[]>([])
     const [lastSessions, setLastSessions] = useState<ISession[]>([])
+    const [psychSession, setPsychSession] = useState<IPsychSession[]>([])
 
     const getSession = useCallback(async () => {
-        const result = await SessionAPI.get(sid)
-        setFutureSessions(result.sessions.future)
-        setLastSessions(result.sessions.last)
+        if (userType === "psych") {
+            const result: IPsychSessions = await PshycologistsAPI.getMy(sid)
+            console.log(result)
+            setPsychSession(result.sessions)
+        } else {
+            const result = await SessionAPI.get(sid)
+            setFutureSessions(result.sessions.future)
+            setLastSessions(result.sessions.last)
+        }
     }, [sid])
 
     useEffect(() => {
@@ -62,49 +69,96 @@ const Sessions = () => {
                         ))}
                     </div>
 
-                    {tab === "Планируемые"
-                        ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled").map((item, index) => (
-                            <div key={index} className={styles.Item} onClick={() => {
-                                navigate(`/session/${item.id}`)
-                            }}>
-                                <img src={item.psychPhoto} alt="" />
+                    {userType !== "psych"
+                        ? <>
+                            {tab === "Планируемые"
+                                ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled").map((item, index) => (
+                                    <div key={index} className={styles.Item} onClick={() => {
+                                        navigate(`/session/${item.id}`)
+                                    }}>
+                                        <img src={item.psychPhoto} alt="" />
 
-                                <div className={styles.ItemBox}>
-                                    <div className={styles.RowBox}>
-                                        <h3>{item.psychName}</h3>
-                                        <ArrowRightIcon />
+                                        <div className={styles.ItemBox}>
+                                            <div className={styles.RowBox}>
+                                                <h3>{item.psychName}</h3>
+                                                <ArrowRightIcon />
+                                            </div>
+
+                                            <p>{item.sessionNumber} сессия</p>
+
+                                            <h4>{formatDate(item.dateSession)}</h4>
+
+                                            <div className={styles.Payed}>
+                                                <CheckIcon />
+                                                Оплачено
+                                            </div>
+                                        </div>
                                     </div>
+                                ))}</div>
+                                    : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
+                                : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
+                                    <div key={index} className={styles.Item} onClick={() => {
+                                        navigate(`/session/${item.id}`)
+                                    }}>
+                                        <img src={item.psychPhoto} alt="" />
 
-                                    <p>{item.sessionNumber} сессия</p>
+                                        <div className={styles.ItemBox}>
+                                            <div className={styles.RowBox}>
+                                                <h3>{item.psychName}</h3>
+                                            </div>
 
-                                    <h4>{formatDate(item.dateSession)}</h4>
+                                            <p>{item.sessionNumber} сессия</p>
 
-                                    <div className={styles.Payed}>
-                                        <CheckIcon />
-                                        Оплачено
+                                            <h4>{formatDate(item.dateSession)}</h4>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))}</div>
-                            : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
-                        : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
-                            <div key={index} className={styles.Item} onClick={() => {
-                                navigate(`/session/${item.id}`)
-                            }}>
-                                <img src={item.psychPhoto} alt="" />
+                                ))}</div>
+                                    : <h3 className={styles.No}>Нет прошедших сессий</h3>}</>
+                            }
+                        </>
 
-                                <div className={styles.ItemBox}>
-                                    <div className={styles.RowBox}>
-                                        <h3>{item.psychName}</h3>
+                        : <>
+                            {tab === "Планируемые"
+                                ? <>{psychSession.length !== 0 ? <div className={styles.Grid}>{psychSession.filter(i => i.status !== "canceled").map((item, index) => (
+                                    <div key={index} className={styles.PsychItem} onClick={() => {
+                                        navigate(`/session/${item.id}`)
+                                    }}>
+                                        <div className={styles.Border} />
+
+                                        <div className={styles.ItemBox}>
+                                            <div className={styles.RowBox}>
+                                                <h3>{item.userName}</h3>
+                                                <ArrowRightIcon />
+                                            </div>
+
+                                            <p>{item.sessionNumber} сессия</p>
+
+                                            <h4>{formatDate(item.dateSession)}</h4>
+
+                                            <div className={styles.Payed}>
+                                                <CheckIcon />
+                                                Запись подтверждена клиентом
+                                            </div>
+                                        </div>
                                     </div>
+                                ))}</div>
+                                    : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
+                                : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
+                                    <div key={index} className={styles.PsychItem} onClick={() => {
+                                        navigate(`/session/${item.id}`)
+                                    }}>
+                                        <div className={styles.Border} />
 
-                                    <p>{item.sessionNumber} сессия</p>
-
-                                    <h4>{formatDate(item.dateSession)}</h4>
-                                </div>
-                            </div>
-                        ))}</div>
-                            : <h3 className={styles.No}>Нет прошедших сессий</h3>}</>
+                                        <div className={styles.ItemBox}>
+                                            <h3>{item.userName}</h3>
+                                            <p>{item.sessionNumber} сессия</p>
+                                            <h4>{formatDate(item.dateSession)}</h4>
+                                        </div>
+                                    </div>
+                                ))}</div>
+                                    : <h3 className={styles.No}>Нет прошедших сессий</h3>}</>
+                            }
+                        </>
                     }
                 </div>
             </section>

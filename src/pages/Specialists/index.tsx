@@ -21,15 +21,15 @@ const Specialists = () => {
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [searchParams] = useSearchParams()
     const familyTherapyParam = JSON.parse(searchParams.get("familyTherapy") as string) || true
-    const themesParam = searchParams.get("themes")?.split("_") || ["Стресс", ""]
+    const themesParam = searchParams.get("themes")?.split("_") || ["Стресс"]
     const genderParam = searchParams.get("gender") || "M"
-    const priceParam = searchParams.get("price")?.split(",").map(Number) || [2500, 3500, 4500];
+    const priceParam = searchParams.get("price")?.split(",").map(Number) || [2300];
     const timeParam = searchParams.get("time")
     const MFTime = searchParams.get("MFTime")
     const [nonePsyh, setNonePsyh] = useState(false)
 
     const getSpecialist = useCallback(async () => {
-        const result = await PshycologistsAPI.get(sid, { familyTherapy: familyTherapyParam, gender: genderParam, prices: priceParam, themes: themesParam })
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: familyTherapyParam ? "Индивидуальные" : "Парная", gender: genderParam, prices: priceParam, themes: themesParam })
         const psyhData: ISpecialist[] = result.psychologists
         if (timeParam === "Ближайшее") psyhData.sort((a, b) => new Date(a.freeTime.sort()[0]).getTime() - new Date(b.freeTime.sort()[0]).getTime());
         if (timeParam === "Конкретное") {
@@ -53,7 +53,7 @@ const Specialists = () => {
 
         if (psyhData.length === 0) {
             setNonePsyh(true)
-            const newResult = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс", ""] })
+            const newResult = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2300], themes: ["Стресс", ""] })
             setData(newResult.psychologists)
         } else {
             setNonePsyh(false)

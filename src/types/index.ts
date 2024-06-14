@@ -170,6 +170,7 @@ export interface IEditProfile {
 }
 
 export interface IPsychSession {
+    "id": string,
     "dateSession": string,
     "sessionNumber": number,
     "userId": string,

@@ -8,6 +8,7 @@ import { ISession } from "@/types"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Avatar from "@/assets/Avatar.svg"
 import useGlobalStore from "@/store"
+import PsychSidebar from "@/components/PsyhSidebar"
 
 const Session = () => {
     const navigate = useNavigate()
@@ -17,11 +18,16 @@ const Session = () => {
     const [enterCall, setEnterCall] = useState(false)
     const changeCallID = useGlobalStore(state => state.changeCallId)
     const changePsychId = useGlobalStore(state => state.changePsychId)
+    const userType = localStorage.getItem("userType")
 
     const getSession = useCallback(async () => {
         const result = await SessionAPI.get(sid)
         const allSessions: ISession[] = result.sessions.future
-        setData(allSessions.filter(i => i.id === id)[0])
+        if (userType === "psych") {
+            setData(null)
+        } else {
+            setData(allSessions.filter(i => i.id === id)[0])
+        }
     }, [sid])
 
     useEffect(() => {
@@ -114,7 +120,7 @@ const Session = () => {
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
-                <Sidebar />
+                {userType === "psych" ? <PsychSidebar /> : <Sidebar />}
 
                 {enterCall
                     ? <div id="call"></div>

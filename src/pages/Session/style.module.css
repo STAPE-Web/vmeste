@@ -159,6 +159,35 @@
     text-align: center;
 }
 
+.PsychItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 13px;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.PsychItem .Border {
+    width: 8px;
+    height: 100%;
+    background: #92D35E;
+}
+
+.PsychItem .ItemBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 12px;
+}
+
+.PsychItem svg {
+    width: 16px;
+    height: 16px;
+}
+
 @media screen and (max-width: 768px) {
     .Top {
         align-items: center;

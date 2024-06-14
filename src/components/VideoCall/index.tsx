@@ -10,7 +10,7 @@ const VideoCall = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
 
     if (userData === null) return;
-    const userInfo = { userID: userData.type === "email" ? userData.email : userData.phone, userName: userData.name };
+    const userInfo = { userID: userData.email || userData.phone || userData.id, userName: userData.username || userData.name };
     const [showVideo, setShowVideo] = useState(false)
     const callId = useGlobalStore(state => state.callId)
     const changeCallJoined = useGlobalStore(state => state.changeCallJoined)

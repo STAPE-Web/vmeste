@@ -73,6 +73,7 @@ const PsychProfile = () => {
             })
             console.log(result)
             alert("Успешно сохранено")
+            window.location.reload()
         }
     }
 

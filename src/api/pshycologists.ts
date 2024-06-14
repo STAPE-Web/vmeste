@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class Pshycologists {
-    async get(sid: string, filters: { themes: string[], gender: string, familyTherapy: boolean, prices: number[] }) {
+    async get(sid: string, filters: { themes: string[], gender: string, familyTherapy: string, prices: number[] }) {
         return await axios.post(`${import.meta.env.VITE_SERVER}/pshycologist/get`, {
             sid, filters
         }).then((res) => res.data)
