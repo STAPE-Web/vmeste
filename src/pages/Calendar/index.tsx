@@ -57,7 +57,7 @@ const Calendar = () => {
     }, [getSession])
 
     const getSpecialist = useCallback(async () => {
-        const result = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс"] })
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2300], themes: ["Стресс"] })
         const userData = result.psychologists.find((i: ISpecialist) => i.id === pid)
         setPsyhData(userData)
     }, [sid, id])

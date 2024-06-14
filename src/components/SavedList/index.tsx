@@ -16,7 +16,7 @@ const SavedList: FC<Props> = ({ getProfile }) => {
     const sid = JSON.parse(localStorage.getItem("sid") as string)
 
     const getSpecialist = useCallback(async () => {
-        const result = await PshycologistsAPI.get(sid, { familyTherapy: true, gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс"] })
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2300], themes: ["Стресс"] })
         setData(result.psychologists)
     }, [sid])
 
