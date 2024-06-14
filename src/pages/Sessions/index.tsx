@@ -3,8 +3,8 @@ import styles from "./style.module.css"
 import { ArrowLeftIcon, VideoIcon } from "@/ui/Icons"
 import { useNavigate, useParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
-import { SessionAPI } from "@/api"
-import { ISession } from "@/types"
+import { PshycologistsAPI, SessionAPI } from "@/api"
+import { IPsychSession, IPsychSessions, ISession } from "@/types"
 import ButtonDefault from "@/ui/Buttons/Default"
 import Avatar from "@/assets/Avatar.svg"
 import useGlobalStore from "@/store"
@@ -14,6 +14,7 @@ const Session = () => {
     const navigate = useNavigate()
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [data, setData] = useState<ISession | null>(null)
+    const [psychData, setPsychData] = useState<IPsychSession | null>(null)
     const { id } = useParams()
     const [enterCall, setEnterCall] = useState(false)
     const changeCallID = useGlobalStore(state => state.changeCallId)
@@ -21,11 +22,13 @@ const Session = () => {
     const userType = localStorage.getItem("userType")
 
     const getSession = useCallback(async () => {
-        const result = await SessionAPI.get(sid)
-        const allSessions: ISession[] = result.sessions.future
         if (userType === "psych") {
-            setData(null)
+            const result: IPsychSessions = await PshycologistsAPI.getMy(sid)
+            console.log(result)
+            setPsychData(result.sessions.filter(i => i.id === id)[0])
         } else {
+            const result = await SessionAPI.get(sid)
+            const allSessions: ISession[] = result.sessions.future
             setData(allSessions.filter(i => i.id === id)[0])
         }
     }, [sid])
@@ -38,7 +41,11 @@ const Session = () => {
         if (data) {
             changePsychId(data?.psychId)
         }
-    }, [data])
+
+        if (psychData) {
+            changePsychId(psychData?.userId)
+        }
+    }, [data, psychData])
 
     useEffect(() => {
         if (id) {
