@@ -18,6 +18,12 @@ class Pshycologists {
             sid
         }).then((res) => res.data)
     }
+
+    async getMy(sid: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/mySessions`, {
+            sid
+        }).then((res) => res.data)
+    }
 }
 
 export default new Pshycologists()

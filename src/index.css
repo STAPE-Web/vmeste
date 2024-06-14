@@ -16,8 +16,11 @@ a {
 body,
 html {
   max-width: 100%;
-  overflow-x: hidden;
-  /* overflow-y: scroll; */
+  overflow: hidden;
+}
+
+html {
+  overflow: auto;
 }
 
 ::-webkit-scrollbar {

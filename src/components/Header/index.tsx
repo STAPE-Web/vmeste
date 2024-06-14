@@ -15,7 +15,7 @@ const Header = () => {
 
     return (
         <>
-            {sid && path !== "/about" && <header className={styles.Header}>
+            {sid && (path !== "/about" && sid !== null) && <header className={styles.Header}>
                 <div className={styles.Container}>
                     <Logo onClick={() => navigate("/")} />
 

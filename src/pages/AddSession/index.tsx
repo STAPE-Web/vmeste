@@ -2,12 +2,13 @@ import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
 import { ArrowLeftIcon, ArrowRightIcon, InfoIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import ButtonRound from "@/ui/Buttons/Round"
 import { freeTime } from "./constants"
 import ButtonDefault from "@/ui/Buttons/Default"
 import { formatFreeTime } from "@/utils"
-import { SessionAPI } from "@/api"
+import { PshycologistsAPI, SessionAPI } from "@/api"
+import { IPsychSessions } from "@/types"
 
 const AddSession = () => {
     const week = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
@@ -18,6 +19,17 @@ const AddSession = () => {
     const [activeMonth, setActiveMonth] = useState(new Date().getMonth())
     const [activeYear, setActiveYear] = useState(new Date().getFullYear())
     const [activeTime, setActiveTime] = useState<string[]>([])
+    const [data, setData] = useState<string[]>([])
+
+    const getSessions = useCallback(async () => {
+        const result: IPsychSessions = await PshycologistsAPI.getMy(sid)
+        console.log(result)
+        setData(result.freeTimetables)
+    }, [sid])
+
+    useEffect(() => {
+        getSessions()
+    }, [getSessions])
 
     const goToPreviousMonth = () => {
         if (activeMonth === 0) {
@@ -72,11 +84,13 @@ const AddSession = () => {
     function addFreeTime(time: string) {
         const formatDate = formatFreeTime(activeMonth, selectedDay, time, activeYear)
 
-        if (activeTime.includes(formatDate)) {
-            const newArray = activeTime.filter(i => i !== formatDate)
-            setActiveTime(newArray)
-        } else {
-            setActiveTime(prev => [...prev, formatDate])
+        if (!data.includes(formatDate)) {
+            if (activeTime.includes(formatDate)) {
+                const newArray = activeTime.filter(i => i !== formatDate)
+                setActiveTime(newArray)
+            } else {
+                setActiveTime(prev => [...prev, formatDate])
+            }
         }
     }
 
@@ -85,6 +99,7 @@ const AddSession = () => {
         console.log(result)
         if (result.status === 200) {
             alert("Записи успешно созданы")
+            setActiveTime([])
         } else {
             alert(result.msg)
         }
@@ -130,7 +145,10 @@ const AddSession = () => {
                             <p>{item.title}</p>
                             <div className={styles.Row}>
                                 {item.array.map((item, i) => (
-                                    <div key={i} className={`${activeTime.some(i => i === formatFreeTime(activeMonth, selectedDay, item, activeYear)) ? styles.Active : ""}`} onClick={() => addFreeTime(item)}>{item}</div>
+                                    <div key={i}
+                                        className={`${activeTime.some(i => i === formatFreeTime(activeMonth, selectedDay, item, activeYear)) ? styles.Active : ""} ${data.some(i => i === formatFreeTime(activeMonth, selectedDay, item, activeYear)) ? styles.Disabled : ""}`}
+                                        onClick={() => addFreeTime(item)}
+                                    >{item}</div>
                                 ))}
                             </div>
                         </div>

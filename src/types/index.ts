@@ -168,3 +168,16 @@ export interface IEditProfile {
     "methods": string[],
     "therapy": string
 }
+
+export interface IPsychSession {
+    "dateSession": string,
+    "sessionNumber": number,
+    "userId": string,
+    "userName": string,
+    "status": string
+}
+
+export interface IPsychSessions {
+    "freeTimetables": string[],
+    "sessions": IPsychSession[]
+}

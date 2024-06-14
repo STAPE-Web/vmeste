@@ -140,7 +140,7 @@ export function formatTherapy(name: string) {
 }
 
 export function formatFreeTime(activeMonth: number, selectedDay: number, time: string, activeYear: number) {
-    const month = String(activeMonth).length === 1 ? `0${activeMonth}` : activeMonth
+    const month = String(activeMonth + 1).length === 1 ? `0${activeMonth + 1}` : activeMonth + 1
     const day = String(selectedDay).length === 1 ? `0${selectedDay}` : selectedDay
     const formatTime = time.split(" - ")[0]
     return `${activeYear}-${month}-${day} ${formatTime}:0.00`
