@@ -181,6 +181,13 @@
 .Disabled,
 .Disabled input {
     cursor: not-allowed;
+    background: #E8E8E8;
+    border-radius: 100px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.Disabled div {
+    border-color: #E8E8E8 !important;
 }
 
 .DeleteAccount {
