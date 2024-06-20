@@ -134,7 +134,7 @@ const Session = () => {
                         {data !== null && <>
                             <div className={styles.Top}>
                                 <ArrowLeftIcon onClick={() => navigate(-1)} />
-                                <h2>{data.psychName} <span>{data.sessionNumber} сессия</span></h2>
+                                {data !== undefined && <h2>{data.psychName} <span>{data.sessionNumber} сессия</span></h2>}
                                 <h6>Мои сессии</h6>
                                 <span></span>
                             </div>
@@ -144,8 +144,8 @@ const Session = () => {
                                     <p>Ближайшая сессия</p>
 
                                     <div className={styles.Column}>
-                                        <h4>{formatDate(data.dateSession)}</h4>
-                                        <h3>{formatTime(data.dateSession)}</h3>
+                                        {data !== undefined && <h4>{formatDate(data.dateSession)}</h4>}
+                                        {data !== undefined && <h3>{formatTime(data.dateSession)}</h3>}
                                     </div>
 
                                     <div className={styles.Row}>

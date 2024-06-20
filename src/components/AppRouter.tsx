@@ -17,7 +17,7 @@ const AppRouter = () => {
       setProfileFetched(true);
       {
         userType !== "psych"
-          ? localStorage.setItem("userData", JSON.stringify(result.userInfo))
+          ? localStorage.setItem("userData", JSON.stringify({ id: result.id, ...result.userInfo }))
           : localStorage.setItem("userData", JSON.stringify(result))
       }
     }

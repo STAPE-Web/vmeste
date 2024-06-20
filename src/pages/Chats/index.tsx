@@ -16,7 +16,7 @@ const Chats = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
     const userType = localStorage.getItem("userType")
 
-    const userInfo = { userID: userData.email || userData.phone || userData.id, userName: userData.username || userData.name };
+    const userInfo = { userID: userData.id.substring(0, 30), userName: userData.username || userData.name };
     const token = generateToken(userInfo.userID, 0)
 
     const loginUser = useCallback(() => {

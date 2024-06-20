@@ -36,6 +36,7 @@ const Code: FC<Props> = ({ setState, authData }) => {
         localStorage.setItem("userType", "psych")
       } else {
         setState("Hello");
+        localStorage.removeItem("userType")
       }
     }
 
