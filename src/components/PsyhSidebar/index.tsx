@@ -1,4 +1,4 @@
-import { ArrowRightIcon, CalendarIcon, DiaryIcon, DocumentIcon, HomeIcon, InfoIcon, MessageIcon, QuestionIcon, SupportIcon, UserIcon, WalletIcon } from "@/ui/Icons"
+import { ArrowRightIcon, CalendarIcon, DiaryIcon, HomeIcon, InfoIcon, MessageIcon, QuestionIcon, SupportIcon, UserIcon, WalletIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import { IPsyhProfile } from "@/types"
@@ -11,7 +11,7 @@ const PsychSidebar = () => {
     const items = [
         { name: "Главная", icon: HomeIcon, link: "/" },
         { name: "Мои сессии", icon: CalendarIcon, link: "/sessions" },
-        { name: "Полезные материалы", icon: DocumentIcon, link: "/blog" },
+        // { name: "Полезные материалы", icon: DocumentIcon, link: "/blog" },
         { name: "Сообщения", icon: MessageIcon, link: "/chats" },
     ]
 
