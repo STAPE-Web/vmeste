@@ -2,11 +2,15 @@ import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
 import { ArrowLeftIcon, ArrowRightIcon, BellIcon, Calendar2Icon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Schedule = () => {
     const navigate = useNavigate()
     const dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пн", "Сб", "Вс"]
+    const monthList = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
+    const [currentDay] = useState(new Date().getDate())
+    const [currentMonth] = useState(new Date().getMonth())
 
     return (
         <main className={styles.Page}>
@@ -26,7 +30,7 @@ const Schedule = () => {
 
                 <div className={styles.Calendar}>
                     <div className={styles.Info}>
-                        <p>1 января</p>
+                        <p>{currentDay} {monthList[currentMonth]}</p>
 
                         <div>
                             <h2>Сегодня</h2>
