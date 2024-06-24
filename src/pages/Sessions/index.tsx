@@ -20,6 +20,7 @@ const Session = () => {
     const changeCallID = useGlobalStore(state => state.changeCallId)
     const changePsychId = useGlobalStore(state => state.changePsychId)
     const userType = localStorage.getItem("userType")
+    const callJoined = useGlobalStore(state => state.callJoined)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
@@ -123,10 +124,17 @@ const Session = () => {
         }
     }, [leftTime])
 
+    useEffect(() => {
+        if (window.innerWidth <= 1160 && callJoined) {
+            const elem: HTMLDivElement | null = document.querySelector(".kdokPV9jgsyFtd2e8Ek2")
+            elem?.click()
+        }
+    }, [callJoined])
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
-                {userType === "psych" ? <PsychSidebar /> : <Sidebar />}
+                {!(window.innerWidth <= 1160 && callJoined) && (userType === "psych" ? <PsychSidebar /> : <Sidebar />)}
 
                 {enterCall
                     ? <div id="call"></div>

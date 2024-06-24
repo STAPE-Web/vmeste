@@ -58,7 +58,7 @@ const VideoCall = () => {
 
     return (
         <>
-            <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`}>
+            <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`} style={callJoined ? { background: "#000" } : { background: "#fff" }}>
                 {callJoined && <button onClick={() => navigate(`/chat/${psychId}`)} className={styles.MessageButton}><MessageIcon /></button>}
                 <div ref={myMeeting}></div>
             </section>
