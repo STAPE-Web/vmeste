@@ -26,7 +26,7 @@ const Specialist = () => {
     const [modal, setModal] = useState(false)
 
     const getSpecialist = useCallback(async () => {
-        const result = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2500, 3500, 4500], themes: ["Стресс"] })
+        const result = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2300, 3500, 5500, 7500], themes: ["Стресс"] })
         const userData = result.psychologists.find((i: ISpecialist) => i.id === id)
         setData(userData)
     }, [sid, id])

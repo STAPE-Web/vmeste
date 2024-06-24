@@ -23,7 +23,7 @@ const Specialists = () => {
     const familyTherapyParam = JSON.parse(searchParams.get("familyTherapy") as string) || true
     const themesParam = searchParams.get("themes")?.split("_") || ["Стресс"]
     const genderParam = searchParams.get("gender") || "M"
-    const priceParam = searchParams.get("price")?.split(",").map(Number) || [2300];
+    const priceParam = searchParams.get("price")?.split(",").map(Number) || [2300, 3500, 5500, 7500];
     const timeParam = searchParams.get("time")
     const MFTime = searchParams.get("MFTime")
     const [nonePsyh, setNonePsyh] = useState(false)
@@ -53,7 +53,7 @@ const Specialists = () => {
 
         if (psyhData.length === 0) {
             setNonePsyh(true)
-            const newResult = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2300], themes: ["Стресс", ""] })
+            const newResult = await PshycologistsAPI.get(sid, { familyTherapy: "Индивидуальные", gender: "M", prices: [2300, 3500, 5500, 7500], themes: ["Стресс", ""] })
             setData(newResult.psychologists)
         } else {
             setNonePsyh(false)
