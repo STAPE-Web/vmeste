@@ -10,6 +10,7 @@ import Calendar from "@/components/Calendar"
 import Input from "@/ui/Input"
 import SelectPayment from "@/components/SelectPayment"
 import CardModal from "@/components/CardModal"
+import { getYearWord } from "@/utils"
 
 const Specialist = () => {
     const { id } = useParams()
@@ -54,7 +55,7 @@ const Specialist = () => {
     if (data === null) return
 
     const achive = [
-        { title: "Опыт", value: `${data?.exp} лет`, icon: VerifedIcon },
+        { title: "Опыт", value: `${data?.exp} ${getYearWord(data?.exp)}`, icon: VerifedIcon },
         { title: "Темы", value: `${data?.sameThemesCount}/4`, icon: ThemesIcon },
     ]
 

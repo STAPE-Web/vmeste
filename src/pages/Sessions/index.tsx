@@ -16,11 +16,14 @@ const Session = () => {
     const [data, setData] = useState<ISession | null>(null)
     const [psychData, setPsychData] = useState<IPsychSession | null>(null)
     const { id } = useParams()
-    const [enterCall, setEnterCall] = useState(false)
     const changeCallID = useGlobalStore(state => state.changeCallId)
     const changePsychId = useGlobalStore(state => state.changePsychId)
+    const changeOpponentName = useGlobalStore(state => state.changeOpponentName)
+    const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined)
+    const sessionJoined = useGlobalStore(state => state.sessionJoined)
     const userType = localStorage.getItem("userType")
     const callJoined = useGlobalStore(state => state.callJoined)
+    console.log(data)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
@@ -40,10 +43,12 @@ const Session = () => {
     useEffect(() => {
         if (data) {
             changePsychId(data?.psychId)
+            changeOpponentName(data?.psychName)
         }
 
         if (psychData) {
             changePsychId(psychData?.userId)
+            changeOpponentName(psychData?.userName)
         }
     }, [data, psychData])
 
@@ -82,7 +87,7 @@ const Session = () => {
         }
     }
 
-    const endDate: any = data && new Date("2024-04-23 01:10:0.00");
+    const endDate: any = new Date(data !== null ? data?.dateSession : "2024-04-23 01:10:0.00");
     const difference = endDate - Date.now();
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -120,7 +125,7 @@ const Session = () => {
 
     useEffect(() => {
         if (leftTime === "00:00:00") {
-            setEnterCall(true)
+            changeSessionJoined(true)
         }
     }, [leftTime])
 
@@ -136,7 +141,7 @@ const Session = () => {
             <section className={styles.Container}>
                 {!(window.innerWidth <= 1160 && callJoined) && (userType === "psych" ? <PsychSidebar /> : <Sidebar />)}
 
-                {enterCall
+                {sessionJoined
                     ? <div id="call"></div>
                     : <div className={styles.Content}>
                         {data !== null && <>
@@ -174,7 +179,7 @@ const Session = () => {
                                     </div>
 
                                     <div className={styles.RowActive}>
-                                        <ButtonDefault disabled={false} onClick={() => setEnterCall(true)}>Войти</ButtonDefault>
+                                        <ButtonDefault disabled={false} onClick={() => changeSessionJoined(true)}>Войти</ButtonDefault>
                                     </div>
                                 </div>
                             }

@@ -21,9 +21,9 @@ const Support = () => {
                     <div />
                 </div>
 
-                <div>
+                <div className={styles.Form}>
                     <Textarea onChange={e => setText(e.target.value)} placeholder="Опишите проблему" value={text} />
-                    <ButtonDefault disabled={false} onClick={() => ({})}>Отправить</ButtonDefault>
+                    <ButtonDefault disabled={text.length === 0} onClick={() => ({})}>Отправить</ButtonDefault>
                 </div>
             </section>
         </main>

@@ -1,0 +1,54 @@
+.Page {
+    max-width: 1330px;
+    padding: 40px 15px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+.Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Top .Back {
+    display: none;
+    width: 28px;
+    height: 28px;
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        padding: 0;
+        padding-bottom: 100px;
+    }
+
+    .Section {
+        padding: 0;
+        box-shadow: none;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .Top .Back {
+        display: flex;
+    }
+
+    .Top {
+        padding: 20px 0;
+        color: #AFABA8;
+    }
+}

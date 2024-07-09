@@ -23,6 +23,7 @@ const Chat = () => {
 
     const callJoined = useGlobalStore(state => state.callJoined);
     const callId = useGlobalStore(state => state.callId);
+    const opponentName = useGlobalStore(state => state.opponentName);
 
     const toConversationID = id ? id.substring(0, 30) : "";
     const conversationType = 0;
@@ -122,8 +123,6 @@ const Chat = () => {
         };
     }, []);
 
-    console.log(user)
-
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -148,7 +147,7 @@ const Chat = () => {
                         <div className={styles.CallInfo} onClick={() => navigate(`/session/${callId}`)}>
                             <div>
                                 <div className={styles.Dot}></div>
-                                <p>Иван Иванов</p>
+                                <p>{opponentName}</p>
                             </div>
                             <button><PhoneIcon /></button>
                         </div>

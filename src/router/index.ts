@@ -28,6 +28,7 @@ import Schedule from "@/pages/Schedule"
 import Wallet from "@/pages/Psych/Wallet"
 import AddSession from "@/pages/AddSession"
 import Support from "@/pages/Support"
+import Memo from "@/pages/Psych/Memo"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -71,7 +72,7 @@ const psychRoutes = [
     { id: 7, path: '/blog', element: Blog },
     { id: 8, path: '/wallet', element: Wallet },
     { id: 9, path: '/faq', element: PsychHome },
-    { id: 10, path: '/memo', element: PsychHome },
+    { id: 10, path: '/memo', element: Memo },
     { id: 11, path: '/support', element: Support },
     { id: 12, path: '/about', element: About },
     { id: 13, path: '/statistic', element: Statistics },

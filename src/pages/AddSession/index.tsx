@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react"
 import ButtonRound from "@/ui/Buttons/Round"
 import { freeTime } from "./constants"
 import ButtonDefault from "@/ui/Buttons/Default"
-import { formatFreeTime } from "@/utils"
+import { formatFreeTime, isPastTime } from "@/utils"
 import { PshycologistsAPI, SessionAPI } from "@/api"
 import { IPsychSessions } from "@/types"
 
@@ -100,6 +100,7 @@ const AddSession = () => {
         if (result.status === 200) {
             alert("Записи успешно созданы")
             setActiveTime([])
+            getSessions()
         } else {
             alert(result.msg)
         }
@@ -144,11 +145,11 @@ const AddSession = () => {
                         <div key={index} className={styles.FreeItem}>
                             <p>{item.title}</p>
                             <div className={styles.Row}>
-                                {item.array.map((item, i) => (
+                                {item.array.map((time, i) => (
                                     <div key={i}
-                                        className={`${activeTime.some(i => i === formatFreeTime(activeMonth, selectedDay, item, activeYear)) ? styles.Active : ""} ${data.some(i => i === formatFreeTime(activeMonth, selectedDay, item, activeYear)) ? styles.Disabled : ""}`}
-                                        onClick={() => addFreeTime(item)}
-                                    >{item}</div>
+                                        className={`${activeTime.some(i => i === formatFreeTime(activeMonth, selectedDay, time, activeYear)) ? styles.Active : ""} ${data.some(i => i === formatFreeTime(activeMonth, selectedDay, time, activeYear)) || isPastTime(activeMonth, selectedDay, time, activeYear) ? styles.Disabled : ""}`}
+                                        onClick={() => !isPastTime(activeMonth, selectedDay, time, activeYear) && addFreeTime(time)}
+                                    >{time}</div>
                                 ))}
                             </div>
                         </div>

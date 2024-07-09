@@ -145,3 +145,25 @@ export function formatFreeTime(activeMonth: number, selectedDay: number, time: s
     const formatTime = time.split(" - ")[0]
     return `${activeYear}-${month}-${day} ${formatTime}:0.00`
 }
+
+export function getYearWord(number: number): string {
+    const lastDigit = number % 10;
+    const lastTwoDigits = number % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+        return 'лет';
+    } else if (lastDigit === 1) {
+        return 'год';
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        return 'года';
+    } else {
+        return 'лет';
+    }
+}
+
+export function isPastTime(month: number, day: number, time: string, year: number): boolean {
+    console.log(month, day, time, year)
+    const hours = Number(time.split(':')[0])
+    const selectedDateTime = new Date(year, month, day, hours, 0);
+    return selectedDateTime < new Date();
+}

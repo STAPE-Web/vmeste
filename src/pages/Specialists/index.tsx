@@ -9,6 +9,7 @@ import { PshycologistsAPI } from "@/api"
 import { ISpecialist } from "@/types"
 import { useSwipeable } from 'react-swipeable';
 import ArrowTop from "@/assets/ArrowTop"
+import { getYearWord } from "@/utils"
 
 const Specialists = () => {
     const navigate = useNavigate()
@@ -82,7 +83,7 @@ const Specialists = () => {
     }
 
     const achive = data.length !== 0 ? [
-        { title: "Опыт", value: `${data[currentPeople].exp} лет`, icon: VerifedIcon },
+        { title: "Опыт", value: `${data[currentPeople].exp} ${getYearWord(data[currentPeople].exp)}`, icon: VerifedIcon },
         { title: "Темы", value: `${data[currentPeople].sameThemesCount}/4`, icon: ThemesIcon },
     ] : []
 
@@ -172,7 +173,7 @@ const Specialists = () => {
                             <div className={styles.TextBoxTop}>
                                 <div>
                                     <h2>Образование</h2>
-                                    <p>4 подтвержденные записи</p>
+                                    <p>Подтвержденных записей: {data[currentPeople].education.length}</p>
                                 </div>
 
                                 <ArrowDownIcon />

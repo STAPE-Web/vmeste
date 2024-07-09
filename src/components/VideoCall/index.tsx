@@ -16,6 +16,7 @@ const VideoCall = () => {
     const changeCallJoined = useGlobalStore(state => state.changeCallJoined)
     const callJoined = useGlobalStore(state => state.callJoined)
     const psychId = useGlobalStore(state => state.psychId)
+    const sessionJoined = useGlobalStore(state => state.sessionJoined)
     const navigate = useNavigate()
 
     const myMeeting = async (element: any) => {
@@ -58,10 +59,10 @@ const VideoCall = () => {
 
     return (
         <>
-            <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`} style={callJoined ? { background: "#000" } : { background: "#fff" }}>
-                {callJoined && <button onClick={() => navigate(`/chat/${psychId}`)} className={styles.MessageButton}><MessageIcon /></button>}
+            {sessionJoined && <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`} style={callJoined ? { background: "#000" } : { background: "#fff" }}>
+                {callJoined && <button onClick={() => navigate(`/chat/${psychId || "123"}`)} className={styles.MessageButton}><MessageIcon /></button>}
                 <div ref={myMeeting}></div>
-            </section>
+            </section>}
         </>
     )
 }
