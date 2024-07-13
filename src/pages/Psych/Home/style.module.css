@@ -108,6 +108,67 @@
     color: #fff;
 }
 
+.Grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.PsychItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 13px;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.PsychItem .Border {
+    width: 8px;
+    height: 100%;
+    background: #92D35E;
+}
+
+.PsychItem .ItemBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 12px;
+}
+
+.PsychItem svg {
+    width: 16px;
+    height: 16px;
+}
+
+.RowBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.RowBox svg {
+    color: #BCBCBF;
+}
+
+.RowBox h3 {
+    color: #23232B;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 22px;
+}
+
+.Payed {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #92D35E;
+}
+
 @media screen and (max-width: 768px) {
     .Page {
         padding: 0;
@@ -138,5 +199,9 @@
 
     .Row div {
         background-position: top right;
+    }
+
+    .Grid {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

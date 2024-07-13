@@ -162,8 +162,12 @@ export function getYearWord(number: number): string {
 }
 
 export function isPastTime(month: number, day: number, time: string, year: number): boolean {
-    console.log(month, day, time, year)
     const hours = Number(time.split(':')[0])
     const selectedDateTime = new Date(year, month, day, hours, 0);
     return selectedDateTime < new Date();
+}
+
+export function isPastTime2(time: string): boolean {
+    const selectedDateTime = new Date(time);
+    return selectedDateTime > new Date();;
 }

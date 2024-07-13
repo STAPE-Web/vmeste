@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react"
 import { PshycologistsAPI, SessionAPI } from "@/api"
 import { IPsychSession, IPsychSessions, ISession } from "@/types"
 import PsychSidebar from "@/components/PsyhSidebar"
+import { isPastTime2 } from "@/utils"
 
 const Sessions = () => {
     const navigate = useNavigate()
@@ -72,7 +73,7 @@ const Sessions = () => {
                     {userType !== "psych"
                         ? <>
                             {tab === "Планируемые"
-                                ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled").map((item, index) => (
+                                ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession)).map((item, index) => (
                                     <div key={index} className={styles.Item} onClick={() => {
                                         navigate(`/session/${item.id}`)
                                     }}>
@@ -97,9 +98,7 @@ const Sessions = () => {
                                 ))}</div>
                                     : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
                                 : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
-                                    <div key={index} className={styles.Item} onClick={() => {
-                                        navigate(`/session/${item.id}`)
-                                    }}>
+                                    <div key={index} className={styles.Item}>
                                         <img src={item.psychPhoto} alt="" />
 
                                         <div className={styles.ItemBox}>
@@ -119,7 +118,7 @@ const Sessions = () => {
 
                         : <>
                             {tab === "Планируемые"
-                                ? <>{psychSession.length !== 0 ? <div className={styles.Grid}>{psychSession.filter(i => i.status !== "canceled").map((item, index) => (
+                                ? <>{psychSession.length !== 0 ? <div className={styles.Grid}>{psychSession.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession)).map((item, index) => (
                                     <div key={index} className={styles.PsychItem} onClick={() => {
                                         navigate(`/session/${item.sesId}`)
                                     }}>
@@ -144,9 +143,7 @@ const Sessions = () => {
                                 ))}</div>
                                     : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
                                 : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
-                                    <div key={index} className={styles.PsychItem} onClick={() => {
-                                        navigate(`/session/${item.id}`)
-                                    }}>
+                                    <div key={index} className={styles.PsychItem}>
                                         <div className={styles.Border} />
 
                                         <div className={styles.ItemBox}>

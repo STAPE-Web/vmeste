@@ -182,3 +182,13 @@ export interface IPsychSessions {
     "freeTimetables": string[],
     "sessions": IPsychSession[]
 }
+
+export interface IClient {
+    "userId": string,
+    "name": string,
+    "lastSession": string,
+    "futureSession": string | null,
+    "sessionsCount": number,
+    "themes": string[]
+    "notes": string[]
+}

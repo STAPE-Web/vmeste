@@ -2,18 +2,24 @@ import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 import { ArrowLeftIcon } from "@/ui/Icons"
+import { useCallback, useEffect, useState } from "react"
+import { ClientsAPI } from "@/api"
+import { IClient } from "@/types"
 
 const Clients = () => {
     const navigate = useNavigate()
-    const items = [
-        { id: "985443", name: "Виктория", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-        { id: "985442", name: "Дмитрий", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-        { id: "985441", name: "Виктория", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-        { id: "985440", name: "Вадим", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-        { id: "985445", name: "Виктория", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-        { id: "985446", name: "Наталья", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-        { id: "985447", name: "Виктория", sessions: 10, lastSession: "30.12.23, 12:00", nextSession: "07.01.24, 15:00" },
-    ]
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+    const [data, setData] = useState<IClient[]>([])
+
+    const getData = useCallback(async () => {
+        const result = await ClientsAPI.get(sid)
+        console.log(result.clients)
+        setData(result.clients)
+    }, [sid])
+
+    useEffect(() => {
+        getData()
+    }, [getData])
 
     return (
         <main className={styles.Page}>
@@ -27,16 +33,16 @@ const Clients = () => {
                 </div>
 
                 <h2 className={styles.Title}>Клиенты</h2>
-                <h2><span>{items.length}</span> человек</h2>
+                <h2><span>{data.length}</span> человек</h2>
 
                 <div className={styles.List}>
-                    {items.map((item, index) => (
-                        <div key={index} className={styles.Item} onClick={() => navigate(`/clients/${item.id}`)}>
-                            <h3>{item.name} <span>#{item.id}</span></h3>
+                    {data.map((item, index) => (
+                        <div key={index} className={styles.Item} onClick={() => navigate(`/clients/${item.userId}`)}>
+                            <h3>{item.name}</h3>
 
                             <div>
                                 <p>Всего сессий</p>
-                                <p>{item.sessions}</p>
+                                <p>{item.sessionsCount}</p>
                             </div>
 
                             <div>
@@ -44,10 +50,10 @@ const Clients = () => {
                                 <p>{item.lastSession}</p>
                             </div>
 
-                            <div>
+                            {item.futureSession !== null && <div>
                                 <p>Следующая сессия</p>
-                                <p>{item.nextSession}</p>
-                            </div>
+                                <p>{item.futureSession}</p>
+                            </div>}
                         </div>
                     ))}
                 </div>
