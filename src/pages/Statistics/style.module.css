@@ -34,7 +34,7 @@
     box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
     flex-direction: column;
     padding: 24px 12px;
-    gap: 30px;
+    gap: 10px;
     height: 100%;
 }
 
@@ -48,7 +48,6 @@
 
 .Bottom {
     gap: 5px;
-    min-height: 52px;
 }
 
 .Top svg {

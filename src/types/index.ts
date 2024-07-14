@@ -200,3 +200,15 @@ export interface IPsychStats {
     "repeatedSessions": number,
     "repeatedSessionsTarget": number
 }
+
+export interface IPayment {
+    "id": string,
+    "sesId": string,
+    "psychId": string,
+    "userId": string,
+    "userName": string,
+    "price": number,
+    "dateSession": string,
+    "themes": string[]
+    "notes": string[]
+}

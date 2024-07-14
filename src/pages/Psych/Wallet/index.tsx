@@ -1,35 +1,33 @@
 import PsychSidebar from '@/components/PsyhSidebar'
 import styles from "./style.module.css"
 import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons'
-import { fillPaymentColor } from '@/utils'
+import { fillPaymentColor, formatDate } from '@/utils'
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PshycologistsAPI } from '@/api'
+import { IPayment } from '@/types'
 
 const Wallet = () => {
     const navigate = useNavigate()
     const [modal, setModal] = useState(false)
     const [menu, setMenu] = useState(false)
+    const [data, setData] = useState<IPayment[]>([])
     const sid = JSON.parse(localStorage.getItem("sid") as string)
-
-    const items = [
-        { type: "Запланировано", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-        { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-        { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-        { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-        { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-        { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-        { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
-    ]
+    const [currentPayment, setCurrentPayment] = useState<IPayment | null>(null)
 
     const getData = useCallback(async () => {
         const result = await PshycologistsAPI.payments(sid)
-        console.log(result)
+        setData(result.payments)
     }, [])
 
     useEffect(() => {
         getData()
     }, [getData])
+
+    function selectPayment(item: IPayment) {
+        setModal(true)
+        setCurrentPayment(item)
+    }
 
     return (
         <main className={styles.Page}>
@@ -45,24 +43,24 @@ const Wallet = () => {
                 </div>
 
                 <div className={styles.Grid}>
-                    {items.map((item, index) => (
-                        <div key={index} className={styles.Item} onClick={() => setModal(true)}>
+                    {data.map((item, index) => (
+                        <div key={index} className={styles.Item} onClick={() => selectPayment(item)}>
                             <div className={styles.Row}>
-                                <div style={{ background: fillPaymentColor(item.type) }} className={styles.Type}>{item.type}</div>
-                                <p className={styles.ID}>№{item.id}</p>
+                                <div style={{ background: fillPaymentColor("Выплачено") }} className={styles.Type}>Выплачено</div>
+                                {/* <p className={styles.ID}>№{item.id}</p> */}
                             </div>
 
                             <div className={styles.Row}>
                                 <div className={styles.Box}>
                                     <div className={styles.Column}>
                                         <p>Дата сессии:</p>
-                                        <span>{item.sessionDate}</span>
+                                        <span>{formatDate(item.dateSession)}</span>
                                     </div>
 
-                                    <div className={styles.Column}>
+                                    {/* <div className={styles.Column}>
                                         <p>Дата выплаты</p>
                                         <span>{item.paymentDate}</span>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <h3>{item.price} ₽</h3>
@@ -80,19 +78,19 @@ const Wallet = () => {
 
                     <div className={styles.ModalInfo}>
                         <div className={styles.ModalTop}>
-                            <h2>Выплата №3668298</h2>
-                            <div style={{ background: fillPaymentColor("Запланировано") }} className={styles.Type}>Запланировано</div>
+                            <h2>Выплата №{currentPayment?.id}</h2>
+                            <div style={{ background: fillPaymentColor("Выплачено") }} className={styles.Type}>Выплачено</div>
                         </div>
 
                         <div className={styles.ModalList}>
                             <div>
                                 <p>Клиент</p>
-                                <p><span>Виктория</span> <br /> #985443</p>
+                                <p><span>{currentPayment?.userName}</span></p>
                             </div>
 
                             <div>
                                 <p>Дата сессии</p>
-                                <p>07.01.2024</p>
+                                {/* <p>{formatDate(currentPayment?.dateSession)}</p> */}
                             </div>
 
                             <div>

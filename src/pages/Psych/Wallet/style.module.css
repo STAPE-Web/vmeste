@@ -161,6 +161,14 @@
     gap: 5px;
 }
 
+.ModalTop h2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+}
+
 .ModalList {
     width: 100%;
     display: flex;

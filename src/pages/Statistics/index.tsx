@@ -1,31 +1,62 @@
-import PsychSidebar from "@/components/PsyhSidebar"
-import styles from "./style.module.css"
-import { ArrowLeftIcon, StableIcon, Time2Icon, UserIcon, VerifedIcon } from "@/ui/Icons"
-import Favicon from "@/assets/Favicon"
-import BarChart from "@/components/BarChart"
-import PieChart from "@/ui/PieChart"
-import { useNavigate } from "react-router-dom"
-import { useCallback, useEffect, useState } from "react"
-import { PshycologistsAPI } from "@/api"
-import { IPsychStats } from "@/types"
+import PsychSidebar from "@/components/PsyhSidebar";
+import styles from "./style.module.css";
+import { ArrowLeftIcon, Time2Icon, UserIcon, VerifedIcon } from "@/ui/Icons";
+import Favicon from "@/assets/Favicon";
+import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { ClientsAPI, PshycologistsAPI } from "@/api";
+import { IClient, IPsychStats } from "@/types";
+
+const getCorrectWordForm = (num: number, forms: [string, string, string]) => {
+    const n = Math.abs(num) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return forms[2];
+    if (n1 > 1 && n1 < 5) return forms[1];
+    if (n1 === 1) return forms[0];
+    return forms[2];
+};
 
 const Statistics = () => {
-    const navigate = useNavigate()
-    const sid = JSON.parse(localStorage.getItem("sid") as string)
-    const [data, setData] = useState<IPsychStats | null>(null)
-    const videoData = [
-        { month: "Ноябрь", value: 100, amount: 12, max: 12 },
-        { month: "Декабрь", value: 84, amount: 5, max: 6 },
-    ]
+    const navigate = useNavigate();
+    const sid = JSON.parse(localStorage.getItem("sid") as string);
+    const [data, setData] = useState<IPsychStats | null>(null);
+    const [clientData, setClientData] = useState<IClient[]>([]);
+    const createdAt = data && new Date(data?.createdAt);
+
+    let years = 0, months = 0, days = 0;
+
+    if (createdAt) {
+        const now = new Date();
+
+        years = now.getFullYear() - createdAt.getFullYear();
+        months = now.getMonth() - createdAt.getMonth();
+        days = now.getDate() - createdAt.getDate();
+
+        if (days < 0) {
+            months -= 1;
+            days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        }
+
+        if (months < 0) {
+            years -= 1;
+            months += 12;
+        }
+    }
 
     const getData = useCallback(async () => {
-        const result: IPsychStats = await PshycologistsAPI.getStatistics(sid)
-        setData(result)
-    }, [])
+        const result: IPsychStats = await PshycologistsAPI.getStatistics(sid);
+        setData(result);
+    }, [sid]);
+
+    const getClients = useCallback(async () => {
+        const result = await ClientsAPI.get(sid);
+        setClientData(result.clients);
+    }, [sid]);
 
     useEffect(() => {
-        getData()
-    }, [getData])
+        getData();
+        getClients();
+    }, [getData, getClients]);
 
     return (
         <main className={styles.Page}>
@@ -43,11 +74,11 @@ const Statistics = () => {
                     <div className={styles.Item}>
                         <div className={styles.Top}>
                             <VerifedIcon />
-                            <h4>Опыт</h4>
+                            <h4>Повторные сессии</h4>
                         </div>
 
                         <div className={styles.Bottom}>
-                            <h3>5 лет <br />8 месяцев</h3>
+                            <h3>{data?.repeatedSessions} из {data?.repeatedSessionsTarget}</h3>
                         </div>
                     </div>
 
@@ -58,32 +89,18 @@ const Statistics = () => {
                         </div>
 
                         <div className={styles.Bottom}>
-                            <h3>7 всего</h3>
-                            <p>4 активных</p>
-                        </div>
-                    </div>
-
-                    <div className={styles.Item}>
-                        <div className={styles.Top}>
-                            <StableIcon />
-                            <h4>Устойчивость терапии</h4>
-                        </div>
-
-                        <div className={styles.Bottom}>
-                            <h3>57%</h3>
-                            <p>Более 6 сессий<br />с 4 из 7 клиентов</p>
+                            <h3>{clientData.length} всего</h3>
                         </div>
                     </div>
 
                     <div className={styles.Item}>
                         <div className={styles.Top}>
                             <Time2Icon />
-                            <h4>Средняя <br /> длительность терапии</h4>
+                            <h4>Проведенные сессии</h4>
                         </div>
 
                         <div className={styles.Bottom}>
-                            <h3>8 сессий</h3>
-                            <p>Самые долгие — 18 <br /> Дмитрий</p>
+                            <h3>{data?.totalSessions} всего</h3>
                         </div>
                     </div>
                 </div>
@@ -94,35 +111,15 @@ const Statistics = () => {
                         <Favicon />
                     </div>
 
-                    <h3>4 мес 18 дней</h3>
-                </div>
-
-                <div className={styles.Sessions}>
-                    <h3>Сессий проведено</h3>
-                    <BarChart />
-
-                    <div className={styles.Row}>
-                        <h4>59 всего</h4>
-                        <p>За 12 месяцев</p>
-                    </div>
-                </div>
-
-                <div className={styles.VideoCall}>
-                    <h2>Использование видеосвязи</h2>
-
-                    <div className={styles.VideoList}>
-                        {videoData.map((item, index) => (
-                            <div key={index} className={styles.VideoItem}>
-                                <h3>{item.month}</h3>
-                                <PieChart value={item.value} />
-                                <p>{item.amount} из {item.max} сессий<br />проведены<br />на платформе</p>
-                            </div>
-                        ))}
-                    </div>
+                    <h3>
+                        {years !== 0 && <>{years} {getCorrectWordForm(years, ["год", "года", "лет"])}{" "}</>}
+                        {months !== 0 && <>{months} {getCorrectWordForm(months, ["месяц", "месяца", "месяцев"])}{" "}</>}
+                        {days !== 0 ? <>{days} {getCorrectWordForm(days, ["день", "дня", "дней"])}{" "}</> : "1 день"}
+                    </h3>
                 </div>
             </section>
         </main>
-    )
-}
+    );
+};
 
-export default Statistics
+export default Statistics;
