@@ -59,6 +59,13 @@ const VideoCall = () => {
         }
     }, [location, setShowVideo])
 
+    function checkTime() {
+        const timeParts = leftTime.split(":").map(Number)
+        const totalSeconds = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2]
+        return totalSeconds < 300
+    }
+
+
     return (
         <>
             {sessionJoined && <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`} style={callJoined ? { background: "#000", padding: 0 } : { background: "#fff" }}>
@@ -80,7 +87,7 @@ const VideoCall = () => {
                 </>}
 
                 {callJoined && <button onClick={() => navigate(`/chat/${psychId || "123"}`)} className={styles.MessageButton}><MessageIcon /></button>}
-                <div ref={myMeeting}></div>
+                {checkTime() && <div ref={myMeeting}></div>}
             </section>}
         </>
     )

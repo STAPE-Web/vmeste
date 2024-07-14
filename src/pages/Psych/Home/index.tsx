@@ -44,7 +44,7 @@ const PsychHome = () => {
                     </div>
 
                     <p>Ближайшая сессия</p>
-                    <h3>{count === 0 ? "У вас пока нет сессий" : `Запланирован${count <= 1 ? "а" : "о"} ${filteredPsychSessions.length} ${getSessionWord(count)}`}</h3>
+                    <h3>{count === 0 ? "У вас пока нет сессий" : `Запланирован${5 <= 1 ? "а" : "о"} ${count} ${getSessionWord(count)}`}</h3>
                 </div>
 
 

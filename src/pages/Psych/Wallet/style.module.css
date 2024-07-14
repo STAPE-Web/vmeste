@@ -217,6 +217,17 @@
     cursor: pointer;
 }
 
+.ConnectPayment {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ConnectPayment p {
+    opacity: 0.5;
+}
+
 @media screen and (max-width: 768px) {
     .Page {
         padding: 0;

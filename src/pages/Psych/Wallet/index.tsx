@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PshycologistsAPI } from '@/api'
 import { IPayment } from '@/types'
+import ButtonDefault from '@/ui/Buttons/Default'
 
 const Wallet = () => {
     const navigate = useNavigate()
@@ -14,6 +15,7 @@ const Wallet = () => {
     const [data, setData] = useState<IPayment[]>([])
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [currentPayment, setCurrentPayment] = useState<IPayment | null>(null)
+    const [accept, setAccept] = useState(false)
 
     const getData = useCallback(async () => {
         const result = await PshycologistsAPI.payments(sid)
@@ -42,7 +44,7 @@ const Wallet = () => {
                     {menu && <div className={styles.Download} onClick={() => setMenu(false)}>Скачать историю вылат в XLSX</div>}
                 </div>
 
-                <div className={styles.Grid}>
+                {accept ? <div className={styles.Grid}>
                     {data.map((item, index) => (
                         <div key={index} className={styles.Item} onClick={() => selectPayment(item)}>
                             <div className={styles.Row}>
@@ -68,6 +70,15 @@ const Wallet = () => {
                         </div>
                     ))}
                 </div>
+                    : <div className={styles.ConnectPayment}>
+                        <h2>Пока нет выплат</h2>
+                        <p>Подключите свой аккаунт к сервису Юкасса, чтобы получать выплаты</p>
+                        <ButtonDefault disabled={false} onClick={() => {
+                            alert("Сервис успешно подключен")
+                            setAccept(true)
+                        }}>Подключить</ButtonDefault>
+                    </div>
+                }
             </section>
 
             {modal && <div className={styles.Modal}>
@@ -90,12 +101,12 @@ const Wallet = () => {
 
                             <div>
                                 <p>Дата сессии</p>
-                                {/* <p>{formatDate(currentPayment?.dateSession)}</p> */}
+                                <p>{formatDate(currentPayment?.dateSession || "")}</p>
                             </div>
 
                             <div>
                                 <p>Цена сессии</p>
-                                <p>2 850 ₽</p>
+                                <p>{currentPayment?.price} ₽</p>
                             </div>
 
                             <div>
@@ -105,18 +116,18 @@ const Wallet = () => {
 
                             <div>
                                 <p>Сумма выплаты</p>
-                                <h3>1 717 ₽</h3>
+                                {currentPayment && <h3>{currentPayment?.price - (currentPayment?.price * 0.02)} ₽</h3>}
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <p>Налогооблагаемая база</p>
                                 <p>2 850 ₽</p>
-                            </div>
+                            </div> */}
 
-                            <div>
+                            {/* <div>
                                 <p>Дата выплаты</p>
                                 <p>10.01.2024</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
