@@ -1,12 +1,10 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, VideoIcon } from "@/ui/Icons"
+import { ArrowLeftIcon } from "@/ui/Icons"
 import { useNavigate, useParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { PshycologistsAPI, SessionAPI } from "@/api"
 import { IPsychSession, IPsychSessions, ISession } from "@/types"
-import ButtonDefault from "@/ui/Buttons/Default"
-import Avatar from "@/assets/Avatar.svg"
 import useGlobalStore from "@/store"
 import PsychSidebar from "@/components/PsyhSidebar"
 
@@ -20,10 +18,8 @@ const Session = () => {
     const changePsychId = useGlobalStore(state => state.changePsychId)
     const changeOpponentName = useGlobalStore(state => state.changeOpponentName)
     const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined)
-    const sessionJoined = useGlobalStore(state => state.sessionJoined)
-    const userType = localStorage.getItem("userType")
+    const userType = localStorage.getItem("userType" as string)
     const callJoined = useGlobalStore(state => state.callJoined)
-    console.log(data)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
@@ -87,7 +83,9 @@ const Session = () => {
         }
     }
 
-    const endDate: any = new Date(data !== null ? data?.dateSession : "2024-04-23 01:10:0.00");
+    const endDate: any = userType === "psych"
+        ? new Date(psychData !== null ? psychData?.dateSession : "2024-04-23 01:10:0.00")
+        : new Date(data !== null ? data?.dateSession : "2024-04-23 01:10:0.00")
     const difference = endDate - Date.now();
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -95,20 +93,22 @@ const Session = () => {
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    const [leftTime, setLeftTime] = useState("")
+    const leftTime = useGlobalStore(state => state.leftTime)
+    const changeLeftTime = useGlobalStore(state => state.changeLeftTime)
     const calculateTime = useCallback(() => {
         const time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
         if (days === 0) {
             if (difference < 0) {
-                setLeftTime("00:00:00")
+                changeLeftTime("00:00:00")
             } else {
-                setLeftTime(time)
+                changeLeftTime(time)
+                changeSessionJoined(true)
             }
         } else {
             if (difference < 0) {
-                setLeftTime("00:00:00")
+                changeLeftTime("00:00:00")
             } else {
-                setLeftTime("")
+                changeLeftTime("")
             }
         }
     }, [days, hours, minutes, seconds, difference])
@@ -141,53 +141,52 @@ const Session = () => {
             <section className={styles.Container}>
                 {!(window.innerWidth <= 1160 && callJoined) && (userType === "psych" ? <PsychSidebar /> : <Sidebar />)}
 
-                {sessionJoined
-                    ? <div id="call"></div>
-                    : <div className={styles.Content}>
-                        {data !== null && <>
-                            <div className={styles.Top}>
-                                <ArrowLeftIcon onClick={() => navigate(-1)} />
-                                {data !== undefined && <h2>{data.psychName} <span>{data.sessionNumber} сессия</span></h2>}
-                                <h6>Мои сессии</h6>
-                                <span></span>
+                <div className={styles.Content}>
+                    <div className={styles.Top}>
+                        <ArrowLeftIcon onClick={() => navigate(-1)} />
+                        <h2>{data?.psychName || psychData?.userName} <span>{data?.sessionNumber || psychData?.sessionNumber} сессия</span></h2>
+                        <h6>Мои сессии</h6>
+                        <span></span>
+                    </div>
+
+                    {leftTime === ""
+                        ? <div className={styles.Box}>
+                            <p>Ближайшая сессия</p>
+
+                            <div className={styles.Column}>
+                                {userType !== "psych"
+                                    ? data !== null && <h4>{formatDate(data?.dateSession)}</h4>
+                                    : psychData !== null && <h4>{formatDate(psychData?.dateSession)}</h4>}
+                                {userType !== "psych"
+                                    ? data !== null && <h3>{formatTime(data?.dateSession)}</h3>
+                                    : psychData !== null && <h3>{formatTime(psychData?.dateSession)}</h3>}
                             </div>
 
-                            {leftTime === ""
-                                ? <div className={styles.Box}>
-                                    <p>Ближайшая сессия</p>
+                            <div className={styles.Row}>
+                                <button onClick={() => cancelSession()}>Отменить</button>
+                                <button onClick={() => navigate(`/calendar?id=${id}&pid=${data?.psychId}`)}>Перенести</button>
+                            </div>
+                        </div>
+                        : <div className={styles.Box}>
+                            {leftTime !== "00:00:00" && <p>Дождитесь начала сессии и подключайтесь</p>}
+                            {leftTime === "00:00:00" && <h4>Сессия началась</h4>}
 
-                                    <div className={styles.Column}>
-                                        {data !== undefined && <h4>{formatDate(data.dateSession)}</h4>}
-                                        {data !== undefined && <h3>{formatTime(data.dateSession)}</h3>}
-                                    </div>
+                            {leftTime !== "00:00:00" && <div className={styles.Column}>
+                                <h3>{leftTime}</h3>
+                            </div>}
 
-                                    <div className={styles.Row}>
-                                        <button onClick={() => cancelSession()}>Отменить</button>
-                                        <button onClick={() => navigate(`/calendar?id=${id}&pid=${data.psychId}`)}>Перенести</button>
-                                    </div>
+                            {/* <div className={styles.VideoRound}>
+                                    {leftTime !== "00:00:00" ? <VideoIcon /> : <img src={Avatar} alt="" />}
                                 </div>
-                                : <div className={styles.Box}>
-                                    {leftTime !== "00:00:00" && <p>Дождитесь начала сессии и подключайтесь</p>}
-                                    {leftTime === "00:00:00" && <h4>Сессия началась</h4>}
 
-                                    {leftTime !== "00:00:00" && <div className={styles.Column}>
-                                        <h3>{leftTime}</h3>
-                                    </div>}
+                                <div className={styles.RowActive}>
+                                    <ButtonDefault disabled={false} onClick={() => changeSessionJoined(true)}>Войти</ButtonDefault>
+                                </div> */}
+                        </div>
+                    }
 
-                                    <div className={styles.VideoRound}>
-                                        {leftTime !== "00:00:00" ? <VideoIcon /> : <img src={Avatar} alt="" />}
-                                    </div>
-
-                                    <div className={styles.RowActive}>
-                                        <ButtonDefault disabled={false} onClick={() => changeSessionJoined(true)}>Войти</ButtonDefault>
-                                    </div>
-                                </div>
-                            }
-
-                            <div className={styles.Empty}></div>
-                        </>}
-                    </div>
-                }
+                    <div className={styles.Empty}></div>
+                </div>
             </section>
         </main>
     )

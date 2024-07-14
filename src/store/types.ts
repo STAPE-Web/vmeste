@@ -8,6 +8,7 @@ export default interface State {
     changeEmailModal: boolean,
     sessionJoined: boolean
     opponentName: string
+    leftTime: string
 
     changeCardList: (value: ICard[]) => void
     changeCallId: (value: string) => void
@@ -16,4 +17,5 @@ export default interface State {
     actionChangeEmailModal: (value: boolean) => void
     changeSessionJoined: (value: boolean) => void
     changeOpponentName: (value: string) => void
+    changeLeftTime: (value: string) => void
 }

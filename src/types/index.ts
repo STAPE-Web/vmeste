@@ -192,3 +192,11 @@ export interface IClient {
     "themes": string[]
     "notes": string[]
 }
+
+export interface IPsychStats {
+    "status": number,
+    "createdAt": string,
+    "totalSessions": number,
+    "repeatedSessions": number,
+    "repeatedSessionsTarget": number
+}

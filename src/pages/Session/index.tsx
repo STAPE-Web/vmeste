@@ -7,6 +7,7 @@ import { PshycologistsAPI, SessionAPI } from "@/api"
 import { IPsychSession, IPsychSessions, ISession } from "@/types"
 import PsychSidebar from "@/components/PsyhSidebar"
 import { isPastTime2 } from "@/utils"
+import useGlobalStore from "@/store"
 
 const Sessions = () => {
     const navigate = useNavigate()
@@ -18,6 +19,9 @@ const Sessions = () => {
     const [futureSessions, setFutureSessions] = useState<ISession[]>([])
     const [lastSessions, setLastSessions] = useState<ISession[]>([])
     const [psychSession, setPsychSession] = useState<IPsychSession[]>([])
+    const filteredPsychSessions = psychSession.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession))
+    const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined)
+    const changeLeftTime = useGlobalStore(state => state.changeLeftTime)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
@@ -75,6 +79,8 @@ const Sessions = () => {
                             {tab === "Планируемые"
                                 ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession)).map((item, index) => (
                                     <div key={index} className={styles.Item} onClick={() => {
+                                        changeSessionJoined(false)
+                                        changeLeftTime("")
                                         navigate(`/session/${item.id}`)
                                     }}>
                                         <img src={item.psychPhoto} alt="" />
@@ -118,8 +124,10 @@ const Sessions = () => {
 
                         : <>
                             {tab === "Планируемые"
-                                ? <>{psychSession.length !== 0 ? <div className={styles.Grid}>{psychSession.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession)).map((item, index) => (
+                                ? <>{filteredPsychSessions.length !== 0 ? <div className={styles.Grid}>{filteredPsychSessions.map((item, index) => (
                                     <div key={index} className={styles.PsychItem} onClick={() => {
+                                        changeSessionJoined(false)
+                                        changeLeftTime("")
                                         navigate(`/session/${item.sesId}`)
                                     }}>
                                         <div className={styles.Border} />

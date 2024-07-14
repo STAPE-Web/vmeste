@@ -5,13 +5,27 @@ import Favicon from "@/assets/Favicon"
 import BarChart from "@/components/BarChart"
 import PieChart from "@/ui/PieChart"
 import { useNavigate } from "react-router-dom"
+import { useCallback, useEffect, useState } from "react"
+import { PshycologistsAPI } from "@/api"
+import { IPsychStats } from "@/types"
 
 const Statistics = () => {
     const navigate = useNavigate()
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+    const [data, setData] = useState<IPsychStats | null>(null)
     const videoData = [
         { month: "Ноябрь", value: 100, amount: 12, max: 12 },
         { month: "Декабрь", value: 84, amount: 5, max: 6 },
     ]
+
+    const getData = useCallback(async () => {
+        const result: IPsychStats = await PshycologistsAPI.getStatistics(sid)
+        setData(result)
+    }, [])
+
+    useEffect(() => {
+        getData()
+    }, [getData])
 
     return (
         <main className={styles.Page}>

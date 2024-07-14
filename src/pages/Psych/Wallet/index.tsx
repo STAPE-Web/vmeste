@@ -2,12 +2,16 @@ import PsychSidebar from '@/components/PsyhSidebar'
 import styles from "./style.module.css"
 import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons'
 import { fillPaymentColor } from '@/utils'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PshycologistsAPI } from '@/api'
 
 const Wallet = () => {
     const navigate = useNavigate()
     const [modal, setModal] = useState(false)
+    const [menu, setMenu] = useState(false)
+    const sid = JSON.parse(localStorage.getItem("sid") as string)
+
     const items = [
         { type: "Запланировано", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
         { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
@@ -18,6 +22,15 @@ const Wallet = () => {
         { type: "Выплачено", id: "3668298", price: 1717, sessionDate: "07.01.2024", paymentDate: "10.01.2024" },
     ]
 
+    const getData = useCallback(async () => {
+        const result = await PshycologistsAPI.payments(sid)
+        console.log(result)
+    }, [])
+
+    useEffect(() => {
+        getData()
+    }, [getData])
+
     return (
         <main className={styles.Page}>
             <PsychSidebar />
@@ -26,7 +39,9 @@ const Wallet = () => {
                 <div className={styles.Top}>
                     <ArrowLeftIcon onClick={() => navigate(-1)} className={styles.Back} />
                     <h2>Выплаты</h2>
-                    <DotsIcon />
+                    <DotsIcon onClick={() => setMenu(!menu)} />
+
+                    {menu && <div className={styles.Download} onClick={() => setMenu(false)}>Скачать историю вылат в XLSX</div>}
                 </div>
 
                 <div className={styles.Grid}>

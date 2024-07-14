@@ -1,0 +1,45 @@
+.Page {
+    max-width: 1330px;
+    padding: 40px 15px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+}
+
+.Section {
+    width: 100%;
+    box-shadow: 3px 3px 16.7px rgba(182, 161, 192, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.Top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Top svg {
+    width: 24px;
+    height: 24px;
+    color: #BCBCBF;
+    cursor: pointer;
+}
+
+.Page button {
+    width: fit-content;
+}
+
+.Page textarea {
+    height: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    resize: vertical;
+}

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import styles from "./style.module.css"
 import useGlobalStore from "@/store"
 import { useLocation, useNavigate } from "react-router-dom"
-import { MessageIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, MessageIcon } from "@/ui/Icons"
 
 const VideoCall = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
@@ -16,6 +16,8 @@ const VideoCall = () => {
     const changeCallJoined = useGlobalStore(state => state.changeCallJoined)
     const callJoined = useGlobalStore(state => state.callJoined)
     const psychId = useGlobalStore(state => state.psychId)
+    const opponentName = useGlobalStore(state => state.opponentName)
+    const leftTime = useGlobalStore(state => state.leftTime)
     const sessionJoined = useGlobalStore(state => state.sessionJoined)
     const navigate = useNavigate()
 
@@ -59,7 +61,24 @@ const VideoCall = () => {
 
     return (
         <>
-            {sessionJoined && <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`} style={callJoined ? { background: "#000" } : { background: "#fff" }}>
+            {sessionJoined && <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""}`} style={callJoined ? { background: "#000", padding: 0 } : { background: "#fff" }}>
+                {!callJoined && <>
+                    <div className={styles.Top}>
+                        <ArrowLeftIcon onClick={() => navigate(-1)} />
+                        <h2>{opponentName}</h2>
+                        <span></span>
+                    </div>
+
+                    <div className={styles.Box}>
+                        {leftTime !== "00:00:00" && <p>Дождитесь начала сессии и подключайтесь</p>}
+                        {leftTime === "00:00:00" && <h4>Сессия началась</h4>}
+
+                        {leftTime !== "00:00:00" && <div className={styles.Column}>
+                            <h3>{leftTime}</h3>
+                        </div>}
+                    </div>
+                </>}
+
                 {callJoined && <button onClick={() => navigate(`/chat/${psychId || "123"}`)} className={styles.MessageButton}><MessageIcon /></button>}
                 <div ref={myMeeting}></div>
             </section>}

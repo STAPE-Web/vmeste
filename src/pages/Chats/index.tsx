@@ -43,7 +43,9 @@ const Chats = () => {
     function formatDate(date: number | undefined) {
         if (date !== undefined) {
             const newDate = new Date(date);
-            return `${newDate.getHours()}:${newDate.getMinutes()}`
+            const hours = String(newDate.getHours()).length !== 1 ? newDate.getHours() : `0${newDate.getHours()}`
+            const minutes = String(newDate.getMinutes()).length !== 1 ? newDate.getMinutes() : `0${newDate.getMinutes()}`
+            return `${hours}:${minutes}`
         }
     }
 
@@ -67,8 +69,6 @@ const Chats = () => {
         getChats()
     })
 
-    console.log(items)
-
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -81,7 +81,7 @@ const Chats = () => {
                     </div>
 
                     <div className={styles.List}>
-                        {items.map((item, index) => (
+                        {items.filter(i => i.conversationName.toLowerCase().includes(search.toLowerCase())).map((item, index) => (
                             <div key={index} className={styles.Item} onClick={() => navigate(`/chat/${item.conversationID}`)}>
                                 <div className={styles.ItemBox}>
                                     <img src={Avatar} alt="" />

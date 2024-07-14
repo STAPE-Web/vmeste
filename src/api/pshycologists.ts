@@ -24,6 +24,30 @@ class Pshycologists {
             sid
         }).then((res) => res.data)
     }
+
+    async addNote(sid: string, userId: string, note: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/addNote`, {
+            sid, userId, note
+        }).then((res) => res.data)
+    }
+
+    async removeNote(sid: string, userId: string, index: number) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/removeNote`, {
+            sid, userId, index
+        }).then((res) => res.data)
+    }
+
+    async getStatistics(sid: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/statistics`, {
+            sid
+        }).then((res) => res.data)
+    }
+
+    async payments(sid: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/psychologist/payments`, {
+            sid
+        }).then((res) => res.data)
+    }
 }
 
 export default new Pshycologists()

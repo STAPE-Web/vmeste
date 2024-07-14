@@ -168,11 +168,12 @@
 .NoteItem {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 12px;
     box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
     padding: 24px 30px;
     border-radius: 13px;
+    max-width: 850px;
 }
 
 .NoteItem h3 {
@@ -185,12 +186,20 @@
     color: #23232B;
     font-size: 16px;
     font-weight: 400;
+    width: 100%;
 }
 
 .NoteItem h6 {
     color: #AFABA8;
     font-size: 14px;
     font-weight: 400;
+}
+
+.NoteItem svg {
+    width: 24px;
+    height: 24px;
+    color: #FF8702;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

@@ -21,12 +21,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .Top .Back {
     display: none;
     width: 28px;
     height: 28px;
+}
+
+.Top svg {
+    cursor: pointer;
 }
 
 .Grid {
@@ -189,6 +194,19 @@
     font-weight: 700;
     font-size: 20px;
     color: #23232B;
+}
+
+.Download {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: #fff;
+    box-shadow: 2px 4px 10px rgba(182, 161, 192, 0.11);
+    padding: 6px 12px;
+    color: #595959;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

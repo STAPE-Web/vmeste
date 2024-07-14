@@ -30,6 +30,7 @@ import AddSession from "@/pages/AddSession"
 import Support from "@/pages/Support"
 import Memo from "@/pages/Psych/Memo"
 import FAQ from "@/pages/Psych/FAQ"
+import Note from "@/pages/Psych/Note"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -87,6 +88,8 @@ const psychRoutes = [
     { id: 22, path: '/test/:id', element: Test },
     { id: 23, path: '/psychologist', element: Landing2 },
     { id: 24, path: '/schedule/new', element: AddSession },
+    { id: 25, path: '/calendar', element: Calendar },
+    { id: 26, path: '/note/:id', element: Note }
 ];
 
 export { notAuthRoutes, authRoutes, psychRoutes };

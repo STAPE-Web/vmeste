@@ -171,3 +171,13 @@ export function isPastTime2(time: string): boolean {
     const selectedDateTime = new Date(time);
     return selectedDateTime > new Date();;
 }
+
+export function getSessionWord(count: number) {
+    if (count === 1) {
+        return "сессия";
+    } else if (count >= 2 && count <= 4) {
+        return "сессии";
+    } else {
+        return "сессий";
+    }
+}

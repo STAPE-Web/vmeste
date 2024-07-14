@@ -11,6 +11,7 @@ const useGlobalStore = create<State>()(devtools((set) => ({
     changeEmailModal: false,
     sessionJoined: false,
     opponentName: "",
+    leftTime: "",
 
     changeCardList: (value: ICard[]) => set({ cardList: value }),
     changeCallId: (value: string) => set({ callId: value }),
@@ -19,6 +20,7 @@ const useGlobalStore = create<State>()(devtools((set) => ({
     actionChangeEmailModal: (value: boolean) => set({ changeEmailModal: value }),
     changeSessionJoined: (value: boolean) => set({ sessionJoined: value }),
     changeOpponentName: (value: string) => set({ opponentName: value }),
+    changeLeftTime: (value: string) => set({ leftTime: value }),
 })))
 
 export default useGlobalStore

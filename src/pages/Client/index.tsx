@@ -1,10 +1,10 @@
 import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon, Note2Icon, NoteIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, DeleteIcon, Note2Icon, NoteIcon } from "@/ui/Icons"
 import { useCallback, useEffect, useState } from "react"
 import Avatar from "@/ui/Avatar";
 import { useNavigate, useParams } from "react-router-dom";
-import { ClientsAPI } from "@/api";
+import { ClientsAPI, PshycologistsAPI } from "@/api";
 import { IClient } from "@/types";
 
 const Client = () => {
@@ -27,6 +27,15 @@ const Client = () => {
         getData()
     }, [getData])
 
+    async function removeNote(index: number) {
+        const result = await PshycologistsAPI.removeNote(sid, id || "", index)
+        console.log(result)
+        if (result.status == 200) {
+            alert("Заметка удалена")
+            getData()
+        }
+    }
+
     return (
         <main className={styles.Page}>
             <PsychSidebar />
@@ -35,7 +44,7 @@ const Client = () => {
                 <div className={styles.Top}>
                     <ArrowLeftIcon onClick={() => navigate(-1)} />
                     <h2>Клиенты</h2>
-                    <NoteIcon className={styles.NoteIcon} />
+                    <NoteIcon className={styles.NoteIcon} onClick={() => navigate(`/note/${id}`)} />
                 </div>
 
                 <div className={styles.UserInfo}>
@@ -68,7 +77,7 @@ const Client = () => {
                         </div>
                     </div>
                     : <div className={styles.Notes}>
-                        <button className={styles.NoteButton}>
+                        <button className={styles.NoteButton} onClick={() => navigate(`/note/${id}`)}>
                             <Note2Icon />
                             <p>Добавить заметку</p>
                         </button>
@@ -76,6 +85,7 @@ const Client = () => {
                         {data?.notes.map((note, index) => (
                             <div key={index} className={styles.NoteItem}>
                                 <p>{note}</p>
+                                <DeleteIcon onClick={() => removeNote(index)} />
                             </div>
                         ))}
                     </div>
