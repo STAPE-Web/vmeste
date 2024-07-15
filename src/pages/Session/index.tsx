@@ -20,8 +20,11 @@ const Sessions = () => {
     const [lastSessions, setLastSessions] = useState<ISession[]>([])
     const [psychSession, setPsychSession] = useState<IPsychSession[]>([])
     const filteredPsychSessions = psychSession.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession))
+    const endedSessions = psychSession.filter(i => i.status === "ended")
     const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined)
     const changeLeftTime = useGlobalStore(state => state.changeLeftTime)
+
+    console.log(psychSession)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
@@ -150,7 +153,7 @@ const Sessions = () => {
                                     </div>
                                 ))}</div>
                                     : <h3 className={styles.No}>Нет запланированных сессий</h3>}</>
-                                : <>{lastSessions.length !== 0 ? <div className={styles.Grid}>{lastSessions.map((item, index) => (
+                                : <>{endedSessions.length !== 0 ? <div className={styles.Grid}>{endedSessions.map((item, index) => (
                                     <div key={index} className={styles.PsychItem}>
                                         <div className={styles.Border} />
 

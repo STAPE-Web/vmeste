@@ -88,6 +88,7 @@ const VideoCall = () => {
 
                 {callJoined && <button onClick={() => navigate(`/chat/${psychId || "123"}`)} className={styles.MessageButton}><MessageIcon /></button>}
                 {checkTime() && <div ref={myMeeting}></div>}
+                <div ref={myMeeting}></div>
             </section>}
         </>
     )
