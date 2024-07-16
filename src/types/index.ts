@@ -170,13 +170,15 @@ export interface IEditProfile {
 }
 
 export interface IPsychSession {
-    "sesId": string,
-    "dateSession": string,
-    "sessionNumber": number,
-    "userId": string,
-    "userName": string,
-    "status": string
+    sesId: string;
+    dateSession: string;
+    sessionNumber: number;
+    userId: string;
+    userName: string;
+    status: string;
+    isFree?: boolean; // добавленное поле для указания свободной сессии
 }
+
 
 export interface IPsychSessions {
     "freeTimetables": string[],

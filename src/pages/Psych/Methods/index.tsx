@@ -31,21 +31,34 @@ const Methods = () => {
     }
 
     function handleClick(type: "methods" | "therapy", name: string) {
-        setDisabled(false)
+        setDisabled(false);
+
         if (type === "methods") {
             const newMethods = userData.methods.includes(name)
                 ? userData.methods.filter(i => i !== name)
                 : [...userData.methods, name];
 
             const updatedUserData = { ...userData, methods: newMethods };
-
             setUserData(updatedUserData);
-            localStorage.setItem("userData", JSON.stringify(updatedUserData))
+            localStorage.setItem("userData", JSON.stringify(updatedUserData));
         }
+
         if (type === "therapy") {
-            const updatedUserData = { ...userData, therapy: name };
+            let newTherapy;
+
+            if (userData.therapy === "Любые") {
+                newTherapy = name;
+            } else if (userData.therapy === name) {
+                newTherapy = "";
+            } else if (!userData.therapy) {
+                newTherapy = name;
+            } else {
+                newTherapy = "Любые";
+            }
+
+            const updatedUserData = { ...userData, therapy: newTherapy };
             setUserData(updatedUserData);
-            localStorage.setItem("userData", JSON.stringify(updatedUserData))
+            localStorage.setItem("userData", JSON.stringify(updatedUserData));
         }
     }
 
@@ -72,7 +85,7 @@ const Methods = () => {
                 <label className={styles.Margin}>Вид терапии</label>
                 {typeList.map((item, index) => (
                     <div key={index} className={styles.Item} onClick={() => handleClick("therapy", formatTherapy(item))}>
-                        <Checkbox state={formatTherapy(userData.therapy) === item} />
+                        <Checkbox state={userData.therapy === "Любые" || userData.therapy === formatTherapy(item)} />
                         {item}
                     </div>
                 ))}

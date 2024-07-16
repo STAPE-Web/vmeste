@@ -13,6 +13,7 @@ const Schedule = () => {
     const monthList = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
     const [currentWeek, setCurrentWeek] = useState<Date[]>([]);
     const [data, setData] = useState<IPsychSession[]>([]);
+    const [freeSessions, setFreeSessions] = useState<string[]>([]);
     const sid = JSON.parse(localStorage.getItem("sid") as string);
     const [day, setDay] = useState(new Date().getDate());
     const [month, setMonth] = useState(new Date().getMonth());
@@ -21,6 +22,7 @@ const Schedule = () => {
     const getSession = useCallback(async () => {
         const result: IPsychSessions = await PshycologistsAPI.getMy(sid);
         setData(result.sessions);
+        setFreeSessions(result.freeTimetables);
     }, [sid]);
 
     useEffect(() => {
@@ -62,8 +64,13 @@ const Schedule = () => {
         return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
     };
 
-    const filteredSessions = data.filter(i => {
+    const filteredSessions = data.filter(i => i.status === "pending").filter(i => {
         const time = new Date(i.dateSession);
+        return checkSelectedDay(time);
+    });
+
+    const filteredFreeSessions = freeSessions.filter(timeString => {
+        const time = new Date(timeString);
         return checkSelectedDay(time);
     });
 
@@ -105,7 +112,7 @@ const Schedule = () => {
                     </div>
                 </div>
 
-                {filteredSessions.length === 0
+                {filteredSessions.length === 0 && filteredFreeSessions.length === 0
                     ? <div className={styles.Memo}>
                         <Calendar2Icon />
                         <p>На этот день вами не указано свободное время для сессий. Нажмите на значок календаря, чтобы настроить своё расписание.</p>
@@ -113,6 +120,9 @@ const Schedule = () => {
                     : <div>
                         {filteredSessions.map((item, index) => (
                             <ScheduleItem item={item} key={index} />
+                        ))}
+                        {filteredFreeSessions.map((timeString, index) => (
+                            <ScheduleItem item={{ sesId: "", dateSession: timeString, sessionNumber: 0, userId: "", userName: "", status: "", isFree: true }} key={index} />
                         ))}
                     </div>
                 }

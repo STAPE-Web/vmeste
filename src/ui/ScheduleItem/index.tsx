@@ -1,14 +1,16 @@
-import { IPsychSession } from "@/types"
-import { FC } from "react"
+import { IPsychSession } from "@/types";
+import { FC } from "react";
 import styles from "./style.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
-    item: IPsychSession
+    item: IPsychSession & { isFree?: boolean };
 }
 
 const ScheduleItem: FC<Props> = ({ item }) => {
-    const colors = ["#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F",]
-    const randomColor = colors[Math.floor(Math.random() * colors.length)]
+    const colors = ["#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F"];
+    const navigate = useNavigate()
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
     return (
         <div className={styles.ScheduleItem}>
@@ -18,20 +20,26 @@ const ScheduleItem: FC<Props> = ({ item }) => {
             </div>
 
             <div className={styles.Points}>
-                <div className={styles.Point} style={{ background: randomColor }}><div /></div>
-                <div className={styles.Line} style={{ background: randomColor }} />
+                <div className={styles.Point} style={{ background: item.isFree ? "#E8E8E8" : randomColor }}><div /></div>
+                <div className={styles.Line} style={{ background: item.isFree ? "#E8E8E8" : randomColor }} />
             </div>
 
-            <div className={styles.Box}>
-                <div className={styles.Border} style={{ background: randomColor }} />
+            <div className={styles.Box} onClick={() => !item.isFree && navigate(`/session/${item.sesId}`)}>
+                <div className={styles.Border} style={{ background: item.isFree ? "#E8E8E8" : randomColor }} />
 
                 <div className={styles.Group}>
-                    <h3>{item.userName}</h3>
-                    <p>{item.sessionNumber} сессия</p>
+                    {item.isFree ? (
+                        <h3 style={{ color: "#98A1AA" }}>Сессия пока не назначена</h3>
+                    ) : (
+                        <>
+                            <h3>{item.userName}</h3>
+                            <p>{item.sessionNumber} сессия</p>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ScheduleItem
+export default ScheduleItem;
