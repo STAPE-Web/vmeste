@@ -254,7 +254,7 @@ const Create = () => {
                         </div> */}
 
                         <div className={styles.ColumnBox}>
-                            <h3>Когда вы начали консультировать?</h3>
+                            <h3>Когда начали консультировать? Укажите количество полных лет</h3>
                             <p>За деньги, не в рамках учебной программы. Обязательно напишите месяц, не только год.</p>
                             <Input onChange={e => setconsultStart(e.target.value)} placeholder="Введите ответ" type="text" value={consultStart} />
                         </div>
