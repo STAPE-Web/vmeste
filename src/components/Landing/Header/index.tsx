@@ -15,40 +15,42 @@ const LandingHeader = () => {
 
     return (
         <>
-            <header className={styles.Header}>
-                <div className={styles.Container}>
-                    <Logo2 className={styles.Logo} onClick={() => navigate("/")} />
+            {!sid && <>
+                <header className={styles.Header}>
+                    <div className={styles.Container}>
+                        <Logo2 className={styles.Logo} onClick={() => navigate("/")} />
 
-                    <div className={styles.Box}>
-                        <ul>
-                            <li className={path === "/psychologist" ? styles.Active : ""} onClick={() => navigate("/psychologist")}>Для психологов</li>
-                            <li className={path === "/about" ? styles.Active : ""} onClick={() => navigate("/about")}>О нас</li>
-                            <li onClick={() => navigate("/blog")}>Блог</li>
-                            {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}><SignInIcon /> Вход</li>}
-                        </ul>
+                        <div className={styles.Box}>
+                            <ul>
+                                <li className={path === "/psychologist" ? styles.Active : ""} onClick={() => navigate("/psychologist")}>Для психологов</li>
+                                <li className={path === "/about" ? styles.Active : ""} onClick={() => navigate("/about")}>О нас</li>
+                                <li onClick={() => navigate("/blog")}>Блог</li>
+                                {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}><SignInIcon /> Вход</li>}
+                            </ul>
 
-                        {path === "/psychologist"
-                            ? <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth/psychologist")}>Зарегестрироваться</ButtonHeader>
-                            : <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
+                            {path === "/psychologist"
+                                ? <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth/psychologist")}>Зарегестрироваться</ButtonHeader>
+                                : <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
 
-                        }
+                            }
 
-                        <Language language={language} setLanguage={setLanguage} />
+                            <Language language={language} setLanguage={setLanguage} />
 
-                        <div className={`${styles.Burger} ${menu ? styles.ActiveMenu : ""}`} onClick={() => setMenu(!menu)}>
-                            <MenuIcon />
-                            <CloseIcon />
+                            <div className={`${styles.Burger} ${menu ? styles.ActiveMenu : ""}`} onClick={() => setMenu(!menu)}>
+                                <MenuIcon />
+                                <CloseIcon />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            <ul className={`${styles.Navigation} ${menu ? styles.ActiveNav : ""}`}>
-                {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}> Вход</li>}
-                <li onClick={() => navigate("/psychologist")}>Для психологов</li>
-                <li onClick={() => navigate("/about")}>О нас</li>
-                <li onClick={() => navigate("/blog")}>Блог</li>
-            </ul>
+                <ul className={`${styles.Navigation} ${menu ? styles.ActiveNav : ""}`}>
+                    {!sid && <li onClick={() => path !== "/psychologist" ? navigate("/auth") : navigate("/auth/psychologist")}> Вход</li>}
+                    <li onClick={() => navigate("/psychologist")}>Для психологов</li>
+                    <li onClick={() => navigate("/about")}>О нас</li>
+                    <li onClick={() => navigate("/blog")}>Блог</li>
+                </ul>
+            </>}
         </>
     )
 }

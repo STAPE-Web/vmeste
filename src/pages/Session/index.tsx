@@ -6,7 +6,6 @@ import { useCallback, useEffect, useState } from "react"
 import { PshycologistsAPI, SessionAPI } from "@/api"
 import { IPsychSession, IPsychSessions, ISession } from "@/types"
 import PsychSidebar from "@/components/PsyhSidebar"
-import { isPastTime2 } from "@/utils"
 import useGlobalStore from "@/store"
 
 const Sessions = () => {
@@ -19,12 +18,10 @@ const Sessions = () => {
     const [futureSessions, setFutureSessions] = useState<ISession[]>([])
     const [lastSessions, setLastSessions] = useState<ISession[]>([])
     const [psychSession, setPsychSession] = useState<IPsychSession[]>([])
-    const filteredPsychSessions = psychSession.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession))
+    const filteredPsychSessions = psychSession.filter(i => i.status === "pending")
     const endedSessions = psychSession.filter(i => i.status === "ended")
     const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined)
     const changeLeftTime = useGlobalStore(state => state.changeLeftTime)
-
-    console.log(psychSession)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
@@ -80,7 +77,7 @@ const Sessions = () => {
                     {userType !== "psych"
                         ? <>
                             {tab === "Планируемые"
-                                ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession)).map((item, index) => (
+                                ? <>{futureSessions.length !== 0 ? <div className={styles.Grid}>{futureSessions.filter(i => i.status === "pending").map((item, index) => (
                                     <div key={index} className={styles.Item} onClick={() => {
                                         changeSessionJoined(false)
                                         changeLeftTime("")

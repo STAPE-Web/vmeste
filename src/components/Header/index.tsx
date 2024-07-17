@@ -11,11 +11,10 @@ const Header = () => {
     const [language, setLanguage] = useState<"RU" | "EN">("RU")
     const sid = JSON.parse(localStorage.getItem('sid') as string)
     const userType = localStorage.getItem('userType')
-    const path = window.location.pathname
 
     return (
         <>
-            {sid && path !== "/about" && <header className={styles.Header}>
+            {sid && <header className={styles.Header}>
                 <div className={styles.Container}>
                     <Logo onClick={() => navigate("/")} />
 

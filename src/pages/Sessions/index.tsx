@@ -20,15 +20,20 @@ const Session = () => {
     const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined)
     const userType = localStorage.getItem("userType" as string)
     const callJoined = useGlobalStore(state => state.callJoined)
+    const [isAvalible, setIsAvalible] = useState(false)
 
     const getSession = useCallback(async () => {
         if (userType === "psych") {
             const result: IPsychSessions = await PshycologistsAPI.getMy(sid)
-            setPsychData(result.sessions.filter(i => i.sesId === id)[0])
+            const avalible = result.sessions.some(i => i.sesId === id)
+            setPsychData(avalible ? result.sessions.filter(i => i.sesId === id)[0] : null)
+            setIsAvalible(avalible)
         } else {
             const result = await SessionAPI.get(sid)
             const allSessions: ISession[] = result.sessions.future
-            setData(allSessions.filter(i => i.id === id)[0])
+            const avalible = allSessions.some(i => i.id === id)
+            setData(avalible ? allSessions.filter(i => i.id === id)[0] : null)
+            setIsAvalible(avalible)
         }
     }, [sid])
 
@@ -125,7 +130,7 @@ const Session = () => {
 
     useEffect(() => {
         if (leftTime === "00:00:00") {
-            changeSessionJoined(true)
+            changeSessionJoined(isAvalible)
         }
     }, [leftTime])
 
@@ -144,44 +149,41 @@ const Session = () => {
                 <div className={styles.Content}>
                     <div className={styles.Top}>
                         <ArrowLeftIcon onClick={() => navigate(-1)} />
-                        <h2>{data?.psychName || psychData?.userName} <span>{data?.sessionNumber || psychData?.sessionNumber} сессия</span></h2>
+                        {isAvalible && <h2>{data?.psychName || psychData?.userName} <span>{data?.sessionNumber || psychData?.sessionNumber} сессия</span></h2>}
                         <h6>Мои сессии</h6>
                         <span></span>
                     </div>
 
-                    {leftTime === ""
-                        ? <div className={styles.Box}>
-                            <p>Ближайшая сессия</p>
+                    {isAvalible
+                        ? <>{leftTime === ""
+                            ? <div className={styles.Box}>
+                                <p>Ближайшая сессия</p>
 
-                            <div className={styles.Column}>
-                                {userType !== "psych"
-                                    ? data !== null && <h4>{formatDate(data?.dateSession)}</h4>
-                                    : psychData !== null && <h4>{formatDate(psychData?.dateSession)}</h4>}
-                                {userType !== "psych"
-                                    ? data !== null && <h3>{formatTime(data?.dateSession)}</h3>
-                                    : psychData !== null && <h3>{formatTime(psychData?.dateSession)}</h3>}
-                            </div>
-
-                            <div className={styles.Row}>
-                                <button onClick={() => cancelSession()}>Отменить</button>
-                                <button onClick={() => navigate(`/calendar?id=${id}&pid=${data?.psychId}`)}>Перенести</button>
-                            </div>
-                        </div>
-                        : <div className={styles.Box}>
-                            {leftTime !== "00:00:00" && <p>Дождитесь начала сессии и подключайтесь</p>}
-                            {leftTime === "00:00:00" && <h4>Сессия началась</h4>}
-
-                            {leftTime !== "00:00:00" && <div className={styles.Column}>
-                                <h3>{leftTime}</h3>
-                            </div>}
-
-                            {/* <div className={styles.VideoRound}>
-                                    {leftTime !== "00:00:00" ? <VideoIcon /> : <img src={Avatar} alt="" />}
+                                <div className={styles.Column}>
+                                    {userType !== "psych"
+                                        ? data !== null && <h4>{formatDate(data?.dateSession)}</h4>
+                                        : psychData !== null && <h4>{formatDate(psychData?.dateSession)}</h4>}
+                                    {userType !== "psych"
+                                        ? data !== null && <h3>{formatTime(data?.dateSession)}</h3>
+                                        : psychData !== null && <h3>{formatTime(psychData?.dateSession)}</h3>}
                                 </div>
 
-                                <div className={styles.RowActive}>
-                                    <ButtonDefault disabled={false} onClick={() => changeSessionJoined(true)}>Войти</ButtonDefault>
-                                </div> */}
+                                <div className={styles.Row}>
+                                    <button onClick={() => cancelSession()}>Отменить</button>
+                                    <button onClick={() => navigate(`/calendar?id=${id}&pid=${data?.psychId}`)}>Перенести</button>
+                                </div>
+                            </div>
+                            : <div className={styles.Box}>
+                                {leftTime !== "00:00:00" && <p>Дождитесь начала сессии и подключайтесь</p>}
+                                {leftTime === "00:00:00" && <h4>Сессия началась</h4>}
+
+                                {leftTime !== "00:00:00" && <div className={styles.Column}>
+                                    <h3>{leftTime}</h3>
+                                </div>}
+                            </div>
+                        }</>
+                        : <div className={styles.Box}>
+                            <h4>Сессия не доступна</h4>
                         </div>
                     }
 
