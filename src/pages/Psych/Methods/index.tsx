@@ -13,7 +13,7 @@ const Methods = () => {
     const navigate = useNavigate()
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [userData, setUserData] = useState<IPsyhProfile>(JSON.parse(localStorage.getItem("userData") as string))
-    const methodList = ["Психоаналитическая терапия", "Транзактный анализ", "Системная терапия", "Гештальт-терапия", "Экзистенциальная терапия", "Когнитивно-поведенческая терапия", "Юнгианский анализ", "Психодрама", "Телесно-ориентированная терапия", "Символдрама"]
+    const methodList = ["Психоаналитическая терапия", "Транзактный анализ", "Экзистенциальная терапия", "Когнитивно-поведенческая терапия", "Юнгианский анализ", "Психодрама", "Телесно-ориентированная терапия", "Символдрама"]
     const typeList = ["Индивидуальная", "Парная"]
     const [disabled, setDisabled] = useState(true)
 

@@ -43,7 +43,7 @@ const Create = () => {
     const [promComm, setpromComm] = useState("")
 
     const [mainMethod, setmainMethod] = useState("")
-    const mainMethodList = ["Психоаналитическая терапия", "Транзактный анализ", "Системная терапия", "Гештальт-терапия", "Экзистенциальная терапия", "Когнитивно-поведенческая терапия", "Юнгианский анализ", "Психодрама", "Телесно-ориентированная терапия", "Символдрама"]
+    const mainMethodList = ["Психоаналитическая терапия", "Транзактный анализ", "Экзистенциальная терапия", "Когнитивно-поведенческая терапия", "Юнгианский анализ", "Психодрама", "Телесно-ориентированная терапия", "Символдрама"]
     const [consultStart, setconsultStart] = useState("")
     const [onlineExp, setonlineExp] = useState("")
     const [onlineExpInfo, setonlineExpInfo] = useState("")
@@ -63,7 +63,7 @@ const Create = () => {
     const [onlineTherapy, setonlineTherapy] = useState("")
     const [familyTherapy, setfamilyTherapy] = useState("")
     const [foundUs, setfoundUs] = useState("")
-    const foundUsList = ["Рассказали коллеги / друзья", "Из рекламы", "Гештальтпсихология", "Нашла на сайте “Вместе” информацию о наборе", "Через поиск работы в интернете", "Другое"]
+    const foundUsList = ["Рассказали коллеги / друзья", "Из рекламы", "Нашла на сайте “Вместе” информацию о наборе", "Через поиск работы в интернете", "Другое"]
 
     const [photos, setPhotos] = useState<FileList | null>(null)
     const [docs, setDocs] = useState<FileList | null>(null)
