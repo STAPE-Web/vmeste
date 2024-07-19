@@ -131,6 +131,8 @@ const Chart: FC<Props> = ({ array, tab2 }) => {
     ],
   };
 
+  console.log(array, tab2)
+
   return (
     <div className={styles.ChartBox}>
       <div className={styles.Labels}>

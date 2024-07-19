@@ -307,6 +307,7 @@ const Diary = () => {
 
   const getFeeling = useCallback(async () => {
     const result = await DiaryAPI.getDiary(sid);
+    console.log(result)
 
     const formattedDataArray = [];
 
@@ -375,7 +376,7 @@ const Diary = () => {
 
     moodscale.forEach((item) => {
       item.array.forEach((subItem) => {
-        newData.push({ time: subItem.time, value: subItem.assessment })
+        newData.push({ time: subItem.time, value: subItem.stress })
       });
     })
 

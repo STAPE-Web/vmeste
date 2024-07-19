@@ -85,6 +85,16 @@
     font-weight: 700;
 }
 
+.Row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Row svg {
+    color: #FF8702;
+}
+
 @media screen and (max-width:1160px) {
     .Sidebar {
         position: fixed;

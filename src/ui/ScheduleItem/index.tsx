@@ -11,12 +11,13 @@ const ScheduleItem: FC<Props> = ({ item }) => {
     const colors = ["#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F", "#92D35E", "#8C79FF", "#F8CB2F"];
     const navigate = useNavigate()
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const hours = new Date(item.dateSession).getHours()
 
     return (
         <div className={styles.ScheduleItem}>
             <div className={styles.Time}>
-                <h4>{new Date(item.dateSession).getHours()}:00</h4>
-                <p>{new Date(item.dateSession).getHours() + 1}:00</p>
+                <h4>{String(hours).length === 1 ? `0${hours}` : hours}:00</h4>
+                <p>{String(hours + 1).length === 1 ? `0${hours + 1}` : hours + 1}:00</p>
             </div>
 
             <div className={styles.Points}>

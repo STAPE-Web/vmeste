@@ -14,7 +14,7 @@ const Methods = () => {
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [userData, setUserData] = useState<IPsyhProfile>(JSON.parse(localStorage.getItem("userData") as string))
     const methodList = ["Психоаналитическая терапия", "Транзактный анализ", "Экзистенциальная терапия", "Когнитивно-поведенческая терапия", "Юнгианский анализ", "Психодрама", "Телесно-ориентированная терапия", "Символдрама"]
-    const typeList = ["Индивидуальная", "Парная"]
+    const typeList = ["Индивидуальные", "Парные"]
     const [disabled, setDisabled] = useState(true)
 
     async function saveChanges() {
@@ -74,7 +74,7 @@ const Methods = () => {
                 </div>
 
                 <label>Методы терапии</label>
-                <p>Выберите 1-2 метода, в которых вы работаете онлайн</p>
+                <p>Выберите методы, в которых вы работаете онлайн</p>
                 {methodList.map((item, index) => (
                     <div key={index} className={styles.Item} onClick={() => handleClick("methods", formatMethods(item))}>
                         <Checkbox state={userData.methods.some(i => i === formatMethods(item))} />

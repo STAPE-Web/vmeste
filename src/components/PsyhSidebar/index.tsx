@@ -1,4 +1,4 @@
-import { ArrowRightIcon, CalendarIcon, DiaryIcon, HomeIcon, InfoIcon, MessageIcon, QuestionIcon, SupportIcon, UserIcon, WalletIcon } from "@/ui/Icons"
+import { ArrowRightIcon, CalendarIcon, DiaryIcon, HomeIcon, InfoIcon, MessageIcon, QuestionIcon, SupportIcon, UserIcon, VerifedIcon, WalletIcon } from "@/ui/Icons"
 import styles from "./style.module.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import { IPsyhProfile } from "@/types"
@@ -38,7 +38,11 @@ const PsychSidebar = () => {
         <div className={styles.Sidebar}>
             <div className={styles.User}>
                 <div>
-                    <h3>{userData !== null ? userData.name : ""}</h3>
+                    <div className={styles.Row}>
+                        <h3>{userData !== null ? userData.name : ""}</h3>
+                        <VerifedIcon />
+                    </div>
+
                     <h6>Ранг: {userData !== null ? userData.level : ""}</h6>
                 </div>
 
