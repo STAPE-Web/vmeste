@@ -20,6 +20,11 @@ const Blog = () => {
 
     const getMaterials = useCallback(async () => {
         const result = await MaterialsAPI.getAll(sid)
+        console.log(result)
+        // @ts-ignore
+        if (result.status === 402) {
+            navigate("/psychologist/create")
+        }
         setData(result.result)
     }, [sid])
 

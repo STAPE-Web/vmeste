@@ -21,6 +21,10 @@ const Schedule = () => {
 
     const getSession = useCallback(async () => {
         const result: IPsychSessions = await PshycologistsAPI.getMy(sid);
+        // @ts-ignore
+        if (result.status === 402) {
+            navigate("/psychologist/create")
+        }
         setData(result.sessions);
         setFreeSessions(result.freeTimetables);
     }, [sid]);

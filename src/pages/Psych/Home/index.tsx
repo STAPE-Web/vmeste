@@ -17,6 +17,11 @@ const PsychHome = () => {
     const getSession = useCallback(async () => {
         const result: IPsychSessions = await PshycologistsAPI.getMy(sid)
         console.log(result)
+
+        // @ts-ignore
+        if (result.status === 402) {
+            navigate("/psychologist/create")
+        }
         setPsychSession(result.sessions)
     }, [sid])
 
