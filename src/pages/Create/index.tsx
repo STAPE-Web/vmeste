@@ -358,7 +358,7 @@ const Create = () => {
 
 
     useEffect(() => {
-        if (step === 1) setDisable(username === "" || gender === "" || bday === "" || phone === "" || email === "")
+        if (step === 1) setDisable(username === "" || gender === "" || bday === "" || phone === "" || phone.length !== 10 || email === "")
         if (step === 2) setDisable(contact === "" || citizenship === "" || socailMedia === "" || bio === "" || promComm === "")
         if (step === 3) setDisable(mainMethod === "" || consultStart === "" || onlineExp === "" || clients === "" || longestSession === "" || personalTreopia === "")
         if (step === 4) setDisable(supervisions === "" || anotherJob === "" || vmesteClients === "" || psychProcess === "" || onlineTherapy === "" || familyTherapy === "" || foundUs === "")

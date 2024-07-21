@@ -8,6 +8,7 @@ import profile from "./profile";
 import upload from "./upload";
 import payment from "./payment";
 import clients from "./clients";
+import support from "./support";
 
 export {
     auth as AuthAPI,
@@ -20,4 +21,5 @@ export {
     upload as UploadAPI,
     payment as PaymentAPI,
     clients as ClientsAPI,
+    support as SupportAPI,
 }

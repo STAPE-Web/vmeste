@@ -5,10 +5,20 @@ import Textarea from "@/ui/Textarea"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./style.module.css"
+import { SupportAPI } from "@/api"
 
 const Support = () => {
     const navigate = useNavigate()
     const [text, setText] = useState("")
+    const sid = JSON.parse(localStorage.getItem("sid") as string);
+
+    async function SendMessage() {
+        const result = await SupportAPI.sendMessage(sid, text)
+        if (result.status === 200) {
+            alert("Сообщение отправлено")
+            setText("")
+        }
+    }
 
     return (
         <main className={styles.Page}>
@@ -23,7 +33,7 @@ const Support = () => {
 
                 <div className={styles.Form}>
                     <Textarea onChange={e => setText(e.target.value)} placeholder="Опишите проблему" value={text} />
-                    <ButtonDefault disabled={text.length === 0} onClick={() => ({})}>Отправить</ButtonDefault>
+                    <ButtonDefault disabled={text.length === 0} onClick={() => SendMessage()}>Отправить</ButtonDefault>
                 </div>
             </section>
         </main>

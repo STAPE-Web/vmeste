@@ -204,6 +204,17 @@
     font-weight: 700;
 }
 
+.Logout {
+    width: fit-content;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #BCBCBF;
+    font-size: 16px;
+    font-weight: 700;
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .Page {
         padding: 0;
@@ -233,5 +244,9 @@
     .Memo,
     .Form {
         width: 100%;
+    }
+
+    .Logout {
+        display: flex;
     }
 }

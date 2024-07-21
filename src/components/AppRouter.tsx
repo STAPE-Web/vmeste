@@ -12,6 +12,7 @@ const AppRouter = () => {
     const result = await AuthAPI.getProfile(sid);
     if (result.status === 404) {
       localStorage.removeItem("sid");
+      localStorage.removeItem("userType")
       window.location.reload();
     } else {
       setProfileFetched(true);

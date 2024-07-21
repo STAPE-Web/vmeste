@@ -126,6 +126,12 @@ const PsychProfile = () => {
         }
     }
 
+    function signOut() {
+        localStorage.removeItem("sid")
+        localStorage.removeItem("userType")
+        window.location.replace("/")
+    }
+
     return (
         <main className={styles.Page}>
             <PsychSidebar />
@@ -192,6 +198,7 @@ const PsychProfile = () => {
                         </ul>
                     </div>
 
+                    <button className={styles.Logout} onClick={() => signOut()}>Выйти из профиля</button>
                     <button className={styles.DeleteAccount} onClick={() => deleteAccount()}>Удалить Аккаунт</button>
                 </div>
 
