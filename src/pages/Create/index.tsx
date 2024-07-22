@@ -198,7 +198,7 @@ const Create = () => {
                         <div className={styles.ColumnBox}>
                             <label>Академическая степень</label>
                             <Select array={degreeList} setValue={setDegree} value={degree === "" ? "Выберите вариант" : degree} />
-                            {university !== "" && endYear !== "" && specialName !== "" && degree !== "" && <button className={styles.AddButton} onClick={() => addNewEduc()}><Add2Icon /> Сохранить</button>}
+                            {university !== "" && endYear !== "" && specialName !== "" && degree !== "" && <button className={styles.AddButton} onClick={() => addNewEduc()}><Add2Icon /> Подтвердить</button>}
                         </div>
 
                         <ul>

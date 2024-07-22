@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import Banner from "@/ui/Banner"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, ArrowRightIcon } from "@/ui/Icons"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import Diary from "@/components/Diary"
 import { SessionAPI, TestsAPI } from "@/api"
@@ -81,16 +81,6 @@ const Home = () => {
         getSession()
     }, [getSession])
 
-    function formatDate(value: string) {
-        const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря",]
-        const date = new Date(value)
-        const day = date.getDate()
-        const month = date.getMonth()
-        const hour = date.getHours()
-        const minutes = date.getMinutes()
-        return `${day} ${months[month]}, ${String(hour).length === 1 ? `0${hour}` : hour}:${String(minutes).length === 1 ? `0${minutes}` : minutes}`
-    }
-
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -101,30 +91,7 @@ const Home = () => {
                         ? <Diary />
                         : <>
                             <div className={styles.DesctopBox}>
-                                {futureSessions.filter(i => i.status !== "canceled").length !== 0
-                                    ? <div className={styles.Grid}>{futureSessions.filter(i => i.status !== "canceled").map((item, index) => (
-                                        <div key={index} className={styles.Item} onClick={() => navigate(`/session/${item.id}`)}>
-                                            <img src={item.psychPhoto} alt="" />
-
-                                            <div className={styles.ItemBox}>
-                                                <div className={styles.RowBox}>
-                                                    <h3>{item.psychName}</h3>
-                                                    <ArrowRightIcon />
-                                                </div>
-
-                                                <p>{item.sessionNumber} сессия</p>
-
-                                                <h4>{formatDate(item.dateSession)}</h4>
-
-                                                <div className={styles.Payed}>
-                                                    <CheckIcon />
-                                                    Оплачено
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}</div>
-                                    : <Banner data={futureSessions} />
-                                }
+                                <Banner data={futureSessions} />
                             </div>
 
                             <div className={styles.MobileBox}>

@@ -66,7 +66,7 @@ const Session = () => {
         const date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
         const day = date.getDate();
         const month = date.getMonth();
-        const weekDay = date.getDay();
+        const weekDay = date.getDay() - 1;
 
         return `${weeks[weekDay]}, ${day} ${months[month]}`;
     }

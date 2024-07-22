@@ -95,6 +95,10 @@
     color: #FF8702;
 }
 
+.MobileItem {
+    display: none !important;
+}
+
 @media screen and (max-width:1160px) {
     .Sidebar {
         position: fixed;
@@ -129,5 +133,9 @@
         width: 100%;
         align-items: center;
         justify-content: center !important;
+    }
+
+    .MobileItem {
+        display: flex !important;
     }
 }
