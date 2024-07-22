@@ -87,3 +87,10 @@
 .ScheduleItem:last-child .Line {
     display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .ScheduleItem .Box {
+        width: 100%;
+        min-width: 0;
+    }
+}

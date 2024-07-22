@@ -255,8 +255,8 @@ const Create = () => {
 
                         <div className={styles.ColumnBox}>
                             <h3>Когда начали консультировать? Укажите количество полных лет</h3>
-                            <p>За деньги, не в рамках учебной программы. Обязательно напишите месяц, не только год.</p>
-                            <Input onChange={e => setconsultStart(e.target.value)} placeholder="Введите ответ" type="text" value={consultStart} />
+                            <p>За деньги, не в рамках учебной программы.</p>
+                            <Input onChange={e => setconsultStart(e.target.value)} placeholder="Введите ответ" type="number" value={consultStart} />
                         </div>
                     </div>
 
@@ -343,14 +343,14 @@ const Create = () => {
                                 Цветные;<br />
                                 Лицо по центру и хорошо освещено.<br />
                                 Размер не менее 1МБ<br />
-                                В формате .jpg<br />
+                                В формате .jpg, .png<br />
                                 В количестве не более трех штук</p>
                             <Upload file={photos} id="photos" setFile={setPhotos} />
                         </div>
                     </div>
                 </div>
 
-                <ButtonDefault disabled={false} onClick={() => Auth()}>Отправить</ButtonDefault>
+                <ButtonDefault disabled={disable} onClick={() => Auth()}>Отправить</ButtonDefault>
                 <h6>Нажимая кнопку «Отправить» я подтверждаю, что прочитал(а) и даю <a href="">согласие</a> на обработку своих персональных данных. Подробнее об обработке данных читайте в <a href="">политике</a>.</h6>
             </div>
         }
@@ -359,11 +359,11 @@ const Create = () => {
 
     useEffect(() => {
         if (step === 1) setDisable(username === "" || gender === "" || bday === "" || phone === "" || phone.length !== 10 || email === "")
-        if (step === 2) setDisable(contact === "" || citizenship === "" || socailMedia === "" || bio === "" || promComm === "")
+        if (step === 2) setDisable(contact === "" || citizenship === "" || socailMedia === "" || bio === "" || promComm === "" || educ.length === 0 || docsList.length === 0)
         if (step === 3) setDisable(mainMethod === "" || consultStart === "" || onlineExp === "" || clients === "" || longestSession === "" || personalTreopia === "")
-        if (step === 4) setDisable(supervisions === "" || anotherJob === "" || vmesteClients === "" || psychProcess === "" || onlineTherapy === "" || familyTherapy === "" || foundUs === "")
-    }, [username, gender, bday, phone, email, university, contact, citizenship, socailMedia, bio, step, promComm, mainMethod, consultStart, onlineExp, clients, longestSession, personalTreopia, supervisions, anotherJob, vmesteClients, psychProcess, onlineTherapy, familyTherapy, foundUs])
-
+        if (step === 4) setDisable(supervisions === "" || anotherJob === "" || vmesteClients === "" || psychProcess === "" || onlineTherapy === "" || familyTherapy === "" || foundUs === "" || photosList.length === 0)
+    }, [username, gender, bday, phone, email, university, contact, citizenship, socailMedia, bio, step, promComm, educ, mainMethod, consultStart, docsList, onlineExp, clients, longestSession, personalTreopia, supervisions, anotherJob, vmesteClients, psychProcess, onlineTherapy, familyTherapy, foundUs, photosList])
+    console.log(photosList)
     function addNewEduc() {
         setEduc(prev => [...prev, {
             degree: degreeList.indexOf(degree) + 1,
