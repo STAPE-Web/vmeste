@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    gap: 30px;
 }
 
 .User img {
@@ -89,10 +90,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
 }
 
 .Row svg {
     color: #FF8702;
+    min-width: 20px;
 }
 
 .MobileItem {

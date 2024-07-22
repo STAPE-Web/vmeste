@@ -416,7 +416,7 @@ const Create = () => {
                 1,
                 2
             ],
-            "consultStart": consultStart,
+            "consultStart": Number(consultStart),
             "onlineExp": onlineExp === "Да",
             "onlineExpInfo": onlineExpInfo,
             "clients": Number(clients),

@@ -127,7 +127,7 @@ export interface ICreatePsyh {
     "profComm": boolean,
     "mainMethod": string[],
     "extraMethod": number[],
-    "consultStart": string,
+    "consultStart": number,
     "onlineExp": boolean,
     "onlineExpInfo": string,
     "clients": number,

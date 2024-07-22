@@ -64,6 +64,12 @@ const PsychSidebar = () => {
                         <SupportIcon />
                     </div>
                 </div>
+
+                <div className={`${styles.Item} ${styles.MobileItem} ${path.pathname === "/methods" ? styles.Active : ""}`} onClick={() => navigate("/methods")}>
+                    <div>
+                        <DiaryIcon />
+                    </div>
+                </div>
             </div>
 
             <div className={styles.List}>
