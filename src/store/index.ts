@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import State from './types'
-import { ICard } from '@/types'
+import { ICard, IPsyhProfile } from '@/types'
 
 const useGlobalStore = create<State>()(devtools((set) => ({
     cardList: [],
@@ -12,6 +12,7 @@ const useGlobalStore = create<State>()(devtools((set) => ({
     sessionJoined: false,
     opponentName: "",
     leftTime: "",
+    psychData: null,
 
     changeCardList: (value: ICard[]) => set({ cardList: value }),
     changeCallId: (value: string) => set({ callId: value }),
@@ -21,6 +22,7 @@ const useGlobalStore = create<State>()(devtools((set) => ({
     changeSessionJoined: (value: boolean) => set({ sessionJoined: value }),
     changeOpponentName: (value: string) => set({ opponentName: value }),
     changeLeftTime: (value: string) => set({ leftTime: value }),
+    changePsychData: (value: IPsyhProfile) => set({ psychData: value }),
 })))
 
 export default useGlobalStore

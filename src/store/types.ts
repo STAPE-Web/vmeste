@@ -1,4 +1,4 @@
-import { ICard } from "@/types";
+import { ICard, IPsyhProfile } from "@/types";
 
 export default interface State {
     cardList: ICard[],
@@ -9,6 +9,7 @@ export default interface State {
     sessionJoined: boolean
     opponentName: string
     leftTime: string
+    psychData: IPsyhProfile | null
 
     changeCardList: (value: ICard[]) => void
     changeCallId: (value: string) => void
@@ -18,4 +19,5 @@ export default interface State {
     changeSessionJoined: (value: boolean) => void
     changeOpponentName: (value: string) => void
     changeLeftTime: (value: string) => void
+    changePsychData: (value: IPsyhProfile) => void
 }

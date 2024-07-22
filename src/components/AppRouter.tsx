@@ -1,5 +1,6 @@
 import { AuthAPI } from "@/api";
 import { authRoutes, notAuthRoutes, psychRoutes } from "@/router";
+import useGlobalStore from "@/store";
 import { useCallback, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -7,6 +8,7 @@ const AppRouter = () => {
   const sid = JSON.parse(localStorage.getItem("sid") as string);
   const userType = localStorage.getItem("userType");
   const [profileFetched, setProfileFetched] = useState(false);
+  const changePsychData = useGlobalStore(state => state.changePsychData)
 
   const getProfile = useCallback(async () => {
     const result = await AuthAPI.getProfile(sid);
@@ -21,6 +23,7 @@ const AppRouter = () => {
           ? localStorage.setItem("userData", JSON.stringify({ id: result.id, ...result.userInfo }))
           : localStorage.setItem("userData", JSON.stringify(result))
       }
+      changePsychData(userType === "psych" && result)
     }
   }, [sid]);
 

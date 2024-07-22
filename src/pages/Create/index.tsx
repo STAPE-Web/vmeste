@@ -198,7 +198,7 @@ const Create = () => {
                         <div className={styles.ColumnBox}>
                             <label>Академическая степень</label>
                             <Select array={degreeList} setValue={setDegree} value={degree === "" ? "Выберите вариант" : degree} />
-                            {university !== "" && endYear !== "" && specialName !== "" && degree !== "" && <button className={styles.AddButton} onClick={() => addNewEduc()}><Add2Icon /> Добавить</button>}
+                            {university !== "" && endYear !== "" && specialName !== "" && degree !== "" && <button className={styles.AddButton} onClick={() => addNewEduc()}><Add2Icon /> Сохранить</button>}
                         </div>
 
                         <ul>
@@ -256,7 +256,7 @@ const Create = () => {
                         <div className={styles.ColumnBox}>
                             <h3>Когда начали консультировать? Укажите количество полных лет</h3>
                             <p>За деньги, не в рамках учебной программы.</p>
-                            <Input onChange={e => setconsultStart(e.target.value)} placeholder="Введите ответ" type="number" value={consultStart} />
+                            <Input onChange={e => setconsultStart(e.target.value)} placeholder="Введите цифру" type="tel" value={consultStart} />
                         </div>
                     </div>
 
@@ -272,7 +272,7 @@ const Create = () => {
                         <div className={styles.ColumnBox}>
                             <h3>Сколько клиентов у вас сейчас в практике?*</h3>
                             <p>Пожалуйста, укажите количество клиентов на текущий момент, а не за всю историю практики.</p>
-                            <Input onChange={e => setclients(e.target.value)} placeholder="Введите цифру" type="number" value={clients} />
+                            <Input onChange={e => setclients(e.target.value)} placeholder="Введите цифру" type="tel" value={clients} />
                         </div>
 
                         <div className={styles.ColumnBox}>
