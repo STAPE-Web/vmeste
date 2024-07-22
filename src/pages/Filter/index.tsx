@@ -32,12 +32,12 @@ const Filter = () => {
     const [coupleTerapy, setCoupleTerapy] = useState<string[]>([])
 
     const [modalMode, setModalMode] = useState(0)
-    const [price, setPrice] = useState<number[]>([2500])
+    const [price, setPrice] = useState<number[]>([2300])
 
     const priceList = [
-        { price: 2500, text: "Опыт от 3 лет. Прошли личное собеседование, подтвердили образование, предоставили рекомендацию" },
+        { price: 2300, text: "Опыт от 3 лет. Прошли личное собеседование, подтвердили образование, предоставили рекомендацию" },
         { price: 3500, text: "Опыт от 5 лет. Работают в “Вместе” более года и за это время зарекомендовали себя наилучшим образом" },
-        { price: 4500, text: "Опыт от 7 лет. Самые востребованные психологи: супервизоры, члены ассоциаций, авторы научных статей" },
+        { price: 5500, text: "Опыт от 7 лет. Самые востребованные психологи: супервизоры, члены ассоциаций, авторы научных статей" },
     ]
 
     const itemsList = [
@@ -60,7 +60,7 @@ const Filter = () => {
             familyTherapy: typeConsult === "Парная",
             themes: typeConsult === "Парная" ? coupleTerapy : [...myCondition, ...relationship, ...work, ...events],
             gender: sexPeople === "Женщина" ? "W" : "M",
-            price: price.length === 0 ? [2500, 3500, 4500] : price,
+            price: price.length === 0 ? [2300, 3500, 5500] : price,
             time: sessionTime,
             MFTime: MonFriTime,
             SSTime: SatSunTime

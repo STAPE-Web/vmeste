@@ -193,7 +193,7 @@ const Specialists = () => {
                             <div className={styles.TextBoxTop}>
                                 <div>
                                     <h2>Методы терапии</h2>
-                                    <p>Гештальт-терапия</p>
+                                    <p>{data[currentPeople].methods.join(",")}</p>
                                 </div>
 
                                 <ArrowDownIcon />

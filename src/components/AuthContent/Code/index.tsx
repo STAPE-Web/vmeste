@@ -41,9 +41,10 @@ const Code: FC<Props> = ({ setState, authData }) => {
     }
 
     if (result.status === 200) {
+      localStorage.removeItem("userType")
       localStorage.setItem("sid", JSON.stringify(result.sid));
-      window.location.replace("/");
       if (result.type === "psych") localStorage.setItem("userType", "psych")
+      window.location.replace("/");
     }
 
     if (result.status === 404) {
