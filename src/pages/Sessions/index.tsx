@@ -88,10 +88,19 @@ const Session = () => {
         }
     }
 
+    const formatDateToISO = (dateString: string) => {
+        // Разделяем дату и время
+        const [datePart, timePart] = dateString.split(' ');
+        // Форматируем дату и время в ISO 8601
+        return `${datePart}T${timePart.slice(0, -3)}:00.000Z`;
+    };
+
     const endDate: any = userType === "psych"
-        ? new Date(psychData !== null ? psychData?.dateSession : "2024-04-23 01:10:0.00")
-        : new Date(data !== null ? data?.dateSession : "2024-04-23 01:10:0.00")
+        ? new Date(psychData !== null ? formatDateToISO(psychData?.dateSession) : "2024-04-23T01:10:00.000Z")
+        : new Date(data !== null ? formatDateToISO(data?.dateSession) : "2024-04-23T01:10:00.000Z");
+
     const difference = endDate - Date.now();
+
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
