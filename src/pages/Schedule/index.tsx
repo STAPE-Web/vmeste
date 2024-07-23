@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon, BellIcon, Calendar2Icon } from "@/ui/Ico
 import { IPsychSession, IPsychSessions } from "@/types";
 import { PshycologistsAPI } from "@/api";
 import ScheduleItem from "@/ui/ScheduleItem";
+import { parseDateString } from "@/utils";
 
 const Schedule = () => {
     const navigate = useNavigate();
@@ -73,9 +74,8 @@ const Schedule = () => {
         return checkSelectedDay(time);
     });
 
-    const filteredFreeSessions = freeSessions.filter(timeString => {
-        const time = new Date(timeString);
-        return checkSelectedDay(time);
+    const filteredFreeSessions = freeSessions.map(timeString => parseDateString(timeString)).filter(date => {
+        return checkSelectedDay(date);
     });
 
     return (
@@ -126,7 +126,7 @@ const Schedule = () => {
                             <ScheduleItem item={item} key={index} />
                         ))}
                         {filteredFreeSessions.map((timeString, index) => (
-                            <ScheduleItem item={{ sesId: "", dateSession: timeString, sessionNumber: 0, userId: "", userName: "", status: "", isFree: true }} key={index} />
+                            <ScheduleItem item={{ sesId: "", dateSession: timeString.toISOString(), sessionNumber: 0, userId: "", userName: "", status: "", isFree: true }} key={index} />
                         ))}
                     </div>
                 }
