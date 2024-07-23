@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react"
 import { PshycologistsAPI, SessionAPI } from "@/api"
 import { IPsychSession, IPsychSessions, ISession } from "@/types"
 import useGlobalStore from "@/store"
-import { parse, formatISO } from 'date-fns';
+import { parse } from 'date-fns';
 import PsychSidebar from "@/components/PsyhSidebar"
 
 const Session = () => {
