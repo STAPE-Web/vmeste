@@ -70,7 +70,7 @@ const Schedule = () => {
     };
 
     const filteredSessions = data.filter(i => i.status === "pending").filter(i => {
-        const time = new Date(i.dateSession);
+        const time = parseDateString(i.dateSession);
         return checkSelectedDay(time);
     });
 
