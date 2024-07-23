@@ -19,12 +19,7 @@ const Wallet = () => {
 
     const getData = useCallback(async () => {
         const result = await PshycologistsAPI.payments(sid);
-        // Преобразуем даты в формат ISO 8601
-        const payments = result.payments.map((payment: IPayment) => ({
-            ...payment,
-            dateSession: new Date(payment.dateSession).toISOString()
-        }));
-        setData(payments);
+        setData(result.payments);
     }, []);
 
     useEffect(() => {
