@@ -18,9 +18,13 @@ const Wallet = () => {
     const [accept, setAccept] = useState(false)
 
     const getData = useCallback(async () => {
-        const result = await PshycologistsAPI.payments(sid)
-        setData(result.payments)
-    }, [])
+        const result = await PshycologistsAPI.payments(sid);
+        const payments = result.payments.map((payment: IPayment) => ({
+            ...payment,
+            dateSession: new Date(payment.dateSession).toISOString()
+        }));
+        setData(payments);
+    }, []);
 
     useEffect(() => {
         getData()

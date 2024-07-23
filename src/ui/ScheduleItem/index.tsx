@@ -12,7 +12,22 @@ const ScheduleItem: FC<Props> = ({ item }) => {
     const navigate = useNavigate();
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-    const dateSession = new Date(item.dateSession);
+    let dateSession = new Date(item.dateSession);
+
+    // Check if the date is invalid
+    if (isNaN(dateSession.getTime())) {
+        // Try to parse it manually if it is in an incorrect format
+        const [datePart, timePart] = item.dateSession.split(' ');
+        const [year, month, day] = datePart.split('-').map(Number);
+        const [hours, minutes, seconds] = timePart.split(':').map(Number);
+        dateSession = new Date(year, month - 1, day, hours, minutes, seconds);
+    }
+
+    // If still invalid, set to default value
+    if (isNaN(dateSession.getTime())) {
+        dateSession = new Date(); // Current date as fallback
+    }
+
     const hours = dateSession.getHours();
     const nextHour = (hours + 1) % 24;
 
