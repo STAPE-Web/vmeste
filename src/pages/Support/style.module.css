@@ -44,7 +44,7 @@
 @media screen and (max-width: 768px) {
     .Page {
         padding: 0;
-        min-height: calc(100vh - 70px);
+        height: calc(100vh - 70px);
         margin-bottom: 100px;
     }
 
