@@ -2,7 +2,7 @@ import PsychSidebar from "@/components/PsyhSidebar"
 import ButtonDefault from "@/ui/Buttons/Default"
 import { ArrowLeftIcon } from "@/ui/Icons"
 import Textarea from "@/ui/Textarea"
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./style.module.css"
 import { SupportAPI } from "@/api"
@@ -11,17 +11,6 @@ const Support = () => {
     const navigate = useNavigate()
     const [text, setText] = useState("")
     const sid = JSON.parse(localStorage.getItem("sid") as string);
-    const pageRef = useRef<HTMLDivElement | null>(null)
-
-    useEffect(() => {
-        if (pageRef.current) {
-            if (window.innerWidth <= 768) {
-                pageRef.current.style.height = `calc(100vh - 70px)`
-            } else {
-                pageRef.current.style.height = `auto`
-            }
-        }
-    }, [])
 
     async function SendMessage() {
         const result = await SupportAPI.sendMessage(sid, text)
@@ -32,7 +21,7 @@ const Support = () => {
     }
 
     return (
-        <main className={styles.Page} ref={pageRef}>
+        <main className={styles.Page}>
             <PsychSidebar />
 
             <section className={styles.Section}>
