@@ -1,7 +1,7 @@
 import PsychSidebar from '@/components/PsyhSidebar';
 import styles from "./style.module.css";
 import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons';
-import { fillPaymentColor, formatDate } from '@/utils';
+import { fillPaymentColor } from '@/utils';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PshycologistsAPI } from '@/api';
@@ -56,7 +56,7 @@ const Wallet = () => {
                                 <div className={styles.Box}>
                                     <div className={styles.Column}>
                                         <p>Дата сессии:</p>
-                                        <span>{formatDate(item.dateSession)}</span>
+                                        <span>{item.dateSession.split(" ")[0]}</span>
                                     </div>
 
                                     {/* <div className={styles.Column}>
@@ -101,7 +101,7 @@ const Wallet = () => {
 
                             <div>
                                 <p>Дата сессии</p>
-                                <p>{formatDate(currentPayment?.dateSession || "")}</p>
+                                <p>{currentPayment?.dateSession.split(" ")[0]}</p>
                             </div>
 
                             <div>
