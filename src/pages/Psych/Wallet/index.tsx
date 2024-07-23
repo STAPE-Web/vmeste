@@ -1,24 +1,25 @@
-import PsychSidebar from '@/components/PsyhSidebar'
-import styles from "./style.module.css"
-import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons'
-import { fillPaymentColor, formatDate } from '@/utils'
-import { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { PshycologistsAPI } from '@/api'
-import { IPayment } from '@/types'
-import ButtonDefault from '@/ui/Buttons/Default'
+import PsychSidebar from '@/components/PsyhSidebar';
+import styles from "./style.module.css";
+import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons';
+import { fillPaymentColor, formatDate } from '@/utils';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PshycologistsAPI } from '@/api';
+import { IPayment } from '@/types';
+import ButtonDefault from '@/ui/Buttons/Default';
 
 const Wallet = () => {
-    const navigate = useNavigate()
-    const [modal, setModal] = useState(false)
-    const [menu, setMenu] = useState(false)
-    const [data, setData] = useState<IPayment[]>([])
-    const sid = JSON.parse(localStorage.getItem("sid") as string)
-    const [currentPayment, setCurrentPayment] = useState<IPayment | null>(null)
-    const [accept, setAccept] = useState(false)
+    const navigate = useNavigate();
+    const [modal, setModal] = useState(false);
+    const [menu, setMenu] = useState(false);
+    const [data, setData] = useState<IPayment[]>([]);
+    const sid = JSON.parse(localStorage.getItem("sid") as string);
+    const [currentPayment, setCurrentPayment] = useState<IPayment | null>(null);
+    const [accept, setAccept] = useState(false);
 
     const getData = useCallback(async () => {
         const result = await PshycologistsAPI.payments(sid);
+        // Преобразуем даты в формат ISO 8601
         const payments = result.payments.map((payment: IPayment) => ({
             ...payment,
             dateSession: new Date(payment.dateSession).toISOString()
@@ -27,12 +28,12 @@ const Wallet = () => {
     }, []);
 
     useEffect(() => {
-        getData()
-    }, [getData])
+        getData();
+    }, [getData]);
 
     function selectPayment(item: IPayment) {
-        setModal(true)
-        setCurrentPayment(item)
+        setModal(true);
+        setCurrentPayment(item);
     }
 
     return (
@@ -45,7 +46,7 @@ const Wallet = () => {
                     <h2>Выплаты</h2>
                     <DotsIcon onClick={() => setMenu(!menu)} />
 
-                    {menu && <div className={styles.Download} onClick={() => setMenu(false)}>Скачать историю вылат в XLSX</div>}
+                    {menu && <div className={styles.Download} onClick={() => setMenu(false)}>Скачать историю выплат в XLSX</div>}
                 </div>
 
                 {accept ? <div className={styles.Grid}>
@@ -78,8 +79,8 @@ const Wallet = () => {
                         <h2>Пока нет выплат</h2>
                         <p>Подключите свой аккаунт к сервису Юкасса, чтобы получать выплаты</p>
                         <ButtonDefault disabled={false} onClick={() => {
-                            alert("Сервис успешно подключен")
-                            setAccept(true)
+                            alert("Сервис успешно подключен");
+                            setAccept(true);
                         }}>Подключить</ButtonDefault>
                     </div>
                 }
@@ -137,7 +138,7 @@ const Wallet = () => {
                 </div>
             </div>}
         </main>
-    )
+    );
 }
 
-export default Wallet
+export default Wallet;
