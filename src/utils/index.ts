@@ -183,11 +183,11 @@ export function getSessionWord(count: number) {
 }
 
 export function formatDate(date: string) {
-    const formatedDate = new Date(date)
-    const day = String(formatedDate.getDate()).length !== 1 ? formatedDate.getDate() : `0${formatedDate.getDate()}`
-    const month = String(formatedDate.getMonth()).length !== 1 ? formatedDate.getDate() + 1 : `0${formatedDate.getDate() + 1}`
-    const year = formatedDate.getFullYear()
-    return `${day}.${month}.${year}`
+    const formattedDate = new Date(date);
+    const day = String(formattedDate.getDate()).padStart(2, '0');
+    const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+    const year = formattedDate.getFullYear();
+    return `${day}.${month}.${year}`;
 }
 
 export const parseDateString = (dateString: string): Date => {

@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { IPsychSession, IPsychSessions } from "@/types"
 import { PshycologistsAPI } from "@/api"
-import { getSessionWord, isPastTime2 } from "@/utils"
+import { getSessionWord } from "@/utils"
 
 const PsychHome = () => {
     const navigate = useNavigate()
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [psychSession, setPsychSession] = useState<IPsychSession[]>([])
-    const filteredPsychSessions = psychSession.filter(i => i.status !== "canceled" && isPastTime2(i.dateSession))
+    const filteredPsychSessions = psychSession.filter(i => i.status === "pending")
     const count = filteredPsychSessions.length
 
     const getSession = useCallback(async () => {
