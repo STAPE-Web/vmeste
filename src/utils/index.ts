@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
 import { ZIM } from 'zego-zim-web';
+import { format } from 'date-fns';
 
 export const appConfig = {
     appID: 111965558,
@@ -184,10 +185,7 @@ export function getSessionWord(count: number) {
 
 export function formatDate(date: string) {
     const formattedDate = new Date(date);
-    const day = String(formattedDate.getDate()).padStart(2, '0');
-    const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
-    const year = formattedDate.getFullYear();
-    return `${day}.${month}.${year}`;
+    return format(formattedDate, 'dd.MM.yyyy');
 }
 
 export const parseDateString = (dateString: string): Date => {
