@@ -29,7 +29,7 @@ const LandingHeader = () => {
                             </ul>
 
                             {path === "/psychologist"
-                                ? <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth/psychologist")}>Зарегестрироваться</ButtonHeader>
+                                ? <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth/psychologist")}>Зарегистрироваться</ButtonHeader>
                                 : <ButtonHeader disabled={false} onClick={() => sid ? navigate("/specialists") : navigate("/auth")}>Выбрать психолога</ButtonHeader>
 
                             }
