@@ -41,8 +41,27 @@
     color: #fff;
 }
 
+.BackMobileIcon {
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    z-index: 1001;
+    left: 20px;
+    top: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #313443;
+    border: none;
+    color: #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.BackMobileIcon svg,
 .MessageButton svg {
     width: 20px;
+    height: 20px;
 }
 
 .Top {
@@ -154,5 +173,15 @@
     .Video {
         width: 100%;
         height: 100%;
+    }
+
+    .Center .Box {
+        height: calc(100% - 120px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .BackMobileIcon {
+        display: flex;
     }
 }

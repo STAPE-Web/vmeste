@@ -56,16 +56,16 @@ const VideoCall = () => {
     function checkTime() {
         const timeParts = leftTime.split(":").map(Number)
         const totalSeconds = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2]
-        return totalSeconds < 300
+        return totalSeconds < 30000
     }
 
     return (
         <>
-            <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""} ${!sessionJoined ? styles.Hidden : ""}`} style={callJoined ? { background: "#000", padding: 0 } : { background: "#fff" }}>
+            <section className={`${styles.Section} ${!showVideo ? styles.Hidden : ""} ${!sessionJoined ? styles.Hidden : ""} ${!checkTime() ? styles.Center : ""}`} style={callJoined ? { background: "#000", padding: 0 } : { background: "#fff" }}>
                 {!callJoined && (
                     <>
                         <div className={styles.Top}>
-                            <ArrowLeftIcon onClick={() => navigate("/sessions/")} />
+                            <ArrowLeftIcon onClick={() => navigate("/sessions")} />
                             <h2>{opponentName}</h2>
                             <span></span>
                         </div>
@@ -84,6 +84,7 @@ const VideoCall = () => {
                 )}
 
                 {callJoined && <button onClick={() => navigate(`/chat/${psychId || "123"}`)} className={styles.MessageButton}><MessageIcon /></button>}
+                {callJoined && <button onClick={() => navigate("/sessions")} className={styles.BackMobileIcon}><ArrowLeftIcon /></button>}
 
                 <div className={`${!checkTime() ? styles.Hidden : ""} ${styles.VideoCall}`}>
                     <div className={styles.Video} ref={myMeeting}></div>
