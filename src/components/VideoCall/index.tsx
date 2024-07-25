@@ -56,7 +56,7 @@ const VideoCall = () => {
     function checkTime() {
         const timeParts = leftTime.split(":").map(Number)
         const totalSeconds = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2]
-        return totalSeconds < 3000
+        return totalSeconds < 300
     }
 
     return (
@@ -85,8 +85,8 @@ const VideoCall = () => {
 
                 {callJoined && <button onClick={() => navigate(`/chat/${psychId || "123"}`)} className={styles.MessageButton}><MessageIcon /></button>}
 
-                <div className={!checkTime() ? styles.Hidden : ""}>
-                    <div ref={myMeeting}></div>
+                <div className={`${!checkTime() ? styles.Hidden : ""} ${styles.VideoCall}`}>
+                    <div className={styles.Video} ref={myMeeting}></div>
                 </div>
             </section>
         </>

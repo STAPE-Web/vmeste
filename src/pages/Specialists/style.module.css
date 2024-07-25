@@ -44,6 +44,7 @@
 .SpecialistsBox img {
     width: 40px;
     height: 40px;
+    min-width: 40px;
     border-radius: 100%;
     object-fit: cover;
     object-position: center top;
@@ -142,6 +143,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 7;
+    line-clamp: 7;
     text-overflow: ellipsis;
 }
 
