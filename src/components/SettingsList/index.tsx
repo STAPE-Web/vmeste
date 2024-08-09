@@ -16,16 +16,22 @@ const SettingsList: FC<Props> = ({ data }) => {
     const sid = JSON.parse(localStorage.getItem("sid") as string)
 
     function signOut() {
-        localStorage.removeItem("sid")
-        window.location.replace("/")
+        const userConfirmed = window.confirm('Вы уверены?');
+        if (userConfirmed) {
+            localStorage.removeItem("sid")
+            window.location.replace("/")
+        }
     }
 
     async function deleteAccount() {
-        const result = await ProfileAPI.delete(sid)
-        console.log(result)
-        if (result.status === 200) {
-            window.location.href = "/"
-            localStorage.clear()
+        const userConfirmed = window.confirm('Вы уверены?');
+        if (userConfirmed) {
+            const result = await ProfileAPI.delete(sid)
+            console.log(result)
+            if (result.status === 200) {
+                window.location.href = "/"
+                localStorage.clear()
+            }
         }
     }
 

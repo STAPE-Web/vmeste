@@ -118,18 +118,24 @@ const PsychProfile = () => {
     };
 
     async function deleteAccount() {
-        const result = await ProfileAPI.delete(sid)
-        console.log(result)
-        if (result.status === 200) {
-            window.location.href = "/"
-            localStorage.clear()
+        const userConfirmed = window.confirm('Вы уверены?');
+        if (userConfirmed) {
+            const result = await ProfileAPI.delete(sid)
+            console.log(result)
+            if (result.status === 200) {
+                window.location.href = "/"
+                localStorage.clear()
+            }
         }
     }
 
     function signOut() {
-        localStorage.removeItem("sid")
-        localStorage.removeItem("userType")
-        window.location.replace("/")
+        const userConfirmed = window.confirm('Вы уверены?');
+        if (userConfirmed) {
+            localStorage.removeItem("sid")
+            localStorage.removeItem("userType")
+            window.location.replace("/")
+        }
     }
 
     return (

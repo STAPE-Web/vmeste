@@ -8,7 +8,6 @@ import { PshycologistsAPI, SessionAPI } from "@/api"
 import { ISpecialist } from "@/types"
 import Calendar from "@/components/Calendar"
 import Input from "@/ui/Input"
-import SelectPayment from "@/components/SelectPayment"
 import CardModal from "@/components/CardModal"
 import { getYearWord } from "@/utils"
 
@@ -159,7 +158,7 @@ const Specialist = () => {
                     </div>
 
                     <div className={styles.Promo}>
-                        <SelectPayment setModal={setModal} />
+                        {/* <SelectPayment setModal={setModal} /> */}
                         <div className={styles.PromoRow}>
                             <Input onChange={e => setPromo(e.target.value)} placeholder="Введите промокод" type="text" value={promo} />
                             <ButtonDefault disabled={promo === ""} onClick={() => setPromocode()}>Применить</ButtonDefault>

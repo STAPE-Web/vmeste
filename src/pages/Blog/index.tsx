@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import React, { useCallback, useEffect, useState } from "react"
 import { ArrowLeftIcon, ArrowRightIcon, DotsIcon, GridIcon, Like2Icon, LikeIcon, ListIcon, PlayIcon } from "@/ui/Icons"
 import ScrollTest from "@/components/ScrollTest"
@@ -11,7 +11,9 @@ import PsychSidebar from "@/components/PsyhSidebar"
 
 const Blog = () => {
     const navigate = useNavigate()
-    const [tab, setTab] = useState("Тесты")
+    const [searchParams, setParams] = useSearchParams()
+    const [tab, setTab] = useState(searchParams.get('tab') || "Тесты")
+    console.log(searchParams)
     const tabs = ["Тесты", "Статьи", "Видео"]
     const [grid, setGrid] = useState(true)
     const [data, setData] = useState<IBlog | null>(null)
@@ -51,6 +53,18 @@ const Blog = () => {
         console.log(result)
         await getMaterials()
     }
+
+    const handleTabChange = (newTab: string) => {
+        setTab(newTab)
+        setParams({ tab: newTab }) // Обновление searchParams при изменении вкладки
+    }
+
+    useEffect(() => {
+        const tabFromParams = searchParams.get('tab')
+        if (tabFromParams && tabFromParams !== tab) {
+            setTab(tabFromParams)
+        }
+    }, [searchParams, tab])
 
     // if (data === null) return;
 
@@ -265,7 +279,7 @@ const Blog = () => {
                         </div>
                         : <div className={styles.Tabs}>
                             {tabs.map((t, index) => (
-                                <div key={index} className={t === tab ? styles.ActiveTab : ""} onClick={() => setTab(t)}>
+                                <div key={index} className={t === tab ? styles.ActiveTab : ""} onClick={() => handleTabChange(t)}>
                                     {t}
                                 </div>
                             ))}

@@ -29,9 +29,12 @@ const PsychSidebar = () => {
     ]
 
     function signOut() {
-        localStorage.removeItem("sid")
-        localStorage.removeItem("userType")
-        window.location.replace("/")
+        const userConfirmed = window.confirm('Вы уверены?');
+        if (userConfirmed) {
+            localStorage.removeItem("sid")
+            localStorage.removeItem("userType")
+            window.location.replace("/")
+        }
     }
 
     return (

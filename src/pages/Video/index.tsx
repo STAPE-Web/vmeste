@@ -141,6 +141,20 @@ const Video = () => {
 
     const speedItems = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
 
+    const handleShare = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: data?.title || 'Видео',
+                text: 'Посмотрите это видео!',
+                url: window.location.href,
+            })
+                .then(() => console.log('Successfully shared'))
+                .catch((error) => console.error('Error sharing', error));
+        } else {
+            alert('Sharing is not supported in this browser.');
+        }
+    };
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -188,7 +202,7 @@ const Video = () => {
                         </div>
 
                         <div className={styles.IconsBox}>
-                            <ShareIcon />
+                            <ShareIcon onClick={() => handleShare()} />
 
                             <div>
                                 <RewindLeftIcon onClick={() => rewindBackward()} />

@@ -112,7 +112,7 @@ const Profile = () => {
 
                 <div className={styles.RefferalBox}>
                     <p>Пригласи друга в приложение <span>получи скидку 20%</span></p>
-                    <a href="https://www.google.com/"><button>Пригласить</button></a>
+                    <a href="https://vmeste.netlify.app/"><button>Пригласить</button></a>
                 </div>
 
                 <div className={styles.Navigation}>
