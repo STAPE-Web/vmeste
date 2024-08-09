@@ -5,9 +5,11 @@ import styles from "./style.module.css"
 import useGlobalStore from "@/store"
 import { useLocation, useNavigate } from "react-router-dom"
 import { ArrowLeftIcon, MessageIcon } from "@/ui/Icons"
+import useViewportHeight from "@/hooks/useViewportHeight"
 
 const VideoCall = () => {
     const userData = JSON.parse(localStorage.getItem("userData") as string)
+    useViewportHeight();
 
     if (userData === null) return null;
     const userInfo = { userID: userData.email || userData.phone || userData.id, userName: userData.username || userData.name };

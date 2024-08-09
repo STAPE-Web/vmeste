@@ -1,6 +1,6 @@
 import PsychSidebar from "@/components/PsyhSidebar"
 import styles from "./style.module.css"
-import { BellIcon, MemoIcon, UserIcon } from "@/ui/Icons"
+import { MemoIcon, UserIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { IPsychSession, IPsychSessions } from "@/types"
@@ -44,7 +44,7 @@ const PsychHome = () => {
                         </div>
 
                         <div className={styles.Notifications}>
-                            <BellIcon />
+                            {/* <BellIcon /> */}
                         </div>
                     </div>
 

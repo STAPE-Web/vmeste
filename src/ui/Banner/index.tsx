@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import ButtonDefault from "../Buttons/Default"
 import styles from "./style.module.css"
-import { BellIcon, UserIcon } from "../Icons"
+import { UserIcon } from "../Icons"
 import { ISession } from "@/types"
 import { FC } from "react"
 
@@ -20,7 +20,7 @@ const Banner: FC<Props> = ({ data }) => {
                 </div>
 
                 <div className={styles.Notifications}>
-                    <BellIcon />
+                    {/* <BellIcon /> */}
                 </div>
             </div>
 
