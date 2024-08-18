@@ -69,8 +69,12 @@ const Specialist = () => {
 
         const result = await SessionAPI.book(sessionData)
         alert(result.status === 200 ? "Сессия создана" : result.msg)
-        setTime("")
-        getSpecialist()
+        if (data.freeTime.length === 1) {
+            navigate("/specialists")
+        } else {
+            setTime("")
+            getSpecialist()
+        }
         console.log(result)
     }
 

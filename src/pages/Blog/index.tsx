@@ -13,7 +13,6 @@ const Blog = () => {
     const navigate = useNavigate()
     const [searchParams, setParams] = useSearchParams()
     const [tab, setTab] = useState(searchParams.get('tab') || "Тесты")
-    console.log(searchParams)
     const tabs = ["Тесты", "Статьи", "Видео"]
     const [grid, setGrid] = useState(true)
     const [data, setData] = useState<IBlog | null>(null)
@@ -64,7 +63,7 @@ const Blog = () => {
         if (tabFromParams && tabFromParams !== tab) {
             setTab(tabFromParams)
         }
-    }, [searchParams, tab])
+    }, [searchParams])
 
     // if (data === null) return;
 

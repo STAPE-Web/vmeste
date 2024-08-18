@@ -3,7 +3,7 @@ import styles from "./style.module.css"
 import { ArrowLeftIcon, DeleteIcon, Note2Icon, NoteIcon } from "@/ui/Icons"
 import { useCallback, useEffect, useState } from "react"
 import Avatar from "@/ui/Avatar";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ClientsAPI, PshycologistsAPI } from "@/api";
 import { IClient } from "@/types";
 
@@ -12,6 +12,9 @@ const Client = () => {
     const tabs = ["Темы для обсуждения", "Заметки"]
     const navigate = useNavigate()
     const { id } = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const isNotes = searchParams.get("notes")
+    console.log(isNotes)
 
     const sid = JSON.parse(localStorage.getItem("sid") as string)
     const [data, setData] = useState<IClient | null>(null)
@@ -26,6 +29,14 @@ const Client = () => {
     useEffect(() => {
         getData()
     }, [getData])
+
+    useEffect(() => {
+        if (isNotes) {
+            setTab("Заметки")
+            searchParams.delete("notes")
+            setSearchParams(searchParams)
+        }
+    }, [isNotes])
 
     async function removeNote(index: number) {
         const result = await PshycologistsAPI.removeNote(sid, id || "", index)

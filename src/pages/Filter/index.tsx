@@ -35,9 +35,20 @@ const Filter = () => {
     const [price, setPrice] = useState<number[]>([2300])
 
     const priceList = [
-        { price: 2300, text: "Опыт от 3 лет. Прошли личное собеседование, подтвердили образование, предоставили рекомендацию" },
-        { price: 3500, text: "Опыт от 5 лет. Работают в “Вместе” более года и за это время зарекомендовали себя наилучшим образом" },
-        { price: 5500, text: "Опыт от 7 лет. Самые востребованные психологи: супервизоры, члены ассоциаций, авторы научных статей" },
+        { price: 2300, level: 0 },
+        { price: 3500, level: 1 },
+        { price: 5500, level: 2 },
+        { price: 7500, level: 3 },
+        { price: 13000, level: 4 },
+        { price: 1000, level: 5 },
+    ]
+
+    const priceListDuo = [
+        { price: 3450, level: 0 },
+        { price: 5250, level: 1 },
+        { price: 8250, level: 2 },
+        { price: 11250, level: 3 },
+        { price: 19000, level: 4 },
     ]
 
     const itemsList = [
@@ -213,28 +224,47 @@ const Filter = () => {
                         </>}
                     </div>
 
-                    {typeConsult === "Индивидуальная" && <div className={styles.Box}>
+                    <div className={styles.Box}>
                         <h3>Стоимость сессии</h3>
                         <div className={styles.Grid}>
-                            {priceList.map((item, index) => (
-                                <div key={index} className={`${styles.GridItem} ${price.includes(item.price) ? styles.Active : ""}`} onClick={() => {
-                                    if (price.includes(item.price)) {
-                                        const newItem = price.filter(i => i !== item.price)
-                                        setPrice(newItem)
-                                    } else {
-                                        setPrice(prev => [...prev, item.price])
-                                    }
-                                }}>
-                                    <div>
-                                        <Checkbox state={price.includes(item.price)} />
-                                        <h4>{item.price} ₽</h4>
-                                    </div>
+                            {typeConsult === "Индивидуальная"
+                                ? <>{priceList.map((item, index) => (
+                                    <div key={index} className={`${styles.GridItem} ${price.includes(item.price) ? styles.Active : ""}`} onClick={() => {
+                                        if (price.includes(item.price)) {
+                                            const newItem = price.filter(i => i !== item.price)
+                                            setPrice(newItem)
+                                        } else {
+                                            setPrice(prev => [...prev, item.price])
+                                        }
+                                    }}>
+                                        <div>
+                                            <Checkbox state={price.includes(item.price)} />
+                                            <h4>{item.price} ₽</h4>
+                                        </div>
 
-                                    <p>{item.text}</p>
-                                </div>
-                            ))}
+                                        <p>Уровень {item.level === 5 ? "Студент" : item.level}</p>
+                                    </div>
+                                ))}</>
+                                : <>{priceListDuo.map((item, index) => (
+                                    <div key={index} className={`${styles.GridItem} ${price.includes(item.price) ? styles.Active : ""}`} onClick={() => {
+                                        if (price.includes(item.price)) {
+                                            const newItem = price.filter(i => i !== item.price)
+                                            setPrice(newItem)
+                                        } else {
+                                            setPrice(prev => [...prev, item.price])
+                                        }
+                                    }}>
+                                        <div>
+                                            <Checkbox state={price.includes(item.price)} />
+                                            <h4>{item.price} ₽</h4>
+                                        </div>
+
+                                        <p>Уровень {item.level}</p>
+                                    </div>
+                                ))}</>
+                            }
                         </div>
-                    </div>}
+                    </div>
 
                     <div className={styles.ButtonBox} style={{ width: "100%" }}>
                         <ButtonDefault disabled={false} onClick={() => SearchSpecialist()}>Показать психологов</ButtonDefault>

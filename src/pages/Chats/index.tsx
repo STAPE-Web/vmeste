@@ -69,6 +69,14 @@ const Chats = () => {
         getChats()
     })
 
+    const filteredChats = items.filter(i => {
+        const chatDate = new Date(i.orderKey);
+        const now = new Date();
+        const oneDay = 24 * 60 * 60 * 1000;
+
+        return (now.getTime() - chatDate.getTime()) < oneDay;
+    });
+
     return (
         <main className={styles.Page}>
             <section className={styles.Container}>
@@ -81,7 +89,7 @@ const Chats = () => {
                     </div>
 
                     <div className={styles.List}>
-                        {items.filter(i => i.conversationName.toLowerCase().includes(search.toLowerCase())).map((item, index) => (
+                        {filteredChats.filter(i => i.conversationName.toLowerCase().includes(search.toLowerCase())).map((item, index) => (
                             <div key={index} className={styles.Item} onClick={() => navigate(`/chat/${item.conversationID}`)}>
                                 <div className={styles.ItemBox}>
                                     <img src={Avatar} alt="" />

@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
-import { ArrowLeftIcon } from "@/ui/Icons"
+import { ArrowLeftIcon, DotsIcon } from "@/ui/Icons"
 import { useNavigate, useParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { PshycologistsAPI, SessionAPI } from "@/api"
@@ -21,6 +21,7 @@ const Session = () => {
     const changeSessionJoined = useGlobalStore(state => state.changeSessionJoined);
     const userType = localStorage.getItem("userType" as string);
     const callJoined = useGlobalStore(state => state.callJoined);
+    const [menu, setMenu] = useState(false);
     const [isAvalible, setIsAvalible] = useState(false);
 
     const getSession = useCallback(async () => {
@@ -153,10 +154,22 @@ const Session = () => {
 
                 <div className={styles.Content}>
                     <div className={styles.Top}>
-                        <ArrowLeftIcon onClick={() => navigate(-1)} />
-                        {isAvalible && <h2>{data?.psychName || psychData?.userName} <span>{data?.sessionNumber || psychData?.sessionNumber} сессия</span></h2>}
+                        <div className={styles.TopBox}>
+                            <ArrowLeftIcon onClick={() => navigate(-1)} />
+                            {isAvalible && <h2>{data?.psychName || psychData?.userName} <span>{data?.sessionNumber || psychData?.sessionNumber} сессия</span></h2>}
+                        </div>
                         <h6>Мои сессии</h6>
-                        <span></span>
+                        {userType === "psych"
+                            ? <>
+                                <DotsIcon onClick={() => setMenu(!menu)} />
+
+                                {menu && <div className={styles.ContextMenu} onClick={() => setMenu(false)}>
+                                    <div onClick={() => navigate(`/clients/${psychData?.userId}?notes=true`)}>Заметки</div>
+                                    <div onClick={() => navigate("/faq")}>Этический кодекс</div>
+                                </div>}
+                            </>
+                            : <span></span>
+                        }
                     </div>
 
                     {isAvalible
