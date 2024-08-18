@@ -195,6 +195,10 @@
     width: 100%;
 }
 
+.RefferalBox textarea {
+    display: none;
+}
+
 @media screen and (max-width: 1160px) {
     .Sidebar {
         display: none;

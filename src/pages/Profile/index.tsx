@@ -100,8 +100,25 @@ const Profile = () => {
         }
     }, [])
 
+
     function copyLink() {
-        // Привет как мне сделать так чтобы копировалось в будер обмена при нажатии на кнопку react + ts
+        const textArea = document.createElement("textarea");
+
+        textArea.value = "https://vmeste.netlify.app/referal";
+
+        document.body.appendChild(textArea);
+
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? alert('Успешно скопировано!') : alert('Не удалось скопировать!');
+            console.log(msg);
+        } catch (err) {
+            console.error('Ошибка копирования: ', err);
+        }
+
+        document.body.removeChild(textArea);
     }
 
     return (
