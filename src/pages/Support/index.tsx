@@ -14,6 +14,7 @@ const Support = () => {
 
     async function SendMessage() {
         const result = await SupportAPI.sendMessage(sid, text)
+        console.log(result)
         if (result.status === 200) {
             alert("Сообщение отправлено")
             setText("")

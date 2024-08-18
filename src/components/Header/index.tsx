@@ -25,7 +25,7 @@ const Header = () => {
                                 : <li onClick={() => navigate("/psychologist")}>Для психологов</li>
                             }
                             <li onClick={() => navigate("/about")}>О нас</li>
-                            <li onClick={() => navigate("/blog")}>Блог</li>
+                            {userType !== "psych" && <li onClick={() => navigate("/blog")}>Блог</li>}
                             {!sid && <li onClick={() => navigate("/auth")}><SignInIcon /> Вход</li>}
                         </ul>
 

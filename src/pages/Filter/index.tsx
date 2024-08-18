@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar"
 import styles from "./style.module.css"
 import { useNavigate } from "react-router-dom"
 import { Add2Icon, ArrowLeftIcon } from "@/ui/Icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Checkbox from "@/ui/Checkbox"
 import ButtonDefault from "@/ui/Buttons/Default"
 import MobileAuthModal from "@/components/MobileAuthModal"
@@ -79,6 +79,18 @@ const Filter = () => {
         const params = `?familyTherapy=${searchData.familyTherapy}&themes=${searchData.themes.map(i => `${i}`).join("_")}&gender=${searchData.gender}&price=${searchData.price}&time=${searchData.time}${searchData.time === "Конкретное" ? `&MFTime=${searchData.MFTime}&SSTime=${searchData.SSTime}` : ""}`
         navigate(`/specialists${params}`)
     }
+
+    useEffect(() => {
+        if (modal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [modal]);
 
     return (
         <main className={styles.Page}>
@@ -272,7 +284,7 @@ const Filter = () => {
                 </div>
             </section>
 
-            {modal && <div className={styles.Modal} onClick={() => setModal(false)}>
+            {modal && <div className={`${styles.Modal}`} onClick={() => setModal(false)}>
                 <div className={styles.GroupItem} onClick={e => e.stopPropagation()}>
                     <h3>Какие темы хотели бы обсудить в первую очередь?</h3>
                     <p>Расскажите о своем запросе. Отмечайте всё, что у вас отзывается</p>

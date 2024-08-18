@@ -9,6 +9,7 @@ import {
 } from "chart.js";
 import styles from "./styles.module.css";
 import { FC } from "react";
+import { getDay, parse } from "date-fns";
 
 interface Props {
   array: { value: number; time: string }[];
@@ -48,8 +49,12 @@ const Chart: FC<Props> = ({ array, tab2 }) => {
     }
 
     if (tab2 === "НЕД") {
-      const day = item.time.split(" ")[0].split("-")
-      const weekDay = new Date(`${day[1]}/${day[0]}/${day[2]}`).getDay() - 1
+      const [day, month, yearAndTime] = item.time.split('-');
+      const [year, time] = yearAndTime.split(' ');
+      const formattedDateStr = `${year}-${month}-${day} ${time.split('.')[0]}`;
+      const date = parse(formattedDateStr, 'yyyy-MM-dd HH:mm:ss', new Date());
+      let weekDay = getDay(date);
+      weekDay = (weekDay + 6) % 7;
       chartData[weekDay] = chartData[weekDay] ? (chartData[weekDay] + item.value) / 2 : item.value;
     }
 
@@ -131,7 +136,6 @@ const Chart: FC<Props> = ({ array, tab2 }) => {
     ],
   };
 
-  console.log(array, tab2)
 
   return (
     <div className={styles.ChartBox}>

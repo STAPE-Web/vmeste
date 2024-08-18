@@ -130,8 +130,10 @@
     height: 100vh;
     background: #0000003D;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding: 30px 0;
+    overflow-y: scroll;
 }
 
 .GroupItem {

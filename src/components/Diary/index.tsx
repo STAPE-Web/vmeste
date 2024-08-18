@@ -332,19 +332,21 @@ const Diary = () => {
         const todayDate = new Date();
         const startOfWeek = new Date(todayDate);
         startOfWeek.setDate(todayDate.getDate() - todayDate.getDay());
+        startOfWeek.setHours(0, 0, 0, 0);
+
         const endOfWeek = new Date(todayDate);
         endOfWeek.setDate(todayDate.getDate() + (6 - todayDate.getDay()));
+        endOfWeek.setHours(23, 59, 59, 999);
 
         filteredData = formattedDataArray.filter((item) => {
           const itemDateParts = item.date.split("-");
           const itemDateISO = `${itemDateParts[2]}-${itemDateParts[1]}-${itemDateParts[0]}`;
           const itemDate = new Date(itemDateISO);
-          return (
-            itemDate.getDate() >= startOfWeek.getDate() &&
-            itemDate.getDate() <= endOfWeek.getDate()
-          );
+
+          return itemDate.getTime() >= startOfWeek.getTime() && itemDate.getTime() <= endOfWeek.getTime();
         });
         break;
+
       case "МЕС":
         const currentMonth = new Date().getMonth() + 1;
         filteredData = formattedDataArray.filter((item) => {
