@@ -255,7 +255,9 @@ html {
   }
 
   body,
-  html {
+  html,
+  .App,
+  .Content {
     height: auto;
   }
 }
