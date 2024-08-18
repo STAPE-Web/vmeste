@@ -5,7 +5,6 @@ import VideoCall from "./components/VideoCall";
 import { useEffect } from "react";
 
 function App() {
-  // useViewportHeight();
   useEffect(() => {
     const handleScroll = () => {
       document.documentElement.style.setProperty("--scroll-y", `${window.scrollY}px`);

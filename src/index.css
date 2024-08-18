@@ -250,13 +250,4 @@ html {
     position: static;
     overflow-y: auto;
   }
-
-  body,
-  html {
-    height: auto;
-  }
-
-  .App {
-    height: calc(var(--vh, 1vh) * 100);
-  }
 }
