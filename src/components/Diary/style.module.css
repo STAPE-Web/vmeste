@@ -195,16 +195,22 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 20px;
-}
-
-.Calendar2Icon {
-    opacity: 0;
-    cursor: default !important;
+    position: relative;
 }
 
 .ClanedarItem div span.ActiveDay {
     background: #FF870240;
 
+}
+
+.ClanedarItem div .SettedDay::before {
+    content: "";
+    position: absolute;
+    background: #FF8702;
+    width: 8px;
+    height: 8px;
+    bottom: 3px;
+    border-radius: 100%;
 }
 
 .Emotions div.ActiveFeel:nth-child(1),

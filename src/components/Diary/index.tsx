@@ -265,6 +265,7 @@ const Diary = () => {
     return monthNames[month];
   };
 
+  const [dateData, setDateData] = useState<string[]>([])
   const renderDays = (month: number, year: number): JSX.Element[] => {
     const totalDays: number = daysInMonth(month, year);
     const currentDate: Date = new Date();
@@ -273,8 +274,12 @@ const Diary = () => {
       const date: Date = new Date(year, month, i);
       const isActiveDay: boolean =
         date.toDateString() === currentDate.toDateString();
+      const isSettedDay = dateData.some(day => {
+        const formatDate = day.split("-")
+        return Number(formatDate[0]) === i && Number(formatDate[1]) === month + 1 && Number(formatDate[2]) === year;
+      })
       daysArray.push(
-        <span key={i} className={isActiveDay ? styles.ActiveDay : ""}>
+        <span key={i} className={`${isActiveDay ? styles.ActiveDay : ""} ${isSettedDay ? styles.SettedDay : ""}`}>
           {i}
         </span>
       );
@@ -314,6 +319,7 @@ const Diary = () => {
     for (const date in result.diary) {
       if (Object.hasOwnProperty.call(result.diary, date)) {
         formattedDataArray.push({ date, array: result.diary[date] });
+        setDateData(prev => [...prev, date])
       }
     }
 
@@ -438,7 +444,7 @@ const Diary = () => {
               {day} {months[month]} {hour}:{minutes}
             </p>
 
-            <Calendar2Icon className={styles.Calendar2Icon} />
+            <Calendar2Icon onClick={() => setCalendar(true)} className={styles.Calendar2Icon} />
           </div>
 
           <div className={styles.Tabs}>
