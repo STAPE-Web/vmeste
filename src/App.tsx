@@ -3,8 +3,10 @@ import AppRouter from "@/components/AppRouter";
 import Header from "@/components/Header";
 import VideoCall from "./components/VideoCall";
 import { useEffect } from "react";
+import useViewportHeight from "./hooks/useViewportHeight";
 
 function App() {
+  useViewportHeight();
   useEffect(() => {
     const handleScroll = () => {
       document.documentElement.style.setProperty("--scroll-y", `${window.scrollY}px`);

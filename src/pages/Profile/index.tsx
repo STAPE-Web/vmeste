@@ -100,6 +100,10 @@ const Profile = () => {
         }
     }, [])
 
+    function copyLink() {
+        // Привет как мне сделать так чтобы копировалось в будер обмена при нажатии на кнопку react + ts
+    }
+
     return (
         <main className={styles.Page}>
             <section className={`${styles.Sidebar} ${mode === "" ? styles.ActiveSidebar : ""}`}>
@@ -112,7 +116,7 @@ const Profile = () => {
 
                 <div className={styles.RefferalBox}>
                     <p>Пригласи друга в приложение <span>получи скидку 20%</span></p>
-                    <a href="https://vmeste.netlify.app/"><button>Пригласить</button></a>
+                    <button onClick={() => copyLink()}>Пригласить</button>
                 </div>
 
                 <div className={styles.Navigation}>

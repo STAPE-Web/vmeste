@@ -255,9 +255,11 @@ html {
   }
 
   body,
-  html,
-  .App,
-  .Content {
+  html {
     height: auto;
+  }
+
+  .App {
+    height: calc(var(--vh, 1vh) * 100);
   }
 }
