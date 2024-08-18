@@ -253,4 +253,9 @@ html {
     position: static;
     overflow-y: auto;
   }
+
+  body,
+  html {
+    height: auto;
+  }
 }
