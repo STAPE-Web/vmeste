@@ -241,14 +241,11 @@ html {
 }
 
 @media (max-width: 1023px) {
-
-  /* Reset scrollbar styles for mobile */
   ::-webkit-scrollbar {
     width: 0;
     background: transparent;
   }
 
-  /* Enable natural scrolling for mobile */
   body {
     position: static;
     overflow-y: auto;

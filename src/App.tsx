@@ -19,15 +19,24 @@ function App() {
   }, []);
 
   return (
-    // <div className="App">
-    // <div className="Content">
-    <BrowserRouter>
-      <Header />
-      <VideoCall />
-      <AppRouter />
-    </BrowserRouter>
-    // </div>
-    // </div>
+    <>
+      {window.innerHeight < 1000
+        ? <BrowserRouter>
+          <Header />
+          <VideoCall />
+          <AppRouter />
+        </BrowserRouter>
+        : <div className="App">
+          <div className="Content">
+            <BrowserRouter>
+              <Header />
+              <VideoCall />
+              <AppRouter />
+            </BrowserRouter>
+          </div>
+        </div>
+      }
+    </>
   );
 }
 
