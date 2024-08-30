@@ -4,9 +4,10 @@ import { ArrowLeftIcon, CloseIcon, DotsIcon } from '@/ui/Icons';
 import { fillPaymentColor } from '@/utils';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PshycologistsAPI } from '@/api';
+import { PaymentAPI, PshycologistsAPI } from '@/api';
 import { IPayment } from '@/types';
 import ButtonDefault from '@/ui/Buttons/Default';
+import Input from '@/ui/Input';
 
 const Wallet = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Wallet = () => {
     const sid = JSON.parse(localStorage.getItem("sid") as string);
     const [currentPayment, setCurrentPayment] = useState<IPayment | null>(null);
     const [accept, setAccept] = useState(false);
+    const [cardNumber, setCardNumber] = useState("");
 
     const getData = useCallback(async () => {
         const result = await PshycologistsAPI.payments(sid);
@@ -29,6 +31,19 @@ const Wallet = () => {
     function selectPayment(item: IPayment) {
         setModal(true);
         setCurrentPayment(item);
+    }
+
+    useEffect(() => {
+        const cardNumber = JSON.parse(localStorage.getItem("cardNumber") as string)
+        setAccept(cardNumber !== null && cardNumber !== undefined)
+    }, [])
+
+    async function ConnectPayment() {
+        const result = await PaymentAPI.addPayment(cardNumber);
+        if (result.status === 200) {
+            localStorage.setItem("cardNumber", JSON.stringify(cardNumber))
+            setAccept(true)
+        }
     }
 
     return (
@@ -73,10 +88,8 @@ const Wallet = () => {
                     : <div className={styles.ConnectPayment}>
                         <h2>Пока нет выплат</h2>
                         <p>Подключите свой аккаунт к сервису Юкасса, чтобы получать выплаты</p>
-                        <ButtonDefault disabled={false} onClick={() => {
-                            alert("Сервис успешно подключен");
-                            setAccept(true);
-                        }}>Подключить</ButtonDefault>
+                        <Input onChange={e => setCardNumber(e.target.value)} placeholder='Введите номер карты' type='number' value={cardNumber} />
+                        <ButtonDefault disabled={cardNumber.length < 16 || cardNumber.length > 16} onClick={() => ConnectPayment()}>Подключить</ButtonDefault>
                     </div>
                 }
             </section>

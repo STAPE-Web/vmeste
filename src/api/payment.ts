@@ -1,25 +1,18 @@
 import axios from "axios";
 
+const sid = JSON.parse(localStorage.getItem("sid") as string);
+
 class Payment {
-    async pay() {
-        return await axios.post(`https://api.yookassa.ru/v3/payments`, {
-            amount: {
-                value: 2300,
-                currency: "RUB",
-            },
-            confirmation: {
-                type: 'redirect',
-                return_url: 'http://localhost:5173/',
-            },
-            capture: true,
-            description: 'Описание платежа',
-        },
-            {
-                auth: {
-                    username: "419438",
-                    password: "test_7yaAAKvOmA1GUK3X5Ex8dQsWQDZky33ajUAF4KU6WDk",
-                },
-            }).then((res) => res.data)
+    async addPayment(cardId: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/user/addPayment`, {
+            sid, cardId
+        }).then((res) => res.data)
+    }
+
+    async paymentUrl(psychId: string, time: string, familyTherapy: boolean) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/user/paymentUrl`, {
+            sid, psychId, time, familyTherapy
+        }).then((res) => res.data)
     }
 }
 

@@ -31,6 +31,7 @@ import Support from "@/pages/Support"
 import Memo from "@/pages/Psych/Memo"
 import FAQ from "@/pages/Psych/FAQ"
 import Note from "@/pages/Psych/Note"
+import Success from "@/pages/Success"
 
 const notAuthRoutes = [
     { id: 1, path: '*', element: Auth },
@@ -62,6 +63,7 @@ const authRoutes = [
     { id: 16, path: '/register', element: Register },
     { id: 17, path: '/specialist/:id', element: Specialist },
     { id: 18, path: '/psychologist', element: Landing2 },
+    { id: 19, path: '/success/:id', element: Success },
 ];
 
 const psychRoutes = [

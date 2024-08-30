@@ -4,7 +4,7 @@ import { ArrowLeftIcon, Like2Icon, LikeIcon, ThemesIcon, VerifedIcon, WarningRou
 import ButtonDefault from "@/ui/Buttons/Default"
 import { useCallback, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { PshycologistsAPI, SessionAPI } from "@/api"
+import { PaymentAPI, PshycologistsAPI, SessionAPI } from "@/api"
 import { ISpecialist } from "@/types"
 import Calendar from "@/components/Calendar"
 import Input from "@/ui/Input"
@@ -60,22 +60,25 @@ const Specialist = () => {
 
     async function bookSession() {
         if (data === null) return;
-        const sessionData = {
-            sid: sid,
+        const payment = {
             psychId: data?.id,
             time: time,
-            price: data?.individualSession.price - (data?.individualSession.price * (sale / 100))
+            familyTherapy: false
         }
 
-        const result = await SessionAPI.book(sessionData)
-        alert(result.status === 200 ? "Сессия создана" : result.msg)
-        if (data.freeTime.length === 1) {
-            navigate("/specialists")
-        } else {
-            setTime("")
-            getSpecialist()
-        }
-        console.log(result)
+        const res = await PaymentAPI.paymentUrl(payment.psychId, payment.time, payment.familyTherapy)
+        console.log(res)
+        window.location.href = res.url
+
+        // const result = await SessionAPI.book(sessionData)
+        // alert(result.status === 200 ? "Сессия создана" : result.msg)
+        // if (data.freeTime.length === 1) {
+        //     navigate("/specialists")
+        // } else {
+        //     setTime("")
+        //     getSpecialist()
+        // }
+        // console.log(result)
     }
 
     async function setPromocode() {
