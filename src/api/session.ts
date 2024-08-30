@@ -2,7 +2,7 @@ import axios from "axios";
 
 class Session {
     async book(data: any) {
-        return await axios.post(`${import.meta.env.VITE_SERVER}/user/bookSession`, {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/user/bookSession1`, {
             ...data
         }).then((res) => res.data)
     }
