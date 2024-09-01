@@ -12,13 +12,13 @@ import Select from "@/ui/Select2"
 import { ICreatePsyh, IEduc } from "@/types"
 import { AuthAPI, UploadAPI } from "@/api"
 import Upload from "@/components/Upload"
+import { themesArray } from "@/constants"
 
 const Create = () => {
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(3)
     const [disable, setDisable] = useState(false)
     const [endRegister, setEndRegister] = useState(false)
-    // const [modal, setModal] = useState(false)
-    // const [modalType, setModalType] = useState<"Внутренние конфликты" | "Отношения" | "Работа, учеба" | "События в жизни" | "">("")
+    const [modal, setModal] = useState(false)
 
     const [username, setUsername] = useState("")
     const [gender, setGender] = useState("")
@@ -43,6 +43,7 @@ const Create = () => {
     const [promComm, setpromComm] = useState("")
 
     const [mainMethod, setmainMethod] = useState("")
+    const [extraMethod, setExtraMethod] = useState<number[]>([])
     const mainMethodList = ["Психоаналитическая терапия", "Транзактный анализ", "Экзистенциальная терапия", "Когнитивно-поведенческая терапия", "Юнгианский анализ", "Психодрама", "Телесно-ориентированная терапия", "Символдрама"]
     const [consultStart, setconsultStart] = useState("")
     const [onlineExp, setonlineExp] = useState("")
@@ -50,11 +51,6 @@ const Create = () => {
     const [clients, setclients] = useState("")
     const [longestSession, setlongestSession] = useState("")
     const [personalTreopia, setpersonalTreopia] = useState("")
-
-    // const [myCondition, setMyCondition] = useState<string[]>([])
-    // const [relationship, setRelationship] = useState<string[]>([])
-    // const [work, setWork] = useState<string[]>([])
-    // const [events, setEvents] = useState<string[]>([])
 
     const [supervisions, setsupervisions] = useState("")
     const [anotherJob, setanotherJob] = useState("")
@@ -69,13 +65,6 @@ const Create = () => {
     const [docs, setDocs] = useState<FileList | null>(null)
     const [docsList, setDocsList] = useState<string[]>([])
     const [photosList, setPhotosList] = useState<string[]>([])
-
-    // const items = [
-    //     { title: "Моё состояние", state: myCondition, func: setMyCondition, array: ["Стресс", "Упадок сил", "Нестабильная самооценка", "Приступы страха и тревоги", "Перепады настроения", "Раздражительность", "Ощущение одиночества", "Проблемы с концентрацией", "Эмоциональная зависимость", "Проблемы со сном", "Расстройство пищевого поведения", "Панические атаки", "Навязчивые мысли о здоровье", "Сложности с алкоголем/наркотиками"] },
-    //     { title: "Отношения", state: relationship, func: setRelationship, array: ["С партнером", "С окружающими", "С родителями", "С детьми", "Сексуальные", "Сложности с ориентацией, ее поиск"] },
-    //     { title: "Работа, учеба", state: work, func: setWork, array: ["Недостаток мотивации", "Выгорание", "«Не знаю, чем хочу заниматься»", "Прокрастинация", "Отсутствие цели", "Смена, потеря работы"] },
-    //     { title: "События в жизни", state: events, func: setEvents, array: ["Переезд, эмиграция", "Беременность, рождение ребёнка", "Разрыв отношений, развод", "Финансовые изменения", "Утрата близкого человека", "Болезнь, своя и близких", "Насилие"] }
-    // ]
 
     function fillContent() {
         switch (step) {
@@ -240,18 +229,17 @@ const Create = () => {
                             <Select array={mainMethodList} setValue={setmainMethod} value={mainMethod === "" ? "Выберите вариант" : mainMethod} />
                         </div>
 
-                        {/* <div className={styles.ColumnBox}>
+                        <div className={styles.ColumnBox}>
                             <h3>Ваш дополнительный метод?*</h3>
                             <div className={styles.Grid}>
                                 {themeList.map((item, index) => (
-                                    <div key={index} className={`${styles.RowItem}`} onClick={() => setEndRegister(false)}>
-                                        <div>{items[index].state.length}</div>
+                                    <div key={index} className={`${styles.RowItem}`} onClick={() => setModal(true)}>
                                         <img src={item.image} alt="" />
                                         <h4>{item.title}</h4>
                                     </div>
                                 ))}
                             </div>
-                        </div> */}
+                        </div>
 
                         <div className={styles.ColumnBox}>
                             <h3>Когда начали консультировать? Укажите количество полных лет</h3>
@@ -390,12 +378,12 @@ const Create = () => {
         }
     }
 
-    // const themeList = [
-    //     { title: "Моё состояние", image: "/Register_1.png" },
-    //     { title: "Отношения", image: "/Register_2.png" },
-    //     { title: "Работа, учеба", image: "/Register_3.png" },
-    //     { title: "События в жизни", image: "/Register_4.png" },
-    // ]
+    const themeList = [
+        { title: "Моё состояние", image: "/Register_1.png" },
+        { title: "Отношения", image: "/Register_2.png" },
+        { title: "Работа, учеба", image: "/Register_3.png" },
+        { title: "События в жизни", image: "/Register_4.png" },
+    ]
 
     async function Auth() {
         const data: ICreatePsyh = {
@@ -412,10 +400,7 @@ const Create = () => {
             "educ": educ,
             "profComm": promComm === "Состою",
             "mainMethod": [mainMethod],
-            "extraMethod": [
-                1,
-                2
-            ],
+            "extraMethod": extraMethod.length === 0 ? [1, 2] : extraMethod,
             "consultStart": Number(consultStart),
             "onlineExp": onlineExp === "Да",
             "onlineExpInfo": onlineExpInfo,
@@ -484,6 +469,17 @@ const Create = () => {
         }
     }, [photos, uploadPhotos]);
 
+    function selectMethod(index: number) {
+        if (extraMethod.some((i) => i === index + 1)) {
+            const deleted = extraMethod.filter(i => i !== index + 1)
+            setExtraMethod(deleted)
+        } else {
+            setExtraMethod(prev => [...prev, index + 1])
+        }
+    }
+
+    console.log(extraMethod)
+
     return (
         <main className={styles.Page}>
             <div className={styles.Box}>
@@ -507,6 +503,14 @@ const Create = () => {
                     </>
                 }
             </div>
+
+            {modal && <div className={styles.Modal} onClick={() => setModal(false)}>
+                <div className={styles.ModalBox} onClick={e => e.stopPropagation()}>
+                    {themesArray.map((item, index) => (
+                        <div onClick={() => selectMethod(index)} key={index} className={`${styles.ModalItem} ${extraMethod.some((i) => i === index + 1) ? styles.Active : ""}`}>{item}</div>
+                    ))}
+                </div>
+            </div>}
         </main>
     )
 }

@@ -291,6 +291,42 @@
     cursor: pointer;
 }
 
+.Modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ModalBox {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.ModalItem {
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.ModalItem:hover {
+    opacity: 0.5;
+}
+
+.ModalItem.Active {
+    color: #FF8702;
+}
+
 @media screen and (max-width: 600px) {
     .Box {
         /* display: none; */
